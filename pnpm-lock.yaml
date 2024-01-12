@@ -12,8 +12,8 @@ dependencies:
     specifier: ^1.0.5
     version: 1.0.5(@types/react-dom@18.2.17)(@types/react@18.2.43)(react-dom@18.2.0)(react@18.2.0)
   '@razorlabs/wallet-sdk':
-    specifier: ^0.1.5
-    version: 0.1.5
+    specifier: ^0.1.6
+    version: 0.1.6
   '@razorlabs/wallet-standard':
     specifier: ^0.1.0
     version: 0.1.0
@@ -1365,8 +1365,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@razorlabs/wallet-sdk@0.1.5:
-    resolution: {integrity: sha512-24BBFhHd6xqnmbT4eWQUVetuEfDrqtZ1p9DPiOP0t0qC/GwirRfBQIL+ROPH+fms/Q7hFKm9wE4UWjNKUnPrkw==}
+  /@razorlabs/wallet-sdk@0.1.6:
+    resolution: {integrity: sha512-JoMeJLsUm3v5ZGYR/PRVdXhHDGD/gykWrjAy7e2/d0t3tWw1OB7aVsq5ieIgVOaKJNGvUwIPPPAQUH0g/uRysw==}
     dependencies:
       '@mysten/sui.js': 0.49.1
       '@razorlabs/wallet-standard': 0.1.0

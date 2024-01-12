@@ -8,7 +8,7 @@ import ConnectButton from './components/Button/ConnectButton';
 
 const sampleNft = new Map([
   [
-    'm2:devnet',
+    'movement:m2:devnet',
     '0x2f60e33e33a1c880e8749073c5ef89288cf4df8974d8b872dfd72bc6c58f1172::nft::mint',
   ],
 ]);
@@ -102,7 +102,13 @@ function App() {
       />
 
       {!wallet.connected ? (
-        <p>Connect DApp with Razor wallet from now!</p>
+        <p
+          style={{
+            color: 'black'
+          }}
+        >
+          Connect DApp with Razor wallet from now!
+        </p>
       ) : (
         <div
           style={{
@@ -132,7 +138,7 @@ function App() {
           </div>
           <div style={{ margin: '8px 0' }}>
             <button
-              onClick={() => handleExecuteMoveCall(sampleNft.get('m2:devnet'))}
+              onClick={() => handleExecuteMoveCall(sampleNft.get('movement:m2:devnet'))}
             >
               Devnet Mint NFT
             </button>
