@@ -8,15 +8,15 @@ dependencies:
   '@mysten/sui.js':
     specifier: ^0.49.1
     version: 0.49.1
-  '@mysten/wallet-standard':
-    specifier: ^0.10.1
-    version: 0.10.1
   '@radix-ui/react-dialog':
     specifier: ^1.0.5
     version: 1.0.5(@types/react-dom@18.2.17)(@types/react@18.2.43)(react-dom@18.2.0)(react@18.2.0)
   '@razorlabs/wallet-sdk':
-    specifier: ^0.1.4
-    version: 0.1.4
+    specifier: ^0.1.5
+    version: 0.1.5
+  '@razorlabs/wallet-standard':
+    specifier: ^0.1.0
+    version: 0.1.0
   '@wallet-standard/core':
     specifier: ^1.0.3
     version: 1.0.3
@@ -1051,13 +1051,6 @@ packages:
       tweetnacl: 1.0.3
     dev: false
 
-  /@mysten/wallet-standard@0.10.1:
-    resolution: {integrity: sha512-tS6d/WWfDcy9JBdvTfZcB1zPi8LFgecZnMa1mq5lmiSqTnDcDJ/h65fhBLIWbfJy08bN3J8ypIIueXv6Nk9uhw==}
-    dependencies:
-      '@mysten/sui.js': 0.49.1
-      '@wallet-standard/core': 1.0.3
-    dev: false
-
   /@noble/curves@1.3.0:
     resolution: {integrity: sha512-t01iSXPuN+Eqzb4eBX0S5oubSqXbK/xXa1Ne18Hj8f9pStxztHCE2gfboSp/dZRLSqfuLpRK2nDXDK+W9puocA==}
     dependencies:
@@ -1372,12 +1365,19 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@razorlabs/wallet-sdk@0.1.4:
-    resolution: {integrity: sha512-gqpXKg7Zr0Y+b1GTX7XVVZDqRQvE8u9EeTLCfmzEryz84fiDUBuJE9G9JGlIdy4/YNNrWG0o8/iGUIA4rOuUeg==}
+  /@razorlabs/wallet-sdk@0.1.5:
+    resolution: {integrity: sha512-24BBFhHd6xqnmbT4eWQUVetuEfDrqtZ1p9DPiOP0t0qC/GwirRfBQIL+ROPH+fms/Q7hFKm9wE4UWjNKUnPrkw==}
     dependencies:
       '@mysten/sui.js': 0.49.1
-      '@mysten/wallet-standard': 0.10.1
+      '@razorlabs/wallet-standard': 0.1.0
       buffer: 6.0.3
+    dev: false
+
+  /@razorlabs/wallet-standard@0.1.0:
+    resolution: {integrity: sha512-eqequ3r64MU3Q+22wFeUwpts5R4xXoykPSdY4GAoiBhOKrds17mqXdsn833WOOT0iJ/PHBm0zLgQgPnkN6AeRw==}
+    dependencies:
+      '@mysten/sui.js': 0.49.1
+      '@wallet-standard/core': 1.0.3
     dev: false
 
   /@rollup/pluginutils@5.1.0:

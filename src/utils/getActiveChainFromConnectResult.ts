@@ -1,8 +1,10 @@
-import {StandardConnectOutput} from "@mysten/wallet-standard";
+import { StandardConnectOutput } from '@razorlabs/wallet-standard';
 
-export default function getActiveChainFromConnectResult(connectRes: StandardConnectOutput) {
+export default function getActiveChainFromConnectResult(
+  connectRes: StandardConnectOutput
+) {
   if (connectRes?.accounts?.[0]?.chains?.[0]) {
     return connectRes.accounts[0].chains[0];
   }
-  return 'sui:unknown';
+  return 'm2:unknown';
 }

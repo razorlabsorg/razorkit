@@ -1,5 +1,9 @@
-import { useEffect, useRef, useState } from "react";
-import { IWalletAdapter, IWalletRadar, WalletRadar } from "@razorlabs/wallet-sdk";
+import { useEffect, useRef, useState } from 'react';
+import {
+  IWalletAdapter,
+  IWalletRadar,
+  WalletRadar,
+} from '@razorlabs/wallet-sdk';
 
 /**
  * detect wallet adapters that support wallet-standard from window and register event

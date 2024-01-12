@@ -4,7 +4,7 @@ import './index.scss';
 import { useWallet } from '../../hooks/useWallet';
 import { Extendable } from '../../types';
 import { SvgArrowDown } from '../Icon/SvgIcons';
-import type { WalletAccount } from '@mysten/wallet-standard';
+import type { WalletAccount } from '@razorlabs/wallet-standard';
 import { useAccountBalance } from '../../hooks';
 import {
   formatSUI,

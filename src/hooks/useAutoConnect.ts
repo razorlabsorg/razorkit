@@ -1,8 +1,8 @@
-import { useEffect, useRef } from "react";
-import { isNonEmptyArray } from "../utils/check";
-import { Storage } from "../utils/storage";
-import { StorageKey } from "../constants/storage";
-import { ConnectionStatus, IWallet } from "@razorlabs/wallet-sdk";
+import { useEffect, useRef } from 'react';
+import { isNonEmptyArray } from '../utils/check';
+import { Storage } from '../utils/storage';
+import { StorageKey } from '../constants/storage';
+import { ConnectionStatus, IWallet } from '@razorlabs/wallet-sdk';
 
 export function useAutoConnect(
   select: (name: string) => Promise<void>,

@@ -1,7 +1,7 @@
-import { useMemo } from "react";
-import { isNonEmptyArray } from "../utils/check";
-import { useWalletAdapterDetection } from "./useWalletDetection";
-import { IDefaultWallet, IWallet } from "@razorlabs/wallet-sdk";
+import { useMemo } from 'react';
+import { isNonEmptyArray } from '../utils/check';
+import { useWalletAdapterDetection } from './useWalletDetection';
+import { IDefaultWallet, IWallet } from '@razorlabs/wallet-sdk';
 
 export const useAvailableWallets = (defaultWallets: IDefaultWallet[]) => {
   const { data: availableWalletAdapters } = useWalletAdapterDetection();
@@ -15,7 +15,7 @@ export const useAvailableWallets = (defaultWallets: IDefaultWallet[]) => {
             ...item,
             adapter: undefined,
             installed: false,
-          } as IWallet)
+          }) as IWallet
       );
     }
 
@@ -55,7 +55,7 @@ export const useAvailableWallets = (defaultWallets: IDefaultWallet[]) => {
           installed: true,
           iconUrl: adapter.icon,
           downloadUrl: {
-            browserExtension: "", // no need to know
+            browserExtension: '', // no need to know
           },
         };
       });

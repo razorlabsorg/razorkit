@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Wallet } from '@mysten/wallet-standard';
+import { Wallet } from '@razorlabs/wallet-standard';
 
 export function isNonEmptyArray(value: any): boolean {
   return Array.isArray(value) && value.length > 0;

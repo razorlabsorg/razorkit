@@ -8,7 +8,7 @@ import {
   SuiSignTransactionBlockInput,
   SuiSignTransactionBlockOutput,
   WalletAccount,
-} from '@mysten/wallet-standard';
+} from '@razorlabs/wallet-standard';
 import {
   Chain,
   ConnectionStatus,
