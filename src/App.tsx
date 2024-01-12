@@ -104,7 +104,7 @@ function App() {
       {!wallet.connected ? (
         <p
           style={{
-            color: 'black'
+            color: 'black',
           }}
         >
           Connect DApp with Razor wallet from now!
@@ -138,7 +138,9 @@ function App() {
           </div>
           <div style={{ margin: '8px 0' }}>
             <button
-              onClick={() => handleExecuteMoveCall(sampleNft.get('movement:m2:devnet'))}
+              onClick={() =>
+                handleExecuteMoveCall(sampleNft.get('movement:m2:devnet'))
+              }
             >
               Devnet Mint NFT
             </button>
