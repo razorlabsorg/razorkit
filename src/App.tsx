@@ -65,7 +65,7 @@ function App() {
   function getPublicKey() {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    return wallet.account?.publicKey.toString('hex');
+    return "0x" + wallet.account?.publicKey.toString('hex');
   }
 
   return (
@@ -102,7 +102,7 @@ function App() {
       />
 
       {!wallet.connected ? (
-        <p>Connect DApp with Suiet wallet from now!</p>
+        <p>Connect DApp with Razor wallet from now!</p>
       ) : (
         <div
           style={{
@@ -127,7 +127,7 @@ function App() {
               current chain: {wallet.chain?.name} (id: {wallet.chain?.id})
             </p>
             <p>
-              SUI Balance: {formatSUI(balance ?? 0)} (id: {wallet.chain?.id})
+              MOVE Balance: {formatSUI(balance ?? 0)} (id: {wallet.chain?.id})
             </p>
           </div>
           <div style={{ margin: '8px 0' }}>

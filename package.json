@@ -26,6 +26,8 @@
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",
+    "@vanilla-extract/css": "^1.14.0",
+    "@vanilla-extract/vite-plugin": "^3.9.3",
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -34,6 +36,8 @@
     "prettier": "^3.1.1",
     "sass": "^1.69.7",
     "typescript": "^5.2.2",
-    "vite": "^5.0.8"
+    "typescript-plugin-css-modules": "^5.0.2",
+    "vite": "^5.0.8",
+    "vite-plugin-svgr": "^4.2.0"
   }
 }

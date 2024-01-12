@@ -39,11 +39,11 @@ const Header = () => {
 
 const Footer = () => {
   return (
-    <div className={'wkit-new-to-sui'}>
-      <span className={'wkit-new-to-sui__text'}>New to sui? </span>
+    <div className={'wkit-new-to-movement'}>
+      <span className={'wkit-new-to-movement__text'}>New to Movement? </span>
       <a
-        className={'wkit-new-to-sui__link'}
-        href="https://suiet.app/docs/getting-started"
+        className={'wkit-new-to-movement__link'}
+        href="https://docs.movementlabs.xyz"
         target="_blank"
       >
         Learn More Here
