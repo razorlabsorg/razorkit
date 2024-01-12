@@ -1,17 +1,17 @@
-import classnames from "classnames";
-import { useCallback, useState } from "react";
-import "./index.scss";
-import { useWallet } from "../../hooks/useWallet";
-import { Extendable } from "../../types";
-import { SvgArrowDown } from "../Icon/SvgIcons";
-import type { WalletAccount } from "@mysten/wallet-standard";
-import { useAccountBalance } from "../../hooks";
+import classnames from 'classnames';
+import { useCallback, useState } from 'react';
+import './index.scss';
+import { useWallet } from '../../hooks/useWallet';
+import { Extendable } from '../../types';
+import { SvgArrowDown } from '../Icon/SvgIcons';
+import type { WalletAccount } from '@mysten/wallet-standard';
+import { useAccountBalance } from '../../hooks';
 import {
   formatSUI,
   addressEllipsis,
   UnknownChain,
   BaseError,
-} from "@razorlabs/wallet-sdk";
+} from '@razorlabs/wallet-sdk';
 
 export type ConnectButtonProps = Extendable & {
   label?: string;
@@ -35,24 +35,24 @@ function WalletInfo(props: ConnectButtonProps) {
   if (!connected) return null;
   return (
     <div
-      className={classnames("wkit-connected-container", props.className)}
+      className={classnames('wkit-connected-container', props.className)}
       style={props.style}
     >
       <button
-        className={classnames("wkit-connected-button")}
+        className={classnames('wkit-connected-button')}
         onClick={() => {
           setShowDisconnectButton(!showDisconnectButton);
         }}
       >
-        <span className={"wkit-connected-button__balance"}>
+        <span className={'wkit-connected-button__balance'}>
           {renderBalance()}
         </span>
-        <div className={"wkit-connected-button__divider"}></div>
-        <div className={"wkit-address-select"}>
-          <span className={"wkit-address-select__address"}>
+        <div className={'wkit-connected-button__divider'}></div>
+        <div className={'wkit-address-select'}>
+          <span className={'wkit-address-select__address'}>
             {addressEllipsis((account as WalletAccount)?.address)}
           </span>
-          <span className={"wkit-address-select__right-arrow"}>
+          <span className={'wkit-address-select__right-arrow'}>
             <SvgArrowDown />
           </span>
         </div>
@@ -60,7 +60,7 @@ function WalletInfo(props: ConnectButtonProps) {
       {showDisconnectButton && (
         <div className="wkit-disconnect-button__container">
           <button
-            className={"wkit-disconnect-button"}
+            className={'wkit-disconnect-button'}
             onClick={async () => {
               setShowDisconnectButton(false);
               try {

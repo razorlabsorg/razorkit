@@ -1,13 +1,13 @@
-import { useCallback, useEffect, useState } from "react";
-import { BaseModal } from "./BaseModal";
-import { Extendable } from "../../types/utils";
-import * as Dialog from "@radix-ui/react-dialog";
-import { SvgArrowLeft, SvgClose } from "../Icon/SvgIcons";
-import { useWallet } from "../../hooks";
-import { isNonEmptyArray } from "../../utils/check";
-import Icon from "../Icon";
-import "./index.scss";
-import { BaseError, IWallet, KitError } from "@razorlabs/wallet-sdk";
+import { useCallback, useEffect, useState } from 'react';
+import { BaseModal } from './BaseModal';
+import { Extendable } from '../../types/utils';
+import * as Dialog from '@radix-ui/react-dialog';
+import { SvgArrowLeft, SvgClose } from '../Icon/SvgIcons';
+import { useWallet } from '../../hooks';
+import { isNonEmptyArray } from '../../utils/check';
+import Icon from '../Icon';
+import './index.scss';
+import { BaseError, IWallet, KitError } from '@razorlabs/wallet-sdk';
 
 export type ConnectModalProps = Extendable & {
   open?: boolean;
@@ -23,13 +23,13 @@ type WalletItemProps = Extendable & {
 
 const Header = () => {
   return (
-    <div className={"wkit-dialog__header"}>
-      <Dialog.Title className={"wkit-dialog__title"}>
-        {"Connect Wallet"}
+    <div className={'wkit-dialog__header'}>
+      <Dialog.Title className={'wkit-dialog__title'}>
+        {'Connect Wallet'}
       </Dialog.Title>
       <Dialog.Close
-        style={{ position: "absolute", right: "16px", top: "16px" }}
-        className={"wkit-dialog__close"}
+        style={{ position: 'absolute', right: '16px', top: '16px' }}
+        className={'wkit-dialog__close'}
       >
         <SvgClose />
       </Dialog.Close>
@@ -39,10 +39,10 @@ const Header = () => {
 
 const Footer = () => {
   return (
-    <div className={"wkit-new-to-sui"}>
-      <span className={"wkit-new-to-sui__text"}>New to sui? </span>
+    <div className={'wkit-new-to-sui'}>
+      <span className={'wkit-new-to-sui__text'}>New to sui? </span>
       <a
-        className={"wkit-new-to-sui__link"}
+        className={'wkit-new-to-sui__link'}
         href="https://suiet.app/docs/getting-started"
         target="_blank"
       >
@@ -54,7 +54,7 @@ const Footer = () => {
 
 const WalletItem = (props: WalletItemProps) => {
   const { wallet } = props;
-  const [icon, setIcon] = useState<string>("");
+  const [icon, setIcon] = useState<string>('');
 
   useEffect(() => {
     if (!wallet.iconUrl) return;
@@ -63,7 +63,7 @@ const WalletItem = (props: WalletItemProps) => {
 
   return (
     <div
-      className={"wkit-select-item"}
+      className={'wkit-select-item'}
       key={wallet.name}
       onClick={() => {
         props.onSelect?.(wallet);
@@ -71,8 +71,8 @@ const WalletItem = (props: WalletItemProps) => {
     >
       <Icon
         icon={icon}
-        className={"wkit-select-item__icon"}
-        elClassName={"wkit-select-item__icon"}
+        className={'wkit-select-item__icon'}
+        elClassName={'wkit-select-item__icon'}
       />
       {wallet.label ?? wallet.name}
     </div>
@@ -86,8 +86,8 @@ const WalletList = (props: {
 }) => {
   if (!isNonEmptyArray(props.wallets)) return null;
   return (
-    <div className={"wkit-select__container"}>
-      <div className={"wkit-select__title"}>{props.title}</div>
+    <div className={'wkit-select__container'}>
+      <div className={'wkit-select__title'}>{props.title}</div>
       {isNonEmptyArray(props.wallets) &&
         props.wallets.map((wallet) => {
           return (
@@ -110,17 +110,17 @@ const InstallGuide = (props: InstallGuideProps) => {
   const { wallet } = props;
   return (
     <section>
-      <div className={"wkit-dialog__header"}>
+      <div className={'wkit-dialog__header'}>
         <Dialog.Title
-          className={"wkit-dialog__title"}
-          style={{ margin: "-8px 12px -6px -8px" }}
+          className={'wkit-dialog__title'}
+          style={{ margin: '-8px 12px -6px -8px' }}
         >
           <span className="wkit-dialog__close" onClick={props.onNavBack}>
             <SvgArrowLeft />
           </span>
         </Dialog.Title>
 
-        <Dialog.Title className={"wkit-dialog__title"}>
+        <Dialog.Title className={'wkit-dialog__title'}>
           Install Wallet
         </Dialog.Title>
       </div>
@@ -142,7 +142,7 @@ const InstallGuide = (props: InstallGuideProps) => {
                 `no downloadUrl config on this wallet: ${wallet.name}`
               );
             }
-            window.open(wallet.downloadUrl.browserExtension, "_blank");
+            window.open(wallet.downloadUrl.browserExtension, '_blank');
           }}
         >
           Get Wallet
@@ -160,17 +160,17 @@ const Connecting = (props: ConnectingProps) => {
   const { wallet } = props;
   return (
     <section>
-      <div className={"wkit-dialog__header"}>
+      <div className={'wkit-dialog__header'}>
         <Dialog.Title
-          className={"wkit-dialog__title"}
-          style={{ margin: "-6px 12px -6px -8px" }}
+          className={'wkit-dialog__title'}
+          style={{ margin: '-6px 12px -6px -8px' }}
         >
           <span className="wkit-dialog__close" onClick={props.onNavBack}>
             <SvgArrowLeft />
           </span>
         </Dialog.Title>
 
-        <Dialog.Title className={"wkit-dialog__title"}>Connecting</Dialog.Title>
+        <Dialog.Title className={'wkit-dialog__title'}>Connecting</Dialog.Title>
       </div>
       <div className="wkit-connecting">
         <img
@@ -244,17 +244,17 @@ export const ConnectModal = (props: ConnectModalProps) => {
         <Header />
         <div className="wkit-select__scroll">
           <WalletList
-            title={"Popular"}
+            title={'Popular'}
             wallets={configuredWallets}
             onSelect={handleSelectWallet}
           />
           <WalletList
-            title={"Others"}
+            title={'Others'}
             wallets={detectedWallets}
             onSelect={handleSelectWallet}
           />
         </div>
-        <div style={{ height: "41px", flexShrink: "0" }}></div>
+        <div style={{ height: '41px', flexShrink: '0' }}></div>
         <Footer />
       </div>
     );

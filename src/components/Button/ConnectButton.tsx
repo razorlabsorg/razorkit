@@ -1,11 +1,11 @@
-import { ReactNode, useEffect, useState } from "react";
-import classnames from "classnames";
-import { Extendable } from "../../types/utils";
-import ConnectModal from "../Modal/ConnectModal";
-import { useWallet } from "../../hooks/useWallet";
-import "./index.scss";
-import WalletInfo from "../WalletInfo";
-import { BaseError } from "@razorlabs/wallet-sdk";
+import { ReactNode, useEffect, useState } from 'react';
+import classnames from 'classnames';
+import { Extendable } from '../../types/utils';
+import ConnectModal from '../Modal/ConnectModal';
+import { useWallet } from '../../hooks/useWallet';
+import './index.scss';
+import WalletInfo from '../WalletInfo';
+import { BaseError } from '@razorlabs/wallet-sdk';
 
 export type ConnectButtonProps = Extendable & {
   label?: string;
@@ -17,7 +17,7 @@ export type ConnectButtonProps = Extendable & {
 };
 
 export const ConnectButton = (props: ConnectButtonProps) => {
-  const { label = "Connect Button" } = props;
+  const { label = 'Connect Button' } = props;
   const [showModal, setShowModal] = useState(false);
   const { connected } = useWallet();
 
@@ -50,7 +50,7 @@ export const ConnectButton = (props: ConnectButtonProps) => {
           />
         ) : (
           <button
-            className={classnames("wkit-button", props.className)}
+            className={classnames('wkit-button', props.className)}
             style={props.style}
           >
             {props.children || label}
