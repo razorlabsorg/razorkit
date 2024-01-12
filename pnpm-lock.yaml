@@ -15,8 +15,11 @@ dependencies:
     specifier: ^1.0.5
     version: 1.0.5(@types/react-dom@18.2.17)(@types/react@18.2.43)(react-dom@18.2.0)(react@18.2.0)
   '@razorlabs/wallet-sdk':
-    specifier: ^0.1.3
-    version: 0.1.3
+    specifier: ^0.1.4
+    version: 0.1.4
+  '@wallet-standard/core':
+    specifier: ^1.0.3
+    version: 1.0.3
   classnames:
     specifier: ^2.5.1
     version: 2.5.1
@@ -944,11 +947,12 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@razorlabs/wallet-sdk@0.1.3:
-    resolution: {integrity: sha512-OfQTvB6No6Kv23z4o2MNxlCWt+hpz4nzYaR50MqtQdbcYc5EPwyF/tBT9dhYCavF3yS4TmfLlftAhuxmjkk4ww==}
+  /@razorlabs/wallet-sdk@0.1.4:
+    resolution: {integrity: sha512-gqpXKg7Zr0Y+b1GTX7XVVZDqRQvE8u9EeTLCfmzEryz84fiDUBuJE9G9JGlIdy4/YNNrWG0o8/iGUIA4rOuUeg==}
     dependencies:
       '@mysten/sui.js': 0.49.1
       '@mysten/wallet-standard': 0.10.1
+      buffer: 6.0.3
     dev: false
 
   /@rollup/rollup-android-arm-eabi@4.9.4:
@@ -1397,6 +1401,10 @@ packages:
     resolution: {integrity: sha512-FuwxlW4H5kh37X/oW59pwTzzTKRzfrrQwhmyspRM7swOEZcHtDZSCt45U6oKgtuFE+WYPblePMVIPR4RZrh/hw==}
     dev: false
 
+  /base64-js@1.5.1:
+    resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
+    dev: false
+
   /big-integer@1.6.52:
     resolution: {integrity: sha512-QxD8cf2eVqJOOz63z6JIN9BzvVs/dlySa5HGSBH5xtR8dPteIRQnBxxKqkNTiT6jbDTF6jAfrd4oMcND9RGbQg==}
     engines: {node: '>=0.6'}
@@ -1448,6 +1456,13 @@ packages:
     resolution: {integrity: sha512-r+ihvQJvahgYT50JD05dyJNKlmmSlMoOGwn1lCcEzanPglg7TxYjioQUYehQ9mAR/+hOSd2jRc/Z2y5UxBymvQ==}
     dependencies:
       base-x: 4.0.0
+    dev: false
+
+  /buffer@6.0.3:
+    resolution: {integrity: sha512-FTiCpNxtwiZZHEZbcbTIcZjERVICn9yq/pDFkTl95/AxzD1naBctN7YO68riM/gLSDY7sdrMby8hofADYuuqOA==}
+    dependencies:
+      base64-js: 1.5.1
+      ieee754: 1.2.1
     dev: false
 
   /callsites@3.1.0:
@@ -1879,6 +1894,10 @@ packages:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
     dev: true
+
+  /ieee754@1.2.1:
+    resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
+    dev: false
 
   /ignore@5.3.0:
     resolution: {integrity: sha512-g7dmpshy+gD7mh88OC9NwSGTKoc3kyLAZQRU1mt53Aw/vnvfXnbC+F/7F7QoYVKbV+KNvJx8wArewKy1vXMtlg==}
