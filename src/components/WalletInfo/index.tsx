@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import './index.scss';
 import { useWallet } from '../../hooks/useWallet';
 import { Extendable } from '../../types';

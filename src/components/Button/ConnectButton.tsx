@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import classnames from 'classnames';
 import { Extendable } from '../../types/utils';
 import ConnectModal from '../Modal/ConnectModal';

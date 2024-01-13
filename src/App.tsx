@@ -2,7 +2,7 @@
 import { TransactionBlock } from '@mysten/sui.js/transactions';
 import { useAccountBalance } from './hooks/useAccountBalance';
 import { useWallet } from './hooks/useWallet';
-
+import React from 'react';
 import { ErrorCode, formatSUI } from '@razorlabs/wallet-sdk';
 import ConnectButton from './components/Button/ConnectButton';
 

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { BaseModal } from './BaseModal';
 import { Extendable } from '../../types/utils';
 import * as Dialog from '@radix-ui/react-dialog';
