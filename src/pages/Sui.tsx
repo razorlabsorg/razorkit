@@ -1,24 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* import { TransactionBlock } from '@mysten/sui.js/transactions';
-import { useSuiAccountBalance } from './hooks/useSuiAccountBalance';
-import { useSuiWallet } from './hooks/useSuiWallet'; */
+import { TransactionBlock } from '@mysten/sui.js/transactions';
+import { useSuiAccountBalance } from '../hooks/useSuiAccountBalance';
+import { useSuiWallet } from '../hooks/useSuiWallet';
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import Sui from './pages/Sui';
-import Aptos from './pages/Aptos';
-/* import { ErrorCode, formatSUI } from '@razorlabs/wallet-sdk';
-import ConnectButton from './components/Button/SuiConnectButton'; */
+import { ErrorCode, formatSUI } from '@razorlabs/wallet-sdk';
+import SuiConnectButton from '../components/Button/SuiConnectButton';
 
-/* const sampleNft = new Map([
+const sampleNft = new Map([
   [
     'movement:m2:devnet',
     '0x2f60e33e33a1c880e8749073c5ef89288cf4df8974d8b872dfd72bc6c58f1172::nft::mint',
   ],
-]); */
+]);
 
-function App() {
-  /* const wallet = useSuiWallet();
+function Sui() {
+  const wallet = useSuiWallet();
   const { balance } = useSuiAccountBalance();
 
   async function handleExecuteMoveCall(target: string | undefined) {
@@ -70,15 +66,10 @@ function App() {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return '0x' + wallet.account?.publicKey.toString('hex');
-  } */
+  }
 
   return (
-    <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/sui' element={<Sui />} />
-      <Route path='/aptos' element={<Aptos />} />
-    </Routes>
-    /* <div
+    <div
       style={{
         height: '100vh',
         display: 'flex',
@@ -87,7 +78,7 @@ function App() {
         alignItems: 'center',
       }}
     >
-      <ConnectButton
+      <SuiConnectButton
         className={'aaa'}
         style={{ marginTop: '16px' }}
         onConnectSuccess={(name) => {
@@ -162,8 +153,8 @@ function App() {
           </div>
         </div>
       )}
-    </div> */
+    </div>
   );
 }
 
-export default App;
+export default Sui;

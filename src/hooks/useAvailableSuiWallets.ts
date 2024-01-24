@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 import { isNonEmptyArray } from '../utils/check';
-import { useWalletAdapterDetection } from './useWalletDetection';
+import { useSuiWalletAdapterDetection } from './useSuiWalletDetection';
 import { IDefaultWallet, IWallet } from '@razorlabs/wallet-sdk';
 
-export const useAvailableWallets = (defaultWallets: IDefaultWallet[]) => {
-  const { data: availableWalletAdapters } = useWalletAdapterDetection();
+export const useAvailableSuiWallets = (defaultWallets: IDefaultWallet[]) => {
+  const { data: availableWalletAdapters } = useSuiWalletAdapterDetection();
   // configured wallets
   const configuredWallets: IWallet[] = useMemo(() => {
     if (!isNonEmptyArray(defaultWallets)) return [];

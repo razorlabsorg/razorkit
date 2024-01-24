@@ -3,7 +3,7 @@ import { BaseModal } from './BaseModal';
 import { Extendable } from '../../types/utils';
 import * as Dialog from '@radix-ui/react-dialog';
 import { SvgArrowLeft, SvgClose } from '../Icon/SvgIcons';
-import { useWallet } from '../../hooks';
+import { useSuiWallet } from '../../hooks';
 import { isNonEmptyArray } from '../../utils/check';
 import Icon from '../Icon';
 import './index.scss';
@@ -187,9 +187,9 @@ const Connecting = (props: ConnectingProps) => {
   );
 };
 
-export const ConnectModal = (props: ConnectModalProps) => {
+export const SuiConnectModal = (props: ConnectModalProps) => {
   const { configuredWallets, detectedWallets, select, connecting } =
-    useWallet();
+    useSuiWallet();
 
   const {
     onConnectSuccess = () => {},
@@ -276,4 +276,4 @@ export const ConnectModal = (props: ConnectModalProps) => {
   );
 };
 
-export default ConnectModal;
+export default SuiConnectModal;

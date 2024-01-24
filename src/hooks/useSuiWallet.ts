@@ -13,21 +13,21 @@ import {
   Chain,
   ConnectionStatus,
   IWallet,
-  IWalletAdapter,
+  ISuiWalletAdapter,
   KitError,
   WalletEvent,
   WalletEventListeners,
 } from '@razorlabs/wallet-sdk';
 import { createContext, useContext } from 'react';
 
-export interface WalletContextState {
+export interface SuiWalletContextState {
   configuredWallets: IWallet[];
   detectedWallets: IWallet[];
   allAvailableWallets: IWallet[];
   chains: Chain[];
   chain: Chain | undefined;
   name: string | undefined; // name of the connected wallet
-  adapter: IWalletAdapter | undefined; // adapter provided by the connected wallet
+  adapter: ISuiWalletAdapter | undefined; // adapter provided by the connected wallet
   account: WalletAccount | undefined; // current account (the first account of accounts)
   address: string | undefined; // alias for account.address
   connecting: boolean;
@@ -71,7 +71,7 @@ function missProviderMessage(action: string) {
   return `Failed to call ${action}, missing context provider to run within`;
 }
 
-const DEFAULT_CONTEXT: WalletContextState = {
+const DEFAULT_CONTEXT: SuiWalletContextState = {
   configuredWallets: [],
   detectedWallets: [],
   allAvailableWallets: [],
@@ -113,8 +113,9 @@ const DEFAULT_CONTEXT: WalletContextState = {
   },
 };
 
-export const WalletContext = createContext<WalletContextState>(DEFAULT_CONTEXT);
+export const SuiWalletContext =
+  createContext<SuiWalletContextState>(DEFAULT_CONTEXT);
 
-export function useWallet(): WalletContextState {
-  return useContext(WalletContext);
+export function useSuiWallet(): SuiWalletContextState {
+  return useContext(SuiWalletContext);
 }

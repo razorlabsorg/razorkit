@@ -1,14 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* import { TransactionBlock } from '@mysten/sui.js/transactions';
-import { useSuiAccountBalance } from './hooks/useSuiAccountBalance';
-import { useSuiWallet } from './hooks/useSuiWallet'; */
+import { useAptosAccountBalance } from '../hooks/useAptosAccountBalance';
+import { useAptosWallet } from '../hooks/useAptosWallet';
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import Sui from './pages/Sui';
-import Aptos from './pages/Aptos';
-/* import { ErrorCode, formatSUI } from '@razorlabs/wallet-sdk';
-import ConnectButton from './components/Button/SuiConnectButton'; */
+import { ErrorCode, formatAPT } from '@razorlabs/wallet-sdk';
+import AptosConnectButton from '../components/Button/AptosConnectButton';
 
 /* const sampleNft = new Map([
   [
@@ -17,11 +12,11 @@ import ConnectButton from './components/Button/SuiConnectButton'; */
   ],
 ]); */
 
-function App() {
-  /* const wallet = useSuiWallet();
-  const { balance } = useSuiAccountBalance();
+function Aptos() {
+  const wallet = useAptosWallet();
+  const { balance } = useAptosAccountBalance();
 
-  async function handleExecuteMoveCall(target: string | undefined) {
+  /* async function handleExecuteMoveCall(target: string | undefined) {
     if (!target) return;
     try {
       const tx = new TransactionBlock();
@@ -44,9 +39,9 @@ function App() {
       console.error('executeMoveCall failed', e);
       alert('executeMoveCall failed (see response in the console)');
     }
-  }
+  } */
 
-  async function handleSignPersonalMessage() {
+  /* async function handleSignPersonalMessage() {
     if (!wallet.account) return;
 
     try {
@@ -64,21 +59,16 @@ function App() {
       console.error('signMessage failed', e);
       alert('signMessage failed (see response in the console)');
     }
-  }
+  } */
 
   function getPublicKey() {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return '0x' + wallet.account?.publicKey.toString('hex');
-  } */
+  }
 
   return (
-    <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/sui' element={<Sui />} />
-      <Route path='/aptos' element={<Aptos />} />
-    </Routes>
-    /* <div
+    <div
       style={{
         height: '100vh',
         display: 'flex',
@@ -87,7 +77,7 @@ function App() {
         alignItems: 'center',
       }}
     >
-      <ConnectButton
+      <AptosConnectButton
         className={'aaa'}
         style={{ marginTop: '16px' }}
         onConnectSuccess={(name) => {
@@ -142,10 +132,10 @@ function App() {
               current chain: {wallet.chain?.name} (id: {wallet.chain?.id})
             </p>
             <p>
-              MOVE Balance: {formatSUI(balance ?? 0)} (id: {wallet.chain?.id})
+              MOVE Balance: {formatAPT(balance ?? 0)} (id: {wallet.chain?.id})
             </p>
           </div>
-          <div style={{ margin: '8px 0' }}>
+          {/* <div style={{ margin: '8px 0' }}>
             <button
               onClick={() =>
                 handleExecuteMoveCall(sampleNft.get('movement:m2:devnet'))
@@ -159,11 +149,11 @@ function App() {
             >
               signMessage
             </button>
-          </div>
+          </div> */}
         </div>
       )}
-    </div> */
+    </div>
   );
 }
 
-export default App;
+export default Aptos;

@@ -1,13 +1,13 @@
-import { useCoinBalance } from './useCoinBalance';
+import { useAptosCoinBalance } from './useAptosCoinBalance';
 
-export interface UseAccountBalanceParams {
+export interface UseAptosAccountBalanceParams {
   typeArg?: string;
   chainId?: string;
 }
 
-export function useAccountBalance(params?: UseAccountBalanceParams) {
+export function useAptosAccountBalance(params?: UseAptosAccountBalanceParams) {
   const { typeArg, chainId } = params || {};
-  const res = useCoinBalance({
+  const res = useAptosCoinBalance({
     typeArg,
     chainId,
   });

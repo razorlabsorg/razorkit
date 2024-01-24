@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import {
-  IWalletAdapter,
+  IAptosWalletAdapter,
+  ISuiWalletAdapter,
   IWalletRadar,
   WalletRadar,
 } from '@razorlabs/wallet-sdk';
@@ -10,10 +11,10 @@ import {
  * normalize them to WalletAdapter
  * Notice: call once only in provider, cuz there is event registration
  */
-export function useWalletAdapterDetection() {
+export function useSuiWalletAdapterDetection() {
   const walletRadar = useRef<IWalletRadar | null>(null);
   const [availableWalletAdapters, setAvailableWalletAdapters] = useState<
-    IWalletAdapter[]
+    ISuiWalletAdapter[] | IAptosWalletAdapter[]
   >([]);
   // console.log("--availableWalletAdapters", availableWalletAdapters);
 
@@ -24,11 +25,11 @@ export function useWalletAdapterDetection() {
     }
 
     const initialWalletAdapters =
-      walletRadar.current.getDetectedWalletAdapters();
+      walletRadar.current.getDetectedSuiWalletAdapters();
     setAvailableWalletAdapters(initialWalletAdapters);
 
-    walletRadar.current.subscribe((newWalletAdapters) => {
-      setAvailableWalletAdapters(newWalletAdapters);
+    walletRadar.current.subscribe((newSuiWalletAdapters) => {
+      setAvailableWalletAdapters(newSuiWalletAdapters);
     });
 
     return () => {

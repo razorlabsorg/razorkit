@@ -1,16 +1,15 @@
 import classnames from 'classnames';
 import React, { useCallback, useState } from 'react';
 import './index.scss';
-import { useWallet } from '../../hooks/useWallet';
 import { Extendable } from '../../types';
 import { SvgArrowDown } from '../Icon/SvgIcons';
 import type { WalletAccount } from '@razorlabs/wallet-standard';
-import { useAccountBalance } from '../../hooks';
+import { useAptosAccountBalance, useAptosWallet } from '../../hooks';
 import {
-  formatSUI,
   addressEllipsis,
   UnknownChain,
   BaseError,
+  formatAPT,
 } from '@razorlabs/wallet-sdk';
 
 export type ConnectButtonProps = Extendable & {
@@ -19,9 +18,9 @@ export type ConnectButtonProps = Extendable & {
   onDisconnectError?: (error: BaseError) => void;
 };
 
-function WalletInfo(props: ConnectButtonProps) {
-  const { disconnect, account, chain, connected, name } = useWallet();
-  const { balance } = useAccountBalance();
+function AptosWalletInfo(props: ConnectButtonProps) {
+  const { disconnect, account, chain, connected, name } = useAptosWallet();
+  const { balance } = useAptosAccountBalance();
   const [showDisconnectButton, setShowDisconnectButton] = useState(false);
 
   const renderBalance = useCallback(() => {
@@ -29,7 +28,7 @@ function WalletInfo(props: ConnectButtonProps) {
       return <>Unknown Chain</>;
     }
     // TODO: formatCurrency supports bigint
-    return <>{formatSUI(balance ?? 0)} MOVE</>;
+    return <>{formatAPT(balance ?? 0)} MOVE</>;
   }, [balance, chain]);
 
   if (!connected) return null;
@@ -80,4 +79,4 @@ function WalletInfo(props: ConnectButtonProps) {
   );
 }
 
-export default WalletInfo;
+export default AptosWalletInfo;
