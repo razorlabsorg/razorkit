@@ -5,61 +5,9 @@ import React from 'react';
 import { ErrorCode, formatAPT } from '@razorlabs/m1-wallet-sdk';
 import AptosConnectButton from '../components/Button/AptosConnectButton';
 
-/* const sampleNft = new Map([
-  [
-    'movement:m2:devnet',
-    '0x2f60e33e33a1c880e8749073c5ef89288cf4df8974d8b872dfd72bc6c58f1172::nft::mint',
-  ],
-]); */
-
 function Aptos() {
   const wallet = useAptosWallet();
   const { balance } = useAptosAccountBalance();
-
-  /* async function handleExecuteMoveCall(target: string | undefined) {
-    if (!target) return;
-    try {
-      const tx = new TransactionBlock();
-      tx.moveCall({
-        target: target as any,
-        arguments: [
-          tx.pure('Razor NFT'),
-          tx.pure('Razor Sample NFT'),
-          tx.pure(
-            'https://ipfs.io/ipfs/QmYbAuxRGdSgNsfDopufzRrXsXfeuRsMnd1T1JR7qdi5Kn'
-          ),
-        ],
-      });
-      const resData = await wallet.signAndExecuteTransactionBlock({
-        transactionBlock: tx,
-      });
-      console.log('executeMoveCall success', resData);
-      alert('executeMoveCall succeeded (see response in the console)');
-    } catch (e) {
-      console.error('executeMoveCall failed', e);
-      alert('executeMoveCall failed (see response in the console)');
-    }
-  } */
-
-  /* async function handleSignPersonalMessage() {
-    if (!wallet.account) return;
-
-    try {
-      const msg = 'Hello world!';
-      const result = await wallet.signPersonalMessage({
-        message: new TextEncoder().encode(msg),
-      });
-      const isValid = await wallet.verifySignedMessage(
-        result,
-        wallet.account.publicKey
-      );
-      console.log('verify signedMessage', isValid);
-      alert('signMessage succeeded (see response in the console)');
-    } catch (e) {
-      console.error('signMessage failed', e);
-      alert('signMessage failed (see response in the console)');
-    }
-  } */
 
   function getPublicKey() {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -135,21 +83,6 @@ function Aptos() {
               MOVE Balance: {formatAPT(balance ?? 0)} (id: {wallet.chain?.id})
             </p>
           </div>
-          {/* <div style={{ margin: '8px 0' }}>
-            <button
-              onClick={() =>
-                handleExecuteMoveCall(sampleNft.get('movement:m2:devnet'))
-              }
-            >
-              Devnet Mint NFT
-            </button>
-            <button
-              style={{ marginLeft: '8px' }}
-              onClick={handleSignPersonalMessage}
-            >
-              signMessage
-            </button>
-          </div> */}
         </div>
       )}
     </div>

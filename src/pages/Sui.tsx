@@ -8,7 +8,7 @@ import SuiConnectButton from '../components/Button/SuiConnectButton';
 
 const sampleNft = new Map([
   [
-    'movement:m2:devnet',
+    'm2:devnet',
     '0x2f60e33e33a1c880e8749073c5ef89288cf4df8974d8b872dfd72bc6c58f1172::nft::mint',
   ],
 ]);
@@ -139,7 +139,7 @@ function Sui() {
           <div style={{ margin: '8px 0' }}>
             <button
               onClick={() =>
-                handleExecuteMoveCall(sampleNft.get('movement:m2:devnet'))
+                handleExecuteMoveCall(sampleNft.get('m2:devnet'))
               }
             >
               Devnet Mint NFT
