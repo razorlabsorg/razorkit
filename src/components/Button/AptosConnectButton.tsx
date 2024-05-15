@@ -7,7 +7,7 @@ import './index.scss';
 import AptosWalletInfo from '../AptosWalletInfo';
 import { BaseError } from '@razorlabs/m1-wallet-sdk';
 
-export type ConnectButtonProps = Extendable & {
+export type AptosConnectButtonProps = Extendable & {
   label?: string;
   children?: ReactNode;
   onConnectSuccess?: (walletName: string) => void;
@@ -16,7 +16,7 @@ export type ConnectButtonProps = Extendable & {
   onDisconnectError?: (error: BaseError) => void;
 };
 
-export const AptosConnectButton = (props: ConnectButtonProps) => {
+export const AptosConnectButton = (props: AptosConnectButtonProps) => {
   const { label = 'Connect Button' } = props;
   const [showModal, setShowModal] = useState(false);
   const { connected } = useAptosWallet();

@@ -7,7 +7,7 @@ import './index.scss';
 import SuiWalletInfo from '../SuiWalletInfo';
 import { BaseError } from '@razorlabs/m2-wallet-sdk';
 
-export type ConnectButtonProps = Extendable & {
+export type SuiConnectButtonProps = Extendable & {
   label?: string;
   children?: ReactNode;
   onConnectSuccess?: (walletName: string) => void;
@@ -16,7 +16,7 @@ export type ConnectButtonProps = Extendable & {
   onDisconnectError?: (error: BaseError) => void;
 };
 
-export const SuiConnectButton = (props: ConnectButtonProps) => {
+export const SuiConnectButton = (props: SuiConnectButtonProps) => {
   const { label = 'Connect Button' } = props;
   const [showModal, setShowModal] = useState(false);
   const { connected } = useSuiWallet();
