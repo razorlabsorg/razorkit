@@ -64,9 +64,9 @@ function Sui() {
 
   function uint8ArrayToHex(arr: Uint8Array | undefined) {
     if (!arr) return '';
-    
+
     // @ts-ignore
-    return arr.toString("hex")
+    return arr.toString('hex');
   }
 
   function getPublicKey() {
@@ -143,9 +143,7 @@ function Sui() {
           </div>
           <div style={{ margin: '8px 0' }}>
             <button
-              onClick={() =>
-                handleExecuteMoveCall(sampleNft.get('m2:devnet'))
-              }
+              onClick={() => handleExecuteMoveCall(sampleNft.get('m2:devnet'))}
             >
               Devnet Mint NFT
             </button>

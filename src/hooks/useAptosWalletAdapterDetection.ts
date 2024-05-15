@@ -12,7 +12,9 @@ import {
  */
 export function useAptosWalletAdapterDetection() {
   const walletRadar = useRef<IWalletRadar | null>(null);
-  const [availableWalletAdapters, setAvailableWalletAdapters] = useState<IWalletAdapter[]>([]);
+  const [availableWalletAdapters, setAvailableWalletAdapters] = useState<
+    IWalletAdapter[]
+  >([]);
   // console.log("--availableWalletAdapters", availableWalletAdapters);
 
   useEffect(() => {

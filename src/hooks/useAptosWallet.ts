@@ -45,7 +45,9 @@ export interface AptosWalletContextState {
     asFeepayer?: boolean
   ): Promise<UserResponse<AptosSignTransactionOutput>>;
 
-  signMessage(input: AptosSignMessageInput): Promise<UserResponse<AptosSignMessageOutput>>;
+  signMessage(
+    input: AptosSignMessageInput
+  ): Promise<UserResponse<AptosSignMessageOutput>>;
 
   /* verifySignedMessage(
     input: AptosSignMessageOutput,

@@ -5,9 +5,7 @@ import Home from './pages/Home';
 import Sui from './pages/Sui';
 import Aptos from './pages/Aptos';
 
-
 function App() {
-
   return (
     <Routes>
       <Route path="/" element={<Home />} />
