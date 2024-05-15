@@ -62,10 +62,15 @@ function Sui() {
     }
   }
 
-  function getPublicKey() {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  function uint8ArrayToHex(arr: Uint8Array | undefined) {
+    if (!arr) return '';
+    
     // @ts-ignore
-    return '0x' + wallet.account?.publicKey.toString('hex');
+    return arr.toString("hex")
+  }
+
+  function getPublicKey() {
+    return uint8ArrayToHex(wallet.account?.publicKey);
   }
 
   return (
@@ -128,7 +133,7 @@ function Sui() {
                   : 'disconnected'}
             </p>
             <p>account address: {wallet.account?.address}</p>
-            <p>account publicKey: {getPublicKey() || 'not supported'}</p>
+            <p>account publicKey: {getPublicKey()}</p>
             <p>
               current chain: {wallet.chain?.name} (id: {wallet.chain?.id})
             </p>
