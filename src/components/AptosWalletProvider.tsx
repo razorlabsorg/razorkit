@@ -9,35 +9,34 @@ import React, {
 } from 'react';
 import { AptosWalletContext } from '../hooks';
 import type {
+  AptosConnectInput,
   AptosSignAndSubmitTransactionInput,
   AptosSignMessageInput,
-  // AptosSignMessageOutput,
-  StandardConnectInput,
   WalletAccount,
 } from '@razorlabs/wallet-standard';
 import { Extendable } from '../types/utils';
 import { isNonEmptyArray } from '../utils/check';
-import { useAutoConnect } from '../hooks/useAutoConnect';
+import { useAptosAutoConnect } from '../hooks/useAptosAutoConnect';
 import { Storage } from '../utils/storage';
 import { StorageKey } from '../constants/storage';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import getActiveChainFromConnectResult from '../utils/getActiveChainFromConnectResult';
 import {
   AllDefaultAptosWallets,
   Chain,
   ConnectionStatus,
   DefaultChains,
   FeatureName,
-  IAptosWalletAdapter,
+  IWalletAdapter,
   IDefaultWallet,
   KitError,
   UnknownChain,
   // verifySignedMessage,
   WalletEvent,
   WalletEventListeners,
-} from '@razorlabs/wallet-sdk';
+} from '@razorlabs/m1-wallet-sdk';
 import { useAvailableAptosWallets } from '../hooks/useAvailableAptosWallets';
-import { AptosSignTransactionInput } from '@razorlabs/wallet-standard/dist/features/aptosSignTransaction';
+import getActiveAptosChain from '../utils/getActiveAptosChain';
+import { AnyRawTransaction } from 'aptos';
 
 export type AptosWalletProviderProps = Extendable & {
   defaultWallets?: IDefaultWallet[];
@@ -57,7 +56,7 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
     useAvailableAptosWallets(defaultWallets);
 
   const [walletAdapter, setWalletAdapter] = useState<
-    IAptosWalletAdapter | undefined
+    IWalletAdapter | undefined
   >();
   const [status, setStatus] = useState<ConnectionStatus>(
     ConnectionStatus.DISCONNECTED
@@ -69,7 +68,7 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
   const walletOffListeners = useRef<(() => void)[]>([]);
 
   const isCallable = (
-    walletAdapter: IAptosWalletAdapter | undefined,
+    walletAdapter: IWalletAdapter | undefined,
     status: ConnectionStatus
   ) => {
     return walletAdapter && status === ConnectionStatus.CONNECTED;
@@ -77,11 +76,11 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
 
   const account = useMemo<WalletAccount | undefined>(() => {
     if (!isCallable(walletAdapter, status)) return;
-    return (walletAdapter as IAptosWalletAdapter).accounts[0]; // use first account by default
+    return (walletAdapter as IWalletAdapter).accounts[0]; // use first account by default
   }, [walletAdapter, status]);
 
   const ensureCallable = (
-    walletAdapter: IAptosWalletAdapter | undefined,
+    walletAdapter: IWalletAdapter | undefined,
     status: ConnectionStatus
   ) => {
     if (!isCallable(walletAdapter, status)) {
@@ -90,16 +89,18 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
   };
 
   const connect = useCallback(
-    async (adapter: IAptosWalletAdapter, opts?: StandardConnectInput) => {
+    async (adapter: IWalletAdapter, opts?: AptosConnectInput) => {
       if (!adapter) throw new KitError('param adapter is missing');
 
       setStatus(ConnectionStatus.CONNECTING);
       try {
-        const res = await adapter.connect(opts);
+        const res = await adapter.connect(opts?.[0]);
+
+        const network = await adapter.network();
 
         // try to get chain from the connected account
         if (isNonEmptyArray((res as any)?.accounts)) {
-          const chainId = getActiveChainFromConnectResult(res);
+          const chainId = getActiveAptosChain(network);
           const targetChain = chains.find((item) => item.id === chainId);
           setChain(targetChain ?? UnknownChain);
         }
@@ -121,7 +122,7 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
 
   const disconnect = useCallback(async () => {
     ensureCallable(walletAdapter, status);
-    const adapter = walletAdapter as IAptosWalletAdapter;
+    const adapter = walletAdapter as IWalletAdapter;
 
     // try to clear listeners
     if (isNonEmptyArray(walletOffListeners.current)) {
@@ -145,7 +146,7 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
 
     try {
       // disconnect is an optional action for wallet
-      if (adapter.hasFeature(FeatureName.STANDARD__DISCONNECT)) {
+      if (adapter.hasFeature(FeatureName.APTOS__DISCONNECT)) {
         await adapter.disconnect();
       }
     } finally {
@@ -159,7 +160,7 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
     async (walletName: string) => {
       // disconnect previous connection if it exists
       if (isCallable(walletAdapter, status)) {
-        const adapter = walletAdapter as IAptosWalletAdapter;
+        const adapter = walletAdapter as IWalletAdapter;
         // Same wallet, ignore
         if (walletName === adapter.name) return;
 
@@ -180,7 +181,7 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
           )}]`
         );
       }
-      await connect(wallet.adapter as IAptosWalletAdapter);
+      await connect(wallet.adapter as IWalletAdapter);
     },
     [walletAdapter, status, allAvailableWallets]
   );
@@ -188,7 +189,7 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
   const on = useCallback(
     (event: WalletEvent, listener: WalletEventListeners[WalletEvent]) => {
       ensureCallable(walletAdapter, status);
-      const _wallet = walletAdapter as IAptosWalletAdapter;
+      const _wallet = walletAdapter as IWalletAdapter;
 
       // filter event and params to decide when to emit
       const off = _wallet.on('change', (params) => {
@@ -221,7 +222,7 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
 
   const getAccounts = useCallback(() => {
     ensureCallable(walletAdapter, status);
-    const _wallet = walletAdapter as IAptosWalletAdapter;
+    const _wallet = walletAdapter as IWalletAdapter;
     return _wallet.accounts;
   }, [walletAdapter, status]);
 
@@ -231,20 +232,20 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
       if (!account) {
         throw new KitError('no active account');
       }
-      const _wallet = walletAdapter as IAptosWalletAdapter;
+      const _wallet = walletAdapter as IWalletAdapter;
       return await _wallet.signAndSubmitTransaction(input);
     },
     [walletAdapter, status, chain, account]
   );
 
   const signTransaction = useCallback(
-    async (input: AptosSignTransactionInput) => {
+    async (transaction: AnyRawTransaction, asFeepayer?: boolean) => {
       ensureCallable(walletAdapter, status);
       if (!account) {
         throw new KitError('no active account');
       }
-      const _wallet = walletAdapter as IAptosWalletAdapter;
-      return await _wallet.signTransaction(input);
+      const _wallet = walletAdapter as IWalletAdapter;
+      return await _wallet.signTransaction(transaction, asFeepayer);
     },
     [walletAdapter, status, chain, account]
   );
@@ -256,13 +257,13 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
         throw new KitError('no active account');
       }
 
-      const adapter = walletAdapter as IAptosWalletAdapter;
+      const adapter = walletAdapter as IWalletAdapter;
       return await adapter.signMessage(input);
     },
     [walletAdapter, account, status]
   );
 
-  useAutoConnect(select, status, allAvailableWallets, autoConnect);
+  useAptosAutoConnect(select, status, allAvailableWallets, autoConnect);
 
   // sync kit's chain with wallet's active chain
   useEffect(() => {

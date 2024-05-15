@@ -74,9 +74,9 @@ function App() {
 
   return (
     <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/sui' element={<Sui />} />
-      <Route path='/aptos' element={<Aptos />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/sui" element={<Sui />} />
+      <Route path="/aptos" element={<Aptos />} />
     </Routes>
     /* <div
       style={{

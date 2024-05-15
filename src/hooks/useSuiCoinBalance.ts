@@ -2,7 +2,7 @@ import { useSuiWallet } from './useSuiWallet';
 import { SUI_TYPE_ARG } from '@mysten/sui.js/utils';
 import { useQuery } from 'react-query';
 import { QueryKey, queryKey } from '../constants';
-import { SuiAccountAssetManager } from '@razorlabs/wallet-sdk';
+import { AccountAssetManager } from '@razorlabs/m2-wallet-sdk';
 import { useCallback } from 'react';
 import { useSuiChain } from './useSuiChain';
 
@@ -33,7 +33,7 @@ export function useSuiCoinBalance(params?: SuiUseCoinBalanceParams) {
   const getCoinBalance = useCallback(() => {
     if (!address || !chain) return BigInt(0);
 
-    const accountAssetManager = new SuiAccountAssetManager(address, {
+    const accountAssetManager = new AccountAssetManager(address, {
       chainRpcUrl: chain.rpcUrl,
     });
     return accountAssetManager.getCoinBalance(typeArg);

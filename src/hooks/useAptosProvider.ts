@@ -1,4 +1,4 @@
-import { AptosClient } from 'movement-sdk';
+import { AptosClient } from 'aptos';
 import { useMemo } from 'react';
 
 export type AptosProvider = AptosClient;

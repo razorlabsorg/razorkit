@@ -7,7 +7,7 @@ import { useSuiWallet } from '../../hooks';
 import { isNonEmptyArray } from '../../utils/check';
 import Icon from '../Icon';
 import './index.scss';
-import { BaseError, IWallet, KitError } from '@razorlabs/wallet-sdk';
+import { BaseError, IWallet, KitError } from '@razorlabs/m2-wallet-sdk';
 
 export type ConnectModalProps = Extendable & {
   open?: boolean;

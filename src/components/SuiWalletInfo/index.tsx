@@ -11,7 +11,7 @@ import {
   addressEllipsis,
   UnknownChain,
   BaseError,
-} from '@razorlabs/wallet-sdk';
+} from '@razorlabs/m2-wallet-sdk';
 
 export type ConnectButtonProps = Extendable & {
   label?: string;

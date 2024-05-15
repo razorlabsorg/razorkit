@@ -8,16 +8,16 @@ import {
   SuiSignTransactionBlockInput,
   SuiSignTransactionBlockOutput,
   WalletAccount,
-} from '@razorlabs/wallet-standard';
+} from '@mysten/wallet-standard';
 import {
   Chain,
   ConnectionStatus,
   IWallet,
-  ISuiWalletAdapter,
+  IWalletAdapter,
   KitError,
   WalletEvent,
   WalletEventListeners,
-} from '@razorlabs/wallet-sdk';
+} from '@razorlabs/m2-wallet-sdk';
 import { createContext, useContext } from 'react';
 
 export interface SuiWalletContextState {
@@ -27,7 +27,7 @@ export interface SuiWalletContextState {
   chains: Chain[];
   chain: Chain | undefined;
   name: string | undefined; // name of the connected wallet
-  adapter: ISuiWalletAdapter | undefined; // adapter provided by the connected wallet
+  adapter: IWalletAdapter | undefined; // adapter provided by the connected wallet
   account: WalletAccount | undefined; // current account (the first account of accounts)
   address: string | undefined; // alias for account.address
   connecting: boolean;

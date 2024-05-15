@@ -3,7 +3,7 @@ import { TransactionBlock } from '@mysten/sui.js/transactions';
 import { useSuiAccountBalance } from '../hooks/useSuiAccountBalance';
 import { useSuiWallet } from '../hooks/useSuiWallet';
 import React from 'react';
-import { ErrorCode, formatSUI } from '@razorlabs/wallet-sdk';
+import { ErrorCode, formatSUI } from '@razorlabs/m2-wallet-sdk';
 import SuiConnectButton from '../components/Button/SuiConnectButton';
 
 const sampleNft = new Map([

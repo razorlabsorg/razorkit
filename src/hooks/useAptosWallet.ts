@@ -3,6 +3,8 @@ import {
   AptosSignAndSubmitTransactionOutput,
   AptosSignMessageInput,
   AptosSignMessageOutput,
+  AptosSignTransactionOutput,
+  UserResponse,
   WalletAccount,
 } from '@razorlabs/wallet-standard';
 import {
@@ -12,13 +14,10 @@ import {
   KitError,
   WalletEvent,
   WalletEventListeners,
-  IAptosWalletAdapter,
-} from '@razorlabs/wallet-sdk';
+  IWalletAdapter,
+} from '@razorlabs/m1-wallet-sdk';
 import { createContext, useContext } from 'react';
-import {
-  AptosSignTransactionInput,
-  AptosSignTransactionOutput,
-} from '@razorlabs/wallet-standard/dist/features/aptosSignTransaction';
+import { AnyRawTransaction } from 'aptos';
 
 export interface AptosWalletContextState {
   configuredWallets: IWallet[];
@@ -27,7 +26,7 @@ export interface AptosWalletContextState {
   chains: Chain[];
   chain: Chain | undefined;
   name: string | undefined; // name of the connected wallet
-  adapter: IAptosWalletAdapter | undefined; // adapter provided by the connected wallet
+  adapter: IWalletAdapter | undefined; // adapter provided by the connected wallet
   account: WalletAccount | undefined; // current account (the first account of accounts)
   address: string | undefined; // alias for account.address
   connecting: boolean;
@@ -39,15 +38,14 @@ export interface AptosWalletContextState {
 
   signAndSubmitTransaction(
     input: AptosSignAndSubmitTransactionInput
-  ): Promise<AptosSignAndSubmitTransactionOutput>;
+  ): Promise<UserResponse<AptosSignAndSubmitTransactionOutput>>;
 
   signTransaction(
-    input: AptosSignTransactionInput
-  ): Promise<AptosSignTransactionOutput>;
+    transaction: AnyRawTransaction,
+    asFeepayer?: boolean
+  ): Promise<UserResponse<AptosSignTransactionOutput>>;
 
-  signMessage(
-    input: AptosSignMessageInput
-  ): Promise<AptosSignMessageOutput>;
+  signMessage(input: AptosSignMessageInput): Promise<UserResponse<AptosSignMessageOutput>>;
 
   /* verifySignedMessage(
     input: AptosSignMessageOutput,

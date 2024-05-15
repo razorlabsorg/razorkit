@@ -2,7 +2,7 @@
 import { useAptosAccountBalance } from '../hooks/useAptosAccountBalance';
 import { useAptosWallet } from '../hooks/useAptosWallet';
 import React from 'react';
-import { ErrorCode, formatAPT } from '@razorlabs/wallet-sdk';
+import { ErrorCode, formatAPT } from '@razorlabs/m1-wallet-sdk';
 import AptosConnectButton from '../components/Button/AptosConnectButton';
 
 /* const sampleNft = new Map([
@@ -64,7 +64,7 @@ function Aptos() {
   function getPublicKey() {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    return '0x' + wallet.account?.publicKey.toString('hex');
+    return wallet.account?.publicKey.toString();
   }
 
   return (
