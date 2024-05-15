@@ -1,30 +1,21 @@
-# React + TypeScript + Vite
+<p align="center"><a href="https://razorwallet.xyz">
+<img width="480" src="/assets/logo.png"/>
+</a></p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Razor Wallet Kit
 
-Currently, two official plugins are available:
+<a href="https://github.com/wallet-standard/wallet-standard">
+  <img src="https://badgen.net/badge/wallet-standard/supported/green" />
+</a>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+> 👋 If you want to know how to **install/use** Razor Wallet, please visit our offical website [razorwallet.xyz](https://razorwallet.xyz) or [docs](https://docs.razorwallet.xyz)
 
-## Expanding the ESLint configuration
+Razor wallet kit is react toolkit for DApps to interact with wallets on Movement easily 🥳
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Razor Wallet Kit presents dapp developers with **React Provider & Hooks, UI components** for connecting DApps to wallet extensions 🔗 Integration solution or customization are also supported ✅
 
-- Configure the top-level `parserOptions` property like this:
+## Documentation
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-};
-```
+See [https://kit.razorwallet.xyz/docs/QuickStart](https://kit.razorwallet.xyz/docs/QuickStart)
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+> 💡 Have fun with [Demo Playground](https://kit-demo.razorwallet.xyz/) + [Vite example repo](https://github.com/razorlabsorg/wallet-kit-vite-example) 
