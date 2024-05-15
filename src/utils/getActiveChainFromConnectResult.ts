@@ -6,5 +6,5 @@ export default function getActiveChainFromConnectResult(
   if (connectRes?.accounts?.[0]?.chains?.[0]) {
     return connectRes.accounts[0].chains[0];
   }
-  return 'm2:unknown';
+  return 'movement:unknown:unknown';
 }
