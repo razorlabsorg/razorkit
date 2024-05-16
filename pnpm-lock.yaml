@@ -15,8 +15,8 @@ dependencies:
     specifier: ^1.0.5
     version: 1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1)(react@18.3.1)
   '@razorlabs/m1-wallet-sdk':
-    specifier: ^0.1.2
-    version: 0.1.2
+    specifier: ^0.1.4
+    version: 0.1.4
   '@razorlabs/m2-wallet-sdk':
     specifier: ^0.1.3
     version: 0.1.3(svelte@4.2.17)(typescript@5.4.5)
@@ -1434,8 +1434,8 @@ packages:
       react: 18.3.1
     dev: false
 
-  /@razorlabs/m1-wallet-sdk@0.1.2:
-    resolution: {integrity: sha512-57z7ah/6Hi9twzBI5e67i/a6Xcvgbxq+cYJg6oVt2ivBM3uEgBkFPoPMc7UtHflFcrqHKjCeAiSRTn60Kbt43w==}
+  /@razorlabs/m1-wallet-sdk@0.1.4:
+    resolution: {integrity: sha512-fRNT2SLr85x9ElvSpaTDsY2HZW0nbkhbuRviD4NKouqVLbI+mbPY67sN5sIbdYl3i0JOGPIpqK6KWrsIrF2Srg==}
     dependencies:
       '@razorlabs/wallet-standard': 0.2.1
       aptos: 1.21.0
