@@ -12,6 +12,7 @@ import type {
   AptosConnectInput,
   AptosSignAndSubmitTransactionInput,
   AptosSignMessageInput,
+  AptosSignTransactionInput,
   WalletAccount,
 } from '@razorlabs/wallet-standard';
 import { Extendable } from '../types/utils';
@@ -36,7 +37,6 @@ import {
 } from '@razorlabs/m1-wallet-sdk';
 import { useAvailableAptosWallets } from '../hooks/useAvailableAptosWallets';
 import getActiveAptosChain from '../utils/getActiveAptosChain';
-import { AnyRawTransaction } from 'aptos';
 
 export type AptosWalletProviderProps = Extendable & {
   defaultWallets?: IDefaultWallet[];
@@ -239,13 +239,13 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
   );
 
   const signTransaction = useCallback(
-    async (transaction: AnyRawTransaction, asFeepayer?: boolean) => {
+    async (input: AptosSignTransactionInput) => {
       ensureCallable(walletAdapter, status);
       if (!account) {
         throw new KitError('no active account');
       }
       const _wallet = walletAdapter as IWalletAdapter;
-      return await _wallet.signTransaction(transaction, asFeepayer);
+      return await _wallet.signTransaction(input);
     },
     [walletAdapter, status, chain, account]
   );

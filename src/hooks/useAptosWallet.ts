@@ -3,6 +3,7 @@ import {
   AptosSignAndSubmitTransactionOutput,
   AptosSignMessageInput,
   AptosSignMessageOutput,
+  AptosSignTransactionInput,
   AptosSignTransactionOutput,
   UserResponse,
   WalletAccount,
@@ -17,7 +18,6 @@ import {
   IWalletAdapter,
 } from '@razorlabs/m1-wallet-sdk';
 import { createContext, useContext } from 'react';
-import { AnyRawTransaction } from 'aptos';
 
 export interface AptosWalletContextState {
   configuredWallets: IWallet[];
@@ -41,18 +41,12 @@ export interface AptosWalletContextState {
   ): Promise<UserResponse<AptosSignAndSubmitTransactionOutput>>;
 
   signTransaction(
-    transaction: AnyRawTransaction,
-    asFeepayer?: boolean
+    input: AptosSignTransactionInput
   ): Promise<UserResponse<AptosSignTransactionOutput>>;
 
   signMessage(
     input: AptosSignMessageInput
   ): Promise<UserResponse<AptosSignMessageOutput>>;
-
-  /* verifySignedMessage(
-    input: AptosSignMessageOutput,
-    publicKey: Uint8Array
-  ): Promise<boolean>; */
 
   on: <E extends WalletEvent>(
     event: E,
