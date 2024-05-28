@@ -65,6 +65,7 @@ function Sui() {
   function uint8ArrayToHex(arr: Uint8Array | undefined) {
     if (!arr) return '';
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return arr.toString('hex');
   }
