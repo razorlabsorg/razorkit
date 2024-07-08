@@ -3,15 +3,15 @@ import { Network } from 'aptos';
 
 export default function getActiveAptosChain(connectRes: AptosGetNetworkOutput) {
   if (connectRes.name === Network.DEVNET) {
-    return 'm1:devnet';
+    return 'aptos:devnet';
   }
 
   if (connectRes.name === Network.TESTNET) {
-    return 'm1:testnet';
+    return 'aptos:testnet';
   }
 
   if (connectRes.name === Network.MAINNET) {
-    return 'm1:mainnet';
+    return 'aptos:mainnet';
   }
 
   return 'unknown:unknown';

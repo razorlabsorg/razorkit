@@ -8,12 +8,13 @@ import React, {
   useState,
 } from 'react';
 import { AptosWalletContext } from '../hooks';
-import type {
-  AptosConnectInput,
-  AptosSignAndSubmitTransactionInput,
-  AptosSignMessageInput,
-  AptosSignTransactionInput,
-  WalletAccount,
+import {
+  UserResponseStatus,
+  type AptosConnectInput,
+  type AptosSignAndSubmitTransactionInput,
+  type AptosSignMessageInput,
+  type AptosSignTransactionInput,
+  type WalletAccount,
 } from '@razorlabs/wallet-standard';
 import { Extendable } from '../types/utils';
 import { isNonEmptyArray } from '../utils/check';
@@ -99,7 +100,7 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
         const network = await adapter.network();
 
         // try to get chain from the connected account
-        if (isNonEmptyArray((res as any)?.accounts)) {
+        if (res.status === UserResponseStatus.APPROVED) {
           const chainId = getActiveAptosChain(network);
           const targetChain = chains.find((item) => item.id === chainId);
           setChain(targetChain ?? UnknownChain);
