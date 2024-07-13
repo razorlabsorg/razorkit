@@ -1,6 +1,7 @@
 import { Wallet, getWallets } from '@mysten/wallet-standard';
 import { WalletRadar } from '../WalletRadar';
 import { FeatureName } from '../constants';
+import { beforeEach, describe, expect, test, vitest } from 'vitest';
 
 const initialWallets: Wallet[] = [
   {
@@ -22,9 +23,9 @@ beforeEach(() => {
   listeners = [];
 });
 
-jest.mock('@mysten/wallet-standard', () => {
+vitest.mock('@mysten/wallet-standard', () => {
   return {
-    getWallets: jest.fn().mockReturnValue({
+    getWallets: vitest.fn().mockReturnValue({
       get: () => initialWallets,
       on: (event: string, callback: () => void) => {
         listeners.push(callback);
@@ -43,7 +44,7 @@ describe('test radar detection', () => {
     const detectedAdapters = walletRadar.getDetectedWalletAdapters();
     initialWallets.forEach((wallet) => {
       expect(
-        detectedAdapters.find((adapter) => adapter.name === wallet.name)
+        detectedAdapters.find((adapter) => adapter.name === wallet.name),
       ).toBeTruthy();
     });
   });

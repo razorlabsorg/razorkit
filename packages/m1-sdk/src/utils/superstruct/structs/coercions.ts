@@ -16,7 +16,7 @@ import { string, unknown } from './types';
 export function coerce<T, S, C>(
   struct: Struct<T, S>,
   condition: Struct<C, any>,
-  coercer: Coercer<C>
+  coercer: Coercer<C>,
 ): Struct<T, S> {
   return new Struct({
     ...struct,
@@ -40,7 +40,7 @@ export function defaulted<T, S>(
   fallback: any,
   options: {
     strict?: boolean;
-  } = {}
+  } = {},
 ): Struct<T, S> {
   return coerce(struct, unknown(), (x) => {
     const f = typeof fallback === 'function' ? fallback() : fallback;

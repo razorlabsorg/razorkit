@@ -96,13 +96,13 @@ export function date(): Struct<Date, null> {
  */
 
 export function enums<U extends number, T extends readonly U[]>(
-  values: T
+  values: T,
 ): Struct<T[number], { [K in T[number]]: K }>;
 export function enums<U extends string, T extends readonly U[]>(
-  values: T
+  values: T,
 ): Struct<T[number], { [K in T[number]]: K }>;
 export function enums<U extends string | number, T extends readonly U[]>(
-  values: T
+  values: T,
 ): any {
   const schema: any = {};
   const description = values.map((v) => print(v)).join();
@@ -141,7 +141,7 @@ export function func(): Struct<Function, null> {
  */
 
 export function instance<T extends { new (...args: any): any }>(
-  Class: T
+  Class: T,
 ): Struct<InstanceType<T>, null> {
   return define('instance', (value) => {
     return (
@@ -169,7 +169,7 @@ export function integer(): Struct<number, null> {
  */
 
 export function intersection<A extends AnyStruct, B extends AnyStruct[]>(
-  Structs: [A, ...B]
+  Structs: [A, ...B],
 ): Struct<Infer<A> & UnionToIntersection<InferStructTuple<B>[number]>, null> {
   return new Struct({
     type: 'intersection',
@@ -224,7 +224,7 @@ export function literal<T>(constant: T): any {
 export function map(): Struct<Map<unknown, unknown>, null>;
 export function map<K, V>(
   Key: Struct<K>,
-  Value: Struct<V>
+  Value: Struct<V>,
 ): Struct<Map<K, V>, null>;
 export function map<K, V>(Key?: Struct<K>, Value?: Struct<V>): any {
   return new Struct({
@@ -292,7 +292,7 @@ export function number(): Struct<number, null> {
 
 export function object(): Struct<Record<string, unknown>, null>;
 export function object<S extends ObjectSchema>(
-  schema: S
+  schema: S,
 ): Struct<ObjectType<S>, S>;
 export function object<S extends ObjectSchema>(schema?: S): any {
   const knowns = schema ? Object.keys(schema) : [];
@@ -350,7 +350,7 @@ export function optional<T, S>(struct: Struct<T, S>): Struct<T | undefined, S> {
 
 export function record<K extends string, V>(
   Key: Struct<K>,
-  Value: Struct<V>
+  Value: Struct<V>,
 ): Struct<Record<K, V>, null> {
   return new Struct({
     type: 'record',
@@ -435,7 +435,7 @@ export function string(): Struct<string, null> {
  */
 
 export function tuple<A extends AnyStruct, B extends AnyStruct[]>(
-  Structs: [A, ...B]
+  Structs: [A, ...B],
 ): Struct<[Infer<A>, ...InferStructTuple<B>], null> {
   const Never = never();
 
@@ -468,7 +468,7 @@ export function tuple<A extends AnyStruct, B extends AnyStruct[]>(
  */
 
 export function type<S extends ObjectSchema>(
-  schema: S
+  schema: S,
 ): Struct<ObjectType<S>, S> {
   const keys = Object.keys(schema);
   return new Struct({
@@ -499,7 +499,7 @@ export function type<S extends ObjectSchema>(
  */
 
 export function union<A extends AnyStruct, B extends AnyStruct[]>(
-  Structs: [A, ...B]
+  Structs: [A, ...B],
 ): Struct<Infer<A> | InferStructTuple<B>[number], null> {
   const description = Structs.map((s) => s.type).join(' | ');
   return new Struct({
@@ -536,7 +536,7 @@ export function union<A extends AnyStruct, B extends AnyStruct[]>(
 
       return [
         `Expected the value to satisfy a union of \`${description}\`, but received: ${print(
-          value
+          value,
         )}`,
         ...failures,
       ];

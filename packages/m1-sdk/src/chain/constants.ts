@@ -15,8 +15,8 @@ export const AptosDevnetChain: Chain = {
 export const AptosTestnetChain: Chain = {
   id: AptosChainId.TEST_NET,
   name: 'Testnet',
-  rpcUrl: 'https://aptos.testnet.suzuka.movementlabs.xyz/v1'
-}
+  rpcUrl: 'https://aptos.testnet.suzuka.movementlabs.xyz/v1',
+};
 
 export const UnknownChain: Chain = {
   id: 'unknown:unknown',

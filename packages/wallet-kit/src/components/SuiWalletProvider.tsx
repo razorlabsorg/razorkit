@@ -61,7 +61,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
     IWalletAdapter | undefined
   >();
   const [status, setStatus] = useState<ConnectionStatus>(
-    ConnectionStatus.DISCONNECTED
+    ConnectionStatus.DISCONNECTED,
   );
   const [chain, setChain] = useState(() => {
     if (isNonEmptyArray(chains)) return chains[0]; // first one as default chain
@@ -71,7 +71,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
 
   const isCallable = (
     walletAdapter: IWalletAdapter | undefined,
-    status: ConnectionStatus
+    status: ConnectionStatus,
   ) => {
     return walletAdapter && status === ConnectionStatus.CONNECTED;
   };
@@ -83,7 +83,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
 
   const ensureCallable = (
     walletAdapter: IWalletAdapter | undefined,
-    status: ConnectionStatus
+    status: ConnectionStatus,
   ) => {
     if (!isCallable(walletAdapter, status)) {
       throw new KitError('Failed to call function, wallet not connected');
@@ -117,7 +117,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
         throw e;
       }
     },
-    []
+    [],
   );
 
   const disconnect = useCallback(async () => {
@@ -132,7 +132,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
         } catch (e) {
           console.error(
             'error when clearing wallet listener',
-            (e as any).message
+            (e as any).message,
           );
         }
       });
@@ -169,21 +169,21 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
       }
 
       const wallet = allAvailableWallets.find(
-        (wallet) => wallet.name === walletName
+        (wallet) => wallet.name === walletName,
       );
       if (!wallet) {
         const availableWalletNames = allAvailableWallets.map(
-          (wallet) => wallet.name
+          (wallet) => wallet.name,
         );
         throw new KitError(
           `select failed: wallet ${walletName} is not available, all wallets are listed here: [${availableWalletNames.join(
-            ', '
-          )}]`
+            ', ',
+          )}]`,
         );
       }
       await connect(wallet.adapter as IWalletAdapter);
     },
-    [walletAdapter, status, allAvailableWallets]
+    [walletAdapter, status, allAvailableWallets],
   );
 
   const on = useCallback(
@@ -217,7 +217,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
       walletOffListeners.current.push(off); // should help user manage off cleaners
       return off;
     },
-    [walletAdapter, status]
+    [walletAdapter, status],
   );
 
   const getAccounts = useCallback(() => {
@@ -228,7 +228,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
 
   const signAndExecuteTransactionBlock = useCallback(
     async (
-      input: Omit<SuiSignAndExecuteTransactionBlockInput, 'account' | 'chain'>
+      input: Omit<SuiSignAndExecuteTransactionBlockInput, 'account' | 'chain'>,
     ) => {
       ensureCallable(walletAdapter, status);
       if (!account) {
@@ -241,7 +241,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
         ...input,
       });
     },
-    [walletAdapter, status, chain, account]
+    [walletAdapter, status, chain, account],
   );
 
   const signTransactionBlock = useCallback(
@@ -257,7 +257,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
         ...input,
       });
     },
-    [walletAdapter, status, chain, account]
+    [walletAdapter, status, chain, account],
   );
 
   const signMessage = useCallback(
@@ -273,7 +273,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
         message: input.message,
       });
     },
-    [walletAdapter, account, status]
+    [walletAdapter, account, status],
   );
 
   const signPersonalMessage = useCallback(
@@ -289,7 +289,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
         message: input.message,
       });
     },
-    [walletAdapter, account, status]
+    [walletAdapter, account, status],
   );
 
   useSuiAutoConnect(select, status, allAvailableWallets, autoConnect);

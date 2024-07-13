@@ -34,7 +34,7 @@ function Aptos() {
         onConnectError={(err) => {
           if (err.code === ErrorCode.WALLET__CONNECT_ERROR__USER_REJECTED) {
             console.warn(
-              'user rejected the connection to ' + err.details?.wallet
+              'user rejected the connection to ' + err.details?.wallet,
             );
           } else {
             console.warn('unknown connect error: ', err);

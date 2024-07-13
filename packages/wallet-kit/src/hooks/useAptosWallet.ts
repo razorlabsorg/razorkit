@@ -37,20 +37,21 @@ export interface AptosWalletContextState {
   getAccounts: () => readonly WalletAccount[];
 
   signAndSubmitTransaction(
-    input: AptosSignAndSubmitTransactionInput
+    input: AptosSignAndSubmitTransactionInput,
   ): Promise<UserResponse<AptosSignAndSubmitTransactionOutput>>;
 
   signTransaction(
-    transaction: AnyRawTransaction, asFeePayer?: boolean
+    transaction: AnyRawTransaction,
+    asFeePayer?: boolean,
   ): Promise<UserResponse<AptosSignTransactionOutput>>;
 
   signMessage(
-    input: AptosSignMessageInput
+    input: AptosSignMessageInput,
   ): Promise<UserResponse<AptosSignMessageOutput>>;
 
   on: <E extends WalletEvent>(
     event: E,
-    listener: WalletEventListeners[E]
+    listener: WalletEventListeners[E],
   ) => () => void;
 }
 

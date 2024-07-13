@@ -9,14 +9,17 @@ export class AccountCoinManager
 {
   private coinType: string;
 
+  /**
+   * Constructor for AccountCoinManager class.
+   *
+   * @param {SuiClient} suiClient - The SuiClient instance.
+   * @param {string} coinType - The type of the coin.
+   */
   constructor(suiClient: SuiClient, coinType: string) {
     super(suiClient);
     this.coinType = coinType;
   }
 
-  /**
-   * Get the coin object of one specific token type
-   */
   async getOwnedCoins(address: string): Promise<CoinObject[]> {
     let hasNextPage = true;
     let nextCursor = null;
@@ -29,7 +32,11 @@ export class AccountCoinManager
       });
       paginatedCoins.data.forEach((coin) => {
         coins.push(
-          new CoinObject(coin.coinObjectId, coin.coinType, BigInt(coin.balance))
+          new CoinObject(
+            coin.coinObjectId,
+            coin.coinType,
+            BigInt(coin.balance),
+          ),
         );
       });
       hasNextPage = paginatedCoins.hasNextPage;

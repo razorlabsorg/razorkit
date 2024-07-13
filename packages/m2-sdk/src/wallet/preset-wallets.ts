@@ -1,5 +1,11 @@
 import { IDefaultWallet } from './types';
 
+/**
+ * A function that defines a wallet by freezing the provided parameters.
+ *
+ * @param {IDefaultWallet} params - The parameters to define the wallet.
+ * @return {IDefaultWallet} The frozen wallet parameters.
+ */
 export function defineWallet(params: IDefaultWallet) {
   return Object.freeze(params);
 }

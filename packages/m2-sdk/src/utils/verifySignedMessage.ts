@@ -8,13 +8,16 @@ import { Uint8arrayTool } from './binary';
 import { has } from './check';
 
 /**
- * Verify a signed message based on Sui standard
- * @param input
- * @param publicKey
+ * Verify a signed message based on Sui standard.
+ *
+ * @param {SuiSignPersonalMessageOutput | SuiSignMessageOutput} input - The signed message input. It should be either SuiSignPersonalMessageOutput or SuiSignMessageOutput.
+ * @param {Uint8Array} publicKey - The public key used for verification.
+ * @return {Promise<boolean>} A promise that resolves to a boolean indicating whether the signature is valid or not.
+ * @throws {Error} If the input is neither SuiSignPersonalMessageOutput nor SuiSignMessageOutput.
  */
 export async function verifySignedMessage(
   input: SuiSignPersonalMessageOutput | SuiSignMessageOutput,
-  publicKey: Uint8Array
+  publicKey: Uint8Array,
 ): Promise<boolean> {
   let message: string;
   if (has(input, 'bytes')) {
@@ -23,13 +26,13 @@ export async function verifySignedMessage(
     message = (input as SuiSignMessageOutput).messageBytes;
   } else {
     throw new Error(
-      'input should be either SuiSignPersonalMessageOutput or SuiSignMessageOutput'
+      'input should be either SuiSignPersonalMessageOutput or SuiSignMessageOutput',
     );
   }
   try {
     const parsedPublicKey = await verifyPersonalMessage(
       stringBytesToUint8Array(message),
-      input.signature
+      input.signature,
     );
     return Uint8arrayTool.bytesEqual(parsedPublicKey.toRawBytes(), publicKey);
   } catch {

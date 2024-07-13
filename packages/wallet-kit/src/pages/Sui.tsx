@@ -27,7 +27,7 @@ function Sui() {
           tx.pure('Razor NFT'),
           tx.pure('Razor Sample NFT'),
           tx.pure(
-            'https://ipfs.io/ipfs/QmYbAuxRGdSgNsfDopufzRrXsXfeuRsMnd1T1JR7qdi5Kn'
+            'https://ipfs.io/ipfs/QmYbAuxRGdSgNsfDopufzRrXsXfeuRsMnd1T1JR7qdi5Kn',
           ),
         ],
       });
@@ -52,7 +52,7 @@ function Sui() {
       });
       const isValid = await wallet.verifySignedMessage(
         result,
-        wallet.account.publicKey
+        wallet.account.publicKey,
       );
       console.log('verify signedMessage', isValid);
       alert('signMessage succeeded (see response in the console)');
@@ -93,7 +93,7 @@ function Sui() {
         onConnectError={(err) => {
           if (err.code === ErrorCode.WALLET__CONNECT_ERROR__USER_REJECTED) {
             console.warn(
-              'user rejected the connection to ' + err.details?.wallet
+              'user rejected the connection to ' + err.details?.wallet,
             );
           } else {
             console.warn('unknown connect error: ', err);

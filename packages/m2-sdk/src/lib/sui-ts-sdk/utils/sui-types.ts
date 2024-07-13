@@ -23,7 +23,7 @@ export function isValidSuiObjectId(value: string): boolean {
  */
 export function normalizeSuiAddress(
   value: string,
-  forceAdd0x: boolean = false
+  forceAdd0x: boolean = false,
 ): string {
   let address = value.toLowerCase();
   if (!forceAdd0x && address.startsWith('0x')) {
@@ -34,7 +34,7 @@ export function normalizeSuiAddress(
 
 export function normalizeSuiObjectId(
   value: string,
-  forceAdd0x: boolean = false
+  forceAdd0x: boolean = false,
 ): string {
   return normalizeSuiAddress(value, forceAdd0x);
 }

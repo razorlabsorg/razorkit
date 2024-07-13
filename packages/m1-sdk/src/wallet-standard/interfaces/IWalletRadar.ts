@@ -13,6 +13,6 @@ export interface IWalletRadar {
    * @param callback
    */
   subscribe: (
-    callback: WalletRadarSubscriptionInput
+    callback: WalletRadarSubscriptionInput,
   ) => WalletRadarSubscriptionOutput;
 }

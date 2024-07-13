@@ -15,13 +15,13 @@ export const useAvailableSuiWallets = (defaultWallets: IDefaultWallet[]) => {
             ...item,
             adapter: undefined,
             installed: false,
-          }) as IWallet
+          }) as IWallet,
       );
     }
 
     return defaultWallets.map((item) => {
       const foundAdapter = availableWalletAdapters.find(
-        (walletAdapter) => item.name === walletAdapter.name
+        (walletAdapter) => item.name === walletAdapter.name,
       );
       if (foundAdapter) {
         return {
@@ -64,7 +64,7 @@ export const useAvailableSuiWallets = (defaultWallets: IDefaultWallet[]) => {
   // filter installed wallets
   const allAvailableWallets: IWallet[] = useMemo(() => {
     return [...configuredWallets, ...detectedWallets].filter(
-      (wallet) => wallet.installed
+      (wallet) => wallet.installed,
     );
   }, [configuredWallets, detectedWallets]);
 

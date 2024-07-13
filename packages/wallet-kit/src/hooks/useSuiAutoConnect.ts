@@ -8,7 +8,7 @@ export function useSuiAutoConnect(
   select: (name: string) => Promise<void>,
   status: ConnectionStatus,
   allAvailableWallets: IWallet[],
-  autoConnect: boolean
+  autoConnect: boolean,
 ) {
   const init = useRef(false);
 
@@ -24,7 +24,7 @@ export function useSuiAutoConnect(
 
     const storage = new Storage();
     const lastConnectedWalletName = storage.getItem(
-      StorageKey.LAST_CONNECT_WALLET_NAME
+      StorageKey.LAST_CONNECT_WALLET_NAME,
     );
     if (!lastConnectedWalletName) return;
 

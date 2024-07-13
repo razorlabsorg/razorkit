@@ -30,10 +30,6 @@ import {
 import { FeatureName } from './constants';
 import { has } from '../utils';
 
-/**
- * Wrap the adapter that supports wallet-standard
- * provider universal interfaces to component usage
- */
 export class WalletAdapter implements IWalletAdapter {
   private standardWalletAdapter: Wallet;
 
@@ -66,17 +62,17 @@ export class WalletAdapter implements IWalletAdapter {
   }
 
   async connect(
-    input: StandardConnectInput | undefined
+    input: StandardConnectInput | undefined,
   ): Promise<StandardConnectOutput> {
     const feature = this.getFeature<{ connect: StandardConnectMethod }>(
-      FeatureName.STANDARD__CONNECT
+      FeatureName.STANDARD__CONNECT,
     );
     try {
       return await feature.connect(input);
     } catch (e) {
       const { code, message, details } = handleConnectionError(
         e as Error,
-        this.name
+        this.name,
       );
       throw new WalletError(message, code, details);
     }
@@ -84,37 +80,37 @@ export class WalletAdapter implements IWalletAdapter {
 
   async disconnect(): Promise<void> {
     const feature = this.getFeature<{ disconnect: StandardDisconnectMethod }>(
-      FeatureName.STANDARD__DISCONNECT
+      FeatureName.STANDARD__DISCONNECT,
     );
     try {
       return await feature.disconnect();
     } catch (e) {
       throw new WalletError(
         (e as any).message,
-        ErrorCode.WALLET__DISCONNECT_ERROR
+        ErrorCode.WALLET__DISCONNECT_ERROR,
       );
     }
   }
 
   on(
     event: StandardEventsNames,
-    listener: StandardEventsListeners[StandardEventsNames]
+    listener: StandardEventsListeners[StandardEventsNames],
   ): () => void {
     const feature = this.getFeature<{ on: StandardEventsOnMethod }>(
-      FeatureName.STANDARD__EVENTS
+      FeatureName.STANDARD__EVENTS,
     );
     try {
       return feature.on<StandardEventsNames>(event, listener);
     } catch (e) {
       throw new WalletError(
         (e as any).message,
-        ErrorCode.WALLET__LISTEN_TO_EVENT_ERROR
+        ErrorCode.WALLET__LISTEN_TO_EVENT_ERROR,
       );
     }
   }
 
   async signAndExecuteTransactionBlock(
-    input: SuiSignAndExecuteTransactionBlockInput
+    input: SuiSignAndExecuteTransactionBlockInput,
   ): Promise<SuiSignAndExecuteTransactionBlockOutput> {
     const feature = this.getFeature<{
       signAndExecuteTransactionBlock: SuiSignAndExecuteTransactionBlockMethod;
@@ -124,13 +120,13 @@ export class WalletAdapter implements IWalletAdapter {
     } catch (e) {
       throw new WalletError(
         (e as any).message,
-        ErrorCode.WALLET__SIGN_TX_ERROR
+        ErrorCode.WALLET__SIGN_TX_ERROR,
       );
     }
   }
 
   signTransactionBlock(
-    input: SuiSignTransactionBlockInput
+    input: SuiSignTransactionBlockInput,
   ): Promise<SuiSignTransactionBlockOutput> {
     const feature = this.getFeature<{
       signTransactionBlock: SuiSignTransactionBlockMethod;
@@ -140,27 +136,27 @@ export class WalletAdapter implements IWalletAdapter {
     } catch (e) {
       throw new WalletError(
         (e as any).message,
-        ErrorCode.WALLET__SIGN_TX_ERROR
+        ErrorCode.WALLET__SIGN_TX_ERROR,
       );
     }
   }
 
   async signMessage(input: SuiSignMessageInput): Promise<SuiSignMessageOutput> {
     const feature = this.getFeature<{ signMessage: SuiSignMessageMethod }>(
-      FeatureName.SUI__SIGN_MESSAGE
+      FeatureName.SUI__SIGN_MESSAGE,
     );
     try {
       return await feature.signMessage(input);
     } catch (e) {
       throw new WalletError(
         (e as any).message,
-        ErrorCode.WALLET__SIGN_MSG_ERROR
+        ErrorCode.WALLET__SIGN_MSG_ERROR,
       );
     }
   }
 
   signPersonalMessage(
-    input: SuiSignPersonalMessageInput
+    input: SuiSignPersonalMessageInput,
   ): Promise<SuiSignPersonalMessageOutput> {
     const feature = this.getFeature<{
       signPersonalMessage: SuiSignPersonalMessageMethod;
@@ -170,7 +166,7 @@ export class WalletAdapter implements IWalletAdapter {
     } catch (e) {
       throw new WalletError(
         (e as any).message,
-        ErrorCode.WALLET__SIGN_PERSONAL_MSG_ERROR
+        ErrorCode.WALLET__SIGN_PERSONAL_MSG_ERROR,
       );
     }
   }
@@ -180,6 +176,12 @@ export class WalletAdapter implements IWalletAdapter {
     return has(features, name);
   }
 
+  /**
+   * Retrieves a specific feature by name from the standard wallet adapter.
+   *
+   * @param {string} name - The name of the feature to retrieve.
+   * @return {T} The retrieved feature.
+   */
   private getFeature<T = any>(name: string): T {
     const { features } = this.standardWalletAdapter;
     if (!has(features, name)) {

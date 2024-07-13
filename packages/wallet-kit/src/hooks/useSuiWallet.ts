@@ -38,32 +38,32 @@ export interface SuiWalletContextState {
   getAccounts: () => readonly WalletAccount[];
 
   signAndExecuteTransactionBlock(
-    input: Omit<SuiSignAndExecuteTransactionBlockInput, 'account' | 'chain'>
+    input: Omit<SuiSignAndExecuteTransactionBlockInput, 'account' | 'chain'>,
   ): Promise<SuiSignAndExecuteTransactionBlockOutput>;
 
   signTransactionBlock(
-    input: Omit<SuiSignTransactionBlockInput, 'account' | 'chain'>
+    input: Omit<SuiSignTransactionBlockInput, 'account' | 'chain'>,
   ): Promise<SuiSignTransactionBlockOutput>;
 
   signPersonalMessage(
-    input: Omit<SuiSignPersonalMessageInput, 'account'>
+    input: Omit<SuiSignPersonalMessageInput, 'account'>,
   ): Promise<SuiSignPersonalMessageOutput>;
 
   /**
    * @deprecated use signPersonalMessage instead
    */
   signMessage(
-    input: Omit<SuiSignMessageInput, 'account'>
+    input: Omit<SuiSignMessageInput, 'account'>,
   ): Promise<SuiSignMessageOutput>;
 
   verifySignedMessage(
     input: SuiSignPersonalMessageOutput | SuiSignMessageOutput,
-    publicKey: Uint8Array
+    publicKey: Uint8Array,
   ): Promise<boolean>;
 
   on: <E extends WalletEvent>(
     event: E,
-    listener: WalletEventListeners[E]
+    listener: WalletEventListeners[E],
   ) => () => void;
 }
 

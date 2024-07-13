@@ -6,7 +6,7 @@ export function formatAPT(
   amount: number | string | bigint,
   options?: {
     withAbbr?: boolean;
-  }
+  },
 ) {
   return formatCurrency(
     amount,
@@ -14,8 +14,8 @@ export function formatAPT(
       {
         decimals: 8,
       },
-      options
-    )
+      options,
+    ),
   );
 }
 
@@ -28,7 +28,7 @@ export function formatCurrency(
   options?: {
     decimals?: number;
     withAbbr?: boolean;
-  }
+  },
 ): string {
   const { decimals = 0, withAbbr = true } = options ?? {};
   // handle bigint that exceeds safe integer range
@@ -65,7 +65,7 @@ function format(amount: number | bigint, showAbbr: boolean): string {
 function formatWithAbbr(
   amount: number | bigint,
   measureUnit: number,
-  abbrSymbol: string
+  abbrSymbol: string,
 ) {
   let _amount: string;
   if (typeof amount === 'bigint') {
@@ -135,7 +135,7 @@ function formatCurrencyBigInt(
   options?: {
     decimals?: number;
     withAbbr?: boolean;
-  }
+  },
 ): string {
   if (amount === 0n) return '0';
   if (amount < 0n) return '-' + formatCurrencyBigInt(-amount, options);

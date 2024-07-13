@@ -14,5 +14,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </AptosWalletProvider>
       </SuiWalletProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest';
 import { stringBytesToString } from '../stringBytesToString';
 import { verifySignedMessage } from '../verifySignedMessage';
 
@@ -28,7 +29,7 @@ describe('verifySignedMessage', function () {
         ...signedOutput,
         bytes: 'SGVsbG8gd29ybGQhAA==',
       },
-      publicKey
+      publicKey,
     );
     expect(isValid).toBe(false);
   });
@@ -40,7 +41,7 @@ describe('verifySignedMessage', function () {
         signature:
           'ADmKQDG8f1BQfTDqxryx64ok0Bvkd4z3Q8VZ+sfn8aeK7F/toAJKW4FsNMytXyjDAIxcXLDV7o+xHtEcKplcLQwiS7D3ApnQ3rlRF5gdKV3d7tv2mWcpG3TlSxhNFU10Hw==AA==',
       },
-      publicKey
+      publicKey,
     );
     expect(isValid).toBe(false);
   });
@@ -48,7 +49,7 @@ describe('verifySignedMessage', function () {
   test('verify signature with wrong publicKey', async () => {
     const isValid = await verifySignedMessage(
       signedOutput,
-      Uint8Array.from([1, 2, 3])
+      Uint8Array.from([1, 2, 3]),
     );
     expect(isValid).toBe(false);
   });
@@ -60,8 +61,8 @@ describe('verifySignedMessage', function () {
           messageBytes: signedOutput.bytes,
           signature: signedOutput.signature,
         },
-        publicKey
-      )
+        publicKey,
+      ),
     ).toBe(true);
   });
 });

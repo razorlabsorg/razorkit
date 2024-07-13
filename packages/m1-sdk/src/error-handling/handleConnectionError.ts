@@ -9,7 +9,7 @@ export interface WalletErrorRes {
 
 export function handleConnectionError(
   e: Error,
-  wallet: string
+  wallet: string,
 ): WalletErrorRes {
   let code = ErrorCode.WALLET__CONNECT_ERROR; // default error
   let message = e.message;

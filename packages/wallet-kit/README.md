@@ -18,4 +18,4 @@ Razor Wallet Kit presents dapp developers with **React Provider & Hooks, UI comp
 
 See [https://kit.razorwallet.xyz/docs/QuickStart](https://kit.razorwallet.xyz/docs/QuickStart)
 
-> 💡 Have fun with [Demo Playground](https://kit-demo.razorwallet.xyz/) + [Vite example repo](https://github.com/razorlabsorg/wallet-kit-vite-example) 
+> 💡 Have fun with [Demo Playground](https://kit-demo.razorwallet.xyz/) + [Vite example repo](https://github.com/razorlabsorg/wallet-kit-vite-example)

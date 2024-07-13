@@ -1,5 +1,6 @@
 import { AccountObjectManager } from '../AccountObjectManager';
 import { PaginatedObjectsResponse } from '@mysten/sui.js/client';
+import { vitest, describe, test, expect } from 'vitest';
 
 const mockedResponse: PaginatedObjectsResponse = {
   data: [
@@ -37,9 +38,9 @@ const mockedResponse: PaginatedObjectsResponse = {
   hasNextPage: false,
 };
 
-const getMockedSuiClient = jest.fn().mockImplementation(() => {
+const getMockedSuiClient = vitest.fn().mockImplementation(() => {
   return {
-    getOwnedObjects: jest.fn().mockReturnValue(mockedResponse),
+    getOwnedObjects: vitest.fn().mockReturnValue(mockedResponse),
   };
 });
 

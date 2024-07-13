@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest';
 import { addressEllipsis } from '../index';
 
 describe('addressEllipsis', function () {

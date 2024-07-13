@@ -18,7 +18,6 @@ export const SuiTestnetChain: Chain = {
   rpcUrl: 'https://sui.testnet.m2.movementlabs.xyz/',
 };
 
-
 export const SuiMainnetChain: Chain = {
   id: SuiChainId.MAIN_NET,
   name: 'M2 Mainnet',

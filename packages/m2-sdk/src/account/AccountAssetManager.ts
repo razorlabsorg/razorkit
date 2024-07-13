@@ -1,4 +1,4 @@
-import { IAccountAssetManager } from './interfaces/IAccountAssetManager';
+import { IAccountAssetManager } from './interfaces';
 import { SuiClient } from '@mysten/sui.js/client';
 import { AccountCoinManager } from './AccountCoinManager';
 import { SUI_TYPE_ARG } from '@mysten/sui.js/utils';
@@ -8,11 +8,18 @@ export class AccountAssetManager implements IAccountAssetManager {
   private chainRpcUrl: string;
   private suiClient: SuiClient;
 
+  /**
+   * Constructs a new instance of the AccountAssetManager class.
+   *
+   * @param {string} address - The address of the account.
+   * @param {object} options - The options for the account asset manager.
+   * @param {string} options.chainRpcUrl - The URL of the chain RPC.
+   */
   constructor(
     address: string,
     options: {
       chainRpcUrl: string;
-    }
+    },
   ) {
     this.address = address;
     this.chainRpcUrl = options.chainRpcUrl;

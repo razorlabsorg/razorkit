@@ -16,7 +16,7 @@ export class Struct<T = unknown, S = unknown> {
   refiner: (value: T, context: Context) => Iterable<Failure>;
   entries: (
     value: unknown,
-    context: Context
+    context: Context,
   ) => Iterable<[string | number, unknown, Struct<any> | Struct<never>]>;
 
   constructor(props: {
@@ -107,7 +107,7 @@ export class Struct<T = unknown, S = unknown> {
     options: {
       coerce?: boolean;
       message?: string;
-    } = {}
+    } = {},
   ): [StructError, undefined] | [undefined, T] {
     return validate(value, this, options);
   }
@@ -120,7 +120,7 @@ export class Struct<T = unknown, S = unknown> {
 export function assert<T, S>(
   value: unknown,
   struct: Struct<T, S>,
-  message?: string
+  message?: string,
 ): asserts value is T {
   const result = validate(value, struct, { message });
 
@@ -136,7 +136,7 @@ export function assert<T, S>(
 export function create<T, S>(
   value: unknown,
   struct: Struct<T, S>,
-  message?: string
+  message?: string,
 ): T {
   const result = validate(value, struct, { coerce: true, message });
 
@@ -154,7 +154,7 @@ export function create<T, S>(
 export function mask<T, S>(
   value: unknown,
   struct: Struct<T, S>,
-  message?: string
+  message?: string,
 ): T {
   const result = validate(value, struct, { coerce: true, mask: true, message });
 
@@ -186,7 +186,7 @@ export function validate<T, S>(
     coerce?: boolean;
     mask?: boolean;
     message?: string;
-  } = {}
+  } = {},
 ): [StructError, undefined] | [undefined, T] {
   const tuples = run(value, struct, options);
   const tuple = shiftIterator(tuples)!;

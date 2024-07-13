@@ -43,13 +43,13 @@ export class AccountCoinManager
   async fetchAccountResource<T = unknown>(
     accountAddress: string,
     resourceType: string,
-    ledgerVersion?: bigint | number
+    ledgerVersion?: bigint | number,
   ): Promise<AptosResource<T> | undefined> {
     try {
       const response = await this.client.getAccountResource(
         accountAddress,
         resourceType,
-        { ledgerVersion: ledgerVersion }
+        { ledgerVersion: ledgerVersion },
       );
       return response as unknown as AptosResource<T>;
     } catch (e: unknown) {
@@ -61,7 +61,7 @@ export class AccountCoinManager
   async getBalance(address: string): Promise<bigint> {
     const coinStore = await this.fetchAccountResource<CoinStoreResource>(
       address,
-      composeType('0x1::coin::CoinStore', [this.coinType])
+      composeType('0x1::coin::CoinStore', [this.coinType]),
     );
     const data = coinStore?.data;
     const balance = BigInt(data?.coin.value!);

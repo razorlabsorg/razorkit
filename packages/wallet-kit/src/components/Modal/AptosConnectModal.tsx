@@ -139,7 +139,7 @@ const InstallGuide = (props: InstallGuideProps) => {
           onClick={() => {
             if (!wallet.downloadUrl?.browserExtension) {
               throw new KitError(
-                `no downloadUrl config on this wallet: ${wallet.name}`
+                `no downloadUrl config on this wallet: ${wallet.name}`,
               );
             }
             window.open(wallet.downloadUrl.browserExtension, '_blank');
@@ -213,7 +213,7 @@ export const AptosConnectModal = (props: ConnectModalProps) => {
         onConnectSuccess(wallet.name);
       }
     },
-    [onConnectError, onConnectSuccess, select]
+    [onConnectError, onConnectSuccess, select],
   );
 
   function renderBody() {

@@ -16,7 +16,7 @@ import { object, optional, type } from './types';
 
 export function assign<A extends ObjectSchema, B extends ObjectSchema>(
   A: Struct<ObjectType<A>, A>,
-  B: Struct<ObjectType<B>, B>
+  B: Struct<ObjectType<B>, B>,
 ): Struct<ObjectType<Assign<A, B>>, Assign<A, B>>;
 export function assign<
   A extends ObjectSchema,
@@ -25,7 +25,7 @@ export function assign<
 >(
   A: Struct<ObjectType<A>, A>,
   B: Struct<ObjectType<B>, B>,
-  C: Struct<ObjectType<C>, C>
+  C: Struct<ObjectType<C>, C>,
 ): Struct<ObjectType<Assign<Assign<A, B>, C>>, Assign<Assign<A, B>, C>>;
 export function assign<
   A extends ObjectSchema,
@@ -36,7 +36,7 @@ export function assign<
   A: Struct<ObjectType<A>, A>,
   B: Struct<ObjectType<B>, B>,
   C: Struct<ObjectType<C>, C>,
-  D: Struct<ObjectType<D>, D>
+  D: Struct<ObjectType<D>, D>,
 ): Struct<
   ObjectType<Assign<Assign<Assign<A, B>, C>, D>>,
   Assign<Assign<Assign<A, B>, C>, D>
@@ -52,7 +52,7 @@ export function assign<
   B: Struct<ObjectType<B>, B>,
   C: Struct<ObjectType<C>, C>,
   D: Struct<ObjectType<D>, D>,
-  E: Struct<ObjectType<E>, E>
+  E: Struct<ObjectType<E>, E>,
 ): Struct<
   ObjectType<Assign<Assign<Assign<Assign<A, B>, C>, D>, E>>,
   Assign<Assign<Assign<Assign<A, B>, C>, D>, E>
@@ -79,7 +79,7 @@ export function define<T>(name: string, validator: Validator): Struct<T, null> {
 
 export function deprecated<T>(
   struct: Struct<T>,
-  log: (value: unknown, ctx: Context) => void
+  log: (value: unknown, ctx: Context) => void,
 ): Struct<T> {
   return new Struct({
     ...struct,
@@ -104,7 +104,7 @@ export function deprecated<T>(
  */
 
 export function dynamic<T>(
-  fn: (value: unknown, ctx: Context) => Struct<T, any>
+  fn: (value: unknown, ctx: Context) => Struct<T, any>,
 ): Struct<T, null> {
   return new Struct({
     type: 'dynamic',
@@ -170,7 +170,7 @@ export function lazy<T>(fn: () => Struct<T, any>): Struct<T, null> {
 
 export function omit<S extends ObjectSchema, K extends keyof S>(
   struct: Struct<ObjectType<S>, S>,
-  keys: K[]
+  keys: K[],
 ): Struct<ObjectType<Omit<S, K>>, Omit<S, K>> {
   const { schema } = struct;
   const subschema: any = { ...schema };
@@ -195,7 +195,7 @@ export function omit<S extends ObjectSchema, K extends keyof S>(
  */
 
 export function partial<S extends ObjectSchema>(
-  struct: Struct<ObjectType<S>, S> | S
+  struct: Struct<ObjectType<S>, S> | S,
 ): Struct<ObjectType<PartialObjectSchema<S>>, PartialObjectSchema<S>> {
   const isStruct = struct instanceof Struct;
   const schema: any = isStruct ? { ...struct.schema } : { ...struct };
@@ -220,7 +220,7 @@ export function partial<S extends ObjectSchema>(
 
 export function pick<S extends ObjectSchema, K extends keyof S>(
   struct: Struct<ObjectType<S>, S>,
-  keys: K[]
+  keys: K[],
 ): Struct<ObjectType<Pick<S, K>>, Pick<S, K>> {
   const { schema } = struct;
   const subschema: any = {};
@@ -246,7 +246,7 @@ export function pick<S extends ObjectSchema, K extends keyof S>(
 
 export function struct<T>(name: string, validator: Validator): Struct<T, null> {
   console.warn(
-    'superstruct@0.11 - The `struct` helper has been renamed to `define`.'
+    'superstruct@0.11 - The `struct` helper has been renamed to `define`.',
   );
 
   return define(name, validator);

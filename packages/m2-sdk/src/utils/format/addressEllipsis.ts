@@ -1,4 +1,10 @@
-export default function addressEllipsis(address: string) {
+/**
+ * Truncates the given address to a format of 0x...0000 based on the address length.
+ *
+ * @param {string} address - The address to truncate.
+ * @return {string} The truncated address.
+ */
+export default function addressEllipsis(address: string): string {
   if (typeof address !== 'string') {
     return '';
   }

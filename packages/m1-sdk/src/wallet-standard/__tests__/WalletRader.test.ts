@@ -43,7 +43,7 @@ describe('test radar detection', () => {
     const detectedAdapters = walletRadar.getDetectedWalletAdapters();
     initialWallets.forEach((wallet) => {
       expect(
-        detectedAdapters.find((adapter) => adapter.name === wallet.name)
+        detectedAdapters.find((adapter) => adapter.name === wallet.name),
       ).toBeTruthy();
     });
   });

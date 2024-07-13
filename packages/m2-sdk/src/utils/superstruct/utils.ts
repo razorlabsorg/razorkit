@@ -61,7 +61,7 @@ export function toFailure<T, S>(
   result: string | boolean | Partial<Failure>,
   context: Context,
   struct: Struct<T, S>,
-  value: any
+  value: any,
 ): Failure | undefined {
   if (result === true) {
     return;
@@ -100,7 +100,7 @@ export function* toFailures<T, S>(
   result: Result,
   context: Context,
   struct: Struct<T, S>,
-  value: any
+  value: any,
 ): IterableIterator<Failure> {
   if (!isIterable(result)) {
     result = [result];
@@ -129,7 +129,7 @@ export function* run<T, S>(
     coerce?: boolean;
     mask?: boolean;
     message?: string;
-  } = {}
+  } = {},
 ): IterableIterator<[Failure, undefined] | [undefined, T]> {
   const { path = [], branch = [value], coerce = false, mask = false } = options;
   const ctx: Context = { path, branch };

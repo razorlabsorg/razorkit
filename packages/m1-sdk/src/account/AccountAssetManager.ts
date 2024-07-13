@@ -11,7 +11,7 @@ export class AccountAssetManager implements IAccountAssetManager {
     address: string,
     options: {
       chainRpcUrl: string;
-    }
+    },
   ) {
     this.address = address;
     this.chainRpcUrl = options.chainRpcUrl;

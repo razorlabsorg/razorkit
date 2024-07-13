@@ -1,6 +1,6 @@
-import { AccountObjectManager } from '../AccountObjectManager';
 import type { PaginatedCoins } from '@mysten/sui.js/client';
 import { AccountCoinManager } from '../AccountCoinManager';
+import { describe, expect, test, vitest } from 'vitest';
 
 const mockedGetCoinsResponse: PaginatedCoins = {
   data: [
@@ -26,10 +26,10 @@ const mockedGetBalanceResponse = {
   lockedBalance: {},
 };
 
-const getMockedSuiClient = jest.fn().mockImplementation(() => {
+const getMockedSuiClient = vitest.fn().mockImplementation(() => {
   return {
-    getCoins: jest.fn().mockReturnValue(mockedGetCoinsResponse),
-    getBalance: jest.fn().mockReturnValue(mockedGetBalanceResponse),
+    getCoins: vitest.fn().mockReturnValue(mockedGetCoinsResponse),
+    getBalance: vitest.fn().mockReturnValue(mockedGetBalanceResponse),
   };
 });
 
@@ -37,12 +37,12 @@ describe('test getCoins', () => {
   test('given mocked sdk, when getCoins, then return coins of that type', async () => {
     const objManager = new AccountCoinManager(
       getMockedSuiClient(),
-      '0x2::sui::SUI'
+      '0x2::sui::SUI',
     );
     const coins = await objManager.getOwnedCoins('0x123');
     expect(coins.length).toEqual(1);
     expect(coins[0].objectId).toEqual(
-      '0x6126323fa428acc1c2b677f919f4655662368e8ad98e4521888850ae30bc2ba0'
+      '0x6126323fa428acc1c2b677f919f4655662368e8ad98e4521888850ae30bc2ba0',
     );
   });
 });
@@ -51,7 +51,7 @@ describe('test getBalance', () => {
   test('given mocked sdk, when getBalance, then return balance of that type of coin', async () => {
     const objManager = new AccountCoinManager(
       getMockedSuiClient(),
-      '0x2::sui::SUI'
+      '0x2::sui::SUI',
     );
     const balance = await objManager.getBalance('0x123');
     expect(balance).toEqual(144521165343n);

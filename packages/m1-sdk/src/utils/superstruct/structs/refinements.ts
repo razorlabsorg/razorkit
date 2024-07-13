@@ -35,7 +35,7 @@ export function max<T extends number | Date, S extends any>(
   threshold: T,
   options: {
     exclusive?: boolean;
-  } = {}
+  } = {},
 ): Struct<T, S> {
   const { exclusive } = options;
   return refine(struct, 'max', (value) => {
@@ -57,7 +57,7 @@ export function min<T extends number | Date, S extends any>(
   threshold: T,
   options: {
     exclusive?: boolean;
-  } = {}
+  } = {},
 ): Struct<T, S> {
   const { exclusive } = options;
   return refine(struct, 'min', (value) => {
@@ -92,7 +92,7 @@ export function nonempty<
 
 export function pattern<T extends string, S extends any>(
   struct: Struct<T, S>,
-  regexp: RegExp
+  regexp: RegExp,
 ): Struct<T, S> {
   return refine(struct, 'pattern', (value) => {
     return (
@@ -148,7 +148,7 @@ export function size<
 export function refine<T, S>(
   struct: Struct<T, S>,
   name: string,
-  refiner: Refiner<T>
+  refiner: Refiner<T>,
 ): Struct<T, S> {
   return new Struct({
     ...struct,

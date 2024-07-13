@@ -36,7 +36,7 @@ export class WalletRadar implements IWalletRadar {
           this.setDetectedWalletAdapters(adapter);
         });
         this.notifySubscribers();
-      }
+      },
     );
   }
 
@@ -52,7 +52,7 @@ export class WalletRadar implements IWalletRadar {
   }
 
   subscribe(
-    callback: WalletRadarSubscriptionInput
+    callback: WalletRadarSubscriptionInput,
   ): WalletRadarSubscriptionOutput {
     this.subscriptions.add(callback);
     return () => {

@@ -7,6 +7,12 @@ import {
 
 export class AccountObjectManager implements IAccountObjectManager {
   protected client: SuiClient;
+
+  /**
+   * Constructor for AccountObjectManager class.
+   *
+   * @param {SuiClient} suiClient - The SuiClient instance.
+   */
   constructor(suiClient: SuiClient) {
     this.client = suiClient;
   }
