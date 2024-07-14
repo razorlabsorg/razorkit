@@ -1,31 +1,33 @@
+import { MoveStructId } from "@aptos-labs/ts-sdk";
+
 export function extractAddressFromType(type: string) {
   const res = type.split('::')[0];
   return res!;
 }
 
-export function composeType(address: string, generics: string[]): string;
+export function composeType(address: string, generics: string[]): MoveStructId;
 export function composeType(
   address: string,
   struct: string,
   generics?: string[],
-): string;
+): MoveStructId;
 export function composeType(
   address: string,
   module: string,
   struct: string,
   generics?: string[],
-): string;
+): MoveStructId;
 
-export function composeType(address: string, ...args: unknown[]): string {
+export function composeType(address: string, ...args: unknown[]): MoveStructId {
   const generics: string[] = Array.isArray(args[args.length - 1])
     ? (args.pop() as string[])
     : [];
   const chains = [address, ...args].filter(Boolean);
-  let result: string = chains.join('::');
+  let result = chains.join('::');
   if (generics && generics.length) {
     result += `<${generics.join(',')}>`;
   }
-  return result;
+  return result as MoveStructId;
 }
 
 export function isAptosCoin(type: string) {

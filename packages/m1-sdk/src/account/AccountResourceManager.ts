@@ -1,22 +1,22 @@
-import { AptosClient, Types } from 'aptos';
+import { Aptos, MoveResource } from '@aptos-labs/ts-sdk';
 import { IAccountResourceManager } from './interfaces';
 
 export class AccountResourceManager implements IAccountResourceManager {
-  protected client: AptosClient;
-  constructor(aptosClient: AptosClient) {
+  protected client: Aptos;
+  constructor(aptosClient: Aptos) {
     this.client = aptosClient;
   }
 
-  async getOwnedResources(address: string): Promise<Types.MoveResource[]> {
-    const response = await this.client.getAccountResources(address);
+  async getOwnedResources(address: string): Promise<MoveResource[]> {
+    const response = await this.client.getAccountResources({ accountAddress: address });
     return response;
   }
 
-  getAptosClient(): AptosClient {
+  getAptosClient(): Aptos {
     return this.client;
   }
 
-  setAptosClient(aptosClient: AptosClient) {
+  setAptosClient(aptosClient: Aptos) {
     this.client = aptosClient;
   }
 }

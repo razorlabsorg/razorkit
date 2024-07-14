@@ -1,4 +1,3 @@
-import { Types } from 'aptos';
 
 export type CoinStoreResult = {
   coin: {
@@ -90,11 +89,6 @@ export interface TransactionResponse {
   success: boolean;
   status: string;
   hash: string;
-}
-
-export interface SimulateTransactionResponse {
-  success: boolean;
-  data: Types.UserTransaction;
 }
 
 type Vec<T = undefined> = {

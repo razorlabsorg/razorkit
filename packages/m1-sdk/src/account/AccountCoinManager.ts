@@ -1,9 +1,9 @@
-import { AptosClient } from 'aptos';
 import { AccountResourceManager } from './AccountResourceManager';
 import { IAccountCoinManager } from './interfaces/IAccountCoinManager';
 import { AptosCoinResource } from '../common/AptosCoinResource';
 import { composeType, extractCoinType, isAptosCoin } from '../utils';
 import { AptosResource, CoinStoreResource } from '../types/coins';
+import { Aptos, MoveStructId } from '@aptos-labs/ts-sdk';
 
 export class AccountCoinManager
   extends AccountResourceManager
@@ -11,7 +11,7 @@ export class AccountCoinManager
 {
   private coinType: string;
 
-  constructor(aptosClient: AptosClient, coinType: string) {
+  constructor(aptosClient: Aptos, coinType: string) {
     super(aptosClient);
     this.coinType = coinType;
   }
@@ -19,17 +19,17 @@ export class AccountCoinManager
   async getOwnedCoins(address: string): Promise<AptosCoinResource[]> {
     const coins: AptosCoinResource[] = [];
 
-    const resp = await this.client.getAccountResources(address);
+    const resp = await this.client.getAccountResources({ accountAddress: address });
 
     let i = 0;
-    const length = resp?.length;
+    const length = resp.length;
 
-    while (length! > 0 && i < length!) {
-      const resource = resp![i];
-      const coinType = extractCoinType(resource?.type!);
-      if (isAptosCoin(resource?.type!) && coinType === this.coinType) {
+    while (length > 0 && i < length) {
+      const resource = resp[i];
+      const coinType = extractCoinType(resource.type);
+      if (isAptosCoin(resource.type) && coinType === this.coinType) {
         //
-        const resourceData = resource?.data as CoinStoreResource;
+        const resourceData = resource.data as CoinStoreResource;
         const balance = BigInt(resourceData.coin.value);
         const coin = new AptosCoinResource(this.coinType, balance);
 
@@ -42,15 +42,15 @@ export class AccountCoinManager
 
   async fetchAccountResource<T = unknown>(
     accountAddress: string,
-    resourceType: string,
+    resourceType: MoveStructId,
     ledgerVersion?: bigint | number,
-  ): Promise<AptosResource<T> | undefined> {
+  ): Promise<AptosResource<T>> {
     try {
-      const response = await this.client.getAccountResource(
+      const response = await this.client.getAccountResource({
         accountAddress,
         resourceType,
-        { ledgerVersion: ledgerVersion },
-      );
+        options: { ledgerVersion: ledgerVersion },
+      });
       return response as unknown as AptosResource<T>;
     } catch (e: unknown) {
       console.log(e);
@@ -63,8 +63,8 @@ export class AccountCoinManager
       address,
       composeType('0x1::coin::CoinStore', [this.coinType]),
     );
-    const data = coinStore?.data;
-    const balance = BigInt(data?.coin.value!);
+    const data = coinStore.data;
+    const balance = BigInt(data.coin.value);
     return balance;
   }
 }

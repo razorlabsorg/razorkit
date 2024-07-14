@@ -1,11 +1,11 @@
 import { IAccountAssetManager } from './interfaces/IAccountAssetManager';
 import { AccountCoinManager } from './AccountCoinManager';
-import { AptosClient } from 'aptos';
+import { Aptos, AptosConfig } from '@aptos-labs/ts-sdk';
 
 export class AccountAssetManager implements IAccountAssetManager {
   private address: string;
   private chainRpcUrl: string;
-  private aptosClient: AptosClient;
+  private aptosClient: Aptos;
 
   constructor(
     address: string,
@@ -13,9 +13,10 @@ export class AccountAssetManager implements IAccountAssetManager {
       chainRpcUrl: string;
     },
   ) {
+    const config = new AptosConfig({ fullnode: options.chainRpcUrl });
     this.address = address;
     this.chainRpcUrl = options.chainRpcUrl;
-    this.aptosClient = new AptosClient(options.chainRpcUrl);
+    this.aptosClient = new Aptos(config);
   }
 
   getAddress(): string {
@@ -37,6 +38,7 @@ export class AccountAssetManager implements IAccountAssetManager {
 
   setChainRpcUrl(chainRpcUrl: string): void {
     this.chainRpcUrl = chainRpcUrl;
-    this.aptosClient = new AptosClient(chainRpcUrl);
+    const config = new AptosConfig({ fullnode: chainRpcUrl });
+    this.aptosClient = new Aptos(config);
   }
 }

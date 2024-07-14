@@ -21,7 +21,6 @@
   "dependencies": {
     "@aptos-labs/ts-sdk": "^1.23.0",
     "@aptos-labs/wallet-standard": "^0.1.0",
-    "aptos": "^1.21.0",
     "buffer": "^6.0.3"
   },
   "publishConfig": {
