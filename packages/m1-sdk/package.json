@@ -13,7 +13,8 @@
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "test": "vitest --run",
     "clean": "rm -rf dist",
-    "build": "pnpm clean && tsup"
+    "build": "pnpm clean && tsup",
+    "publish": "pnpm publish --access public"
   },
   "keywords": [],
   "author": "",
