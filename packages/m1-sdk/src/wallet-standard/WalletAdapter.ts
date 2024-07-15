@@ -21,11 +21,13 @@ import {
   AptosSignTransactionMethod,
   AptosSignTransactionOutput,
   NetworkInfo,
-  StandardEventsListeners,
-  StandardEventsNames,
-  StandardEventsOnMethod,
   UserResponse,
   AptosWallet,
+  AptosOnAccountChangeMethod,
+  AptosOnAccountChangeInput,
+  AptosOnNetworkChangeInput,
+  AptosOnNetworkChangeMethod,
+  AccountInfo,
 } from '@aptos-labs/wallet-standard';
 import { has } from '../utils';
 import { AnyRawTransaction } from '@aptos-labs/ts-sdk';
@@ -41,7 +43,7 @@ export class WalletAdapter implements IWalletAdapter {
     this.standardWalletAdapter = standardWalletAdapter;
   }
 
-  get name() {
+  get name(): string {
     return this.standardWalletAdapter.name;
   }
 
@@ -62,7 +64,7 @@ export class WalletAdapter implements IWalletAdapter {
   }
 
   get features() {
-    return this.standardWalletAdapter.features as any;
+    return this.standardWalletAdapter.features;
   }
 
   async connect(): Promise<UserResponse<AptosConnectOutput>> {
@@ -108,7 +110,7 @@ export class WalletAdapter implements IWalletAdapter {
     }
   }
 
-  async account() {
+  async account(): Promise<AccountInfo> {
     const feature = this.getFeature<{ account: AptosGetAccountMethod }>(
       FeatureName.APTOS__ACCOUNT,
     );
@@ -122,19 +124,34 @@ export class WalletAdapter implements IWalletAdapter {
     }
   }
 
-  on(
-    event: StandardEventsNames,
-    listener: StandardEventsListeners[StandardEventsNames],
-  ): () => void {
-    const feature = this.getFeature<{ on: StandardEventsOnMethod }>(
-      FeatureName.STANDARD__EVENTS,
-    );
+  async onAccountChange(
+    input: AptosOnAccountChangeInput
+  ): Promise<void> {
+    const feature = this.getFeature<{
+      onAccountChange: AptosOnAccountChangeMethod
+    }>(FeatureName.APTOS__ON_ACCOUNT_CHANGE);
     try {
-      return feature.on<StandardEventsNames>(event, listener);
+      return await feature.onAccountChange(input);
     } catch (e) {
       throw new WalletError(
         (e as any).message,
-        ErrorCode.WALLET__LISTEN_TO_EVENT_ERROR,
+        ErrorCode.WALLET__ON_ACCOUNT_CHANGE_ERROR,
+      );
+    }
+  }
+
+  async onNetworkChange(
+    input: AptosOnNetworkChangeInput
+  ): Promise<void> {
+    const feature = this.getFeature<{
+      onNetworkChange: AptosOnNetworkChangeMethod
+    }>(FeatureName.APTOS__ON_NETWORK_CHANGE);
+    try {
+      return await feature.onNetworkChange(input);
+    } catch (e) {
+      throw new WalletError(
+        (e as any).message,
+        ErrorCode.WALLET__ON_NETWORK_CHANGE_ERROR,
       );
     }
   }
@@ -155,7 +172,7 @@ export class WalletAdapter implements IWalletAdapter {
     }
   }
 
-  signTransaction(
+  async signTransaction(
     transaction: AnyRawTransaction,
     asFeePayer?: boolean,
   ): Promise<UserResponse<AptosSignTransactionOutput>> {

@@ -1,4 +1,7 @@
+import { expect } from 'vitest';
 import { formatCurrency } from '../formatCurrency';
+import { describe } from 'vitest';
+import { test } from 'vitest';
 
 describe('formatCurrency with default decimal 0', () => {
   test('decimal 0 means amount * 10^0 = amount * 1', () => {

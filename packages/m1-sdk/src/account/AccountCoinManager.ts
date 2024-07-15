@@ -2,7 +2,7 @@ import { AccountResourceManager } from './AccountResourceManager';
 import { IAccountCoinManager } from './interfaces/IAccountCoinManager';
 import { AptosCoinResource } from '../common/AptosCoinResource';
 import { composeType, extractCoinType, isAptosCoin } from '../utils';
-import { AptosResource, CoinStoreResource } from '../types/coins';
+import { CoinStoreResource } from '../types/coins';
 import { Aptos, MoveStructId } from '@aptos-labs/ts-sdk';
 
 export class AccountCoinManager
@@ -40,18 +40,18 @@ export class AccountCoinManager
     return coins;
   }
 
-  async fetchAccountResource<T = unknown>(
+  async fetchAccountResource(
     accountAddress: string,
     resourceType: MoveStructId,
     ledgerVersion?: bigint | number,
-  ): Promise<AptosResource<T>> {
+  ) {
     try {
       const response = await this.client.getAccountResource({
         accountAddress,
         resourceType,
         options: { ledgerVersion: ledgerVersion },
       });
-      return response as unknown as AptosResource<T>;
+      return response;
     } catch (e: unknown) {
       console.log(e);
       throw e;
@@ -59,11 +59,11 @@ export class AccountCoinManager
   }
 
   async getBalance(address: string): Promise<bigint> {
-    const coinStore = await this.fetchAccountResource<CoinStoreResource>(
+    const coinStore = await this.fetchAccountResource(
       address,
       composeType('0x1::coin::CoinStore', [this.coinType]),
     );
-    const data = coinStore.data;
+    const data = coinStore;
     const balance = BigInt(data.coin.value);
     return balance;
   }

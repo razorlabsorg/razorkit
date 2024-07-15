@@ -1,6 +1,6 @@
 {
   "name": "@razorlabs/wallet-kit",
-  "version": "0.2.6",
+  "version": "0.3.0",
   "type": "module",
   "files": [
     "dist"
@@ -30,8 +30,6 @@
     "@radix-ui/react-dialog": "^1.0.5",
     "@razorlabs/m1-wallet-sdk": "workspace:^",
     "@razorlabs/m2-wallet-sdk": "workspace:^",
-    "@wallet-standard/core": "^1.0.3",
-    "aptos": "^1.21.0",
     "classnames": "^2.5.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

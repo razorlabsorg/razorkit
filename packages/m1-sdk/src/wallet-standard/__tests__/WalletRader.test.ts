@@ -1,6 +1,11 @@
 import { Wallet, getWallets } from '@aptos-labs/wallet-standard';
 import { WalletRadar } from '../WalletRadar';
 import { FeatureName } from '../constants';
+import { beforeEach } from 'vitest';
+import { vitest } from 'vitest';
+import { describe } from 'vitest';
+import { test } from 'vitest';
+import { expect } from 'vitest';
 
 const initialWallets: Wallet[] = [
   {
@@ -11,7 +16,6 @@ const initialWallets: Wallet[] = [
     chains: ['aptos:devnet'],
     features: {
       [FeatureName.APTOS__CONNECT]: () => {},
-      [FeatureName.STANDARD__EVENTS]: () => {},
       [FeatureName.APTOS__SIGN_AND_SUBMIT_TRANSACTION]: () => {},
     },
   },
@@ -22,9 +26,9 @@ beforeEach(() => {
   listeners = [];
 });
 
-jest.mock('@aptos-labs/wallet-standard', () => {
+vitest.mock('@aptos-labs/wallet-standard', () => {
   return {
-    getWallets: jest.fn().mockReturnValue({
+    getWallets: vitest.fn().mockReturnValue({
       get: () => initialWallets,
       on: (event: string, callback: () => void) => {
         listeners.push(callback);
@@ -61,7 +65,6 @@ describe('test radar detection', () => {
         chains: ['aptos:devnet'],
         features: {
           [FeatureName.APTOS__CONNECT]: () => {},
-          [FeatureName.STANDARD__EVENTS]: () => {},
           [FeatureName.APTOS__SIGN_AND_SUBMIT_TRANSACTION]: () => {},
         },
       },

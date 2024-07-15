@@ -1,6 +1,6 @@
 {
   "name": "@razorlabs/m2-wallet-sdk",
-  "version": "0.1.3",
+  "version": "0.3.0",
   "description": "",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",

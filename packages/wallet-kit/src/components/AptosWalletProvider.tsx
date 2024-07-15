@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, {
   useCallback,
-  useEffect,
   useMemo,
   useRef,
   useState,
@@ -32,8 +31,6 @@ import {
   KitError,
   UnknownChain,
   // verifySignedMessage,
-  WalletEvent,
-  WalletEventListeners,
 } from '@razorlabs/m1-wallet-sdk';
 import { useAvailableAptosWallets } from '../hooks/useAvailableAptosWallets';
 import getActiveAptosChain from '../utils/getActiveAptosChain';
@@ -113,6 +110,7 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
         storage.setItem(StorageKey.LAST_CONNECT_WALLET_NAME, adapter.name);
         return res;
       } catch (e) {
+        console.log('connect error', e);
         setWalletAdapter(undefined);
         setStatus(ConnectionStatus.DISCONNECTED);
         throw e;
@@ -187,40 +185,6 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
     [walletAdapter, status, allAvailableWallets],
   );
 
-  const on = useCallback(
-    (event: WalletEvent, listener: WalletEventListeners[WalletEvent]) => {
-      ensureCallable(walletAdapter, status);
-      const _wallet = walletAdapter as IWalletAdapter;
-
-      // filter event and params to decide when to emit
-      const off = _wallet.on('change', (params) => {
-        if (event === 'change') {
-          const _listener = listener as WalletEventListeners['change'];
-          _listener(params);
-          return;
-        }
-        if (params.chains && event === 'chainChange') {
-          const _listener = listener as WalletEventListeners['chainChange'];
-          _listener({ chain: (params.chains as any)?.[0] });
-          return;
-        }
-        if (params.accounts && event === 'accountChange') {
-          const _listener = listener as WalletEventListeners['accountChange'];
-          _listener({ account: (params.accounts as any)?.[0] });
-          return;
-        }
-        if (params.features && event === 'featureChange') {
-          const _listener = listener as WalletEventListeners['featureChange'];
-          _listener({ features: params.features as any });
-          return;
-        }
-      });
-      walletOffListeners.current.push(off); // should help user manage off cleaners
-      return off;
-    },
-    [walletAdapter, status],
-  );
-
   const getAccounts = useCallback(() => {
     ensureCallable(walletAdapter, status);
     const _wallet = walletAdapter as IWalletAdapter;
@@ -267,21 +231,7 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
   useAptosAutoConnect(select, status, allAvailableWallets, autoConnect);
 
   // sync kit's chain with wallet's active chain
-  useEffect(() => {
-    if (!walletAdapter || status !== 'connected') return;
-    const off = on('chainChange', (params: { chain: string }) => {
-      if (params.chain === chain.id) return;
-      const newChain = chains.find((item) => item.id === params.chain);
-      if (!newChain) {
-        setChain(UnknownChain);
-        return;
-      }
-      setChain(newChain);
-    });
-    return () => {
-      off();
-    };
-  }, [walletAdapter, status, chain, chains, on]);
+  
 
   return (
     <AptosWalletContext.Provider
@@ -298,7 +248,6 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
         connected: status === ConnectionStatus.CONNECTED,
         select,
         disconnect,
-        on,
         getAccounts,
         account,
         signAndSubmitTransaction,

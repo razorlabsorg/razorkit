@@ -9,6 +9,7 @@ import React, {
 } from 'react';
 import { SuiWalletContext } from '../hooks';
 import type {
+  IdentifierString,
   StandardConnectInput,
   SuiSignAndExecuteTransactionBlockInput,
   SuiSignMessageInput,
@@ -23,7 +24,6 @@ import { useSuiAutoConnect } from '../hooks/useSuiAutoConnect';
 import { Storage } from '../utils/storage';
 import { StorageKey } from '../constants/storage';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { IdentifierString } from '@wallet-standard/core';
 import getActiveChainFromConnectResult from '../utils/getActiveSuiChain';
 import {
   AllDefaultWallets,

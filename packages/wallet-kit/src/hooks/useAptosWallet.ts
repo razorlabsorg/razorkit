@@ -13,8 +13,6 @@ import {
   ConnectionStatus,
   IWallet,
   KitError,
-  WalletEvent,
-  WalletEventListeners,
   IWalletAdapter,
 } from '@razorlabs/m1-wallet-sdk';
 import { createContext, useContext } from 'react';
@@ -48,11 +46,6 @@ export interface AptosWalletContextState {
   signMessage(
     input: AptosSignMessageInput,
   ): Promise<UserResponse<AptosSignMessageOutput>>;
-
-  on: <E extends WalletEvent>(
-    event: E,
-    listener: WalletEventListeners[E],
-  ) => () => void;
 }
 
 function missProviderMessage(action: string) {
@@ -74,9 +67,6 @@ const DEFAULT_CONTEXT: AptosWalletContextState = {
   address: undefined,
   async select() {
     throw new KitError(missProviderMessage('select'));
-  },
-  on() {
-    throw new KitError(missProviderMessage('on'));
   },
   async disconnect() {
     throw new KitError(missProviderMessage('disconnect'));

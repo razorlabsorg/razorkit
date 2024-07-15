@@ -1,39 +1,24 @@
 import {
-  AptosConnectFeature,
   AptosConnectMethod,
-  AptosDisconnectFeature,
   AptosDisconnectMethod,
-  AptosGetAccountFeature,
   AptosGetAccountMethod,
-  AptosGetNetworkFeature,
   AptosGetNetworkMethod,
-  AptosSignAndSubmitTransactionFeature,
+  AptosOnAccountChangeMethod,
+  AptosOnNetworkChangeMethod,
   AptosSignAndSubmitTransactionMethod,
-  AptosSignMessageFeature,
   AptosSignMessageMethod,
-  AptosSignTransactionFeature,
   AptosSignTransactionMethod,
-  StandardEventsFeature,
-  StandardEventsOnMethod,
-  WalletWithFeatures,
+  WalletWithAptosFeatures,
 } from '@aptos-labs/wallet-standard';
 
-export type IWalletAdapter = WalletWithFeatures<
-  AptosConnectFeature &
-    AptosGetAccountFeature &
-    AptosGetNetworkFeature &
-    StandardEventsFeature &
-    AptosSignAndSubmitTransactionFeature &
-    AptosSignTransactionFeature &
-    AptosSignMessageFeature &
-    Partial<AptosDisconnectFeature>
-> & {
+export type IWalletAdapter = WalletWithAptosFeatures & {
   hasFeature: (name: string) => boolean;
   connect: AptosConnectMethod;
-  on: StandardEventsOnMethod;
   disconnect: AptosDisconnectMethod;
   network: AptosGetNetworkMethod;
   account: AptosGetAccountMethod;
+  onAccountChange: AptosOnAccountChangeMethod
+  onNetworkChange: AptosOnNetworkChangeMethod
   signAndSubmitTransaction: AptosSignAndSubmitTransactionMethod;
   signTransaction: AptosSignTransactionMethod;
   signMessage: AptosSignMessageMethod;

@@ -1,8 +1,13 @@
-import { AptosClient } from 'aptos';
+import { Aptos, AptosConfig } from '@aptos-labs/ts-sdk';
 import { useMemo } from 'react';
 
-export type AptosProvider = AptosClient;
+export type AptosProvider = Aptos;
 
 export function useAptosProvider(endpoint: string): AptosProvider {
-  return useMemo<AptosClient>(() => new AptosClient(endpoint), [endpoint]);
+  const provider = useMemo<Aptos>(() => {
+    const config = new AptosConfig({ fullnode: endpoint })
+    return new Aptos(config)
+  }, [endpoint]);
+
+  return provider
 }
