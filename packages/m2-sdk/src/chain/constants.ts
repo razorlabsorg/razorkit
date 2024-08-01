@@ -8,20 +8,14 @@ export enum SuiChainId {
 
 export const SuiDevnetChain: Chain = {
   id: SuiChainId.DEV_NET,
-  name: 'M2 Devnet',
+  name: 'Movement Sui Devnet',
   rpcUrl: 'https://sui.devnet.m2.movementlabs.xyz/',
 };
 
 export const SuiTestnetChain: Chain = {
   id: SuiChainId.TEST_NET,
-  name: 'M2 Testnet',
-  rpcUrl: 'https://sui.testnet.m2.movementlabs.xyz/',
-};
-
-export const SuiMainnetChain: Chain = {
-  id: SuiChainId.MAIN_NET,
-  name: 'M2 Mainnet',
-  rpcUrl: 'https://sui.mainnet.m2.movementlabs.xyz/',
+  name: 'Movement Sui Testnet',
+  rpcUrl: 'https://devnet.baku.movementlabs.xyz/',
 };
 
 export const UnknownChain: Chain = {
@@ -30,4 +24,4 @@ export const UnknownChain: Chain = {
   rpcUrl: '',
 };
 
-export const DefaultChains = [SuiDevnetChain, SuiTestnetChain, SuiMainnetChain];
+export const DefaultChains = [SuiTestnetChain, SuiDevnetChain];

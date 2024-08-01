@@ -3,7 +3,7 @@ import {
   SuiClient,
   SuiObjectData,
   SuiObjectResponse,
-} from '@mysten/sui.js/client';
+} from '@mysten/sui/client';
 
 export class AccountObjectManager implements IAccountObjectManager {
   protected client: SuiClient;
@@ -20,7 +20,7 @@ export class AccountObjectManager implements IAccountObjectManager {
   async getOwnedObjects(address: string): Promise<SuiObjectData[]> {
     let hasNextPage = true;
     let nextCursor = null;
-    let objects: SuiObjectData[] = [];
+    const objects: SuiObjectData[] = [];
     while (hasNextPage) {
       const resp: any = await this.client.getOwnedObjects({
         owner: address,

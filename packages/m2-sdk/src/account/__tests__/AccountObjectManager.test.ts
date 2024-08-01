@@ -1,5 +1,5 @@
 import { AccountObjectManager } from '../AccountObjectManager';
-import { PaginatedObjectsResponse } from '@mysten/sui.js/client';
+import { PaginatedObjectsResponse } from '@mysten/sui/client';
 import { vitest, describe, test, expect } from 'vitest';
 
 const mockedResponse: PaginatedObjectsResponse = {

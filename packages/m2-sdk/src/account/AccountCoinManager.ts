@@ -1,6 +1,6 @@
 import { IAccountCoinManager } from './interfaces';
 import { CoinObject } from '../common';
-import { SuiClient, PaginatedCoins } from '@mysten/sui.js/client';
+import { SuiClient, PaginatedCoins } from '@mysten/sui/client';
 import { AccountObjectManager } from './AccountObjectManager';
 
 export class AccountCoinManager
@@ -23,7 +23,7 @@ export class AccountCoinManager
   async getOwnedCoins(address: string): Promise<CoinObject[]> {
     let hasNextPage = true;
     let nextCursor = null;
-    let coins: CoinObject[] = [];
+    const coins: CoinObject[] = [];
     while (hasNextPage) {
       const paginatedCoins: PaginatedCoins = await this.client.getCoins({
         owner: address,

@@ -26,6 +26,15 @@ import { ObjectOwner } from './common';
 export const ObjectType = union([string(), literal('package')]);
 export type ObjectType = Infer<typeof ObjectType>;
 
+export type SharedObjectRef = {
+  /** Hex code as string representing the object id */
+  objectId: string;
+  /** The version the object was shared at */
+  initialSharedVersion: number | string;
+  /** Whether reference is mutable */
+  mutable: boolean;
+};
+
 export const SuiObjectRef = object({
   /** Base64 string representing the object digest */
   digest: string(),

@@ -1,4 +1,4 @@
-import type { PaginatedCoins } from '@mysten/sui.js/client';
+import type { PaginatedCoins } from '@mysten/sui/client';
 import { AccountCoinManager } from '../AccountCoinManager';
 import { describe, expect, test, vitest } from 'vitest';
 

@@ -2,10 +2,11 @@ import {
   SuiSignMessageOutput,
   SuiSignPersonalMessageOutput,
 } from '@mysten/wallet-standard';
-import { verifyPersonalMessage } from '@mysten/sui.js/verify';
 import { stringBytesToUint8Array } from './stringBytesToUint8Array';
 import { Uint8arrayTool } from './binary';
 import { has } from './check';
+import { verifyPersonalMessageSignature } from '@mysten/sui/verify';
+
 
 /**
  * Verify a signed message based on Sui standard.
@@ -30,7 +31,7 @@ export async function verifySignedMessage(
     );
   }
   try {
-    const parsedPublicKey = await verifyPersonalMessage(
+    const parsedPublicKey = await verifyPersonalMessageSignature(
       stringBytesToUint8Array(message),
       input.signature,
     );

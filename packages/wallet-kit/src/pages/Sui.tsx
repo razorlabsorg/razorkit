@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { TransactionBlock } from '@mysten/sui.js/transactions';
+import { Transaction } from '@mysten/sui/transactions';
 import { useSuiAccountBalance } from '../hooks/useSuiAccountBalance';
 import { useSuiWallet } from '../hooks/useSuiWallet';
 import React from 'react';
@@ -20,13 +20,13 @@ function Sui() {
   async function handleExecuteMoveCall(target: string | undefined) {
     if (!target) return;
     try {
-      const tx = new TransactionBlock();
+      const tx = new Transaction();
       tx.moveCall({
         target: target as any,
         arguments: [
-          tx.pure('Razor NFT'),
-          tx.pure('Razor Sample NFT'),
-          tx.pure(
+          tx.pure.string('Razor NFT'),
+          tx.pure.string('Razor Sample NFT'),
+          tx.pure.string(
             'https://ipfs.io/ipfs/QmYbAuxRGdSgNsfDopufzRrXsXfeuRsMnd1T1JR7qdi5Kn',
           ),
         ],

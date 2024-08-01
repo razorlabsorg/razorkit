@@ -12,9 +12,11 @@ import type {
   IdentifierString,
   StandardConnectInput,
   SuiSignAndExecuteTransactionBlockInput,
+  SuiSignAndExecuteTransactionInput,
   SuiSignMessageInput,
   SuiSignPersonalMessageInput,
   SuiSignTransactionBlockInput,
+  SuiSignTransactionInput,
   WalletAccount,
 } from '@mysten/wallet-standard';
 import { Extendable } from '../types/utils';
@@ -244,6 +246,24 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
     [walletAdapter, status, chain, account],
   );
 
+  const signAndExecuteTransaction = useCallback(
+    async (
+      input: Omit<SuiSignAndExecuteTransactionInput, 'account' | 'chain'>,
+    ) => {
+      ensureCallable(walletAdapter, status);
+      if (!account) {
+        throw new KitError('no active account');
+      }
+      const _wallet = walletAdapter as IWalletAdapter;
+      return await _wallet.signAndExecuteTransaction({
+        account,
+        chain: chain.id as IdentifierString,
+        ...input,
+      });
+    },
+    [walletAdapter, status, chain, account],
+  );
+
   const signTransactionBlock = useCallback(
     async (input: Omit<SuiSignTransactionBlockInput, 'account' | 'chain'>) => {
       ensureCallable(walletAdapter, status);
@@ -252,6 +272,22 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
       }
       const _wallet = walletAdapter as IWalletAdapter;
       return await _wallet.signTransactionBlock({
+        account,
+        chain: chain.id as IdentifierString,
+        ...input,
+      });
+    },
+    [walletAdapter, status, chain, account],
+  );
+
+  const signTransaction = useCallback(
+    async (input: Omit<SuiSignTransactionInput, 'account' | 'chain'>) => {
+      ensureCallable(walletAdapter, status);
+      if (!account) {
+        throw new KitError('no active account');
+      }
+      const _wallet = walletAdapter as IWalletAdapter;
+      return await _wallet.signTransaction({
         account,
         chain: chain.id as IdentifierString,
         ...input,
@@ -330,9 +366,11 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
         getAccounts,
         account,
         signAndExecuteTransactionBlock,
+        signAndExecuteTransaction,
         signPersonalMessage,
         signMessage,
         signTransactionBlock,
+        signTransaction,
         verifySignedMessage,
         address: account?.address,
       }}

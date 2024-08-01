@@ -1,12 +1,16 @@
 import {
+  SignedTransaction,
   SuiSignAndExecuteTransactionBlockInput,
   SuiSignAndExecuteTransactionBlockOutput,
+  SuiSignAndExecuteTransactionInput,
+  SuiSignAndExecuteTransactionOutput,
   SuiSignMessageInput,
   SuiSignMessageOutput,
   SuiSignPersonalMessageInput,
   SuiSignPersonalMessageOutput,
   SuiSignTransactionBlockInput,
   SuiSignTransactionBlockOutput,
+  SuiSignTransactionInput,
   WalletAccount,
 } from '@mysten/wallet-standard';
 import {
@@ -41,9 +45,17 @@ export interface SuiWalletContextState {
     input: Omit<SuiSignAndExecuteTransactionBlockInput, 'account' | 'chain'>,
   ): Promise<SuiSignAndExecuteTransactionBlockOutput>;
 
+  signAndExecuteTransaction(
+    input: Omit<SuiSignAndExecuteTransactionInput, 'account' | 'chain'>,
+  ): Promise<SuiSignAndExecuteTransactionOutput>;
+
   signTransactionBlock(
     input: Omit<SuiSignTransactionBlockInput, 'account' | 'chain'>,
   ): Promise<SuiSignTransactionBlockOutput>;
+
+  signTransaction(
+    input: Omit<SuiSignTransactionInput, 'account' | 'chain'>,
+  ): Promise<SignedTransaction>;
 
   signPersonalMessage(
     input: Omit<SuiSignPersonalMessageInput, 'account'>,
@@ -99,8 +111,14 @@ const DEFAULT_CONTEXT: SuiWalletContextState = {
   async signAndExecuteTransactionBlock() {
     throw new KitError(missProviderMessage('signAndExecuteTransactionBlock'));
   },
+  async signAndExecuteTransaction() {
+    throw new KitError(missProviderMessage('signAndExecuteTransaction'));
+  },
   async signTransactionBlock() {
     throw new KitError(missProviderMessage('signTransactionBlock'));
+  },
+  async signTransaction() {
+    throw new KitError(missProviderMessage('signTransaction'));
   },
   async signPersonalMessage() {
     throw new KitError(missProviderMessage('signPersonalMessage'));

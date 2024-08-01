@@ -8,13 +8,13 @@ export enum AptosChainId {
 
 export const AptosDevnetChain: Chain = {
   id: AptosChainId.DEV_NET,
-  name: 'M1 Devnet',
+  name: 'Movement Aptos Devnet',
   rpcUrl: 'https://aptos.devnet.m1.movementlabs.xyz',
 };
 
 export const AptosTestnetChain: Chain = {
   id: AptosChainId.TEST_NET,
-  name: 'Testnet',
+  name: 'Movement Aptos Testnet',
   rpcUrl: 'https://aptos.testnet.suzuka.movementlabs.xyz/v1',
 };
 
