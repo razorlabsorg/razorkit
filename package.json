@@ -7,8 +7,7 @@
     "build": "turbo run build --concurrency=1 --continue",
     "dev": "turbo run dev --concurrency=4 --continue",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "publish": "turbo run publish --concurrency=1 --continue"
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "keywords": [],
   "author": "",
