@@ -2,25 +2,56 @@
   "name": "razor-wallet-kit",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "turbo run build --concurrency=1 --continue",
     "dev": "turbo run dev --concurrency=4 --continue",
     "lint": "turbo lint",
+    "test": "pnpm test:unit",
+    "test:unit": "vitest",
+    "test:update": "vitest --update",
+    "test:watch": "vitest --watch",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/razorlabsorg/razorkit.git"
+  },
   "devDependencies": {
+    "@tanstack/react-query": "^5.52.2",
+    "@testing-library/jest-dom": "^6.5.0",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/user-event": "^14.5.2",
     "@types/node": "^20.12.12",
+    "@types/react": "^18.3.2",
+    "@types/react-dom": "^18.3.0",
     "@typescript-eslint/parser": "^7.9.0",
+    "@vanilla-extract/esbuild-plugin": "^2.3.10",
+    "@vanilla-extract/vite-plugin": "^4.0.9",
+    "dotenv": "^16.4.5",
+    "esbuild": "^0.23.1",
+    "esbuild-plugin-replace": "^1.4.0",
     "eslint": "^8.56.0",
+    "postcss": "^8.4.38",
+    "postcss-prefix-selector": "^1.16.1",
     "prettier": "^3.2.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recursive-readdir-files": "^2.3.2",
     "tsup": "^8.1.0",
     "turbo": "^2.0.6",
     "typescript": "^5.4.5",
-    "vitest": "^2.0.2"
+    "viem": "^2.20.1",
+    "vitest": "^2.0.2",
+    "wagmi": "^2.12.7"
   },
-  "packageManager": "pnpm@9.5.0"
+  "packageManager": "pnpm@9.5.0",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
 }

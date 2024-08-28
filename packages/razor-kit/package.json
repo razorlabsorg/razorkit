@@ -1,0 +1,73 @@
+{
+  "name": "razor-kit",
+  "version": "1.0.0",
+  "description": "",
+  "files": [
+    "dist",
+    "styles.css",
+    "wallets"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./styles.css": "./dist/index.css",
+    "./wallets": "./dist/wallets/walletConnectors/index.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": [
+    "src/css/reset.css.ts"
+  ],
+  "engines": {
+    "node": ">=12.4"
+  },
+  "scripts": {
+    "build": "node build.js",
+    "build:watch": "node build.js --watch",
+    "dev": "pnpm build:watch & pnpm typegen:watch",
+    "prepare": "MINIFY_CSS=true pnpm build",
+    "prebuild": "pnpm typegen",
+    "typecheck": "pnpm tsc --noEmit",
+    "typegen": "tsc --emitDeclarationOnly || true",
+    "typegen:watch": "tsc --emitDeclarationOnly --watch"
+  },
+  "keywords": [
+    "react",
+    "movement",
+    "move",
+    "aptos",
+    "sui",
+    "mevm"
+  ],
+  "author": "Nate",
+  "license": "MIT",
+  "peerDependencies": {
+    "@tanstack/react-query": ">=5.0.0",
+    "react": ">=18",
+    "react-dom": ">=18",
+    "viem": "2.x",
+    "wagmi": "^2.9.0"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.0.0",
+    "@types/qrcode": "^1.5.5",
+    "@types/ua-parser-js": "^0.7.39",
+    "@vanilla-extract/css-utils": "^0.1.4",
+    "@vanilla-extract/private": "^1.0.6",
+    "autoprefixer": "^10.4.20",
+    "dotenv": "^16.4.5",
+    "jsdom": "^25.0.0",
+    "postcss": "^8.4.38",
+    "react": "^18.3.1",
+    "vitest": "^2.0.2"
+  },
+  "dependencies": {
+    "@vanilla-extract/css": "^1.15.1",
+    "@vanilla-extract/dynamic": "^2.1.2",
+    "@vanilla-extract/sprinkles": "^1.6.3",
+    "clsx": "^2.1.1",
+    "qrcode": "^1.5.4",
+    "react-remove-scroll": "^2.5.10",
+    "ua-parser-js": "^1.0.38"
+  }
+}
