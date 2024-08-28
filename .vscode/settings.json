@@ -1,10 +1,13 @@
 {
   "cSpell.words": [
     "Aptos",
+    "bitget",
     "camelcase",
     "classname",
+    "DEEPLINK",
     "DEVNET",
     "fullnode",
+    "lucide",
     "mysten",
     "razorlabs",
     "superstruct",
@@ -12,6 +15,7 @@
     "treeshake",
     "tsup",
     "viem",
+    "wagmi",
     "wkit"
   ]
 }
