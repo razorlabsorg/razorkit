@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import { isNonEmptyArray } from '../utils/check';
 import { useSuiWalletAdapterDetection } from './useSuiWalletDetection';
-import { IDefaultWallet, IWallet } from '@razorlabs/m2-wallet-sdk';
+import { IDefaultSuiWallet, ISuiWallet } from '../wallets/sui/wallet';
 
-export const useAvailableSuiWallets = (defaultWallets: IDefaultWallet[]) => {
+export const useAvailableSuiWallets = (defaultWallets: IDefaultSuiWallet[]) => {
   const { data: availableWalletAdapters } = useSuiWalletAdapterDetection();
   // configured wallets
-  const configuredWallets: IWallet[] = useMemo(() => {
+  const configuredWallets: ISuiWallet[] = useMemo(() => {
     if (!isNonEmptyArray(defaultWallets)) return [];
     if (!isNonEmptyArray(availableWalletAdapters)) {
       return defaultWallets.map(
@@ -15,7 +15,7 @@ export const useAvailableSuiWallets = (defaultWallets: IDefaultWallet[]) => {
             ...item,
             adapter: undefined,
             installed: false,
-          }) as IWallet,
+          }) as ISuiWallet,
       );
     }
 
@@ -28,18 +28,18 @@ export const useAvailableSuiWallets = (defaultWallets: IDefaultWallet[]) => {
           ...item,
           adapter: foundAdapter,
           installed: true,
-        } as IWallet;
+        } as ISuiWallet;
       }
       return {
         ...item,
         adapter: undefined,
         installed: false,
-      } as IWallet;
+      } as ISuiWallet;
     });
   }, [defaultWallets, availableWalletAdapters]);
 
   // detected wallets
-  const detectedWallets: IWallet[] = useMemo(() => {
+  const detectedWallets: ISuiWallet[] = useMemo(() => {
     if (!isNonEmptyArray(availableWalletAdapters)) return [];
     return availableWalletAdapters
       .filter((adapter) => {
@@ -62,7 +62,7 @@ export const useAvailableSuiWallets = (defaultWallets: IDefaultWallet[]) => {
   }, [defaultWallets, availableWalletAdapters]);
 
   // filter installed wallets
-  const allAvailableWallets: IWallet[] = useMemo(() => {
+  const allAvailableWallets: ISuiWallet[] = useMemo(() => {
     return [...configuredWallets, ...detectedWallets].filter(
       (wallet) => wallet.installed,
     );

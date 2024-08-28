@@ -1,9 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import {
-  IWalletAdapter,
-  IWalletRadar,
-  WalletRadar,
-} from '@razorlabs/m2-wallet-sdk';
+import { ISuiWalletAdapter, ISuiWalletRadar, SuiWalletRadar } from '../wallets/sui/wallet-standard';
 
 /**
  * detect wallet adapters that support wallet-standard from window and register event
@@ -11,15 +7,15 @@ import {
  * Notice: call once only in provider, cuz there is event registration
  */
 export function useSuiWalletAdapterDetection() {
-  const walletRadar = useRef<IWalletRadar | null>(null);
+  const walletRadar = useRef<ISuiWalletRadar | null>(null);
   const [availableWalletAdapters, setAvailableWalletAdapters] = useState<
-    IWalletAdapter[]
+    ISuiWalletAdapter[]
   >([]);
   // console.log("--availableWalletAdapters", availableWalletAdapters);
 
   useEffect(() => {
     if (!walletRadar.current) {
-      walletRadar.current = new WalletRadar();
+      walletRadar.current = new SuiWalletRadar();
       walletRadar.current.activate();
     }
 

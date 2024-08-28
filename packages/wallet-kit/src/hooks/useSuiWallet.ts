@@ -13,25 +13,21 @@ import {
   SuiSignTransactionInput,
   WalletAccount,
 } from '@mysten/wallet-standard';
-import {
-  Chain,
-  ConnectionStatus,
-  IWallet,
-  IWalletAdapter,
-  KitError,
-  WalletEvent,
-  WalletEventListeners,
-} from '@razorlabs/m2-wallet-sdk';
 import { createContext, useContext } from 'react';
+import { ISuiWallet } from '../wallets/sui/wallet';
+import { SuiChain } from '../chains/sui';
+import { ISuiWalletAdapter, SuiWalletEvent, SuiWalletEventListeners } from '../wallets/sui/wallet-standard';
+import { ConnectionStatus } from '../common';
+import { KitError } from '../error-handling';
 
 export interface SuiWalletContextState {
-  configuredWallets: IWallet[];
-  detectedWallets: IWallet[];
-  allAvailableWallets: IWallet[];
-  chains: Chain[];
-  chain: Chain | undefined;
+  configuredWallets: ISuiWallet[];
+  detectedWallets: ISuiWallet[];
+  allAvailableWallets: ISuiWallet[];
+  chains: SuiChain[];
+  chain: SuiChain | undefined;
   name: string | undefined; // name of the connected wallet
-  adapter: IWalletAdapter | undefined; // adapter provided by the connected wallet
+  adapter: ISuiWalletAdapter | undefined; // adapter provided by the connected wallet
   account: WalletAccount | undefined; // current account (the first account of accounts)
   address: string | undefined; // alias for account.address
   connecting: boolean;
@@ -73,9 +69,9 @@ export interface SuiWalletContextState {
     publicKey: Uint8Array,
   ): Promise<boolean>;
 
-  on: <E extends WalletEvent>(
+  on: <E extends SuiWalletEvent>(
     event: E,
-    listener: WalletEventListeners[E],
+    listener: SuiWalletEventListeners[E],
   ) => () => void;
 }
 

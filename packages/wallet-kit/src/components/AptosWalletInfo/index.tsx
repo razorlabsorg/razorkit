@@ -5,12 +5,9 @@ import { Extendable } from '../../types';
 import { SvgArrowDown } from '../Icon/SvgIcons';
 import type { WalletAccount } from '@aptos-labs/wallet-standard';
 import { useAptosAccountBalance, useAptosWallet } from '../../hooks';
-import {
-  addressEllipsis,
-  UnknownChain,
-  BaseError,
-  formatAPT,
-} from '@razorlabs/m1-wallet-sdk';
+import { BaseError } from '../../error-handling';
+import { UnknownChain } from '../../chains/aptos';
+import { addressEllipsis, formatAPT } from '../../utils';
 
 export type ConnectButtonProps = Extendable & {
   label?: string;

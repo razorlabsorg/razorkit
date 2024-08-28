@@ -5,7 +5,7 @@ import ConnectModal from '../Modal/SuiConnectModal';
 import { useSuiWallet } from '../../hooks/useSuiWallet';
 import './index.scss';
 import SuiWalletInfo from '../SuiWalletInfo';
-import { BaseError } from '@razorlabs/m2-wallet-sdk';
+import { BaseError } from '../../error-handling';
 
 export type SuiConnectButtonProps = Extendable & {
   label?: string;

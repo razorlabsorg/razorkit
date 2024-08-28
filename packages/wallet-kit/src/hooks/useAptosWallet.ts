@@ -8,23 +8,21 @@ import {
   UserResponse,
   WalletAccount,
 } from '@aptos-labs/wallet-standard';
-import {
-  Chain,
-  ConnectionStatus,
-  IWallet,
-  KitError,
-  IWalletAdapter,
-} from '@razorlabs/m1-wallet-sdk';
 import { createContext, useContext } from 'react';
+import { IAptosWallet } from '../wallets/aptos/wallet';
+import { AptosChain } from '../chains/aptos';
+import { IAptosWalletAdapter } from '../wallets/aptos/wallet-standard';
+import { ConnectionStatus } from '../common';
+import { KitError } from '../error-handling';
 
 export interface AptosWalletContextState {
-  configuredWallets: IWallet[];
-  detectedWallets: IWallet[];
-  allAvailableWallets: IWallet[];
-  chains: Chain[];
-  chain: Chain | undefined;
+  configuredWallets: IAptosWallet[];
+  detectedWallets: IAptosWallet[];
+  allAvailableWallets: IAptosWallet[];
+  chains: AptosChain[];
+  chain: AptosChain | undefined;
   name: string | undefined; // name of the connected wallet
-  adapter: IWalletAdapter | undefined; // adapter provided by the connected wallet
+  adapter: IAptosWalletAdapter | undefined; // adapter provided by the connected wallet
   account: WalletAccount | undefined; // current account (the first account of accounts)
   address: string | undefined; // alias for account.address
   connecting: boolean;

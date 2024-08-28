@@ -2,12 +2,12 @@
 import { useMemo } from 'react';
 import { isNonEmptyArray } from '../utils/check';
 import { useAptosWalletAdapterDetection } from './useAptosWalletAdapterDetection';
-import { IDefaultWallet, IWallet } from '@razorlabs/m1-wallet-sdk';
+import { IAptosWallet, IDefaultAptosWallet } from '../wallets/aptos/wallet';
 
-export const useAvailableAptosWallets = (defaultWallets: IDefaultWallet[]) => {
+export const useAvailableAptosWallets = (defaultWallets: IDefaultAptosWallet[]) => {
   const { data: availableWalletAdapters } = useAptosWalletAdapterDetection();
   // configured wallets
-  const configuredWallets: IWallet[] = useMemo(() => {
+  const configuredWallets: IAptosWallet[] = useMemo(() => {
     if (!isNonEmptyArray(defaultWallets)) return [];
     if (!isNonEmptyArray(availableWalletAdapters)) {
       return defaultWallets.map(
@@ -17,7 +17,7 @@ export const useAvailableAptosWallets = (defaultWallets: IDefaultWallet[]) => {
             ...item,
             adapter: undefined,
             installed: false,
-          }) as IWallet,
+          }) as IAptosWallet,
       );
     }
 
@@ -30,19 +30,19 @@ export const useAvailableAptosWallets = (defaultWallets: IDefaultWallet[]) => {
           ...item,
           adapter: foundAdapter,
           installed: true,
-        } as IWallet;
+        } as IAptosWallet;
       }
       // @ts-ignore
       return {
         ...item,
         adapter: undefined,
         installed: false,
-      } as IWallet;
+      } as IAptosWallet;
     });
   }, [defaultWallets, availableWalletAdapters]);
 
   // detected wallets
-  const detectedWallets: IWallet[] = useMemo(() => {
+  const detectedWallets: IAptosWallet[] = useMemo(() => {
     if (!isNonEmptyArray(availableWalletAdapters)) return [];
     return availableWalletAdapters
       .filter((adapter) => {
@@ -65,7 +65,7 @@ export const useAvailableAptosWallets = (defaultWallets: IDefaultWallet[]) => {
   }, [defaultWallets, availableWalletAdapters]);
 
   // filter installed wallets
-  const allAvailableWallets: IWallet[] = useMemo(() => {
+  const allAvailableWallets: IAptosWallet[] = useMemo(() => {
     return [...configuredWallets, ...detectedWallets].filter(
       (wallet) => wallet.installed,
     );

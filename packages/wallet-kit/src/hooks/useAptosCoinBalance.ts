@@ -2,8 +2,8 @@ import { useQuery } from 'react-query';
 import { QueryKey, queryKey } from '../constants';
 import { useCallback } from 'react';
 import { useAptosWallet } from './useAptosWallet';
-import { AccountAssetManager } from '@razorlabs/m1-wallet-sdk';
 import { useAptosChain } from './useAptosChain';
+import { AptosAccountAssetManager } from '../account/aptos';
 
 export interface AptosUseCoinBalanceParams {
   address?: string;
@@ -32,7 +32,7 @@ export function useAptosCoinBalance(params?: AptosUseCoinBalanceParams) {
   const getCoinBalance = useCallback(() => {
     if (!address || !chain) return BigInt(0);
 
-    const accountAssetManager = new AccountAssetManager(address, {
+    const accountAssetManager = new AptosAccountAssetManager(address, {
       chainRpcUrl: chain.rpcUrl,
     });
     return accountAssetManager.getCoinBalance(typeArg);

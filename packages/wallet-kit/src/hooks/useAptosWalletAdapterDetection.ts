@@ -1,9 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import {
-  IWalletAdapter,
-  IWalletRadar,
-  WalletRadar,
-} from '@razorlabs/m1-wallet-sdk';
+import { AptosWalletRadar, IAptosWalletAdapter, IAptosWalletRadar } from '../wallets/aptos/wallet-standard';
 
 /**
  * detect wallet adapters that support wallet-standard from window and register event
@@ -11,15 +7,15 @@ import {
  * Notice: call once only in provider, cuz there is event registration
  */
 export function useAptosWalletAdapterDetection() {
-  const walletRadar = useRef<IWalletRadar | null>(null);
+  const walletRadar = useRef<IAptosWalletRadar | null>(null);
   const [availableWalletAdapters, setAvailableWalletAdapters] = useState<
-    IWalletAdapter[]
+    IAptosWalletAdapter[]
   >([]);
   // console.log("--availableWalletAdapters", availableWalletAdapters);
 
   useEffect(() => {
     if (!walletRadar.current) {
-      walletRadar.current = new WalletRadar();
+      walletRadar.current = new AptosWalletRadar();
       walletRadar.current.activate();
     }
 

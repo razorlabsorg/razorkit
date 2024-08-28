@@ -6,12 +6,9 @@ import { Extendable } from '../../types';
 import { SvgArrowDown } from '../Icon/SvgIcons';
 import type { WalletAccount } from '@mysten/wallet-standard';
 import { useSuiAccountBalance } from '../../hooks';
-import {
-  formatSUI,
-  addressEllipsis,
-  UnknownChain,
-  BaseError,
-} from '@razorlabs/m2-wallet-sdk';
+import { BaseError } from '../../error-handling';
+import { UnknownChain } from '../../chains/sui';
+import { addressEllipsis, formatSUI } from '../../utils';
 
 export type ConnectButtonProps = Extendable & {
   label?: string;

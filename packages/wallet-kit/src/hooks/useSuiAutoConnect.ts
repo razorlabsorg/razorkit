@@ -2,12 +2,13 @@ import { useEffect, useRef } from 'react';
 import { isNonEmptyArray } from '../utils/check';
 import { Storage } from '../utils/storage';
 import { StorageKey } from '../constants/storage';
-import { ConnectionStatus, IWallet } from '@razorlabs/m2-wallet-sdk';
+import { ConnectionStatus } from '../common';
+import { ISuiWallet } from '../wallets/sui/wallet';
 
 export function useSuiAutoConnect(
   select: (name: string) => Promise<void>,
   status: ConnectionStatus,
-  allAvailableWallets: IWallet[],
+  allAvailableWallets: ISuiWallet[],
   autoConnect: boolean,
 ) {
   const init = useRef(false);

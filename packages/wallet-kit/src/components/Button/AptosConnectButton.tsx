@@ -5,7 +5,7 @@ import ConnectModal from '../Modal/AptosConnectModal';
 import { useAptosWallet } from '../../hooks/useAptosWallet';
 import './index.scss';
 import AptosWalletInfo from '../AptosWalletInfo';
-import { BaseError } from '@razorlabs/m1-wallet-sdk';
+import { BaseError } from '../../error-handling';
 
 export type AptosConnectButtonProps = Extendable & {
   label?: string;

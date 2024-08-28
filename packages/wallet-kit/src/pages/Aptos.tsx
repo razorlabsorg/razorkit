@@ -2,8 +2,9 @@
 import { useAptosAccountBalance } from '../hooks/useAptosAccountBalance';
 import { useAptosWallet } from '../hooks/useAptosWallet';
 import React from 'react';
-import { ErrorCode, formatAPT } from '@razorlabs/m1-wallet-sdk';
 import AptosConnectButton from '../components/Button/AptosConnectButton';
+import { ErrorCode } from '../error-handling';
+import { formatAPT } from '../utils/format';
 
 function Aptos() {
   const wallet = useAptosWallet();

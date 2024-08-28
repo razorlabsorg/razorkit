@@ -7,7 +7,8 @@ import { useSuiWallet } from '../../hooks';
 import { isNonEmptyArray } from '../../utils/check';
 import Icon from '../Icon';
 import './index.scss';
-import { BaseError, IWallet, KitError } from '@razorlabs/m2-wallet-sdk';
+import { BaseError, KitError } from '../../error-handling';
+import { ISuiWallet } from '../../wallets/sui/wallet';
 
 export type ConnectModalProps = Extendable & {
   open?: boolean;
@@ -17,8 +18,8 @@ export type ConnectModalProps = Extendable & {
 };
 
 type WalletItemProps = Extendable & {
-  wallet: IWallet;
-  onSelect?: (wallet: IWallet) => void;
+  wallet: ISuiWallet;
+  onSelect?: (wallet: ISuiWallet) => void;
 };
 
 const Header = () => {
@@ -81,8 +82,8 @@ const WalletItem = (props: WalletItemProps) => {
 
 const WalletList = (props: {
   title: string;
-  wallets: IWallet[];
-  onSelect?: (wallet: IWallet) => void;
+  wallets: ISuiWallet[];
+  onSelect?: (wallet: ISuiWallet) => void;
 }) => {
   if (!isNonEmptyArray(props.wallets)) return null;
   return (
@@ -103,7 +104,7 @@ const WalletList = (props: {
 };
 
 type InstallGuideProps = Extendable & {
-  wallet: IWallet;
+  wallet: ISuiWallet;
   onNavBack?: () => void;
 };
 const InstallGuide = (props: InstallGuideProps) => {
@@ -153,7 +154,7 @@ const InstallGuide = (props: InstallGuideProps) => {
 };
 
 type ConnectingProps = Extendable & {
-  wallet: IWallet;
+  wallet: ISuiWallet;
   onNavBack?: () => void;
 };
 const Connecting = (props: ConnectingProps) => {
@@ -198,10 +199,10 @@ export const SuiConnectModal = (props: ConnectModalProps) => {
     },
   } = props;
 
-  const [activeWallet, setActiveWallet] = useState<IWallet | undefined>();
+  const [activeWallet, setActiveWallet] = useState<ISuiWallet | undefined>();
 
   const handleSelectWallet = useCallback(
-    async (wallet: IWallet) => {
+    async (wallet: ISuiWallet) => {
       setActiveWallet(wallet);
       if (wallet.installed) {
         try {

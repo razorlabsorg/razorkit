@@ -7,7 +7,8 @@ import { useAptosWallet } from '../../hooks';
 import { isNonEmptyArray } from '../../utils/check';
 import Icon from '../Icon';
 import './index.scss';
-import { BaseError, IWallet, KitError } from '@razorlabs/m1-wallet-sdk';
+import { BaseError, KitError } from '../../error-handling';
+import { IAptosWallet } from '../../wallets/aptos/wallet';
 
 export type ConnectModalProps = Extendable & {
   open?: boolean;
@@ -17,8 +18,8 @@ export type ConnectModalProps = Extendable & {
 };
 
 type WalletItemProps = Extendable & {
-  wallet: IWallet;
-  onSelect?: (wallet: IWallet) => void;
+  wallet: IAptosWallet;
+  onSelect?: (wallet: IAptosWallet) => void;
 };
 
 const Header = () => {
@@ -81,8 +82,8 @@ const WalletItem = (props: WalletItemProps) => {
 
 const WalletList = (props: {
   title: string;
-  wallets: IWallet[];
-  onSelect?: (wallet: IWallet) => void;
+  wallets: IAptosWallet[];
+  onSelect?: (wallet: IAptosWallet) => void;
 }) => {
   if (!isNonEmptyArray(props.wallets)) return null;
   return (
@@ -103,7 +104,7 @@ const WalletList = (props: {
 };
 
 type InstallGuideProps = Extendable & {
-  wallet: IWallet;
+  wallet: IAptosWallet;
   onNavBack?: () => void;
 };
 const InstallGuide = (props: InstallGuideProps) => {
@@ -153,7 +154,7 @@ const InstallGuide = (props: InstallGuideProps) => {
 };
 
 type ConnectingProps = Extendable & {
-  wallet: IWallet;
+  wallet: IAptosWallet;
   onNavBack?: () => void;
 };
 const Connecting = (props: ConnectingProps) => {
@@ -198,10 +199,10 @@ export const AptosConnectModal = (props: ConnectModalProps) => {
     },
   } = props;
 
-  const [activeWallet, setActiveWallet] = useState<IWallet | undefined>();
+  const [activeWallet, setActiveWallet] = useState<IAptosWallet | undefined>();
 
   const handleSelectWallet = useCallback(
-    async (wallet: IWallet) => {
+    async (wallet: IAptosWallet) => {
       setActiveWallet(wallet);
       if (wallet.installed) {
         try {

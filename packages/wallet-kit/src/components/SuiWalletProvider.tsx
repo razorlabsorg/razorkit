@@ -27,31 +27,23 @@ import { Storage } from '../utils/storage';
 import { StorageKey } from '../constants/storage';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import getActiveChainFromConnectResult from '../utils/getActiveSuiChain';
-import {
-  AllDefaultWallets,
-  Chain,
-  ConnectionStatus,
-  DefaultChains,
-  FeatureName,
-  IDefaultWallet,
-  IWalletAdapter,
-  KitError,
-  UnknownChain,
-  verifySignedMessage,
-  WalletEvent,
-  WalletEventListeners,
-} from '@razorlabs/m2-wallet-sdk';
+import { DefaultSuiChains, SuiChain, UnknownChain } from '../chains/sui';
+import { AllDefaultSuiWallets, IDefaultSuiWallet } from '../wallets/sui/wallet';
+import { ConnectionStatus } from '../common';
+import { FeatureName, ISuiWalletAdapter, SuiWalletEvent, SuiWalletEventListeners } from '../wallets/sui/wallet-standard';
+import { KitError } from '../error-handling';
+import { verifySignedMessage } from '../utils/verifySignedMessage';
 
 export type SuiWalletProviderProps = Extendable & {
-  defaultWallets?: IDefaultWallet[];
-  chains?: Chain[];
+  defaultWallets?: IDefaultSuiWallet[];
+  chains?: SuiChain[];
   autoConnect?: boolean;
 };
 
 export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
   const {
-    defaultWallets = AllDefaultWallets,
-    chains = DefaultChains,
+    defaultWallets = AllDefaultSuiWallets,
+    chains = DefaultSuiChains,
     autoConnect = true,
     children,
   } = props;
@@ -60,7 +52,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
     useAvailableSuiWallets(defaultWallets);
 
   const [walletAdapter, setWalletAdapter] = useState<
-    IWalletAdapter | undefined
+    ISuiWalletAdapter | undefined
   >();
   const [status, setStatus] = useState<ConnectionStatus>(
     ConnectionStatus.DISCONNECTED,
@@ -72,7 +64,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
   const walletOffListeners = useRef<(() => void)[]>([]);
 
   const isCallable = (
-    walletAdapter: IWalletAdapter | undefined,
+    walletAdapter: ISuiWalletAdapter | undefined,
     status: ConnectionStatus,
   ) => {
     return walletAdapter && status === ConnectionStatus.CONNECTED;
@@ -80,11 +72,11 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
 
   const account = useMemo<WalletAccount | undefined>(() => {
     if (!isCallable(walletAdapter, status)) return;
-    return (walletAdapter as IWalletAdapter).accounts[0]; // use first account by default
+    return (walletAdapter as ISuiWalletAdapter).accounts[0]; // use first account by default
   }, [walletAdapter, status]);
 
   const ensureCallable = (
-    walletAdapter: IWalletAdapter | undefined,
+    walletAdapter: ISuiWalletAdapter | undefined,
     status: ConnectionStatus,
   ) => {
     if (!isCallable(walletAdapter, status)) {
@@ -93,7 +85,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
   };
 
   const connect = useCallback(
-    async (adapter: IWalletAdapter, opts?: StandardConnectInput) => {
+    async (adapter: ISuiWalletAdapter, opts?: StandardConnectInput) => {
       if (!adapter) throw new KitError('param adapter is missing');
 
       setStatus(ConnectionStatus.CONNECTING);
@@ -124,7 +116,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
 
   const disconnect = useCallback(async () => {
     ensureCallable(walletAdapter, status);
-    const adapter = walletAdapter as IWalletAdapter;
+    const adapter = walletAdapter as ISuiWalletAdapter;
 
     // try to clear listeners
     if (isNonEmptyArray(walletOffListeners.current)) {
@@ -162,7 +154,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
     async (walletName: string) => {
       // disconnect previous connection if it exists
       if (isCallable(walletAdapter, status)) {
-        const adapter = walletAdapter as IWalletAdapter;
+        const adapter = walletAdapter as ISuiWalletAdapter;
         // Same wallet, ignore
         if (walletName === adapter.name) return;
 
@@ -183,35 +175,35 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
           )}]`,
         );
       }
-      await connect(wallet.adapter as IWalletAdapter);
+      await connect(wallet.adapter as ISuiWalletAdapter);
     },
     [walletAdapter, status, allAvailableWallets],
   );
 
   const on = useCallback(
-    (event: WalletEvent, listener: WalletEventListeners[WalletEvent]) => {
+    (event: SuiWalletEvent, listener: SuiWalletEventListeners[SuiWalletEvent]) => {
       ensureCallable(walletAdapter, status);
-      const _wallet = walletAdapter as IWalletAdapter;
+      const _wallet = walletAdapter as ISuiWalletAdapter;
 
       // filter event and params to decide when to emit
       const off = _wallet.on('change', (params) => {
         if (event === 'change') {
-          const _listener = listener as WalletEventListeners['change'];
+          const _listener = listener as SuiWalletEventListeners['change'];
           _listener(params);
           return;
         }
         if (params.chains && event === 'chainChange') {
-          const _listener = listener as WalletEventListeners['chainChange'];
+          const _listener = listener as SuiWalletEventListeners['chainChange'];
           _listener({ chain: (params.chains as any)?.[0] });
           return;
         }
         if (params.accounts && event === 'accountChange') {
-          const _listener = listener as WalletEventListeners['accountChange'];
+          const _listener = listener as SuiWalletEventListeners['accountChange'];
           _listener({ account: (params.accounts as any)?.[0] });
           return;
         }
         if (params.features && event === 'featureChange') {
-          const _listener = listener as WalletEventListeners['featureChange'];
+          const _listener = listener as SuiWalletEventListeners['featureChange'];
           _listener({ features: params.features });
           return;
         }
@@ -224,7 +216,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
 
   const getAccounts = useCallback(() => {
     ensureCallable(walletAdapter, status);
-    const _wallet = walletAdapter as IWalletAdapter;
+    const _wallet = walletAdapter as ISuiWalletAdapter;
     return _wallet.accounts;
   }, [walletAdapter, status]);
 
@@ -236,7 +228,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
       if (!account) {
         throw new KitError('no active account');
       }
-      const _wallet = walletAdapter as IWalletAdapter;
+      const _wallet = walletAdapter as ISuiWalletAdapter;
       return await _wallet.signAndExecuteTransactionBlock({
         account,
         chain: chain.id as IdentifierString,
@@ -254,7 +246,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
       if (!account) {
         throw new KitError('no active account');
       }
-      const _wallet = walletAdapter as IWalletAdapter;
+      const _wallet = walletAdapter as ISuiWalletAdapter;
       return await _wallet.signAndExecuteTransaction({
         account,
         chain: chain.id as IdentifierString,
@@ -270,7 +262,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
       if (!account) {
         throw new KitError('no active account');
       }
-      const _wallet = walletAdapter as IWalletAdapter;
+      const _wallet = walletAdapter as ISuiWalletAdapter;
       return await _wallet.signTransactionBlock({
         account,
         chain: chain.id as IdentifierString,
@@ -286,7 +278,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
       if (!account) {
         throw new KitError('no active account');
       }
-      const _wallet = walletAdapter as IWalletAdapter;
+      const _wallet = walletAdapter as ISuiWalletAdapter;
       return await _wallet.signTransaction({
         account,
         chain: chain.id as IdentifierString,
@@ -303,7 +295,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
         throw new KitError('no active account');
       }
 
-      const adapter = walletAdapter as IWalletAdapter;
+      const adapter = walletAdapter as ISuiWalletAdapter;
       return await adapter.signMessage({
         account,
         message: input.message,
@@ -319,7 +311,7 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
         throw new KitError('no active account');
       }
 
-      const adapter = walletAdapter as IWalletAdapter;
+      const adapter = walletAdapter as ISuiWalletAdapter;
       return await adapter.signPersonalMessage({
         account,
         message: input.message,
