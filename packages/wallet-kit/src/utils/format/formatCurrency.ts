@@ -44,7 +44,6 @@ export function formatSUI(
   );
 }
 
-
 // formatWithAbbr currency
 // less than 1M -> show original
 // [1M, 1B)  -> x.xxxM

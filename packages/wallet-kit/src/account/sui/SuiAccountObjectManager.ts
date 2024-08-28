@@ -1,8 +1,5 @@
 import { ISuiAccountObjectManager } from './interfaces';
-import {
-  SuiClient,
-  SuiObjectData,
-} from '@mysten/sui/client';
+import { SuiClient, SuiObjectData } from '@mysten/sui/client';
 
 export class SuiAccountObjectManager implements ISuiAccountObjectManager {
   protected client: SuiClient;

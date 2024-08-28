@@ -24,7 +24,12 @@ import {
   AccountInfo,
 } from '@aptos-labs/wallet-standard';
 import { AnyRawTransaction } from '@aptos-labs/ts-sdk';
-import { ErrorCode, handleAptosConnectionError, WalletError, WalletNotImplementError } from '../../../error-handling';
+import {
+  ErrorCode,
+  handleAptosConnectionError,
+  WalletError,
+  WalletNotImplementError,
+} from '../../../error-handling';
 import { has } from '../../../utils/check/has';
 
 /**
@@ -119,11 +124,9 @@ export class AptosWalletAdapter implements IAptosWalletAdapter {
     }
   }
 
-  async onAccountChange(
-    input: AptosOnAccountChangeInput
-  ): Promise<void> {
+  async onAccountChange(input: AptosOnAccountChangeInput): Promise<void> {
     const feature = this.getFeature<{
-      onAccountChange: AptosOnAccountChangeMethod
+      onAccountChange: AptosOnAccountChangeMethod;
     }>(FeatureName.APTOS__ON_ACCOUNT_CHANGE);
     try {
       return await feature.onAccountChange(input);
@@ -135,11 +138,9 @@ export class AptosWalletAdapter implements IAptosWalletAdapter {
     }
   }
 
-  async onNetworkChange(
-    input: AptosOnNetworkChangeInput
-  ): Promise<void> {
+  async onNetworkChange(input: AptosOnNetworkChangeInput): Promise<void> {
     const feature = this.getFeature<{
-      onNetworkChange: AptosOnNetworkChangeMethod
+      onNetworkChange: AptosOnNetworkChangeMethod;
     }>(FeatureName.APTOS__ON_NETWORK_CHANGE);
     try {
       return await feature.onNetworkChange(input);

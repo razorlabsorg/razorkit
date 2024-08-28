@@ -4,7 +4,9 @@ import { isNonEmptyArray } from '../utils/check';
 import { useAptosWalletAdapterDetection } from './useAptosWalletAdapterDetection';
 import { IAptosWallet, IDefaultAptosWallet } from '../wallets/aptos/wallet';
 
-export const useAvailableAptosWallets = (defaultWallets: IDefaultAptosWallet[]) => {
+export const useAvailableAptosWallets = (
+  defaultWallets: IDefaultAptosWallet[],
+) => {
   const { data: availableWalletAdapters } = useAptosWalletAdapterDetection();
   // configured wallets
   const configuredWallets: IAptosWallet[] = useMemo(() => {

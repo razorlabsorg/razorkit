@@ -70,6 +70,9 @@ export class SuiWalletRadar implements ISuiWalletRadar {
     if (!isStandardWalletAdapterCompatibleWallet(rawAdapter)) return;
     if (this.walletAdapterMap.has(rawAdapter.name)) return;
 
-    this.walletAdapterMap.set(rawAdapter.name, new SuiWalletAdapter(rawAdapter));
+    this.walletAdapterMap.set(
+      rawAdapter.name,
+      new SuiWalletAdapter(rawAdapter),
+    );
   }
 }

@@ -1,11 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, {
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { AptosWalletContext } from '../hooks';
 import {
   UserResponseStatus,
@@ -23,10 +18,16 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { useAvailableAptosWallets } from '../hooks/useAvailableAptosWallets';
 import getActiveAptosChain from '../utils/getActiveAptosChain';
 import { AnyRawTransaction } from '@aptos-labs/ts-sdk';
-import { AllDefaultAptosWallets, IDefaultAptosWallet } from '../wallets/aptos/wallet';
+import {
+  AllDefaultAptosWallets,
+  IDefaultAptosWallet,
+} from '../wallets/aptos/wallet';
 import { AptosChain, DefaultAptosChains, UnknownChain } from '../chains/aptos';
 import { ConnectionStatus } from '../common';
-import { FeatureName, IAptosWalletAdapter } from '../wallets/aptos/wallet-standard';
+import {
+  FeatureName,
+  IAptosWalletAdapter,
+} from '../wallets/aptos/wallet-standard';
 import { KitError } from '../error-handling';
 
 export type AptosWalletProviderProps = Extendable & {
@@ -224,7 +225,6 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
   useAptosAutoConnect(select, status, allAvailableWallets, autoConnect);
 
   // sync kit's chain with wallet's active chain
-  
 
   return (
     <AptosWalletContext.Provider

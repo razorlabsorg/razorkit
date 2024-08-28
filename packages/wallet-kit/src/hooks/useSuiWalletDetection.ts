@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { ISuiWalletAdapter, ISuiWalletRadar, SuiWalletRadar } from '../wallets/sui/wallet-standard';
+import {
+  ISuiWalletAdapter,
+  ISuiWalletRadar,
+  SuiWalletRadar,
+} from '../wallets/sui/wallet-standard';
 
 /**
  * detect wallet adapters that support wallet-standard from window and register event

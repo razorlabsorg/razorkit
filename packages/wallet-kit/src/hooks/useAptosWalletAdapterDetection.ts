@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { AptosWalletRadar, IAptosWalletAdapter, IAptosWalletRadar } from '../wallets/aptos/wallet-standard';
+import {
+  AptosWalletRadar,
+  IAptosWalletAdapter,
+  IAptosWalletRadar,
+} from '../wallets/aptos/wallet-standard';
 
 /**
  * detect wallet adapters that support wallet-standard from window and register event

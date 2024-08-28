@@ -16,7 +16,11 @@ import {
 import { createContext, useContext } from 'react';
 import { ISuiWallet } from '../wallets/sui/wallet';
 import { SuiChain } from '../chains/sui';
-import { ISuiWalletAdapter, SuiWalletEvent, SuiWalletEventListeners } from '../wallets/sui/wallet-standard';
+import {
+  ISuiWalletAdapter,
+  SuiWalletEvent,
+  SuiWalletEventListeners,
+} from '../wallets/sui/wallet-standard';
 import { ConnectionStatus } from '../common';
 import { KitError } from '../error-handling';
 

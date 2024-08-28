@@ -30,7 +30,12 @@ import getActiveChainFromConnectResult from '../utils/getActiveSuiChain';
 import { DefaultSuiChains, SuiChain, UnknownChain } from '../chains/sui';
 import { AllDefaultSuiWallets, IDefaultSuiWallet } from '../wallets/sui/wallet';
 import { ConnectionStatus } from '../common';
-import { FeatureName, ISuiWalletAdapter, SuiWalletEvent, SuiWalletEventListeners } from '../wallets/sui/wallet-standard';
+import {
+  FeatureName,
+  ISuiWalletAdapter,
+  SuiWalletEvent,
+  SuiWalletEventListeners,
+} from '../wallets/sui/wallet-standard';
 import { KitError } from '../error-handling';
 import { verifySignedMessage } from '../utils/verifySignedMessage';
 
@@ -181,7 +186,10 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
   );
 
   const on = useCallback(
-    (event: SuiWalletEvent, listener: SuiWalletEventListeners[SuiWalletEvent]) => {
+    (
+      event: SuiWalletEvent,
+      listener: SuiWalletEventListeners[SuiWalletEvent],
+    ) => {
       ensureCallable(walletAdapter, status);
       const _wallet = walletAdapter as ISuiWalletAdapter;
 
@@ -198,12 +206,14 @@ export const SuiWalletProvider = (props: SuiWalletProviderProps) => {
           return;
         }
         if (params.accounts && event === 'accountChange') {
-          const _listener = listener as SuiWalletEventListeners['accountChange'];
+          const _listener =
+            listener as SuiWalletEventListeners['accountChange'];
           _listener({ account: (params.accounts as any)?.[0] });
           return;
         }
         if (params.features && event === 'featureChange') {
-          const _listener = listener as SuiWalletEventListeners['featureChange'];
+          const _listener =
+            listener as SuiWalletEventListeners['featureChange'];
           _listener({ features: params.features });
           return;
         }

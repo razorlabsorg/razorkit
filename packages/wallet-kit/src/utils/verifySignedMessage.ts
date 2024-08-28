@@ -7,7 +7,6 @@ import { has } from './check/has';
 import { stringBytesToUint8Array } from './stringBytesToUint8Array';
 import { Uint8arrayTool } from './binary';
 
-
 /**
  * Verify a signed message based on Sui standard.
  *

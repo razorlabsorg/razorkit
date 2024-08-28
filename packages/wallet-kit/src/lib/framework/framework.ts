@@ -9,29 +9,40 @@ import {
 } from '../types';
 import { normalizeSuiObjectId } from '../utils';
 
-export type TypeTag = {
-  bool: null | true;
-} | {
-  u8: null | true;
-} | {
-  u64: null | true;
-} | {
-  u128: null | true;
-} | {
-  address: null | true;
-} | {
-  signer: null | true;
-} | {
-  vector: TypeTag;
-} | {
-  struct: StructTag;
-} | {
-  u16: null | true;
-} | {
-  u32: null | true;
-} | {
-  u256: null | true;
-};
+export type TypeTag =
+  | {
+      bool: null | true;
+    }
+  | {
+      u8: null | true;
+    }
+  | {
+      u64: null | true;
+    }
+  | {
+      u128: null | true;
+    }
+  | {
+      address: null | true;
+    }
+  | {
+      signer: null | true;
+    }
+  | {
+      vector: TypeTag;
+    }
+  | {
+      struct: StructTag;
+    }
+  | {
+      u16: null | true;
+    }
+  | {
+      u32: null | true;
+    }
+  | {
+      u256: null | true;
+    };
 
 export type StructTag = {
   address: string;

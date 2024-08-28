@@ -1,4 +1,22 @@
-import { any, array, assign, bigint, boolean, Infer, is, literal, nullable, number, object, optional, record, string, tuple, union, unknown } from '../../utils';
+import {
+  any,
+  array,
+  assign,
+  bigint,
+  boolean,
+  Infer,
+  is,
+  literal,
+  nullable,
+  number,
+  object,
+  optional,
+  record,
+  string,
+  tuple,
+  union,
+  unknown,
+} from '../../utils';
 import { ObjectOwner } from './common';
 
 export const ObjectType = union([string(), literal('package')]);

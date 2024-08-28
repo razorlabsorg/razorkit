@@ -6,7 +6,9 @@ import {
 } from '@aptos-labs/wallet-standard';
 import { IAptosWalletAdapter } from './interfaces/IAptosWalletAdapter';
 
-export type AptosWalletRadarSubscriptionInput = (wallets: IAptosWalletAdapter[]) => void;
+export type AptosWalletRadarSubscriptionInput = (
+  wallets: IAptosWalletAdapter[],
+) => void;
 export type AptosWalletRadarSubscriptionOutput = () => void;
 
 export type AptosWalletEvent =

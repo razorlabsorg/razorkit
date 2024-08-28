@@ -6,7 +6,9 @@ import {
   WalletAccount,
 } from '@mysten/wallet-standard';
 
-export type SuiWalletRadarSubscriptionInput = (wallets: ISuiWalletAdapter[]) => void;
+export type SuiWalletRadarSubscriptionInput = (
+  wallets: ISuiWalletAdapter[],
+) => void;
 export type SuiWalletRadarSubscriptionOutput = () => void;
 
 export type SuiWalletEvent =
