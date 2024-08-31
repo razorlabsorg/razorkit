@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@razorlabs/razorkit": "workspace:*",
+    "@tanstack/react-query": "^5.52.2",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "wagmi": "^2.12.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
