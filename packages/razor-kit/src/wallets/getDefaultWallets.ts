@@ -25,7 +25,6 @@ export function getDefaultWallets(parameters?: ConnectorsForWalletsParameters) {
       wallets: [
         razorWallet,
         safeWallet,
-        rainbowWallet,
         coinbaseWallet,
         metaMaskWallet,
         walletConnectWallet,
