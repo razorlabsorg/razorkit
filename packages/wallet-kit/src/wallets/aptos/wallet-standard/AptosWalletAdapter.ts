@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IAptosWalletAdapter } from './interfaces';
 import { FeatureName } from './constants';
 import {
