@@ -4,7 +4,25 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="/fonts/Satoshi-Bold.woff" as="font" type="font/woff" crossorigin />
+    
+    <title>RazorKit EVM with Vite</title>
+
+    <style>
+      * {
+        font-family: 'Satoshi', sans-serif;
+        box-sizing: border-box;
+      }
+
+      @supports (font-variation-settings: normal) {
+        * {
+          font-family: 'Satoshi', sans-serif;
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

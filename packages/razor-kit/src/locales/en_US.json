@@ -11,7 +11,7 @@
     "description": "A wallet is used to send, receive, store, and display digital assets. It's also a new way to log in, without needing to create new accounts and passwords on every website.",
     "digital_asset": {
       "title": "A Home for your Digital Assets",
-      "description": "Wallets are used to send, receive, store, and display digital assets like Ethereum and NFTs."
+      "description": "Wallets are used to send, receive, store, and display digital assets like MOVE and NFTs."
     },
     "login": {
       "title": "A New Way to Log In",
@@ -47,7 +47,7 @@
     "label": "Connect",
     "title": "Connect a Wallet",
     "new_to_ethereum": {
-      "description": "New to Ethereum wallets?",
+      "description": "New to Movement wallets?",
       "learn_more": {
         "label": "Learn More"
       }
@@ -136,7 +136,7 @@
     "short_title": "Get %{wallet}",
     "mobile": {
       "title": "%{wallet} for Mobile",
-      "description": "Use the mobile wallet to explore the world of Ethereum.",
+      "description": "Use the mobile wallet to explore the world of Movement.",
       "download": {
         "label": "Get the app"
       }
@@ -1135,7 +1135,7 @@
           "description": "We recommend pinning Talisman to your taskbar for quicker access to your wallet."
         },
         "step2": {
-          "title": "Create or Import an Ethereum Wallet",
+          "title": "Create or Import a Movement Wallet",
           "description": "Be sure to back up your wallet using a secure method. Never share your recovery phrase with anyone."
         },
         "step3": {

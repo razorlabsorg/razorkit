@@ -1,20 +1,17 @@
 {
-  "name": "with-vite",
+  "name": "docs",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host",
+    "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@razorlabs/razorkit": "workspace:*",
-    "@tanstack/react-query": "^5.52.2",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "wagmi": "^2.12.7"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
