@@ -10,13 +10,27 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@razorlabs/razorkit": "workspace:*",
+    "@tanstack/react-query": "^5.52.2",
+    "@vanilla-extract/css": "^1.15.1",
+    "@vanilla-extract/css-utils": "^0.1.4",
+    "@vanilla-extract/recipes": "^0.5.5",
+    "@vanilla-extract/sprinkles": "^1.6.3",
+    "clsx": "^2.1.1",
+    "copy-to-clipboard": "^3.3.3",
+    "deepmerge": "^4.3.1",
+    "framer-motion": "^11.3.31",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-helmet-async": "^2.0.5",
+    "react-router-dom": "^6.26.1",
+    "wagmi": "^2.12.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "@vanilla-extract/vite-plugin": "^4.0.9",
     "@vitejs/plugin-react": "^4.3.1",
     "eslint": "^9.9.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
@@ -24,6 +38,7 @@
     "globals": "^15.9.0",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
-    "vite": "^5.4.1"
+    "vite": "^5.4.1",
+    "vite-tsconfig-paths": "^5.0.1"
   }
 }
