@@ -14,6 +14,7 @@ import { CopyIcon } from "components/Icons/Copy";
 import { Hero } from "components/Hero";
 import { UsedBy } from "components/UsedBy";
 import { Playground } from "components/Playground";
+import { TickIcon } from "components/Icons/Tick";
 
 const InstallScript: React.FC = () => {
   const [requestCopy, setRequestCopy] = useState(false);
@@ -117,7 +118,7 @@ const Home: React.FC = () => {
                 {'Sui Docs'}
               </Button>
             </Link>
-            <Link to="/aptosDocs">
+            <Link to="/mevmDocs">
               <Button as="a" size="xl" variant="razorGradient">
                 {'MEVM Docs'}
               </Button>
@@ -142,6 +143,179 @@ const Home: React.FC = () => {
       </Box>
 
       <Playground />
+
+      <Box
+        backgroundColor="backgroundElevated"
+        paddingY={{ xs: '11', lg: '12' }}
+      >
+        <Wrapper>
+          <Text
+            align={{ xs: 'left', md: 'center' }}
+            as="h2"
+            size={{ xs: '7', md: '9' }}
+            style={{ lineHeight: 1 }}
+            weight="bold"
+          >
+            {`Razor 🤝 Developers`}
+          </Text>
+          <Text
+            align={{ xs: 'left', md: 'center' }}
+            as="p"
+            marginTop={{ xs: '7', md: '9' }}
+            marginX="auto"
+            size={{ xs: '4', md: '5' }}
+            style={{ lineHeight: '28px', maxWidth: 720 }}
+            weight="semibold"
+          >
+            {'Razor Kit provides a fast, easy and highly customizable way for developers to add a great wallet experience to their application. We handle the hard stuff so developers and teams can focus on building amazing products and communities for their users.'}
+          </Text>
+
+          <Box marginTop={{ xs: '10', md: '11' }} marginX="auto">
+            <Box
+              as="ul"
+              display="flex"
+              flexWrap="wrap"
+              left={{ lg: '9' }}
+              marginLeft={{ md: '10', lg: '11' }}
+              paddingLeft={{ md: '3', lg: '11' }}
+              position="relative"
+            >
+              {[
+                'Easy to Install',
+                'Custom Themes Support',
+                'Built-in Themes',
+                'Custom Wallet Lists',
+                'Light and Dark Mode',
+                'Support for all Movement Environments',
+                'App Store and Google Play Store Integration',
+                'Custom Connect Button',
+              ].map((value) => (
+                <Box
+                  alignItems="center"
+                  as="li"
+                  display="flex"
+                  gap="4"
+                  key={value}
+                  marginBottom="5"
+                  width={{ xs: 'full', md: '1/2' }}
+                >
+                  <Box as="span" flexShrink={0}>
+                    <TickIcon />
+                  </Box>
+                  <Text weight="bold">{value}</Text>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        </Wrapper>
+      </Box>
+
+      <Box
+        backgroundColor="backgroundElevated"
+        data-mode="light"
+        paddingY={{ xs: '11', lg: '12' }}
+      >
+        <Wrapper>
+          <Text
+            align={{ xs: 'left', md: 'center' }}
+            as="h2"
+            size={{ xs: '7', md: '9' }}
+            style={{ lineHeight: '1' }}
+            weight="bold"
+          >
+            {'Made with ❤️ by your frens at'}{' '}
+            <Box
+              as="span"
+              display={{ md: 'none' }}
+              marginLeft="2"
+              position="relative"
+              top="3"
+            >
+              <img
+                alt="Razor logo"
+                height={36}
+                src="/logo.png"
+                width={36}
+              />
+            </Box>
+            <Box
+              as="span"
+              display={{ xs: 'none', md: 'inline' }}
+              marginLeft="2"
+              position="relative"
+              top="3"
+            >
+              <img
+                alt="Razor logo"
+                height={56}
+                src="/logo.png"
+                width={56}
+              />
+            </Box>
+          </Text>
+          <Text
+            align={{ xs: 'left', md: 'center' }}
+            as="p"
+            marginX="auto"
+            marginY={{ xs: '7', md: '9' }}
+            size={{ xs: '4', md: '5' }}
+            style={{ lineHeight: '28px', maxWidth: 720 }}
+            weight="semibold"
+          >
+            {"We're always looking to make Razor Kit better, so please let us know how we can improve"}
+          </Text>
+
+          <Box
+            display="flex"
+            flexDirection={{ xs: 'column', sm: 'row' }}
+            gap={{ xs: '5', sm: '8' }}
+            justifyContent="center"
+          >
+            <Button
+              as="a"
+              href="https://twitter.com/razordao"
+              shadow
+              size="xl"
+              variant="razorGradient"
+            >
+              <Box
+                as="span"
+                marginX={{ sm: '4' }}
+                textAlign="center"
+                width="full"
+              >
+                {'Follow us on X'}
+              </Box>
+            </Button>
+            <Button
+              as="a"
+              href="https://github.com/razorlabsorg/razorkit/discussions/new?category=feedback"
+              shadow
+              size="xl"
+              target="_blank"
+              variant="razorGradient"
+            >
+              <Box as="span" textAlign="center" width="full">
+                {'Share Feedback with us'}
+              </Box>
+            </Button>
+          </Box>
+
+          <Box
+            display="flex"
+            flexDirection="column"
+            gap="6"
+            justifyContent="center"
+            marginTop={{ xs: '11', lg: '12' }}
+            marginBottom={{ xs: '-11', lg: '-11' }}
+            textAlign="center"
+          >
+            <Text color="labelTertiary" size="3" weight="bold">
+              © Razor Labs {new Date().getFullYear()}
+            </Text>
+          </Box>
+        </Wrapper>
+      </Box>
     </Box>
   )
 }
