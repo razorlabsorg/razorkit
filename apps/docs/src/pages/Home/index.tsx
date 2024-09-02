@@ -13,6 +13,7 @@ import { CheckIcon } from "components/Icons/Check";
 import { CopyIcon } from "components/Icons/Copy";
 import { Hero } from "components/Hero";
 import { UsedBy } from "components/UsedBy";
+import { Playground } from "components/Playground";
 
 const InstallScript: React.FC = () => {
   const [requestCopy, setRequestCopy] = useState(false);
@@ -139,6 +140,8 @@ const Home: React.FC = () => {
           <UsedBy />
         </Wrapper>
       </Box>
+
+      <Playground />
     </Box>
   )
 }
