@@ -1,0 +1,62 @@
+---
+title: कस्टम एप्लीकेशन जानकारी
+description: अपने एप्लीकेशन की जानकारी को कस्टमाइज़ करना
+---
+
+# कस्टम एप्लीकेशन जानकारी
+
+## अपने एप्लीकेशन की जानकारी को कस्टमाइज़ करना
+
+आप `RainbowKitProvider` के लिए `appInfo` प्रॉप में ऐप की जानकारी दर्ज कर सकते हैं। आप उन गुणों को संशोधित कर सकते हैं जो आपके एप का नाम (`appName`) और कनेक्शन मोडल में “Learn More” बटन का लिंक (`learnMoreUrl`) हटा देते हैं:
+
+```tsx
+import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
+
+const App = () => {
+  return (
+    <RainbowKitProvider
+      appInfo={{
+        appName: 'Rainbowkit Demo',
+        learnMoreUrl: 'https://learnaboutcryptowallets.example',
+      }}
+      {...etc}
+    >
+      {/* ... */}
+    </RainbowKitProvider>
+  );
+};
+```
+
+### डिस्क्लेमर जोड़ें
+
+आप अपना डिस्क्लेमर प्रदान कर सकते हैं जो कनेक्शन मोडल के नीचे प्रदर्शित होगा। `appInfo` में `disclaimer` प्रॉप `DisclaimerComponent` को तर्कसहित लेती है `Text` और `Link` के साथ। आप इसे उपयोग कर अपना डिस्क्लेमर बना सकते हैं जो थिमिंग सिस्टम को उत्तराधिकारी बनाता है। हम TypeScript उपयोगकर्ताओं के लिए `DisclaimerComponent` प्रकार का निर्यात करते हैं:
+
+```tsx
+import {
+  RainbowKitProvider,
+  DisclaimerComponent,
+} from '@rainbow-me/rainbowkit';
+
+const Disclaimer: DisclaimerComponent = ({ Text, Link }) => (
+  <Text>
+    By connecting your wallet, you agree to the{' '}
+    <Link href="https://termsofservice.xyz">Terms of Service</Link> and
+    acknowledge you have read and understand the protocol{' '}
+    <Link href="https://disclaimer.xyz">Disclaimer</Link>
+  </Text>
+);
+
+const App = () => {
+  return (
+    <RainbowKitProvider
+      appInfo={{
+        appName: 'RainbowKit Demo',
+        disclaimer: Disclaimer,
+      }}
+      {...etc}
+    >
+      {/* ... */}
+    </RainbowKitProvider>
+  );
+};
+```

@@ -1,0 +1,175 @@
+---
+title: การติดตั้ง
+description: เริ่มต้นและทำงานได้ด้วย RainbowKit
+---
+
+# การติดตั้ง
+
+## เริ่มต้นและทำงานได้ด้วย RainbowKit
+
+### เริ่มต้นอย่างรวดเร็ว
+
+คุณสามารถสร้างแอป RainbowKit + [wagmi](https://wagmi.sh) + [Next.js](https://nextjs.org) ใหม่ด้วยคำสั่งที่ต้องการ โดยใช้โปรแกรมจัดการแพคเกจที่คุณเลือก:
+
+```bash
+npm init @rainbow-me/rainbowkit@latest
+# or
+pnpm create @rainbow-me/rainbowkit@latest
+# or
+yarn create @rainbow-me/rainbowkit
+```
+
+การดำเนินการนี้จะถามคุณว่าต้องการชื่อโครงการอะไร สร้างไดเรกทอรีใหม่ที่มีโครงการโครงสร้างพื้นฐานและติดตั้งทุกความต้องการที่พวกคุณต้องการ.
+
+สำหรับอีกทางเลือก คุณสามารถรวม RainbowKit เข้ากับโครงการที่มีอยู่ของคุณเอง
+
+### การตั้งค่าด้วยตมือ
+
+ติดตั้ง RainbowKit และ peer dependencies ที่เกี่ยวข้อง, [wagmi](https://wagmi.sh/), [viem](https://viem.sh), และ [@tanstack/react-query](https://tanstack.com/query/v5).
+
+```bash
+npm install @rainbow-me/rainbowkit wagmi viem@2.x @tanstack/react-query
+```
+
+> หมายเหตุ: RainbowKit เป็นคลังภาพ [React](https://reactjs.org/).
+
+#### นำเข้า
+
+นำเข้า RainbowKit, Wagmi และ TanStack Query.
+
+```tsx
+import '@rainbow-me/rainbowkit/styles.css';
+
+import {
+  getDefaultConfig,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit';
+import { WagmiProvider } from 'wagmi';
+import {
+  mainnet,
+  polygon,
+  optimism,
+  arbitrum,
+  base,
+} from 'wagmi/chains';
+import {
+  QueryClientProvider,
+  QueryClient,
+} from "@tanstack/react-query";
+```
+
+#### กำหนดค่า
+
+กำหนดค่าสำหรับเชื่อมโยงที่คุณต้องการและสร้างตัวเชื่อมต่อที่ต้องการ คุณยังต้องตั้งค่ากำหนดค่า `wagmi`. หากแอปพลิเคชันของคุณใช้การเรนเดอร์ฝั่งเซิร์ฟเวอร์ (SSR) ต้องตั้งค่า `ssr` ให้เป็น `true`.
+
+> หมายเหตุ: ทุก dApp ที่ใช้ WalletConnect ตอนนี้ต้องได้รับ `projectId` จาก [WalletConnect Cloud](https://cloud.walletconnect.com/). นี่เป็นบริการฟรีและใช้เวลาไม่กี่นาที.
+
+```tsx line=4-99
+...
+import { getDefaultConfig } from '@rainbow-me/rainbowkit';
+
+const config = getDefaultConfig({
+  appName: 'My RainbowKit App',
+  projectId: 'YOUR_PROJECT_ID',
+  chains: [mainnet, polygon, optimism, arbitrum, base],
+  ssr: true, // If your dApp uses server side rendering (SSR)
+});
+```
+
+#### ห่อผู้ให้บริการ
+
+ห่อแอปพลิเคชันของคุณด้วย `RainbowKitProvider`, [`WagmiProvider`](https://wagmi.sh/react/api/WagmiProvider#wagmiprovider), และ [`QueryClientProvider`](https://tanstack.com/query/v4/docs/framework/react/reference/QueryClientProvider).
+
+```tsx
+const queryClient = new QueryClient();
+
+const App = () => {
+  return (
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider>
+          {/* Your App */}
+        </RainbowKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
+  );
+};
+```
+
+#### เพิ่มปุ่มเชื่อมต่อ
+
+จากนั้นในแอพของคุณ นำเข้าและแสดงคอมโพเน้นต์ `ConnectButton`
+
+```tsx
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+
+export const YourApp = () => {
+  return <ConnectButton />;
+};
+```
+
+RainbowKit จะดูแลเลือกกระเป๋าเงินของผู้ใช้ แสดงข้อมูลกระเป๋าเงิน/การทำธุรกรรม และจัดการเปลี่ยนเครือข่าย/กระเป๋าเงินของคุณ
+
+#### การตั้งค่าเครื่องมือสร้างเพิ่มเติม
+
+เครื่องมือสร้างบางตัวจะต้องการการตั้งค่าเพิ่มเติม.
+
+##### Remix
+
+เมื่อใช้งาน [Remix](https://remix.run) คุณต้อง polyfill โมดูล `buffer`, `events` และ `http`. อ้างอิงการตั้งค่า Remix ด้านล่าง หรือ [โปรเจ็กต์ Remix ตัวอย่างของเรา](https://github.com/rainbow-me/rainbowkit/blob/main/examples/with-remix).
+
+```ts
+/** @type {import('@remix-run/dev').AppConfig} */
+export default {
+  ignoredRouteFiles: ["**/.*"],
+  browserNodeBuiltinsPolyfill: {
+    modules: { buffer: true, events: true, http: true },
+  },
+};
+```
+
+### การเตรียมตัวเพื่อดีพลอย
+
+โดยค่าเริ่มต้น แอปพลิเคชันของคุณใช้ผู้ให้บริการ RPC สาธารณะสำหรับแต่ละเชนในการดึงยอดคงเหลือ การแก้ไขชื่อ ENS และอื่นๆ สิ่งนี้อาจทำให้เกิดปัญหาความน่าเชื่อถือสำหรับผู้ใช้ของคุณ เนื่องจากโหนดสาธารณะมีการจำกัดอัตราการใช้งาน. คุณควรซื้อการเข้าถึงผู้ให้บริการ RPC ผ่านบริการเช่น [Alchemy](https://www.alchemy.com/) หรือ [QuickNode](https://www.quicknode.com/) และกำหนด Transports ของคุณเองใน Wagmi. สามารถทำได้โดยการเพิ่มพารามิเตอร์ `transports` ใน `getDefaultConfig` หรือผ่าน `createConfig` ของ Wagmi โดยตรง.
+
+Transport เป็นชั้นกลางการเครือข่ายที่จัดการส่งคำขอ JSON-RPC ไปยังผู้ให้บริการโหนด Ethereum (เช่น Alchemy, Infura เป็นต้น)
+
+**ตัวอย่างด้วย `http` transport**
+
+```tsx
+import { getDefaultConfig } from '@rainbow-me/rainbowkit';
+import { http } from 'wagmi';
+import { mainnet, sepolia } from 'wagmi/chains';
+
+const config = getDefaultConfig({
+  appName: 'My RainbowKit App',
+  projectId: 'YOUR_PROJECT_ID',
+  chains: [mainnet, sepolia],
+  transports: {
+    [mainnet.id]: http('https://eth-mainnet.g.alchemy.com/v2/...'),
+    [sepolia.id]: http('https://eth-sepolia.g.alchemy.com/v2/...'),
+  },
+});
+```
+
+สำหรับรายละเอียดเพิ่มเติม ดูที่ [เอกสาร wagmi.](https://wagmi.sh/core/api/transports#transports).
+
+### เพิ่มฟังก์ชันของคุณเอง
+
+ขณะนี้ผู้ใช้ของคุณสามารถเชื่อมต่อกระเป๋าเงินของพวกเขา คุณสามารถเริ่มสร้างแอปของคุณออกไปโดยใช้ [wagmi.](https://wagmi.sh)
+
+ส่งธุรกรรม โต้ตอบกับสัญญา แก้ไขรายละเอียด ENS และอื่นๆ อีกมากมายด้วยชุดครอบจักรวาล React Hooks ของ wagmi.
+
+สำหรับรายละเอียดเพิ่มเติม ดูที่ [เอกสาร wagmi.](https://wagmi.sh)
+
+### ตัวอย่างเพิ่มเติม
+
+เพื่อดูตัวอย่างการทำงานของ RainbowKit หรือใช้พวกเขาเพื่อสร้างโครงงานใหม่โดยอัตโนมัติ ดูที่ [ตัวอย่างการทำงานของทางการ](https://github.com/rainbow-me/rainbowkit/tree/main/examples).
+
+เพื่อทดลอง RainbowKit โดยตรงในเบราว์เซอร์ของคุณ ดูลิงก์ CodeSandbox ที่ด้านล่าง:
+
+- ร่วมกับ [Create React App](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-create-react-app)
+- ร่วมกับ [Next.js](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-next)
+- ร่วมกับ [Next.js App Router](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-next-app)
+- ร่วมกับ [Remix](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-remix)
+- ร่วมกับ [Vite](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-vite)

@@ -1,0 +1,165 @@
+---
+title: カスタムテーマ
+description: カスタムテーマの作成
+---
+
+# カスタムテーマ
+
+## カスタムテーマの作成
+
+> 注：このAPIは不安定で、近い将来変更される可能性があります。 現在は[組み込みテーマ](/docs/theming)の使用をお勧めします。
+
+組み込みテーマはある程度のカスタマイズを提供しますが、`Theme`タイプを使用すると、基本となるテーマ変数に低レベルでアクセスして独自のカスタムテーマを定義するのに役立ちます。
+
+```tsx
+import { RainbowKitProvider, Theme } from '@rainbow-me/rainbowkit';
+
+const myCustomTheme: Theme = {
+  blurs: {
+    modalOverlay: '...',
+  },
+  colors: {
+    accentColor: '...',
+    accentColorForeground: '...',
+    actionButtonBorder: '...',
+    actionButtonBorderMobile: '...',
+    actionButtonSecondaryBackground: '...',
+    closeButton: '...',
+    closeButtonBackground: '...',
+    connectButtonBackground: '...',
+    connectButtonBackgroundError: '...',
+    connectButtonInnerBackground: '...',
+    connectButtonText: '...',
+    connectButtonTextError: '...',
+    connectionIndicator: '...',
+    downloadBottomCardBackground: '...',
+    downloadTopCardBackground: '...',
+    error: '...',
+    generalBorder: '...',
+    generalBorderDim: '...',
+    menuItemBackground: '...',
+    modalBackdrop: '...',
+    modalBackground: '...',
+    modalBorder: '...',
+    modalText: '...',
+    modalTextDim: '...',
+    modalTextSecondary: '...',
+    profileAction: '...',
+    profileActionHover: '...',
+    profileForeground: '...',
+    selectedOptionBorder: '...',
+    standby: '...',
+  },
+  fonts: {
+    body: '...',
+  },
+  radii: {
+    actionButton: '...',
+    connectButton: '...',
+    menuButton: '...',
+    modal: '...',
+    modalMobile: '...',
+  },
+  shadows: {
+    connectButton: '...',
+    dialog: '...',
+    profileDetailsAction: '...',
+    selectedOption: '...',
+    selectedWallet: '...',
+    walletLogo: '...',
+  },
+};
+
+const App = () => (
+  <RainbowKitProvider theme={myCustomTheme} {...etc}>
+    {/* Your App */}
+  </RainbowKitProvider>;
+)
+```
+
+### 組み込みテーマの拡張
+
+全てのテーマを再定義することなく、組み込みテーマを拡張することができます。 これは特定のテーマトークンを上書きしたいだけの時に便利です。
+
+それを行うには、`lodash.merge`（または同等のもの）をインストールします。
+
+```bash
+npm install lodash.merge
+```
+
+拡張したいテーマ（例：`darkTheme`）とTypeScriptの`Theme`タイプと一緒にインポートします。
+
+```tsx
+import merge from 'lodash.merge';
+import {
+  RainbowKitProvider,
+  darkTheme,
+  Theme,
+} from '@rainbow-me/rainbowkit';
+```
+
+次に、組み込みテーマを上書きしたいテーマトークンとマージします。 この例では、ブランドのアクセントカラーに合わせて`accentColor`トークンを上書きしています。
+
+```tsx
+const myTheme = merge(darkTheme(), {
+  colors: {
+    accentColor: '#07296d',
+  },
+} as Theme);
+```
+
+最後に、カスタムテーマを `RainbowKitProvider` の `theme` プロパティに渡すことができます。
+
+```tsx
+const App = () => {
+  return (
+    <RainbowKitProvider theme={myTheme} {...etc}>
+      {/* Your App */}
+    </RainbowKitProvider>
+  );
+};
+```
+
+### カスタムテーマセレクターの作成
+
+アプリがサーバー/静的にレンダリングされ、ユーザーがテーマの切り替えを手動で行える場合、RainbowKitのテーマシステムは、任意のCSS-in-JSシステムで使用できる以下の関数を用いてカスタムCSSセレクターに接続することができます。
+
+- `cssStringFromTheme`
+- `cssObjectFromTheme`
+
+これらの関数は、必要なテーマ変数をすべて設定するCSSを返します。 文字列とオブジェクトの両方がサポートされているため、これは任意のCSS-in-JSシステムと統合することができます。
+
+基本的な例として、各テーマのカスタムセレクターを持つ自分の`style`要素をレンダリングすることができます。 テーマのCSSのレンダリングを制御しているので、RainbowKitProviderが私たちに対してスタイルをレンダリングしないように、`theme`プロップに`null`をパスしています。 また、基本テーマと同じテーマ変数を省略するcssStringFromTheme関数のextendsオプションの使用にも注意してください。
+
+```tsx
+import {
+  RainbowKitProvider,
+  cssStringFromTheme,
+  lightTheme,
+  darkTheme,
+} from '@rainbow-me/rainbowkit';
+
+const App = () => {
+  return (
+    <RainbowKitProvider theme={null} {...etc}>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            :root {
+              ${cssStringFromTheme(lightTheme)}
+            }
+
+            html[data-dark] {
+              ${cssStringFromTheme(darkTheme, {
+                extends: lightTheme,
+              })}
+            }
+          `,
+        }}
+      />
+
+      {/* ... */}
+    </RainbowKitProvider>
+  );
+};
+```

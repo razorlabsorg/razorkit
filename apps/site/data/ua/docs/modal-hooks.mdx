@@ -1,0 +1,64 @@
+---
+title: Модальні Хуки
+description: Програмне відкриття модалів за допомогою Хуків
+---
+
+# Модальні Хуки
+
+## Програмне відкриття модалів за допомогою Хуків
+
+Наступні Хуки надаються для програмного відкриття модальних вікон будь-де у вашому застосунку.
+
+- `useConnectModal`
+- `useAccountModal`
+- `useChainModal`
+
+Кожен з цих Хуків повертає об'єкт з функцією для відкриття свого відповідного модального вікна. Зверніть увагу, що повернені функції будуть невизначеними, якщо ваш застосунок не знаходиться в необхідному стані для відкриття модального вікна.
+
+```tsx
+import {
+  useConnectModal,
+  useAccountModal,
+  useChainModal,
+} from '@rainbow-me/rainbowkit';
+
+export const YourApp = () => {
+  const { openConnectModal } = useConnectModal();
+  const { openAccountModal } = useAccountModal();
+  const { openChainModal } = useChainModal();
+
+  return (
+    <>
+      {openConnectModal && (
+        <button onClick={openConnectModal} type="button">
+          Open Connect Modal
+        </button>
+      )}
+
+      {openAccountModal && (
+        <button onClick={openAccountModal} type="button">
+          Open Account Modal
+        </button>
+      )}
+
+      {openChainModal && (
+        <button onClick={openChainModal} type="button">
+          Open Chain Modal
+        </button>
+      )}
+    </>
+  );
+};
+```
+
+Кожен хуки також повертає булеве значення для статусу модального вікна. Зазвичай рекомендується покладатися виключно на хуки Wagmi (наприклад, `useAccount`), щоб реагувати безпосередньо на статус підключення гаманця користувача, а не на стан Connect Modal.
+
+```tsx
+const { connectModalOpen } = useConnectModal();
+const { accountModalOpen } = useAccountModal();
+const { chainModalOpen } = useChainModal();
+```
+
+RainbowKit розроблений так, щоб бути ненав'язливим та адаптивним, тому dApps повинні завжди надавати інтерфейс для користувачів, незалежно від того, чи підключили вони свій гаманець. Користувач може підключити або відключити свій гаманець безпосередньо через MetaMask, тому dApp повинен надавати адаптивний інтерфейс безпосередньо до підлеглого статусу підключення.
+
+dApps, які покладаються на такі механізми, як Sign-in with Ethereum для верифікації користувачів, повинні натомість покладатися на функцію [Аутентифікація](/docs/authentication).

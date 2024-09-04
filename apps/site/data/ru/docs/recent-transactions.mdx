@@ -1,0 +1,75 @@
+---
+title: Недавние транзакции
+description: Показать ваши недавние транзакции
+---
+
+# Недавние транзакции
+
+## Показать ваши недавние транзакции
+
+Вы можете включить отображение недавних транзакций в модальном окне учетной записи RainbowKit. Обратите внимание, что все транзакции сохраняются в локальном хранилище и должны быть вручную зарегистрированы в RainbowKit для отображения.
+
+Стандартная реализация `ConnectButton` также будет отображать индикатор загрузки вокруг аватара пользователя при наличии ожидающих транзакций. Пользовательские реализации `ConnectButton` могут воссоздать это поведение через свойство `account.hasPendingTransactions`, которое передается в вашу функцию рендеринга.
+
+Чтобы использовать эту функцию, сначала включите опцию `showRecentTransactions` в `RainbowKitProvider`.
+
+```tsx
+import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
+
+const App = () => {
+  return (
+    <RainbowKitProvider showRecentTransactions={true} {...etc}>
+      {/* ... */}
+    </RainbowKitProvider>
+  );
+};
+```
+
+Транзакции затем могут быть зарегистрированы с помощью хука `useAddRecentTransaction`.
+
+```tsx
+import { useAddRecentTransaction } from '@rainbow-me/rainbowkit';
+
+export default () => {
+  const addRecentTransaction = useAddRecentTransaction();
+
+  return (
+    <button
+      onClick={() => {
+        addRecentTransaction({
+          hash: '0x...',
+          description: '...',
+        });
+      }}
+    >
+      Add recent transaction
+    </button>
+  );
+};
+```
+
+После того как транзакция зарегистрирована в RainbowKit, ее статус будет обновлен после завершения.
+
+По умолчанию транзакция будет считаться завершенной после добычи одного блока поверх блока, в котором она была проведена, но это можно настроить, указав значение `confirmations`.
+
+```tsx
+import { useAddRecentTransaction } from '@rainbow-me/rainbowkit';
+
+export default () => {
+  const addRecentTransaction = useAddRecentTransaction();
+
+  return (
+    <button
+      onClick={() => {
+        addRecentTransaction({
+          hash: '0x...',
+          description: '...',
+          confirmations: 100,
+        });
+      }}
+    >
+      Add recent transaction
+    </button>
+  );
+};
+```

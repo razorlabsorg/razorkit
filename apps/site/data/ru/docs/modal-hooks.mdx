@@ -1,0 +1,64 @@
+---
+title: Модальные хуки
+description: Программное открытие модальных окон через Хуки
+---
+
+# Модальные хуки
+
+## Программное открытие модальных окон через Хуки
+
+Следующие хуки предоставляются для того, чтобы позволить программно открывать модальные окна в любом месте вашего приложения.
+
+- `useConnectModal`
+- `useAccountModal`
+- `useChainModal`
+
+Каждый из этих хуков возвращает объект с функцией для открытия соответствующего модального окна. Обратите внимание, что возвращаемые функции будут неопределенными, если ваше приложение не находится в требуемом состоянии для открытия модального окна.
+
+```tsx
+import {
+  useConnectModal,
+  useAccountModal,
+  useChainModal,
+} from '@rainbow-me/rainbowkit';
+
+export const YourApp = () => {
+  const { openConnectModal } = useConnectModal();
+  const { openAccountModal } = useAccountModal();
+  const { openChainModal } = useChainModal();
+
+  return (
+    <>
+      {openConnectModal && (
+        <button onClick={openConnectModal} type="button">
+          Open Connect Modal
+        </button>
+      )}
+
+      {openAccountModal && (
+        <button onClick={openAccountModal} type="button">
+          Open Account Modal
+        </button>
+      )}
+
+      {openChainModal && (
+        <button onClick={openChainModal} type="button">
+          Open Chain Modal
+        </button>
+      )}
+    </>
+  );
+};
+```
+
+Каждый хук также возвращает boolean для статуса модального окна. Обычно рекомендуется полагаться исключительно на хуки Wagmi (например, `useAccount`), чтобы реагировать непосредственно на состояние подключения кошелька пользователя, а не на состояние подключения модального окна.
+
+```tsx
+const { connectModalOpen } = useConnectModal();
+const { accountModalOpen } = useAccountModal();
+const { chainModalOpen } = useChainModal();
+```
+
+RainbowKit разработан так, чтобы не прерывать работу и быть отзывчивым, поэтому dApps всегда должны отображать интерфейс для пользователей, независимо от того, подключили ли они свой кошелек. Пользователь может подключить или отключить свой кошелек напрямую через MetaMask, поэтому dApp должен быть отзывчивым непосредственно к состоянию подключения.
+
+dApps, которые полагаются на такие механизмы, как Вход через Ethereum для проверки пользователя, должны вместо этого полагаться на функцию [Аутентификации](/docs/authentication).

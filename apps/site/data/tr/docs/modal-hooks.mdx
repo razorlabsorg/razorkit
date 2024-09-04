@@ -1,0 +1,64 @@
+---
+title: Modal Kancaları
+description: Kancalar aracılığıyla programatik olarak modalların açılması
+---
+
+# Modal Kancaları
+
+## Kancalar aracılığıyla programatik olarak modalların açılması
+
+Uygulamanızın herhangi bir yerinde modalların programatik olarak açılmasına olanak tanımak için aşağıdaki kancalar sağlanmıştır.
+
+- `useConnectModal`
+- `useAccountModal`
+- `useChainModal`
+
+Bu kancaların her biri, ilgili modalın açılması için bir işlev içeren bir nesne döndürür. Uygulamanız modalın açılması için gerekli durumda değilse, döndürülen işlevlerin tanımsız olacağını unutmayın.
+
+```tsx
+import {
+  useConnectModal,
+  useAccountModal,
+  useChainModal,
+} from '@rainbow-me/rainbowkit';
+
+export const YourApp = () => {
+  const { openConnectModal } = useConnectModal();
+  const { openAccountModal } = useAccountModal();
+  const { openChainModal } = useChainModal();
+
+  return (
+    <>
+      {openConnectModal && (
+        <button onClick={openConnectModal} type="button">
+          Open Connect Modal
+        </button>
+      )}
+
+      {openAccountModal && (
+        <button onClick={openAccountModal} type="button">
+          Open Account Modal
+        </button>
+      )}
+
+      {openChainModal && (
+        <button onClick={openChainModal} type="button">
+          Open Chain Modal
+        </button>
+      )}
+    </>
+  );
+};
+```
+
+Her kanca ayrıca modalın durumu için bir boole değeri döndürür. Genellikle, kullanıcının cüzdan bağlantı durumuna doğrudan tepki vermek için Wagmi kancalarına (ör. `useAccount`) tamamen güvenmeniz ve Connect Modal durumuna güvenmemeniz önerilir.
+
+```tsx
+const { connectModalOpen } = useConnectModal();
+const { accountModalOpen } = useAccountModal();
+const { chainModalOpen } = useChainModal();
+```
+
+RainbowKit, kesintisiz ve duyarlı olacak şekilde tasarlanmıştır, bu nedenle dApp'ler, kullanıcının cüzdanını bağlayıp bağlamadığına bakılmaksızın her zaman bir arayüz oluşturmalıdır. Bir kullanıcı, MetaMask'tan direkt olarak cüzdanını bağlayabilir veya bağlantısını kesebilir, bu yüzden dApp, temel bağlantı durumuna doğrudan duyarlı olmalıdır.
+
+Kullanıcı doğrulaması için Ethereum ile Oturum Açma gibi mekanizmalara güvenen dApp'ler bunun yerine [Kimlik Doğrulama](/docs/authentication) özelliğine güvenmelidir.

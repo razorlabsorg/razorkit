@@ -1,0 +1,64 @@
+---
+title: モーダルフック
+description: フック経由でプログラム的にモーダルを開く
+---
+
+# モーダルフック
+
+## フック経由でプログラム的にモーダルを開く
+
+以下のフックは、アプリケーション内のどこでもプログラム的にモーダルを開くことを可能にするために提供されています。
+
+- `useConnectModal`
+- `useAccountModal`
+- `useChainModal`
+
+これらの各フックは、それぞれのモーダルを開くための関数を持つオブジェクトを返します。 アプリケーションがモーダルを開くために必要な状態にない場合、返される関数は未定義になりますのでご注意ください。
+
+```tsx
+import {
+  useConnectModal,
+  useAccountModal,
+  useChainModal,
+} from '@rainbow-me/rainbowkit';
+
+export const YourApp = () => {
+  const { openConnectModal } = useConnectModal();
+  const { openAccountModal } = useAccountModal();
+  const { openChainModal } = useChainModal();
+
+  return (
+    <>
+      {openConnectModal && (
+        <button onClick={openConnectModal} type="button">
+          Open Connect Modal
+        </button>
+      )}
+
+      {openAccountModal && (
+        <button onClick={openAccountModal} type="button">
+          Open Account Modal
+        </button>
+      )}
+
+      {openChainModal && (
+        <button onClick={openChainModal} type="button">
+          Open Chain Modal
+        </button>
+      )}
+    </>
+  );
+};
+```
+
+各フックはまた、モーダルのステータスのための真偽値を返します。 通常は、Connect Modalの状態に頼るのではなく、ユーザーのウォレット接続状態に直接反応するために、純粋にWagmiフック (つまり `useAccount`) に頼ることをお勧めします。
+
+```tsx
+const { connectModalOpen } = useConnectModal();
+const { accountModalOpen } = useAccountModal();
+const { chainModalOpen } = useChainModal();
+```
+
+RainbowKitは中断せず、応答性がありますので、dAppsはウォレットが接続されているかどうかに関わらず、ユーザーインターフェイスを常にレンダリングする必要があります。 ユーザーはMetaMaskから直接ウォレットを接続または切断できるため、dAppは直接的に基礎となる接続ステータスに対して応答性が必要です。
+
+dAppsはユーザー認証のためにEthereumを使ったサインインのようなメカニズムに依存するのではなく、[認証](/docs/authentication)機能を使用するべきです。

@@ -1,0 +1,175 @@
+---
+title: インストール
+description: RainbowKitで始めてみましょう
+---
+
+# インストール
+
+## RainbowKitで始めてみましょう
+
+### クイックスタート
+
+あなたの選択したパッケージマネージャで、以下のコマンドのいずれかを使用して、新しいRainbowKit + [wagmi](https://wagmi.sh) + [Next.js](https://nextjs.org)アプリを一から作成することができます。
+
+```bash
+npm init @rainbow-me/rainbowkit@latest
+# or
+pnpm create @rainbow-me/rainbowkit@latest
+# or
+yarn create @rainbow-me/rainbowkit
+```
+
+これにより、プロジェクト名を求められ、新しいディレクトリが生成され、ボイラープレートプロジェクトが含まれ、必要な全ての依存関係がインストールされます。
+
+または、既存のプロジェクトにRainbowKitを手動で統合することも可能です。
+
+### 手動設定
+
+RainbowKitおよびそのピア依存関係である[wagmi](https://wagmi.sh/)、[viem](https://viem.sh)、[@tanstack/react-query](https://tanstack.com/query/v5)をインストールしてください。
+
+```bash
+npm install @rainbow-me/rainbowkit wagmi viem@2.x @tanstack/react-query
+```
+
+> 注: RainbowKitは [React](https://reactjs.org/) ライブラリです。
+
+#### インポート
+
+RainbowKit、Wagmi、TanStack Queryをインポートします。
+
+```tsx
+import '@rainbow-me/rainbowkit/styles.css';
+
+import {
+  getDefaultConfig,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit';
+import { WagmiProvider } from 'wagmi';
+import {
+  mainnet,
+  polygon,
+  optimism,
+  arbitrum,
+  base,
+} from 'wagmi/chains';
+import {
+  QueryClientProvider,
+  QueryClient,
+} from "@tanstack/react-query";
+```
+
+#### 設定
+
+希望するチェーンを設定し、必要なコネクタを生成します。 `wagmi` 設定も行う必要があります。 If your dApp uses server side rendering (SSR) make sure to set `ssr` to `true`.
+
+> 注: WalletConnectを利用するすべてのdAppは、現在[WalletConnect Cloud](https://cloud.walletconnect.com/)から`projectId`を取得する必要があります。 これは完全に無料で、数分で完了します。
+
+```tsx line=4-99
+...
+import { getDefaultConfig } from '@rainbow-me/rainbowkit';
+
+const config = getDefaultConfig({
+  appName: 'My RainbowKit App',
+  projectId: 'YOUR_PROJECT_ID',
+  chains: [mainnet, polygon, optimism, arbitrum, base],
+  ssr: true, // If your dApp uses server side rendering (SSR)
+});
+```
+
+#### プロバイダーをラップする
+
+アプリケーションを`RainbowKitProvider`、[`WagmiProvider`](https://wagmi.sh/react/api/WagmiProvider#wagmiprovider)、および[`QueryClientProvider`](https://tanstack.com/query/v4/docs/framework/react/reference/QueryClientProvider)でラップしてください。
+
+```tsx
+const queryClient = new QueryClient();
+
+const App = () => {
+  return (
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider>
+          {/* Your App */}
+        </RainbowKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
+  );
+};
+```
+
+#### 接続ボタンを追加する
+
+次に、あなたのアプリで、`ConnectButton` コンポーネントをインポートしてレンダリングします。
+
+```tsx
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+
+export const YourApp = () => {
+  return <ConnectButton />;
+};
+```
+
+RainbowKitは今後、ユーザーのウォレット選択の処理、ウォレット/トランザクション情報の表示、そしてネットワーク/ウォレットの切り替えを行います。
+
+#### 追加のビルドツーリング設定
+
+一部のビルドツールでは追加の設定が必要になります。
+
+##### Remix
+
+[Remix](https://remix.run)を使用する場合、`buffer`、`events`、`http`モジュールをポリフィルする必要があります。 以下のRemix設定を参照するか、[サンプル Remix プロジェクト](https://github.com/rainbow-me/rainbowkit/blob/main/examples/with-remix)を参照してください。
+
+```ts
+/** @type {import('@remix-run/dev').AppConfig} */
+export default {
+  ignoredRouteFiles: ["**/.*"],
+  browserNodeBuiltinsPolyfill: {
+    modules: { buffer: true, events: true, http: true },
+  },
+};
+```
+
+### デプロイの準備
+
+デフォルトでは、dAppは各チェーンの公開RPCプロバイダーを使用してバランスを取得し、ENS名を解決などを行います。 これは、パブリックノードがレート制限されているため、ユーザーに信頼性の問題を引き起こすことがよくあります。 代わりに、[Alchemy](https://www.alchemy.com/)や[QuickNode](https://www.quicknode.com/)などのサービスを通じてRPCプロバイダーへのアクセスを購入し、Wagmiで独自のトランスポートを定義する必要があります。 これは、`getDefaultConfig`の`transports` パラメータを追加するか、Wagmiの `createConfig` を直接使用することで達成できます。
+
+A Transport is the networking middle layer that handles sending JSON-RPC requests to the Ethereum Node Provider (like Alchemy, Infura, etc).
+
+**`http` トランスポートの例**
+
+```tsx
+import { getDefaultConfig } from '@rainbow-me/rainbowkit';
+import { http } from 'wagmi';
+import { mainnet, sepolia } from 'wagmi/chains';
+
+const config = getDefaultConfig({
+  appName: 'My RainbowKit App',
+  projectId: 'YOUR_PROJECT_ID',
+  chains: [mainnet, sepolia],
+  transports: {
+    [mainnet.id]: http('https://eth-mainnet.g.alchemy.com/v2/...'),
+    [sepolia.id]: http('https://eth-sepolia.g.alchemy.com/v2/...'),
+  },
+});
+```
+
+詳細については、[wagmi トランスポートドキュメント](https://wagmi.sh/core/api/transports#transports)をご覧ください。
+
+### 自分自身の機能を追加する
+
+ユーザーがウォレットを接続できるようになったので、あなたは [wagmi.](https://wagmi.sh)を使用してアプリの残りの部分を構築を開始することができます。
+
+トランザクションを送信し、コントラクトと対話し、ENSの詳細を解決し、その他の多くのことを、wagmiの包括的なReactフックスイートを使用して行います。
+
+詳細については、[wagmi の文書化](https://wagmi.sh)をご覧ください。
+
+### さらなる例
+
+RainbowKitの一部の実行例を見るため、またはそれらを使って新しいプロジェクトを自動的に生成するために、[公式の例](https://github.com/rainbow-me/rainbowkit/tree/main/examples)をご確認ください。
+
+ブラウザで直接RainbowKitを試すためには、下記のCodeSandboxリンクをご覧ください:
+
+- [Create React App]を使用(https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-create-react-app)
+- [Next.js]を使用(https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-next)
+- [Next.js App Router]を使用(https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-next-app)
+- [Remix]を使用(https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-remix)
+- with [Vite](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-vite)

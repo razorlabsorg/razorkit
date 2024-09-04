@@ -1,0 +1,75 @@
+---
+title: ธุรกรรมล่าสุด
+description: แสดงธุรกรรมล่าสุดของคุณ
+---
+
+# ธุรกรรมล่าสุด
+
+## แสดงธุรกรรมล่าสุดของคุณ
+
+คุณสามารถเลือกที่จะแสดงธุรกรรมล่าสุดในโมดอลบัญชีของ RainbowKit โปรดทราบว่าธุรกรรมทั้งหมดจะถูกเก็บไว้ในหน่วยความจำท้องถิ่นและต้องลงทะเบียนด้วยตัวเองกับ RainbowKit เพื่อให้สามารถแสดงได้
+
+การดำเนินการตามค่าเริ่มต้นของ `ConnectButton` จะแสดงตัวบ่งชี้การโหลดรอบๆ อวาตาร์ของผู้ใช้ถ้ามีธุรกรรมที่ค้างอยู่ การดำเนินการแบบกำหนดเองของ `ConnectButton` สามารถสร้างพฤติกรรมนี้ขึ้นมาใหม่ได้ผ่านคุณสมบัติ `account.hasPendingTransactions` ที่ส่งผ่านฟังก์ชันเรนเดอร์ของคุณ
+
+ในการใช้คุณลักษณะนี้ ให้เปิดใช้งานตัวเลือก `showRecentTransactions` บน `RainbowKitProvider` ก่อน
+
+```tsx
+import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
+
+const App = () => {
+  return (
+    <RainbowKitProvider showRecentTransactions={true} {...etc}>
+      {/* ... */}
+    </RainbowKitProvider>
+  );
+};
+```
+
+จากนั้นธูรกรรมสามารถลงทะเบียนกับ RainbowKit ได้โดยใช้ฮุค `useAddRecentTransaction`
+
+```tsx
+import { useAddRecentTransaction } from '@rainbow-me/rainbowkit';
+
+export default () => {
+  const addRecentTransaction = useAddRecentTransaction();
+
+  return (
+    <button
+      onClick={() => {
+        addRecentTransaction({
+          hash: '0x...',
+          description: '...',
+        });
+      }}
+    >
+      Add recent transaction
+    </button>
+  );
+};
+```
+
+เมื่อธุรกรรมได้รับการลงทะเบียนกับ RainbowKit แล้ว สถานะของมันจะได้รับการอัพเดตเมื่อเสร็จสิ้น
+
+โดยค่าเริ่มต้น ธุรกรรมจะถือว่าเสร็จสิ้นเมื่อบล็อกเดียวได้ถูกทำเหมืองเสร็จแล้วซ้อนทับบล็อกที่ธุรกรรมถูกทำเหมือง แต่สิ่งนี้สามารถกำหนดค่าได้โดยการระบุมูลค่า `confirmations` แบบกำหนดเอง
+
+```tsx
+import { useAddRecentTransaction } from '@rainbow-me/rainbowkit';
+
+export default () => {
+  const addRecentTransaction = useAddRecentTransaction();
+
+  return (
+    <button
+      onClick={() => {
+        addRecentTransaction({
+          hash: '0x...',
+          description: '...',
+          confirmations: 100,
+        });
+      }}
+    >
+      Add recent transaction
+    </button>
+  );
+};
+```

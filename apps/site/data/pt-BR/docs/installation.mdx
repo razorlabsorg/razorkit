@@ -1,0 +1,175 @@
+---
+title: Instalação
+description: Comece a trabalhar com o RainbowKit
+---
+
+# Instalação
+
+## Comece a trabalhar com o RainbowKit
+
+### Início rápido
+
+Você pode criar um novo aplicativo RainbowKit + [wagmi](https://wagmi.sh) + [Next.js](https://nextjs.org) com um dos seguintes comandos, usando o gerenciador de pacotes de sua escolha:
+
+```bash
+npm init @rainbow-me/rainbowkit@latest
+# or
+pnpm create @rainbow-me/rainbowkit@latest
+# or
+yarn create @rainbow-me/rainbowkit
+```
+
+Isso irá solicitar o nome do projeto, gerar um novo diretório contendo um projeto boilerplate e instalar todas as dependências necessárias.
+
+Alternativamente, você pode integrar manualmente o RainbowKit ao seu projeto existente.
+
+### Configuração manual
+
+Instale o RainbowKit e suas dependências, [wagmi](https://wagmi.sh/), [viem](https://viem.sh), e [@tanstack/react-query](https://tanstack.com/query/v5).
+
+```bash
+npm install @rainbow-me/rainbowkit wagmi viem@2.x @tanstack/react-query
+```
+
+> Nota: RainbowKit é uma biblioteca [React](https://reactjs.org/).
+
+#### Importar
+
+Importe RainbowKit e wagmi.
+
+```tsx
+import '@rainbow-me/rainbowkit/styles.css';
+
+import {
+  getDefaultConfig,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit';
+import { WagmiProvider } from 'wagmi';
+import {
+  mainnet,
+  polygon,
+  optimism,
+  arbitrum,
+  base,
+} from 'wagmi/chains';
+import {
+  QueryClientProvider,
+  QueryClient,
+} from "@tanstack/react-query";
+```
+
+#### Configurar
+
+Configure suas cadeias desejadas e gere os conectores necessários. Você também precisará configurar um `wagmi` config. Se o seu dApp usa renderização no lado do servidor (SSR), certifique-se de definir `ssr` como `true`.
+
+> Nota: Todo dApp que depende do WalletConnect agora precisa obter um `projectId` do [WalletConnect Cloud](https://cloud.walletconnect.com/). Isso é totalmente grátis e leva apenas alguns minutos.
+
+```tsx line=4-99
+...
+import { getDefaultConfig } from '@rainbow-me/rainbowkit';
+
+const config = getDefaultConfig({
+  appName: 'My RainbowKit App',
+  projectId: 'YOUR_PROJECT_ID',
+  chains: [mainnet, polygon, optimism, arbitrum, base],
+  ssr: true, // If your dApp uses server side rendering (SSR)
+});
+```
+
+#### Envolver provedores
+
+Envolva sua aplicação com `RainbowKitProvider`, [`WagmiProvider`](https://wagmi.sh/react/api/WagmiProvider#wagmiprovider), e [`QueryClientProvider`](https://tanstack.com/query/v4/docs/framework/react/reference/QueryClientProvider).
+
+```tsx
+const queryClient = new QueryClient();
+
+const App = () => {
+  return (
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider>
+          {/* Your App */}
+        </RainbowKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
+  );
+};
+```
+
+#### Adicione o botão de conexão
+
+Então, no seu aplicativo, importe e renderize o componente `ConnectButton`.
+
+```tsx
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+
+export const YourApp = () => {
+  return <ConnectButton />;
+};
+```
+
+Agora, o RainbowKit vai gerenciar a seleção de carteira do seu usuário, exibir informações de carteira/transação e lidar com a troca de rede/carteira.
+
+#### Configuração adicional da ferramenta de construção
+
+Algumas ferramentas de build podem necessitar de configuração adicional.
+
+##### Remix
+
+Ao usar o [Remix](https://remix.run), você deve polyfill dos módulos `buffer`, `events` e `http`. Consulte a configuração do Remix abaixo, ou [nosso exemplo de projeto Remix](https://github.com/rainbow-me/rainbowkit/blob/main/examples/with-remix).
+
+```ts
+/** @type {import('@remix-run/dev').AppConfig} */
+export default {
+  ignoredRouteFiles: ["**/.*"],
+  browserNodeBuiltinsPolyfill: {
+    modules: { buffer: true, events: true, http: true },
+  },
+};
+```
+
+### Preparando-se para implantar
+
+Por padrão, seu dApp usa provedores RPC públicos para cada cadeia para buscar saldos, resolver nomes ENS e mais. Isso pode muitas vezes causar problemas de confiabilidade para seus usuários, já que os nós públicos têm limite de taxa. Você deve, ao invés disso, adquirir acesso a um provedor RPC por meio de serviços como [Alchemy](https://www.alchemy.com/) ou [QuickNode](https://www.quicknode.com/), e definir seus próprios Transportes no Wagmi. Isso pode ser alcançado adicionando o parâmetro `transports` em `getDefaultConfig` ou diretamente via `createConfig` do Wagmi.
+
+Um Transporte é a camada intermediária de rede que lida com o envio de solicitações JSON-RPC para o Provedor de Nó Ethereum (como Alchemy, Infura, etc).
+
+**Exemplo com transporte `http`**
+
+```tsx
+import { getDefaultConfig } from '@rainbow-me/rainbowkit';
+import { http } from 'wagmi';
+import { mainnet, sepolia } from 'wagmi/chains';
+
+const config = getDefaultConfig({
+  appName: 'My RainbowKit App',
+  projectId: 'YOUR_PROJECT_ID',
+  chains: [mainnet, sepolia],
+  transports: {
+    [mainnet.id]: http('https://eth-mainnet.g.alchemy.com/v2/...'),
+    [sepolia.id]: http('https://eth-sepolia.g.alchemy.com/v2/...'),
+  },
+});
+```
+
+Para mais detalhes, veja a [documentação wagmi](https://wagmi.sh/core/api/transports#transports).
+
+### Adicione sua própria funcionalidade
+
+Agora que seus usuários podem conectar suas carteiras, você pode começar a construir o resto do seu aplicativo usando [wagmi.](https://wagmi.sh)
+
+Envie transações, interaja com contratos, resolva detalhes da ENS e muito mais com o abrangente conjunto de React Hooks do wagmi.
+
+Para mais detalhes, veja a [documentação wagmi.](https://wagmi.sh)
+
+### Exemplos adicionais
+
+Para ver alguns exemplos em execução do RainbowKit, ou até mesmo usá-los para criar automaticamente um novo projeto, confira os [exemplos oficiais](https://github.com/rainbow-me/rainbowkit/tree/main/examples).
+
+Para experimentar o RainbowKit diretamente no seu navegador, confira os links do CodeSandbox abaixo:
+
+- com [Create React App](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-create-react-app)
+- com [Next.js](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-next)
+- com [Next.js App Router](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-next-app)
+- com [Remix](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-remix)
+- com [Vite](https://codesandbox.io/p/sandbox/github/rainbow-me/rainbowkit/tree/main/examples/with-vite)

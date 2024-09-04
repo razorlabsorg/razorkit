@@ -1,0 +1,28 @@
+---
+title: 모달 크기
+description: 넓음 vs. 짧음
+---
+
+# 모달 크기
+
+## 넓음 vs. 짧음 크기
+
+기본적으로 RainbowKit의 `modalSize`는 `wide`로 설정되어 있습니다 (다음과 같이 보입니다):
+
+<Img src="/modal-default.png" height="569" width="1029" />
+
+또한 `compact` 모달 크기도 제공되며, 다음과 같이 보입니다:
+
+<Img src="/modal-compact.png" height="569" width="1029" />
+
+모달 크기를 `compact`로 설정하려면, `RainbowKitProvider`에 `modalSize="compact"`을 prop로 추가하면 됩니다:
+
+```tsx
+import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
+
+export const App = () => (
+  <RainbowKitProvider modalSize="compact" {...etc}>
+    {/* Your App */}
+  </RainbowKitProvider>
+);
+```

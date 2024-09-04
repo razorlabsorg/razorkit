@@ -1,0 +1,44 @@
+---
+title: TombolDompet
+description: Menggunakan dan menyesuaikan TombolDompet
+---
+
+# TombolDompet
+
+> Catatan: `TombolDompet` saat ini bergantung pada standar dompet EIP-1193, tetapi akan mendukung EIP-6963 di masa mendatang.
+
+Komponen `TombolDompet` baru membantu dApps dengan implementasi daftar dompet kustom untuk mengadopsi RainbowKit dan semua manfaat tanpa perawatan.
+
+```tsx
+import { WalletButton } from '@rainbow-me/rainbowkit';
+
+<WalletButton wallet="rainbow" />
+<WalletButton wallet="metamask" />
+<WalletButton wallet="coinbase" />
+```
+
+Seperti `ConnectButton`, komponen `TombolDompet.Custom` tersedia untuk implementasi dan tampilan kustom.
+
+```tsx
+<WalletButton.Custom wallet="rainbow">
+  {({ ready, connect }) => {
+    return (
+      <button
+        type="button"
+        disabled={!ready}
+        onClick={connect}
+      >
+        Connect Rainbow
+      </button>
+    );
+  }}
+</WalletButton.Custom>
+```
+
+Sebagian besar dApps paling baik dilayani oleh [ConnectButton](https://www.rainbowkit.com/docs/connect-button). Rujuk dokumen [di sini](https://www.rainbowkit.com/docs/wallet-button) untuk informasi lebih lanjut tentang adopsi `TombolDompet` dan kasus penggunaan.
+
+#### Demo
+
+Tekan tombol di bawah ini untuk melihat seperti apa titik masuk RainbowKit ini.
+
+<WalletButtonDemo />

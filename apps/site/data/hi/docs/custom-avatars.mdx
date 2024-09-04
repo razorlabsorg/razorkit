@@ -1,0 +1,51 @@
+---
+title: कस्टम अवतार
+description: आपके ऐप के उपयोगकर्ता अवतार को कस्टमाइज़ करना
+---
+
+# कस्टम अवतार
+
+## आपके ऐप के उपयोगकर्ता अवतार को कस्टमाइज़ करना
+
+डिफ़ॉल्ट रूप से, यदि उनका ENS इमेज सेट नहीं है तो हम उपयोगकर्ताओं के लिए एक अवतार प्रदान करते हैं, लेकिन आप अपना स्वयं का अवतार घटक प्रदान करके इसे कस्टमाइज़ कर सकते हैं। यदि आप टाइपस्क्रिप्ट का उपयोग कर रहे हैं तो आप `AvatarComponent` प्रकार को आयात कर सकते हैं:
+
+```tsx
+import {
+  RainbowKitProvider,
+  AvatarComponent,
+} from '@rainbow-me/rainbowkit';
+import { generateColorFromAddress } from './utils';
+
+const CustomAvatar: AvatarComponent = ({ address, ensImage, size }) => {
+  const color = generateColorFromAddress(address);
+  return ensImage ? (
+    <img
+      src={ensImage}
+      width={size}
+      height={size}
+      style={{ borderRadius: 999 }}
+    />
+  ) : (
+    <div
+      style={{
+        backgroundColor: color,
+        borderRadius: 999,
+        height: size,
+        width: size,
+      }}
+    >
+      :^)
+    </div>
+  );
+};
+
+const App = () => {
+  return (
+    <RainbowKitProvider avatar={CustomAvatar} {...etc}>
+      {/* ... */}
+    </RainbowKitProvider>
+  );
+};
+```
+
+`avatar` प्रॉप में पास किया गया `AvatarComponent` निम्नलिखित प्रॉप प्रकारों का होता है: `<{ address: string; ensImage?: string | null; size: number;}>`

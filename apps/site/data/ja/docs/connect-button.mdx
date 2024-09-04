@@ -1,0 +1,149 @@
+---
+title: ConnectButton
+description: ConnectButtonの使用とカスタマイズ
+---
+
+# ConnectButton
+
+## ConnectButtonの使用とカスタマイズ
+
+これは主要なコンポーネントです。 接続/切断ボタンのレンダリングやチェーンのスワップUIを担当します。
+
+```tsx
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+
+export const YourApp = () => {
+  return <ConnectButton />;
+};
+```
+
+> 注: 必要なプロバイダでアプリがラップされていることを確認してください。 [詳細はこちら](/docs/installation#wrap-providers).
+
+### プロップ
+
+`ConnectButton`コンポーネントはいくつかのプロップを公開して、その外観をカスタマイズしたり、異なる要素の表示/非表示を切り替えたりすることができます。
+
+<PropsTable
+  data={[
+    {
+      name: 'label',
+      required: false,
+      default: 'Connect Wallet',
+      type: 'string',
+      description: 'The text label displayed on the Connect button',
+    },
+    {
+      name: 'accountStatus',
+      required: false,
+      default: 'full',
+      type: '"avatar" | "address" | "full" | { smallScreen: AccountStatus, largeScreen?: AccountStatus }',
+      typeSimple: 'enum',
+      description:
+        "Whether the active account's avatar and/or address is displayed",
+    },
+    {
+      name: 'chainStatus',
+      required: false,
+      default: '{ smallScreen: "icon", largeScreen: "full" }',
+      type: '"icon" | "name" | "full" | "none" | { smallScreen: ChainStatus, largeScreen?: ChainStatus }',
+      typeSimple: 'enum',
+      description:
+        "Whether the current chain's icon and/or name is displayed, or hidden entirely",
+    },
+    {
+      name: 'showBalance',
+      required: false,
+      default: '{ smallScreen: false, largeScreen: true }',
+      type: 'boolean | { smallScreen: boolean, largeScreen?: boolean }',
+      typeSimple: 'enum',
+      description:
+        'Whether the balance is visible next to the account name',
+    },
+  ]}
+/>
+
+> 注: 組み込みの`largeScreen`ブレークポイントは`768px`です。
+
+### 例
+
+#### ラベル
+
+`label`プロップを使用してカスタム`ConnectButton`テキストを設定します。
+
+```tsx
+<ConnectButton label="__Sign in__" />
+```
+
+#### アカウントステータス
+
+`accountStatus`プロップを使用するいくつかの異なる方法です。
+
+アカウントのアバターのみを表示します。
+
+```tsx
+<ConnectButton accountStatus="__avatar__" />
+```
+
+アカウントのアドレスのみを表示します。
+
+```tsx
+<ConnectButton accountStatus="__address__" />
+```
+
+#### チェーンステータス
+
+`chainStatus`プロップを使用するいくつかの異なる方法です。
+
+現在のチェーンのアイコンのみを表示します。
+
+```tsx
+<ConnectButton chainStatus="__icon__" />
+```
+
+現在のチェーンの名前のみを表示します。
+
+```tsx
+<ConnectButton chainStatus="__name__" />
+```
+
+チェーンUIを完全に非表示にします。
+
+```tsx
+<ConnectButton chainStatus="__none__" />
+```
+
+#### 残高の表示
+
+`showBalance`プロップを使用して残高を表示/非表示にします。
+
+残高を非表示にします。
+
+```tsx
+<ConnectButton showBalance={__false__} />
+```
+
+#### レスポンシブ
+
+これらのプロップはレスポンシブ形式でも定義できます。
+
+小さいスクリーンではアカウントのアイコンのみを表示します。 しかし、大きなスクリーンではアイコンとアドレスを表示します。
+
+```tsx
+<ConnectButton
+  accountStatus={{
+    smallScreen: 'avatar',
+    largeScreen: 'full',
+  }}
+/>
+```
+
+小さいスクリーンでは残高を非表示にします。 しかし、大きなスクリーンでは表示します。
+
+```tsx
+<ConnectButton
+  showBalance={{
+    smallScreen: false,
+    largeScreen: true,
+  }}
+/>
+```
