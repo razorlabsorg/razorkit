@@ -14,7 +14,7 @@ type HeaderProps = {
 }
 
 export const Header: React.FC<HeaderProps> = ({
-  darkMode,
+  // darkMode,
   docsMobileMenuRef,
   sticky,
   ...props
