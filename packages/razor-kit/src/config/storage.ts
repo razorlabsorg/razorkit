@@ -1,0 +1,3 @@
+export enum StorageKey {
+  LAST_CONNECT_WALLET_NAME = 'RAZORKIT__LAST_CONNECT_WALLET_NAME',
+}

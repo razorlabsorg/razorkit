@@ -1,4 +1,14 @@
+import { CSSProperties, ReactNode } from 'react';
 import { type EIP1193Provider } from 'viem';
+
+export interface StyleExtendable {
+  className?: string;
+  style?: CSSProperties;
+}
+
+export type Extendable<T = ReactNode> = StyleExtendable & {
+  children?: T;
+};
 
 /** Combines members of an intersection into a readable type. */
 export type Evaluate<type> = { [key in keyof type]: type[key] } & unknown;
