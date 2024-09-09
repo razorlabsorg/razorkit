@@ -12,7 +12,7 @@ export interface ConnectModalProps {
 }
 
 export function ConnectModal({ onClose, open }: ConnectModalProps) {
-  const titleId = 'rk_connect_title';
+  const titleId = 'razorkit_connect_title';
   const connectionStatus = useConnectionStatus();
 
   const { disconnect } = useDisconnect();

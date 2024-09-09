@@ -860,11 +860,11 @@
         }
       }
     },
-    "zerion": {
+    "razor": {
       "qr_code": {
         "step1": {
-          "title": "打開 Zerion 應用程式",
-          "description": "我們建議把 Zerion 放在主頁上以便更快捷地進入。"
+          "title": "打開 Razor Wallet 應用程式",
+          "description": "我們建議把 Razor Wallet 放在主頁上以便更快捷地進入。"
         },
         "step2": {
           "title": "創建或導入錢包",
@@ -877,8 +877,8 @@
       },
       "extension": {
         "step1": {
-          "title": "安裝 Zerion 擴充功能",
-          "description": "我們建議把 Zerion 釘在工作列上，以便更快捷地進入你的錢包。"
+          "title": "安裝 Razor Wallet 擴充功能",
+          "description": "我們建議把 Razor Wallet 釘在工作列上，以便更快捷地進入你的錢包。"
         },
         "step2": {
           "title": "創建或導入錢包",
@@ -887,22 +887,6 @@
         "step3": {
           "title": "刷新你的瀏覽器",
           "description": "設置你的錢包後，點擊下方按鈕刷新瀏覽器並載入擴展。"
-        }
-      }
-    },
-    "rainbow": {
-      "qr_code": {
-        "step1": {
-          "title": "打開 Rainbow 應用程式",
-          "description": "我們建議把 Rainbow 放在主頁上以便更快捷地進入你的錢包。"
-        },
-        "step2": {
-          "title": "創建或導入錢包",
-          "description": "你可以使用我們的備份功能在手機上輕鬆備份你的錢包。"
-        },
-        "step3": {
-          "title": "點擊掃描按鈕",
-          "description": "掃描後，將會出現連接提示，讓你連接你的錢包。"
         }
       }
     },

@@ -19,7 +19,7 @@ export type {
   Wallet,
   WalletList,
   WalletDetailsParams,
-  RainbowKitWalletConnectParameters,
+  RazorKitWalletConnectParameters,
 } from './wallets/Wallet';
 export type { Theme } from './components/RazorKitEthProvider';
 export type {

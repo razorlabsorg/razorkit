@@ -860,11 +860,11 @@
         }
       }
     },
-    "zerion": {
+    "razor": {
       "qr_code": {
         "step1": {
-          "title": "Ouvrez l'application Zerion",
-          "description": "Nous vous recommandons de mettre Zerion sur votre écran d'accueil pour un accès plus rapide."
+          "title": "Ouvrez l'application Razor Wallet",
+          "description": "Nous vous recommandons de mettre Razor Wallet sur votre écran d'accueil pour un accès plus rapide."
         },
         "step2": {
           "title": "Créer ou Importer un portefeuille",
@@ -877,8 +877,8 @@
       },
       "extension": {
         "step1": {
-          "title": "Installer l'extension Zerion",
-          "description": "Nous recommandons d'épingler Zerion à votre barre des tâches pour un accès plus rapide à votre portefeuille."
+          "title": "Installer l'extension Razor Wallet",
+          "description": "Nous recommandons d'épingler Razor Wallet à votre barre des tâches pour un accès plus rapide à votre portefeuille."
         },
         "step2": {
           "title": "Créez ou Importez un portefeuille",
@@ -887,22 +887,6 @@
         "step3": {
           "title": "Rafraîchissez votre navigateur",
           "description": "Une fois que vous avez configuré votre portefeuille, cliquez ci-dessous pour rafraîchir le navigateur et charger l'extension."
-        }
-      }
-    },
-    "rainbow": {
-      "qr_code": {
-        "step1": {
-          "title": "Ouvre l'application Rainbow",
-          "description": "Nous vous recommandons de mettre Rainbow sur votre écran d'accueil pour un accès plus rapide à votre portefeuille."
-        },
-        "step2": {
-          "title": "Créez ou Importez un portefeuille",
-          "description": "Vous pouvez facilement sauvegarder votre portefeuille en utilisant notre fonction de sauvegarde sur votre téléphone."
-        },
-        "step3": {
-          "title": "Appuyez sur le bouton de scan",
-          "description": "Après avoir scanné, une invite de connexion apparaîtra pour que vous connectiez votre portefeuille."
         }
       }
     },

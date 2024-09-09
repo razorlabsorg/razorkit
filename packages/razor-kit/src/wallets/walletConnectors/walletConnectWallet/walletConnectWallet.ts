@@ -1,9 +1,9 @@
-import { RainbowKitWalletConnectParameters, Wallet } from '../../Wallet';
+import { RazorKitWalletConnectParameters, Wallet } from '../../Wallet';
 import { getWalletConnectConnector } from '../../getWalletConnectConnector';
 
 export interface WalletConnectWalletOptions {
   projectId: string;
-  options?: RainbowKitWalletConnectParameters;
+  options?: RazorKitWalletConnectParameters;
 }
 
 export const walletConnectWallet = ({

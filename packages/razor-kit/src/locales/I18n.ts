@@ -102,7 +102,7 @@ export class I18n {
       }
 
       // If translation is missing -> return the raw key instead.
-      // This is useful if someone were to create their own RainbowKit
+      // This is useful if someone were to create their own RazorKit
       // wallet with steps, but translations are missing. In this case
       // we don't want to throw missing translation message.
       if (options?.rawKeyIfTranslationMissing) return key;

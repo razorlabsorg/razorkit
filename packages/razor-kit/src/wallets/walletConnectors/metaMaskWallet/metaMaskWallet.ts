@@ -43,7 +43,6 @@ function isMetaMask(ethereum?: WindowProvider['ethereum']): boolean {
   if (ethereum.isPhantom) return false;
   if (ethereum.isPortal) return false;
   if (ethereum.isRabby) return false;
-  if (ethereum.isRainbow) return false;
   if (ethereum.isStatus) return false;
   if (ethereum.isTalisman) return false;
   if (ethereum.isTally) return false;
@@ -52,7 +51,7 @@ function isMetaMask(ethereum?: WindowProvider['ethereum']): boolean {
   if (ethereum.isTrust || ethereum.isTrustWallet) return false;
   if (ethereum.isXDEFI) return false;
   if (ethereum.isZeal) return false;
-  if (ethereum.isZerion) return false;
+  if (ethereum.isRazor) return false;
   if (ethereum.__seif) return false;
   return true;
 }

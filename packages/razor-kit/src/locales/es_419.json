@@ -860,11 +860,11 @@
         }
       }
     },
-    "zerion": {
+    "razor": {
       "qr_code": {
         "step1": {
-          "title": "Abre la aplicación Zerion",
-          "description": "Recomendamos poner Zerion en tu pantalla de inicio para un acceso más rápido."
+          "title": "Abre la aplicación Razor Wallet",
+          "description": "Recomendamos poner Razor Wallet en tu pantalla de inicio para un acceso más rápido."
         },
         "step2": {
           "title": "Crear o Importar una Billetera",
@@ -877,8 +877,8 @@
       },
       "extension": {
         "step1": {
-          "title": "Instala la extensión Zerion",
-          "description": "Recomendamos anclar Zerion a tu barra de tareas para un acceso más rápido a tu billetera."
+          "title": "Instala la extensión Razor Wallet",
+          "description": "Recomendamos anclar Razor Wallet a tu barra de tareas para un acceso más rápido a tu billetera."
         },
         "step2": {
           "title": "Crear o Importar una Billetera",
@@ -887,22 +887,6 @@
         "step3": {
           "title": "Actualiza tu navegador",
           "description": "Una vez que configures tu billetera, haz clic a continuación para actualizar el navegador y cargar la extensión."
-        }
-      }
-    },
-    "rainbow": {
-      "qr_code": {
-        "step1": {
-          "title": "Abre la aplicación Rainbow",
-          "description": "Recomendamos poner Rainbow en tu pantalla de inicio para un acceso más rápido a tu billetera."
-        },
-        "step2": {
-          "title": "Crear o Importar una Billetera",
-          "description": "Puedes respaldar fácilmente tu billetera usando nuestra función de respaldo en tu teléfono."
-        },
-        "step3": {
-          "title": "Toca el botón de escanear",
-          "description": "Después de escanear, aparecerá una solicitud de conexión para que conectes tu billetera."
         }
       }
     },

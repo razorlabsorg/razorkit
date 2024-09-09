@@ -3,7 +3,7 @@ import { isHexString } from '../utils/colors';
 import { omitUndefinedValues } from '../utils/omitUndefinedValues';
 import { uniqueBy } from '../utils/uniqueBy';
 import type {
-  RainbowKitWalletConnectParameters,
+  RazorKitWalletConnectParameters,
   Wallet,
   WalletDetailsParams,
   WalletList,
@@ -22,7 +22,7 @@ export interface ConnectorsForWalletsParameters {
   appDescription?: string;
   appUrl?: string;
   appIcon?: string;
-  walletConnectParameters?: RainbowKitWalletConnectParameters;
+  walletConnectParameters?: RazorKitWalletConnectParameters;
 }
 
 export const connectorsForWallets = (
@@ -141,7 +141,7 @@ export const connectorsForWallets = (
           ...walletMeta,
           groupIndex,
           groupName,
-          isRainbowKitConnector: true,
+          isRazorKitConnector: true,
           // These additional params will be used in rainbowkit react tree to
           // merge `walletConnectWallet` and `walletConnect` connector from wagmi with
           // showQrModal: true. This way we can let the user choose if they want to

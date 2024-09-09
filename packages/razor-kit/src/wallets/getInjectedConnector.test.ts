@@ -6,9 +6,9 @@ import {
 
 describe('getInjectedConnector', () => {
   it('only rainbow provider', () => {
-    window.ethereum = { isMetaMask: true, isRainbow: true };
+    window.ethereum = { isMetaMask: true, isRazor: true };
     const connector = getInjectedConnector({
-      flag: 'isRainbow',
+      flag: 'isRazor',
     });
     expect(!!connector).toEqual(true);
   });
@@ -24,15 +24,15 @@ describe('getInjectedConnector', () => {
 
 describe('hasInjectedProvider', () => {
   it('only rainbow flag', () => {
-    window.ethereum = { isMetaMask: true, isRainbow: true };
-    const hasRainbow = hasInjectedProvider({ flag: 'isRainbow' });
-    expect(hasRainbow).toEqual(true);
+    window.ethereum = { isMetaMask: true, isRazor: true };
+    const hasRazor = hasInjectedProvider({ flag: 'isRazor' });
+    expect(hasRazor).toEqual(true);
   });
 
   it('only metamask flag', () => {
     window.ethereum = { isMetaMask: true };
-    const hasRainbow = hasInjectedProvider({ flag: 'isRainbow' });
-    expect(hasRainbow).toEqual(false);
+    const hasRazor = hasInjectedProvider({ flag: 'isRazor' });
+    expect(hasRazor).toEqual(false);
   });
 
   it('only coinbase flag', () => {
@@ -88,15 +88,15 @@ describe('hasInjectedProvider', () => {
       isCoinbaseWallet: true,
       providers: [
         { isMetaMask: true, isCoinbaseWallet: true },
-        { isMetaMask: true, isRainbow: true },
+        { isMetaMask: true, isRazor: true },
       ],
     };
 
     const hasCoinbase = hasInjectedProvider({ flag: 'isCoinbaseWallet' });
     expect(hasCoinbase).toEqual(true);
 
-    const hasRainbow = hasInjectedProvider({ flag: 'isRainbow' });
-    expect(hasRainbow).toEqual(true);
+    const hasRazor = hasInjectedProvider({ flag: 'isRazor' });
+    expect(hasRazor).toEqual(true);
   });
 
   it('has rainbow, coinbase wallet, and metamask', () => {
@@ -105,7 +105,7 @@ describe('hasInjectedProvider', () => {
       isCoinbaseWallet: true,
       providers: [
         { isMetaMask: true, isCoinbaseWallet: true },
-        { isMetaMask: true, isRainbow: true },
+        { isMetaMask: true, isRazor: true },
         { isMetaMask: true },
       ],
     };
@@ -113,8 +113,8 @@ describe('hasInjectedProvider', () => {
     const hasCoinbase = hasInjectedProvider({ flag: 'isCoinbaseWallet' });
     expect(hasCoinbase).toEqual(true);
 
-    const hasRainbow = hasInjectedProvider({ flag: 'isRainbow' });
-    expect(hasRainbow).toEqual(true);
+    const hasRazor = hasInjectedProvider({ flag: 'isRazor' });
+    expect(hasRazor).toEqual(true);
 
     const hasMetaMask = hasInjectedProvider({ flag: 'isMetaMask' });
     expect(hasMetaMask).toEqual(true);

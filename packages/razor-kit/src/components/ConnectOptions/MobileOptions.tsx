@@ -204,9 +204,9 @@ enum MobileWalletStep {
 }
 
 export function MobileOptions({ onClose }: { onClose: () => void }) {
-  const titleId = 'rk_connect_title';
+  const titleId = 'razorkit_connect_title';
   const wallets = useWalletConnectors().filter(
-    (wallet) => wallet.isRainbowKitConnector,
+    (wallet) => wallet.isRazorKitConnector,
   );
   const { disclaimer: Disclaimer, learnMoreUrl } = useContext(AppContext);
 

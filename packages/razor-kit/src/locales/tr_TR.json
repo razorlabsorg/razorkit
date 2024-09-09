@@ -860,11 +860,11 @@
         }
       }
     },
-    "zerion": {
+    "razor": {
       "qr_code": {
         "step1": {
-          "title": "Zerion uygulamasını açın",
-          "description": "Daha hızlı erişim için Zerion'un ana ekranınıza konumlandırmanızı öneririz."
+          "title": "Razor Wallet uygulamasını açın",
+          "description": "Daha hızlı erişim için Razor Wallet'un ana ekranınıza konumlandırmanızı öneririz."
         },
         "step2": {
           "title": "Bir Cüzdan Oluşturun veya İçe Aktarın",
@@ -877,8 +877,8 @@
       },
       "extension": {
         "step1": {
-          "title": "Zerion eklentisini yükleyin",
-          "description": "Cüzdanınıza daha hızlı erişim için Zerion'u görev çubuğunuza sabitlemenizi öneririz."
+          "title": "Razor Wallet eklentisini yükleyin",
+          "description": "Cüzdanınıza daha hızlı erişim için Razor Wallet'u görev çubuğunuza sabitlemenizi öneririz."
         },
         "step2": {
           "title": "Cüzdan Oluştur veya İçe Aktar",
@@ -887,22 +887,6 @@
         "step3": {
           "title": "Tarayıcınızı yenileyin",
           "description": "Cüzdanınızı ayarladıktan sonra, tarayıcıyı yenilemek ve eklentiyi yüklemek için aşağıya tıklayın."
-        }
-      }
-    },
-    "rainbow": {
-      "qr_code": {
-        "step1": {
-          "title": "Rainbow uygulamasını açın",
-          "description": "Cüzdanınıza daha hızlı erişim için Rainbow'u ana ekranınıza koymanızı öneririz."
-        },
-        "step2": {
-          "title": "Cüzdan Oluştur veya İçe Aktar",
-          "description": "Telefonunuzdaki yedekleme özelliğimizi kullanarak cüzdanınızı kolayca yedekleyebilirsiniz."
-        },
-        "step3": {
-          "title": "Tarama düğmesine dokunun",
-          "description": "Tarama yaptıktan sonra, cüzdanınızı bağlamanız için bir bağlantı istemi belirecektir."
         }
       }
     },

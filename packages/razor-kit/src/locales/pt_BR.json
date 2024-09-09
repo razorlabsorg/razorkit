@@ -860,11 +860,11 @@
         }
       }
     },
-    "zerion": {
+    "razor": {
       "qr_code": {
         "step1": {
-          "title": "Abra o aplicativo Zerion",
-          "description": "Recomendamos colocar o Zerion na sua tela inicial para um acesso mais rápido."
+          "title": "Abra o aplicativo Razor Wallet",
+          "description": "Recomendamos colocar o Razor Wallet na sua tela inicial para um acesso mais rápido."
         },
         "step2": {
           "title": "Criar ou Importar uma Carteira",
@@ -877,8 +877,8 @@
       },
       "extension": {
         "step1": {
-          "title": "Instale a extensão Zerion",
-          "description": "Recomendamos fixar o Zerion na sua barra de tarefas para um acesso mais rápido à sua carteira."
+          "title": "Instale a extensão Razor Wallet",
+          "description": "Recomendamos fixar o Razor Wallet na sua barra de tarefas para um acesso mais rápido à sua carteira."
         },
         "step2": {
           "title": "Criar ou Importar uma Carteira",
@@ -887,22 +887,6 @@
         "step3": {
           "title": "Atualize seu navegador",
           "description": "Depois de configurar sua carteira, clique abaixo para atualizar o navegador e carregar a extensão."
-        }
-      }
-    },
-    "rainbow": {
-      "qr_code": {
-        "step1": {
-          "title": "Abra o aplicativo Rainbow",
-          "description": "Recomendamos colocar o Rainbow na tela inicial para um acesso mais rápido à sua carteira."
-        },
-        "step2": {
-          "title": "Criar ou Importar uma Carteira",
-          "description": "Você pode facilmente fazer backup da sua carteira usando nosso recurso de backup no seu telefone."
-        },
-        "step3": {
-          "title": "Toque no botão de digitalizar",
-          "description": "Depois de escanear, uma solicitação de conexão aparecerá para você conectar sua carteira."
         }
       }
     },

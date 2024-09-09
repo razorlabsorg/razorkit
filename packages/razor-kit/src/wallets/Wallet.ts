@@ -10,7 +10,7 @@ export type InstructionStepName =
   | 'connect'
   | 'refresh';
 
-type RainbowKitConnector = {
+type RazorKitConnector = {
   mobile?: {
     getUri?: (uri: string) => string;
   };
@@ -75,11 +75,11 @@ export type Wallet = {
   };
   hidden?: () => boolean;
   createConnector: (walletDetails: WalletDetailsParams) => CreateConnectorFn;
-} & RainbowKitConnector;
+} & RazorKitConnector;
 
 export interface DefaultWalletOptions {
   projectId: string;
-  walletConnectParameters?: RainbowKitWalletConnectParameters;
+  walletConnectParameters?: RazorKitWalletConnectParameters;
 }
 
 export type CreateWalletFn = (
@@ -98,27 +98,27 @@ export type WalletList = {
 // We don't want users to pass in `showQrModal` or `projectId`.
 // Those two values are handled by rainbowkit. The rest of WalletConnect
 // parameters can be passed with no issue
-export type RainbowKitWalletConnectParameters = Omit<
+export type RazorKitWalletConnectParameters = Omit<
   WalletConnectParameters,
   'showQrModal' | 'projectId'
 >;
 
-export type RainbowKitDetails = Omit<Wallet, 'createConnector' | 'hidden'> & {
+export type RazorKitDetails = Omit<Wallet, 'createConnector' | 'hidden'> & {
   index: number;
   groupIndex: number;
   groupName: string;
   isWalletConnectModalConnector?: boolean;
-  isRainbowKitConnector: boolean;
+  isRazorKitConnector: boolean;
   walletConnectModalConnector?: Connector;
   // Used specifically in `connectorsForWallets` logic
   // to make sure we can also get WalletConnect modal in rainbowkit
   showQrModal?: true;
 };
 
-export type WalletDetailsParams = { rkDetails: RainbowKitDetails };
+export type WalletDetailsParams = { rkDetails: RazorKitDetails };
 
 export type CreateConnector = (walletDetails: {
-  rkDetails: RainbowKitDetails;
+  rkDetails: RazorKitDetails;
 }) => CreateConnectorFn;
 
 // This is the default connector you get at first from wagmi
@@ -126,9 +126,9 @@ export type CreateConnector = (walletDetails: {
 export type WagmiConnectorInstance = Connector & {
   // this is optional since we only get
   // rkDetails if we use rainbowkit connectors
-  rkDetails?: RainbowKitDetails;
+  rkDetails?: RazorKitDetails;
 };
 
 // This will be the wallet instance we will return
 // in the rainbowkit connect modal
-export type WalletInstance = Connector & RainbowKitDetails;
+export type WalletInstance = Connector & RazorKitDetails;

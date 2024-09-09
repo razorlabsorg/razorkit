@@ -74,9 +74,9 @@ export function DesktopOptions({ onClose }: { onClose: () => void }) {
   const { connector } = useContext(WalletButtonContext);
 
   // The `WalletButton` component made the connect modal appear empty when trying to connect.
-  // This happened because of a mix up between EIP-6963 and RainbowKit connectors.
-  // The problem was finding the correct `wallet.id`. `WalletButton` uses RainbowKit's id,
-  // but EIP-6963 uses `rdns` for its id. We now don't merge EIP-6963 and RainbowKit
+  // This happened because of a mix up between EIP-6963 and RazorKit connectors.
+  // The problem was finding the correct `wallet.id`. `WalletButton` uses RazorKit's id,
+  // but EIP-6963 uses `rdns` for its id. We now don't merge EIP-6963 and RazorKit
   // connectors if user interacts with `WalletButton` component.
   const mergeEIP6963WithRkConnectors = !connector;
 
@@ -445,7 +445,7 @@ export function DesktopOptions({ onClose }: { onClose: () => void }) {
                             ready={wallet.ready}
                             recent={wallet.recent}
                             testId={`wallet-option-${wallet.id}`}
-                            isRainbowKitConnector={wallet.isRainbowKitConnector}
+                            isRazorKitConnector={wallet.isRazorKitConnector}
                           />
                         );
                       })}

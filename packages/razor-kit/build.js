@@ -38,7 +38,7 @@ const baseBuildConfig = (onEnd) => {
     plugins: [
       replace({
         include:
-          /src\/components\/RainbowKitProvider\/useFingerprint.ts$/,
+          /src\/components\/RazorKitEthProvider\/useFingerprint.ts$/,
         values: {
           __buildVersion: process.env.npm_package_version,
         },
@@ -48,7 +48,7 @@ const baseBuildConfig = (onEnd) => {
         processCss: async (css) => {
           const result = await postcss([
             autoprefixer,
-            prefixSelector({ prefix: '[data-rk]' }),
+            prefixSelector({ prefix: '[data-razorkit]' }),
           ]).process(css, {
             from: undefined, // suppress source map warning
           });

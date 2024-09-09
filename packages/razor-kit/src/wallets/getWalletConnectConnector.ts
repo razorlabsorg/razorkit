@@ -3,26 +3,26 @@ import type { CreateConnectorFn } from 'wagmi';
 import { WalletConnectParameters, walletConnect } from 'wagmi/connectors';
 import type {
   CreateConnector,
-  RainbowKitDetails,
-  RainbowKitWalletConnectParameters,
+  RazorKitDetails,
+  RazorKitWalletConnectParameters,
   WalletDetailsParams,
 } from './Wallet';
 
 interface GetWalletConnectConnectorParams {
   projectId: string;
-  walletConnectParameters?: RainbowKitWalletConnectParameters;
+  walletConnectParameters?: RazorKitWalletConnectParameters;
 }
 
 interface CreateWalletConnectConnectorParams {
   projectId: string;
   walletDetails: WalletDetailsParams;
-  walletConnectParameters?: RainbowKitWalletConnectParameters;
+  walletConnectParameters?: RazorKitWalletConnectParameters;
 }
 
 interface GetOrCreateWalletConnectInstanceParams {
   projectId: string;
-  walletConnectParameters?: RainbowKitWalletConnectParameters;
-  rkDetailsShowQrModal?: RainbowKitDetails['showQrModal'];
+  walletConnectParameters?: RazorKitWalletConnectParameters;
+  rkDetailsShowQrModal?: RazorKitDetails['showQrModal'];
 }
 
 const walletConnectInstances = new Map<

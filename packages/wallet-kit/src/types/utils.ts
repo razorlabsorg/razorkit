@@ -64,7 +64,7 @@ export type WalletProviderFlags =
   | "isTrust"
   | "isTrustWallet"
   | "isXDEFI"
-  | "isZerion"
+  | "isRazor"
   | "isTalisman"
   | "isZeal"
   | "isCoin98"

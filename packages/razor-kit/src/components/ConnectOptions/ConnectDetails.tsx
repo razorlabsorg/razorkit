@@ -72,7 +72,7 @@ export function GetDetail({
   compactModeEnabled: boolean;
 }) {
   const wallets = useWalletConnectors().filter(
-    (wallet) => wallet.isRainbowKitConnector,
+    (wallet) => wallet.isRazorKitConnector,
   );
 
   const shownWallets = wallets.splice(0, 5);
@@ -309,7 +309,7 @@ export function ConnectDetail({
           >
             <Box borderRadius="10" height={LOGO_SIZE} overflow="hidden">
               <AsyncImage
-                useAsImage={!wallet.isRainbowKitConnector}
+                useAsImage={!wallet.isRazorKitConnector}
                 height={LOGO_SIZE}
                 src={iconUrl}
                 width={LOGO_SIZE}

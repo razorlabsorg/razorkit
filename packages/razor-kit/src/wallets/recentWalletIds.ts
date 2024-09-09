@@ -1,4 +1,4 @@
-const storageKey = 'rk-recent';
+const storageKey = 'razorkit-recent';
 
 function safeParseJsonArray<T>(string: string | null): T[] {
   try {

@@ -20,13 +20,13 @@ export const isRecentWallet = (
   return recentWallets.some((recentWallet) => recentWallet.id === walletId);
 };
 
-export const isRainbowKitConnector = (wallet: WalletInstance) => {
-  return !!wallet.isRainbowKitConnector;
+export const isRazorKitConnector = (wallet: WalletInstance) => {
+  return !!wallet.isRazorKitConnector;
 };
 
 export const isEIP6963Connector = (wallet: WalletInstance) => {
   return !!(
-    !wallet.isRainbowKitConnector &&
+    !wallet.isRazorKitConnector &&
     wallet.icon?.replace(/\n/g, '').startsWith('data:image') &&
     wallet.uid &&
     wallet.name

@@ -15,7 +15,7 @@ import {
 import {
   connectorsWithRecentWallets,
   isEIP6963Connector,
-  isRainbowKitConnector,
+  isRazorKitConnector,
   isRecentWallet,
   rainbowKitConnectorWithWalletConnect,
 } from './groupedWallets';
@@ -58,11 +58,11 @@ export function useWalletConnectors(
     const result = await connectAsync({
       chainId:
         // The goal here is to ensure users are always on a supported chain when connecting.
-        // If an `initialChain` prop was provided to RainbowKitProvider, use that.
+        // If an `initialChain` prop was provided to RazorKitEthProvider, use that.
         intialChainId ??
         // Otherwise, if the wallet is already on a supported chain, use that to avoid a chain switch prompt.
         rainbowKitChains.find(({ id }) => id === walletChainId)?.id ??
-        // Finally, fall back to the first chain provided to RainbowKitProvider.
+        // Finally, fall back to the first chain provided to RazorKitProvider.
         rainbowKitChains[0]?.id,
       connector,
     });
@@ -132,7 +132,7 @@ export function useWalletConnectors(
     });
 
   const rainbowKitConnectors = defaultConnectors
-    .filter(isRainbowKitConnector)
+    .filter(isRazorKitConnector)
     .filter((wallet) => !wallet.isWalletConnectModalConnector)
     .filter((wallet) => {
       if (!mergeEIP6963WithRkConnectors) return true;

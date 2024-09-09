@@ -4,14 +4,12 @@ import { Box } from '../Box/Box';
 import { ActionButton } from '../Button/ActionButton';
 import { DisclaimerLink } from '../Disclaimer/DisclaimerLink';
 import { DisclaimerText } from '../Disclaimer/DisclaimerText';
-import { AssetsIcon } from '../Icons/Assets';
-import { LoginIcon } from '../Icons/Login';
 import { Text } from '../Text/Text';
 import { AppContext } from '../../contexts/AppContext';
 import { I18nContext } from '../../contexts/I18nContext';
 
 export function ConnectModalIntro({
-  compactModeEnabled = false,
+  compactModeEnabled = true,
   getWallet,
 }: {
   compactModeEnabled?: boolean;
@@ -47,7 +45,7 @@ export function ConnectModalIntro({
         >
           <Box alignItems="center" display="flex" flexDirection="row" gap="16">
             <Box borderRadius="6" height="48" minWidth="48" width="48">
-              <AssetsIcon />
+              
             </Box>
             <Box display="flex" flexDirection="column" gap="4">
               <Text color="modalText" size="14" weight="bold">
@@ -60,7 +58,7 @@ export function ConnectModalIntro({
           </Box>
           <Box alignItems="center" display="flex" flexDirection="row" gap="16">
             <Box borderRadius="6" height="48" minWidth="48" width="48">
-              <LoginIcon />
+              
             </Box>
             <Box display="flex" flexDirection="column" gap="4">
               <Text color="modalText" size="14" weight="bold">

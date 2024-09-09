@@ -860,11 +860,11 @@
         }
       }
     },
-    "zerion": {
+    "razor": {
       "qr_code": {
         "step1": {
-          "title": "打开Zerion应用",
-          "description": "我们建议将Zerion放在您的主屏幕上以便更快地访问。"
+          "title": "打开Razor Wallet应用",
+          "description": "我们建议将Razor Wallet放在您的主屏幕上以便更快地访问。"
         },
         "step2": {
           "title": "创建或导入钱包",
@@ -877,8 +877,8 @@
       },
       "extension": {
         "step1": {
-          "title": "安装 Zerion 扩展",
-          "description": "我们建议将 Zerion 固定在你的任务栏以便更快访问你的钱包。"
+          "title": "安装 Razor Wallet 扩展",
+          "description": "我们建议将 Razor Wallet 固定在你的任务栏以便更快访问你的钱包。"
         },
         "step2": {
           "title": "创建或导入钱包",
@@ -887,22 +887,6 @@
         "step3": {
           "title": "刷新您的浏览器",
           "description": "设置您的钱包后，点击下面以刷新浏览器并加载扩展程序。"
-        }
-      }
-    },
-    "rainbow": {
-      "qr_code": {
-        "step1": {
-          "title": "打开 Rainbow 应用",
-          "description": "我们建议将 Rainbow 放在您的主屏幕上，以便更快地访问您的钱包。"
-        },
-        "step2": {
-          "title": "创建或导入钱包",
-          "description": "您可以使用我们的备份功能在您的手机上轻松备份你的钱包。"
-        },
-        "step3": {
-          "title": "点击扫描按钮",
-          "description": "扫描后，将出现连接提示，让您连接您的钱包。"
         }
       }
     },

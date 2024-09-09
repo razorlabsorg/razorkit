@@ -12,7 +12,7 @@ import { TransactionStore, createTransactionStore } from './transactionStore';
 
 
 // Only allow a single instance of the store to exist at once
-// so that multiple RainbowKitProvider instances can share the same store.
+// so that multiple RazorKitEthProvider instances can share the same store.
 // We delay the creation of the store until the first time it is used
 // so that it always has access to a provider.
 

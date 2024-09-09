@@ -860,11 +860,11 @@
         }
       }
     },
-    "zerion": {
+    "razor": {
       "qr_code": {
         "step1": {
-          "title": "Buka aplikasi Zerion",
-          "description": "Kami merekomendasikan untuk meletakkan Zerion di layar utama Anda untuk akses lebih cepat."
+          "title": "Buka aplikasi Razor Wallet",
+          "description": "Kami merekomendasikan untuk meletakkan Razor Wallet di layar utama Anda untuk akses lebih cepat."
         },
         "step2": {
           "title": "Buat atau Impor Dompet",
@@ -877,8 +877,8 @@
       },
       "extension": {
         "step1": {
-          "title": "Instal ekstensi Zerion",
-          "description": "Kami menyarankan untuk menempelkan Zerion ke taskbar Anda untuk akses lebih cepat ke dompet Anda."
+          "title": "Instal ekstensi Razor Wallet",
+          "description": "Kami menyarankan untuk menempelkan Razor Wallet ke taskbar Anda untuk akses lebih cepat ke dompet Anda."
         },
         "step2": {
           "title": "Buat atau Impor Wallet",
@@ -887,22 +887,6 @@
         "step3": {
           "title": "Segarkan browser Anda",
           "description": "Setelah Anda mengatur wallet Anda, klik di bawah untuk menyegarkan browser dan memuat ekstensi."
-        }
-      }
-    },
-    "rainbow": {
-      "qr_code": {
-        "step1": {
-          "title": "Buka aplikasi Rainbow",
-          "description": "Kami menyarankan menempatkan Rainbow di layar home Anda untuk akses yang lebih cepat ke wallet Anda."
-        },
-        "step2": {
-          "title": "Buat atau Impor Wallet",
-          "description": "Anda dapat dengan mudah mencadangkan wallet Anda menggunakan fitur cadangan kami di telepon Anda."
-        },
-        "step3": {
-          "title": "Tekan tombol scan",
-          "description": "Setelah Anda memindai, akan muncul pesan untuk menghubungkan dompet Anda."
         }
       }
     },

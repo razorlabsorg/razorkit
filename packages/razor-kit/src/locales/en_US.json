@@ -911,11 +911,11 @@
       }
     },
 
-    "zerion": {
+    "razor": {
       "qr_code": {
         "step1": {
-          "title": "Open the Zerion app",
-          "description": "We recommend putting Zerion on your home screen for quicker access."
+          "title": "Open the Razor Wallet app",
+          "description": "We recommend putting Razor Wallet on your home screen for quicker access."
         },
         "step2": {
           "title": "Create or Import a Wallet",
@@ -929,8 +929,8 @@
 
       "extension": {
         "step1": {
-          "title": "Install the Zerion extension",
-          "description": "We recommend pinning Zerion to your taskbar for quicker access to your wallet."
+          "title": "Install the Razor Wallet extension",
+          "description": "We recommend pinning Razor Wallet to your taskbar for quicker access to your wallet."
         },
         "step2": {
           "title": "Create or Import a Wallet",
@@ -942,24 +942,6 @@
         }
       }
     },
-
-    "rainbow": {
-      "qr_code": {
-        "step1": {
-          "title": "Open the Rainbow app",
-          "description": "We recommend putting Rainbow on your home screen for faster access to your wallet."
-        },
-        "step2": {
-          "title": "Create or Import a Wallet",
-          "description": "You can easily backup your wallet using our backup feature on your phone."
-        },
-        "step3": {
-          "title": "Tap the scan button",
-          "description": "After you scan, a connection prompt will appear for you to connect your wallet."
-        }
-      }
-    },
-
     "enkrypt": {
       "extension": {
         "step1": {
