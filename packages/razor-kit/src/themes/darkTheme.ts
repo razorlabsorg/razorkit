@@ -8,6 +8,7 @@ import {
 const darkGrey = '#1A1B1F';
 
 const accentColors: Record<AccentColorPreset, AccentColor> = {
+  primary: { accentColor: '#FFCB11', accentColorForeground: darkGrey },
   blue: { accentColor: '#3898FF', accentColorForeground: '#FFF' },
   green: { accentColor: '#4BD166', accentColorForeground: darkGrey },
   orange: { accentColor: '#FF983D', accentColorForeground: darkGrey },

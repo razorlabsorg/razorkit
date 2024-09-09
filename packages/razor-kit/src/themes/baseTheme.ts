@@ -95,7 +95,7 @@ export interface AccentColor {
 }
 
 export type AccentColorPreset =
-  | '#ffcb11'
+  | 'primary'
   | 'blue'
   | 'green'
   | 'red'

@@ -6,6 +6,7 @@ import {
 } from './baseTheme';
 
 const accentColors: Record<AccentColorPreset, AccentColor> = {
+  primary: { accentColor: '#FFCB11', accentColorForeground: '#FFF' },
   blue: { accentColor: '#0E76FD', accentColorForeground: '#FFF' },
   green: { accentColor: '#1DB847', accentColorForeground: '#FFF' },
   orange: { accentColor: '#FF801F', accentColorForeground: '#FFF' },
