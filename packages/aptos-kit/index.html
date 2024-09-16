@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-dark.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preload" href="/fonts/Satoshi-Regular.woff" as="font" type="font/woff" crossorigin />
+    <link rel="preload" href="/fonts/Satoshi-Medium.woff" as="font" type="font/woff" crossorigin />
+    <title>Razor Wallet Kit</title>
+
+    <style>
+      * {
+        font-family: 'Satoshi', sans-serif;
+        box-sizing: border-box;
+      }
+
+      /**
+          Explicitly load Satoshi var from public/ so it does not block LCP's critical path.
+        */
+      @font-face {
+        font-family: 'Satoshi';
+        font-weight: 535;
+        font-style: normal;
+        font-display: block;
+        src: 
+          url('/fonts/Satoshi-Medium.woff') format('woff'),
+      }
+
+      @font-face {
+        font-family: 'Satoshi';
+        font-weight: 485;
+        font-style: normal;
+        font-display: block;
+        src: 
+          url('/fonts/Satoshi-Regular.woff') format('woff');
+      }
+
+      @supports (font-variation-settings: normal) {
+        * {
+          font-family: 'Satoshi', sans-serif;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
