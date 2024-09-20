@@ -16,12 +16,14 @@
   },
   "types": "./dist/index.d.ts",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc --emitDeclarationOnly && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "publish": "pnpm publish --access public"
+    "build": "node build.js",
+    "build:watch": "node build.js --watch",
+    "dev": "pnpm build:watch & pnpm typegen:watch",
+    "prepare": "MINIFY_CSS=true pnpm build",
+    "prebuild": "pnpm typegen",
+    "typecheck": "pnpm tsc --noEmit",
+    "typegen": "tsc --emitDeclarationOnly || true",
+    "typegen:watch": "tsc --emitDeclarationOnly --watch"
   },
   "dependencies": {
     "@aptos-labs/ts-sdk": "^1.23.0",
@@ -53,10 +55,7 @@
     "prettier": "^3.2.5",
     "sass": "^1.77.1",
     "typescript": "^5.4.5",
-    "typescript-plugin-css-modules": "^5.1.0",
-    "vite": "^5.2.11",
-    "vite-plugin-node-polyfills": "^0.22.0",
-    "vite-plugin-svgr": "^4.2.0"
+    "typescript-plugin-css-modules": "^5.1.0"
   },
   "publishConfig": {
     "access": "public"
