@@ -1,7 +1,6 @@
 import type { Transport } from "viem";
 import { http, CreateConfigParameters } from "wagmi";
 import { createConfig } from "wagmi";
-import type { MevmKitChain } from "../components/MevmKitProvider/provideMevmKitChains";
 import type { WalletList } from "../wallets/Wallet";
 import { computeWalletConnectMetaData } from "../wallets/computeWalletConnectMetaData";
 import { connectorsForWallets } from "../wallets/connectorsForWallets";
@@ -11,8 +10,9 @@ import {
   metaMaskWallet,
   walletConnectWallet,
 } from "../wallets/walletConnectors";
+import { RazorKitEthChain } from "../contexts/provideRazorKitEthChains";
 
-export type _chains = readonly [MevmKitChain, ...MevmKitChain[]];
+export type _chains = readonly [RazorKitEthChain, ...RazorKitEthChain[]];
 
 // Define the '_transports' type as a Record
 // It maps each 'Chain' id to a 'Transport'

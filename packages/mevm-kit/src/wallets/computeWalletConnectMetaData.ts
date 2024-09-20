@@ -1,4 +1,4 @@
-import { MevmKitWalletConnectParameters } from "./Wallet";
+import { RazorKitWalletConnectParameters } from './Wallet';
 
 interface ComputeMetaDataParameters {
   appName: string;
@@ -12,11 +12,11 @@ export const computeWalletConnectMetaData = ({
   appDescription,
   appUrl,
   appIcon,
-}: ComputeMetaDataParameters): MevmKitWalletConnectParameters["metadata"] => {
+}: ComputeMetaDataParameters): RazorKitWalletConnectParameters['metadata'] => {
   return {
     name: appName,
     description: appDescription ?? appName,
-    url: appUrl ?? (typeof window !== "undefined" ? window.location.href : ""),
+    url: appUrl ?? (typeof window !== 'undefined' ? window.location.href : ''),
     icons: [...(appIcon ? [appIcon] : [])],
   };
 };

@@ -1,10 +1,12 @@
-import type { CreateConnectorFn } from "wagmi";
-import type { WalletList } from "./Wallet";
-import { ConnectorsForWalletsParameters, connectorsForWallets } from "./connectorsForWallets";
-import { razorWallet } from "./walletConnectors/razorWallet/razorWallet";
-import { coinbaseWallet } from "./walletConnectors/coinbaseWallet/coinbaseWallet";
-import { metaMaskWallet } from "./walletConnectors/metaMaskWallet/metaMaskWallet";
-import { walletConnectWallet } from "./walletConnectors/walletConnectWallet/walletConnectWallet";
+import type { CreateConnectorFn } from 'wagmi';
+import type { WalletList } from './Wallet';
+import {
+  ConnectorsForWalletsParameters,
+  connectorsForWallets,
+} from './connectorsForWallets';
+import { metaMaskWallet } from './walletConnectors/metaMaskWallet/metaMaskWallet';
+import { walletConnectWallet } from './walletConnectors/walletConnectWallet/walletConnectWallet';
+import { razorWallet } from './walletConnectors';
 
 export function getDefaultWallets(parameters: ConnectorsForWalletsParameters): {
   connectors: CreateConnectorFn[];
@@ -16,8 +18,12 @@ export function getDefaultWallets(): { wallets: WalletList };
 export function getDefaultWallets(parameters?: ConnectorsForWalletsParameters) {
   const wallets: WalletList = [
     {
-      groupName: "Popular",
-      wallets: [razorWallet, coinbaseWallet, metaMaskWallet, walletConnectWallet],
+      groupName: 'Popular',
+      wallets: [
+        razorWallet,
+        metaMaskWallet,
+        walletConnectWallet,
+      ],
     },
   ];
 
@@ -28,5 +34,7 @@ export function getDefaultWallets(parameters?: ConnectorsForWalletsParameters) {
     };
   }
 
-  return { wallets };
+  return {
+    wallets,
+  };
 }

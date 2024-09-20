@@ -1,146 +1,299 @@
-import { ReactNode, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { useAccount, useConfig } from 'wagmi';
-// import { useIsMounted } from '../../hooks/useIsMounted';
-import { useProfile } from '../../hooks/useProfile';
-import { useRecentTransactions } from '../../utils/transactions/useRecentTransactions';
-import { useAccountModal, useChainModal, useConnectModal } from '../MevmKitProvider/ModalContext';
-import { useMevmKitChainsById } from '../MevmKitProvider/MevmKitChainContext';
-import { abbreviateETHBalance } from './abbreviateETHBalance';
-import { formatAddress } from './formatAddress';
-import { ChevronDown } from 'lucide-react';
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import {
+  ResponsiveValue,
+  mapResponsiveValue,
+  normalizeResponsiveValue,
+} from '../../css/sprinkles.css';
+import { touchableStyles } from '../../css/touchableStyles';
+import { useConnectionStatus } from '../../hooks/useConnectionStatus';
+import { isMobile } from '../../utils/isMobile';
+import { AsyncImage } from '../AsyncImage/AsyncImage';
+import { Avatar } from '../Avatar/Avatar';
+import { Box } from '../Box/Box';
+import { DropdownIcon } from '../Icons/Dropdown';
+import { I18nContext } from '../../contexts/I18nContext';
+import { useShowBalance } from '../../contexts/ShowBalanceContext';
+import { ConnectButtonRenderer } from './ConnectButtonRenderer';
+import { useRazorKitEthChains } from '../../contexts/RazorKitEthChainContext';
 
-const Button = styled.button`
-  display: flex;
-  align-items: center;
-  padding: 8px 12px;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  &:hover { opacity: 0.8; }
-  color: #333; /* Added dark text color */
-`;
+type AccountStatus = 'full' | 'avatar' | 'address';
+type ChainStatus = 'full' | 'icon' | 'name' | 'none';
 
-const ChainButton = styled(Button)<{ $unsupported?: boolean }>`
-  background-color: ${props => props.$unsupported ? '#FFA500' : '#f0f0f0'};
-  color: ${props => props.$unsupported ? 'white' : '#333'}; /* Updated for dark text */
-  margin-right: 8px;
-`;
-
-const AccountButton = styled(Button)`
-  background-color: #e0e0e0;
-  color: #333; /* Added dark text color */
-`;
-
-const ConnectButtonItem = styled(Button)`
-  background-color: #3498db;
-  color: #333; /* Changed to dark text color */
-`;
-
-interface ConnectButtonRendererProps {
-  children: (renderProps: {
-    account?: {
-      address: string;
-      displayName: string;
-      displayBalance?: string;
-      ensAvatar?: string;
-      hasPendingTransactions: boolean;
-    };
-    chain?: {
-      id: number;
-      name?: string;
-      unsupported?: boolean;
-    };
-    openAccountModal: () => void;
-    openChainModal: () => void;
-    openConnectModal: () => void;
-  }) => ReactNode;
-}
-
-function ConnectButtonRenderer({ children }: ConnectButtonRendererProps) {
-  // const isMounted = useIsMounted();
-  const { address, chainId } = useAccount();
-  const { chains } = useConfig();
-  const mevmKitChainsById = useMevmKitChainsById();
-
-  const { openConnectModal } = useConnectModal();
-  const { openChainModal } = useChainModal();
-  const { openAccountModal } = useAccountModal();
-
-  const { balance, ensAvatar, ensName } = useProfile({ address, includeBalance:true });
-  const recentTransactions = useRecentTransactions();
-
-  const chain = chainId ? mevmKitChainsById[chainId] : undefined;
-  const unsupportedChain = chain && !chains.some(c => c.id === chainId);
-
-  const displayBalance = balance
-    ? `${abbreviateETHBalance(parseFloat(balance.formatted))} ${balance.symbol}`
-    : undefined;
-
-  return children({
-    account: address
-      ? {
-          address,
-          displayName: ensName ? ensName : formatAddress(address),
-          displayBalance,
-          ensAvatar: ensAvatar ?? undefined,
-          hasPendingTransactions: recentTransactions.some(tx => tx.status === 'pending'),
-        }
-      : undefined,
-    chain: chainId
-      ? {
-          id: chainId,
-          name: chain?.name,
-          unsupported: unsupportedChain,
-        }
-      : undefined,
-    openAccountModal: openAccountModal ?? (() => {}),
-    openChainModal: openChainModal ?? (() => {}),
-    openConnectModal: openConnectModal ?? (() => {}),
-  });
-}
-
-interface ConnectButtonProps {
+export interface ConnectButtonProps {
+  accountStatus?: ResponsiveValue<AccountStatus>;
+  showBalance?: ResponsiveValue<boolean>;
+  chainStatus?: ResponsiveValue<ChainStatus>;
   label?: string;
 }
 
-function ConnectButton({ label = 'Connect Wallet' }: ConnectButtonProps) {
+const defaultProps = {
+  accountStatus: 'full',
+  chainStatus: { largeScreen: 'full', smallScreen: 'icon' },
+  label: 'Connect Wallet',
+  showBalance: { largeScreen: true, smallScreen: false },
+} as const;
+
+export function ConnectButton({
+  accountStatus = defaultProps.accountStatus,
+  chainStatus = defaultProps.chainStatus,
+  label = defaultProps.label,
+  showBalance = defaultProps.showBalance,
+}: ConnectButtonProps) {
+  const chains = useRazorKitEthChains();
+  const connectionStatus = useConnectionStatus();
+  const { setShowBalance } = useShowBalance();
   const [ready, setReady] = useState(false);
 
+  const { i18n } = useContext(I18nContext);
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    setReady(true);
-  }, []);
+    setShowBalance(showBalance);
+    if (!ready) setReady(true);
+  }, [showBalance, setShowBalance]);
 
-  if (!ready) return null;
-
-  return (
+  return ready ? (
     <ConnectButtonRenderer>
-      {({ account, chain, openAccountModal, openChainModal, openConnectModal }) => (
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          {chain && (
-            <ChainButton onClick={openChainModal} $unsupported={chain.unsupported}>
-              {chain.unsupported ? 'Unsupported' : chain.name}
-              <ChevronDown size={16} style={{ marginLeft: '4px' }} />
-            </ChainButton>
-          )}
-          {account ? (
-            <AccountButton onClick={openAccountModal}>
-              {account.displayBalance && <span style={{ marginRight: '8px' }}>{account.displayBalance}</span>}
-              {account.displayName}
-              <ChevronDown size={16} style={{ marginLeft: '4px' }} />
-            </AccountButton>
-          ) : (
-            <ConnectButtonItem onClick={openConnectModal}>{label}</ConnectButtonItem>
-          )}
-        </div>
-      )}
+      {({
+        account,
+        chain,
+        mounted,
+        openAccountModal,
+        openChainModal,
+        openConnectModal,
+      }) => {
+        const ready = mounted && connectionStatus !== 'loading';
+        const unsupportedChain = chain?.unsupported ?? false;
+
+        return (
+          <Box
+            display="flex"
+            gap="12"
+            {...(!ready && {
+              'aria-hidden': true,
+              style: {
+                opacity: 0,
+                pointerEvents: 'none',
+                userSelect: 'none',
+              },
+            })}
+          >
+            {ready && account && connectionStatus === 'connected' ? (
+              <>
+                {chain && (chains.length > 1 || unsupportedChain) && (
+                  <Box
+                    alignItems="center"
+                    aria-label="Chain Selector"
+                    as="button"
+                    background={
+                      unsupportedChain
+                        ? 'connectButtonBackgroundError'
+                        : 'connectButtonBackground'
+                    }
+                    borderRadius="connectButton"
+                    boxShadow="connectButton"
+                    className={touchableStyles({
+                      active: 'shrink',
+                      hover: 'grow',
+                    })}
+                    color={
+                      unsupportedChain
+                        ? 'connectButtonTextError'
+                        : 'connectButtonText'
+                    }
+                    display={mapResponsiveValue(chainStatus, (value) =>
+                      value === 'none' ? 'none' : 'flex',
+                    )}
+                    fontFamily="body"
+                    fontWeight="bold"
+                    gap="6"
+                    key={
+                      // Force re-mount to prevent CSS transition
+                      unsupportedChain ? 'unsupported' : 'supported'
+                    }
+                    onClick={openChainModal}
+                    paddingX="10"
+                    paddingY="8"
+                    testId={
+                      unsupportedChain ? 'wrong-network-button' : 'chain-button'
+                    }
+                    transition="default"
+                    type="button"
+                  >
+                    {unsupportedChain ? (
+                      <Box
+                        alignItems="center"
+                        display="flex"
+                        height="24"
+                        paddingX="4"
+                      >
+                        {i18n.t('connect_wallet.wrong_network.label')}
+                      </Box>
+                    ) : (
+                      <Box alignItems="center" display="flex" gap="6">
+                        {chain.hasIcon ? (
+                          <Box
+                            display={mapResponsiveValue(chainStatus, (value) =>
+                              value === 'full' || value === 'icon'
+                                ? 'block'
+                                : 'none',
+                            )}
+                            height="24"
+                            width="24"
+                          >
+                            <AsyncImage
+                              alt={chain.name ?? 'Chain icon'}
+                              background={chain.iconBackground}
+                              borderRadius="full"
+                              height="24"
+                              src={chain.iconUrl}
+                              width="24"
+                            />
+                          </Box>
+                        ) : null}
+                        <Box
+                          display={mapResponsiveValue(chainStatus, (value) => {
+                            if (value === 'icon' && !chain.iconUrl) {
+                              return 'block'; // Show the chain name if there is no iconUrl
+                            }
+
+                            return value === 'full' || value === 'name'
+                              ? 'block'
+                              : 'none';
+                          })}
+                        >
+                          {chain.name ?? chain.id}
+                        </Box>
+                      </Box>
+                    )}
+                    <DropdownIcon />
+                  </Box>
+                )}
+
+                {!unsupportedChain && (
+                  <Box
+                    alignItems="center"
+                    as="button"
+                    background="connectButtonBackground"
+                    borderRadius="connectButton"
+                    boxShadow="connectButton"
+                    className={touchableStyles({
+                      active: 'shrink',
+                      hover: 'grow',
+                    })}
+                    color="connectButtonText"
+                    display="flex"
+                    fontFamily="body"
+                    fontWeight="bold"
+                    onClick={openAccountModal}
+                    testId="account-button"
+                    transition="default"
+                    type="button"
+                  >
+                    {account.displayBalance && (
+                      <Box
+                        display={mapResponsiveValue(showBalance, (value) =>
+                          value ? 'block' : 'none',
+                        )}
+                        padding="8"
+                        paddingLeft="12"
+                      >
+                        {account.displayBalance}
+                      </Box>
+                    )}
+                    <Box
+                      background={
+                        normalizeResponsiveValue(showBalance)[
+                          isMobile() ? 'smallScreen' : 'largeScreen'
+                        ]
+                          ? 'connectButtonInnerBackground'
+                          : 'connectButtonBackground'
+                      }
+                      borderColor="connectButtonBackground"
+                      borderRadius="connectButton"
+                      borderStyle="solid"
+                      borderWidth="2"
+                      color="connectButtonText"
+                      fontFamily="body"
+                      fontWeight="bold"
+                      paddingX="8"
+                      paddingY="6"
+                      transition="default"
+                    >
+                      <Box
+                        alignItems="center"
+                        display="flex"
+                        gap="6"
+                        height="24"
+                      >
+                        <Box
+                          display={mapResponsiveValue(accountStatus, (value) =>
+                            value === 'full' || value === 'avatar'
+                              ? 'block'
+                              : 'none',
+                          )}
+                        >
+                          <Avatar
+                            address={account.address}
+                            imageUrl={account.ensAvatar}
+                            loading={account.hasPendingTransactions}
+                            size={24}
+                          />
+                        </Box>
+
+                        <Box alignItems="center" display="flex" gap="6">
+                          <Box
+                            display={mapResponsiveValue(
+                              accountStatus,
+                              (value) =>
+                                value === 'full' || value === 'address'
+                                  ? 'block'
+                                  : 'none',
+                            )}
+                          >
+                            {account.displayName}
+                          </Box>
+                          <DropdownIcon />
+                        </Box>
+                      </Box>
+                    </Box>
+                  </Box>
+                )}
+              </>
+            ) : (
+              <Box
+                as="button"
+                background="accentColor"
+                borderRadius="connectButton"
+                boxShadow="connectButton"
+                className={touchableStyles({
+                  active: 'shrink',
+                  hover: 'grow',
+                })}
+                color="accentColorForeground"
+                fontFamily="body"
+                fontWeight="bold"
+                height="40"
+                key="connect"
+                onClick={openConnectModal}
+                paddingX="14"
+                testId="connect-button"
+                transition="default"
+                type="button"
+              >
+                {mounted && label === 'Connect Wallet'
+                  ? i18n.t('connect_wallet.label')
+                  : label}
+              </Box>
+            )}
+          </Box>
+        );
+      }}
     </ConnectButtonRenderer>
+  ) : (
+    <></>
   );
 }
 
+ConnectButton.__defaultProps = defaultProps;
 ConnectButton.Custom = ConnectButtonRenderer;
-
-export { ConnectButton, ConnectButtonRenderer };

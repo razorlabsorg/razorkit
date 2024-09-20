@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CSSProperties, ReactNode } from 'react';
-import { type EIP1193Provider } from "viem";
+import { type EIP1193Provider } from 'viem';
 
 export interface StyleExtendable {
   className?: string;
@@ -11,7 +10,6 @@ export type Extendable<T = ReactNode> = StyleExtendable & {
   children?: T;
 };
 
-
 /** Combines members of an intersection into a readable type. */
 export type Evaluate<type> = { [key in keyof type]: type[key] } & unknown;
 
@@ -21,57 +19,59 @@ export type Mutable<type extends object> = {
 };
 
 /** Strict version of built-in Omit type */
-export type Omit<type, keys extends keyof type> = Pick<type, Exclude<keyof type, keys>>;
+export type Omit<type, keys extends keyof type> = Pick<
+  type,
+  Exclude<keyof type, keys>
+>;
 
 // window.ethereum types
 
 export type WalletProviderFlags =
-  | "isRazor"
-  | "isApexWallet"
-  | "isAvalanche"
-  | "isBackpack"
-  | "isBifrost"
-  | "isBitKeep"
-  | "isBitski"
-  | "isBlockWallet"
-  | "isBraveWallet"
-  | "isCoinbaseWallet"
-  | "isDawn"
-  | "isEnkrypt"
-  | "isExodus"
-  | "isFrame"
-  | "isFrontier"
-  | "isGamestop"
-  | "isHyperPay"
-  | "isImToken"
-  | "isKuCoinWallet"
-  | "isMathWallet"
-  | "isMetaMask"
-  | "isNestWallet"
-  | "isOkxWallet"
-  | "isOKExWallet"
-  | "isOneInchAndroidWallet"
-  | "isOneInchIOSWallet"
-  | "isOpera"
-  | "isPhantom"
-  | "isPortal"
-  | "isRabby"
-  | "isRainbow"
-  | "isStatus"
-  | "isTally"
-  | "isTokenPocket"
-  | "isTokenary"
-  | "isTrust"
-  | "isTrustWallet"
-  | "isXDEFI"
-  | "isRazor"
-  | "isTalisman"
-  | "isZeal"
-  | "isCoin98"
-  | "isMEWwallet"
-  | "isSafeheron"
-  | "isSafePal"
-  | "__seif";
+  | 'isApexWallet'
+  | 'isAvalanche'
+  | 'isBackpack'
+  | 'isBifrost'
+  | 'isBitKeep'
+  | 'isBitski'
+  | 'isBlockWallet'
+  | 'isBraveWallet'
+  | 'isCoinbaseWallet'
+  | 'isDawn'
+  | 'isEnkrypt'
+  | 'isExodus'
+  | 'isFrame'
+  | 'isFrontier'
+  | 'isGamestop'
+  | 'isHyperPay'
+  | 'isImToken'
+  | 'isKuCoinWallet'
+  | 'isMathWallet'
+  | 'isMetaMask'
+  | 'isNestWallet'
+  | 'isOkxWallet'
+  | 'isOKExWallet'
+  | 'isOneInchAndroidWallet'
+  | 'isOneInchIOSWallet'
+  | 'isOpera'
+  | 'isPhantom'
+  | 'isPortal'
+  | 'isRabby'
+  | 'isRazor'
+  | 'isStatus'
+  | 'isTally'
+  | 'isTokenPocket'
+  | 'isTokenary'
+  | 'isTrust'
+  | 'isTrustWallet'
+  | 'isXDEFI'
+  | 'isRazor'
+  | 'isTalisman'
+  | 'isZeal'
+  | 'isCoin98'
+  | 'isMEWwallet'
+  | 'isSafeheron'
+  | 'isSafePal'
+  | '__seif';
 
 export type WalletProvider = Evaluate<
   EIP1193Provider & {
@@ -94,10 +94,8 @@ export type WalletProvider = Evaluate<
 >;
 
 export type WindowProvider = {
-  razor?: WalletProvider | undefined;
   coinbaseWalletExtension?: WalletProvider | undefined;
   ethereum?: WalletProvider | undefined;
   phantom?: { ethereum: WalletProvider } | undefined;
   providers?: any[] | undefined; // Adjust the type as needed
 };
-

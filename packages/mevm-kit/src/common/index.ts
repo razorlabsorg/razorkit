@@ -1,1 +1,2 @@
-export * from './constants';
+export * from './AptosCoinResource';
+export * from './SuiCoinObject';

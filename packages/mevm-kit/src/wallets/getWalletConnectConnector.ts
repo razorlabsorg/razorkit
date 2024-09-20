@@ -1,33 +1,43 @@
-import { createConnector } from "wagmi";
-import type { CreateConnectorFn } from "wagmi";
-import { WalletConnectParameters, walletConnect } from "wagmi/connectors";
-import type { CreateConnector, MevmKitDetails, MevmKitWalletConnectParameters, WalletDetailsParams } from "./Wallet";
+import { createConnector } from 'wagmi';
+import type { CreateConnectorFn } from 'wagmi';
+import { WalletConnectParameters, walletConnect } from 'wagmi/connectors';
+import type {
+  CreateConnector,
+  RazorKitDetails,
+  RazorKitWalletConnectParameters,
+  WalletDetailsParams,
+} from './Wallet';
 
 interface GetWalletConnectConnectorParams {
   projectId: string;
-  walletConnectParameters?: MevmKitWalletConnectParameters;
+  walletConnectParameters?: RazorKitWalletConnectParameters;
 }
 
 interface CreateWalletConnectConnectorParams {
   projectId: string;
   walletDetails: WalletDetailsParams;
-  walletConnectParameters?: MevmKitWalletConnectParameters;
+  walletConnectParameters?: RazorKitWalletConnectParameters;
 }
 
 interface GetOrCreateWalletConnectInstanceParams {
   projectId: string;
-  walletConnectParameters?: MevmKitWalletConnectParameters;
-  rkDetailsShowQrModal?: MevmKitDetails["showQrModal"];
+  walletConnectParameters?: RazorKitWalletConnectParameters;
+  rkDetailsShowQrModal?: RazorKitDetails['showQrModal'];
 }
 
-const walletConnectInstances = new Map<string, ReturnType<typeof walletConnect>>();
+const walletConnectInstances = new Map<
+  string,
+  ReturnType<typeof walletConnect>
+>();
 
 // Function to get or create a walletConnect instance
 const getOrCreateWalletConnectInstance = ({
   projectId,
   walletConnectParameters,
   rkDetailsShowQrModal,
-}: GetOrCreateWalletConnectInstanceParams): ReturnType<typeof walletConnect> => {
+}: GetOrCreateWalletConnectInstanceParams): ReturnType<
+  typeof walletConnect
+> => {
   let config: WalletConnectParameters = {
     ...(walletConnectParameters ? walletConnectParameters : {}),
     projectId,
@@ -67,8 +77,8 @@ function createWalletConnectConnector({
       projectId,
       walletConnectParameters,
       // Used in `connectorsForWallets` to add another
-      // walletConnect wallet into mevmkit with modal popup option
-      rkDetailsShowQrModal: walletDetails.mkDetails.showQrModal,
+      // walletConnect wallet into rainbowkit with modal popup option
+      rkDetailsShowQrModal: walletDetails.rkDetails.showQrModal,
     })(config),
     ...walletDetails,
   }));
@@ -82,15 +92,15 @@ export function getWalletConnectConnector({
   // We use this projectId in place of YOUR_PROJECT_ID for our examples.
   // This allows us our examples and templates to be functional with WalletConnect v2.
   // We warn developers against using this projectId in their dApp in production.
-  const exampleProjectId = "21fef48091f12692cad574a6f7753643";
+  const exampleProjectId = '21fef48091f12692cad574a6f7753643';
 
-  if (!projectId || projectId === "") {
+  if (!projectId || projectId === '') {
     throw new Error(
-      "No projectId found. Every dApp must now provide a WalletConnect Cloud projectId to enable WalletConnect v2 https://www.mevmkit.com/docs/installation#configure"
+      'No projectId found. Every dApp must now provide a WalletConnect Cloud projectId to enable WalletConnect v2 https://www.rainbowkit.com/docs/installation#configure',
     );
   }
 
-  if (projectId === "YOUR_PROJECT_ID") {
+  if (projectId === 'YOUR_PROJECT_ID') {
     projectId = exampleProjectId;
   }
 

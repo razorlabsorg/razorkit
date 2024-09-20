@@ -1,6 +1,9 @@
-const storageKey = "mk-latest-id";
+const storageKey = 'razorkit-latest-id';
+
 export function getLatestWalletId(): string {
-  return typeof localStorage !== "undefined" ? localStorage.getItem(storageKey) || "" : "";
+  return typeof localStorage !== 'undefined'
+    ? localStorage.getItem(storageKey) || ''
+    : '';
 }
 
 export function addLatestWalletId(walletId: string): void {

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import { Wallet } from '../../Wallet';
 import { walletConnectWallet } from './walletConnectWallet';

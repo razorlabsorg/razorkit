@@ -1,127 +1,169 @@
-import { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { User, Copy, CheckCircle, LogOut } from 'lucide-react';
-import React from 'react';
-
-const Container = styled.div`
-  font-family: Arial, sans-serif;
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f0f0f0;
-  border-radius: 12px;
-`;
-
-const Header = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
-`;
-
-const Avatar = styled.div`
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background-color: #ddd;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
-`;
-
-const Name = styled.h2`
-  margin: 0;
-  font-size: 20px;
-  color: #333;
-`;
-
-const Balance = styled.p`
-  margin: 5px 0;
-  font-size: 16px;
-  color: #666;
-`;
-
-const ActionButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: none;
-  border-radius: 8px;
-  background-color: #fff;
-  color: #333;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #eee;
-  }
-
-  svg {
-    margin-right: 10px;
-  }
-`;
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { GetEnsNameReturnType } from 'viem';
+import { GetEnsAvatarReturnType } from 'viem/actions';
+import { useAccount } from 'wagmi';
+import { useEthProfile } from '../../hooks/useEthProfile';
+import { isMobile } from '../../utils/isMobile';
+import { Avatar } from '../Avatar/Avatar';
+import { Box } from '../Box/Box';
+import { CloseButton } from '../CloseButton/CloseButton';
+import { CopiedIcon } from '../Icons/Copied';
+import { CopyIcon } from '../Icons/Copy';
+import { DisconnectIcon } from '../Icons/Disconnect';
+import { Text } from '../Text/Text';
+import { TxList } from '../Txs/TxList';
+import { ProfileDetailsAction } from './ProfileDetailsAction';
+import { ShowRecentTransactionsContext } from '../../contexts/ShowRecentTransactionsContext';
+import { formatENS } from '../EthConnectButton/formatENS';
+import { formatAddress } from '../EthConnectButton/formatAddress';
+import { abbreviateETHBalance } from '../EthConnectButton/abbreviateETHBalance';
+import { I18nContext } from '../../contexts/I18nContext';
 
 interface ProfileDetailsProps {
-  address: string;
-  ensName?: string;
-  ensAvatar?: string;
-  balance?: { formatted: string; symbol: string };
+  address: ReturnType<typeof useAccount>['address'];
+  ensAvatar: GetEnsAvatarReturnType | undefined;
+  ensName: GetEnsNameReturnType | undefined;
+  balance: ReturnType<typeof useEthProfile>['balance'];
   onClose: () => void;
   onDisconnect: () => void;
 }
 
 export function ProfileDetails({
   address,
-  ensName,
   ensAvatar,
+  ensName,
   balance,
   onClose,
   onDisconnect,
 }: ProfileDetailsProps) {
+  const showRecentTransactions = useContext(ShowRecentTransactionsContext);
+
   const [copiedAddress, setCopiedAddress] = useState(false);
-
-  const accountName = ensName || `${address.slice(0, 6)}...${address.slice(-4)}`;
-  const displayBalance = balance ? `${parseFloat(balance.formatted).toFixed(4)} ${balance.symbol}` : 'Balance unavailable';
-
-  const copyAddress = () => {
-    navigator.clipboard.writeText(address);
-    setCopiedAddress(true);
-  };
+  const copyAddressAction = useCallback(() => {
+    if (address) {
+      navigator.clipboard.writeText(address);
+      setCopiedAddress(true);
+    }
+  }, [address]);
 
   useEffect(() => {
     if (copiedAddress) {
-      const timer = setTimeout(() => setCopiedAddress(false), 1500);
+      const timer = setTimeout(() => {
+        setCopiedAddress(false);
+      }, 1500);
       return () => clearTimeout(timer);
     }
   }, [copiedAddress]);
 
+  if (!address) {
+    return null;
+  }
+
+  const accountName = ensName ? formatENS(ensName) : formatAddress(address);
+  const ethBalance = balance?.formatted;
+  const displayBalance = ethBalance
+    ? abbreviateETHBalance(parseFloat(ethBalance))
+    : undefined;
+  const titleId = 'rk_profile_title';
+  const mobile = isMobile();
+
+  const { i18n } = useContext(I18nContext);
+
   return (
-    <Container>
-      <Header>
-        <Avatar>
-          {ensAvatar ? (
-            <img src={ensAvatar} alt="Profile" style={{ width: '100%', height: '100%', borderRadius: '50%' }} />
-          ) : (
-            <User size={40} color="#666" />
-          )}
-        </Avatar>
-        <Name>{accountName}</Name>
-        <Balance>{displayBalance}</Balance>
-      </Header>
-      <ActionButton onClick={copyAddress}>
-        {copiedAddress ? <CheckCircle size={20} /> : <Copy size={20} />}
-        {copiedAddress ? 'Copied!' : 'Copy Address'}
-      </ActionButton>
-      <ActionButton onClick={onDisconnect}>
-        <LogOut size={20} />
-        Disconnect
-      </ActionButton>
-      <ActionButton onClick={onClose}>Close</ActionButton>
-    </Container>
+    <>
+      <Box display="flex" flexDirection="column">
+        <Box background="profileForeground" padding="16">
+          <Box
+            alignItems="center"
+            display="flex"
+            flexDirection="column"
+            gap={mobile ? '16' : '12'}
+            justifyContent="center"
+            margin="8"
+            style={{ textAlign: 'center' }}
+          >
+            <Box
+              style={{
+                position: 'absolute',
+                right: 16,
+                top: 16,
+                willChange: 'transform',
+              }}
+            >
+              <CloseButton onClose={onClose} />
+            </Box>{' '}
+            <Box marginTop={mobile ? '24' : '0'}>
+              <Avatar
+                address={address}
+                imageUrl={ensAvatar}
+                size={mobile ? 82 : 74}
+              />
+            </Box>
+            <Box
+              display="flex"
+              flexDirection="column"
+              gap={mobile ? '4' : '0'}
+              textAlign="center"
+            >
+              <Box textAlign="center">
+                <Text
+                  as="h1"
+                  color="modalText"
+                  id={titleId}
+                  size={mobile ? '20' : '18'}
+                  weight="heavy"
+                >
+                  {accountName}
+                </Text>
+              </Box>
+              {!!balance && (
+                <Box textAlign="center">
+                  <Text
+                    as="h1"
+                    color="modalTextSecondary"
+                    id={titleId}
+                    size={mobile ? '16' : '14'}
+                    weight="semibold"
+                  >
+                    {displayBalance} {balance.symbol}
+                  </Text>
+                </Box>
+              )}
+            </Box>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="row"
+            gap="8"
+            margin="2"
+            marginTop="16"
+          >
+            <ProfileDetailsAction
+              action={copyAddressAction}
+              icon={copiedAddress ? <CopiedIcon /> : <CopyIcon />}
+              label={
+                copiedAddress
+                  ? i18n.t('profile.copy_address.copied')
+                  : i18n.t('profile.copy_address.label')
+              }
+            />
+            <ProfileDetailsAction
+              action={onDisconnect}
+              icon={<DisconnectIcon />}
+              label={i18n.t('profile.disconnect.label')}
+              testId="disconnect-button"
+            />
+          </Box>
+        </Box>
+        {showRecentTransactions && (
+          <>
+            <Box background="generalBorder" height="1" marginTop="-1" />
+            <Box>
+              <TxList address={address} />
+            </Box>
+          </>
+        )}
+      </Box>
+    </>
   );
 }

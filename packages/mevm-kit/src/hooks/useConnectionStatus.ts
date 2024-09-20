@@ -1,23 +1,30 @@
-import { useAccount } from "wagmi";
-import { useAuthenticationStatus } from "../components/MevmKitProvider/AuthenticationContext";
+import { useAccount } from 'wagmi';
+import { useEthAuthenticationStatus } from '../contexts/EthAuthenticationContext';
 
-export type ConnectionStatus = "disconnected" | "loading" | "unauthenticated" | "connected";
+export type ConnectionStatus =
+  | 'disconnected'
+  | 'loading'
+  | 'unauthenticated'
+  | 'connected';
 
 export function useConnectionStatus(): ConnectionStatus {
-  const authenticationStatus = useAuthenticationStatus();
+  const authenticationStatus = useEthAuthenticationStatus();
   const { isConnected } = useAccount();
 
   if (!isConnected) {
-    return "disconnected";
+    return 'disconnected';
   }
 
   if (!authenticationStatus) {
-    return "connected";
+    return 'connected';
   }
 
-  if (authenticationStatus === "loading" || authenticationStatus === "unauthenticated") {
+  if (
+    authenticationStatus === 'loading' ||
+    authenticationStatus === 'unauthenticated'
+  ) {
     return authenticationStatus;
   }
 
-  return "connected";
+  return 'connected';
 }
