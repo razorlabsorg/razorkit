@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useAptosAccountBalance } from '../hooks/useAptosAccountBalance';
-import { useAptosWallet } from '../hooks/useAptosWallet';
 import React from 'react';
-import AptosConnectButton from '../components/Button/AptosConnectButton';
-import { ErrorCode } from '../error-handling';
+// import { ErrorCode } from '../error-handling';
 import { formatAPT } from '../utils/format';
+import {
+  AptosConnectButton,
+  useAptosAccountBalance,
+  useAptosWallet,
+} from '@razorlabs/aptos-kit';
+import { ErrorCode } from '@razorlabs/aptos-kit';
 
 function Aptos() {
   const wallet = useAptosWallet();

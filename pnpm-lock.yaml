@@ -91,7 +91,7 @@ importers:
     dependencies:
       '@razorlabs/razorkit':
         specifier: workspace:*
-        version: link:../../packages/razor-kit
+        version: link:../../packages/mevm-kit
       '@tanstack/react-query':
         specifier: ^5.52.2
         version: 5.52.2(react@18.3.1)
@@ -228,103 +228,6 @@ importers:
         version: 5.1.0(typescript@5.5.4)
 
   packages/mevm-kit:
-    dependencies:
-      '@radix-ui/react-dialog':
-        specifier: ^1.0.5
-        version: 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@tanstack/react-query':
-        specifier: ^5.52.2
-        version: 5.52.2(react@18.3.1)
-      classnames:
-        specifier: ^2.5.1
-        version: 2.5.1
-      lucide-react:
-        specifier: ^0.436.0
-        version: 0.436.0(react@18.3.1)
-      react:
-        specifier: ^18.3.1
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.3.1
-        version: 18.3.1(react@18.3.1)
-      react-query:
-        specifier: ^3.39.3
-        version: 3.39.3(react-dom@18.3.1(react@18.3.1))(react-native@0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(bufferutil@4.0.8)(react@18.3.1)(typescript@5.5.4)(utf-8-validate@5.0.10))(react@18.3.1)
-      react-router-dom:
-        specifier: ^6.23.1
-        version: 6.26.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      styled-components:
-        specifier: ^6.1.12
-        version: 6.1.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      ua-parser-js:
-        specifier: ^1.0.38
-        version: 1.0.38
-      viem:
-        specifier: ^2.20.1
-        version: 2.20.1(bufferutil@4.0.8)(typescript@5.5.4)(utf-8-validate@5.0.10)(zod@3.23.8)
-      wagmi:
-        specifier: ^2.12.7
-        version: 2.12.7(@tanstack/query-core@5.52.2)(@tanstack/react-query@5.52.2(react@18.3.1))(@types/react@18.3.5)(bufferutil@4.0.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(bufferutil@4.0.8)(react@18.3.1)(typescript@5.5.4)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.21.1)(typescript@5.5.4)(utf-8-validate@5.0.10)(viem@2.20.1(bufferutil@4.0.8)(typescript@5.5.4)(utf-8-validate@5.0.10)(zod@3.23.8))(zod@3.23.8)
-    devDependencies:
-      '@types/react':
-        specifier: ^18.3.2
-        version: 18.3.5
-      '@types/react-dom':
-        specifier: ^18.3.0
-        version: 18.3.0
-      '@types/ua-parser-js':
-        specifier: ^0.7.39
-        version: 0.7.39
-      '@typescript-eslint/eslint-plugin':
-        specifier: ^7.9.0
-        version: 7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)
-      '@typescript-eslint/parser':
-        specifier: ^7.9.0
-        version: 7.18.0(eslint@8.57.0)(typescript@5.5.4)
-      '@vanilla-extract/css':
-        specifier: ^1.15.1
-        version: 1.15.5
-      '@vanilla-extract/vite-plugin':
-        specifier: ^4.0.9
-        version: 4.0.15(@types/node@20.16.2)(less@4.2.0)(sass-embedded@1.79.2)(sass@1.77.8)(stylus@0.62.0)(terser@5.31.6)(vite@5.4.2(@types/node@20.16.2)(less@4.2.0)(sass-embedded@1.79.2)(sass@1.77.8)(stylus@0.62.0)(terser@5.31.6))
-      '@vitejs/plugin-react':
-        specifier: ^4.2.1
-        version: 4.3.1(vite@5.4.2(@types/node@20.16.2)(less@4.2.0)(sass-embedded@1.79.2)(sass@1.77.8)(stylus@0.62.0)(terser@5.31.6))
-      eslint:
-        specifier: ^8.56.0
-        version: 8.57.0
-      eslint-plugin-react-hooks:
-        specifier: ^4.6.2
-        version: 4.6.2(eslint@8.57.0)
-      eslint-plugin-react-refresh:
-        specifier: ^0.4.7
-        version: 0.4.11(eslint@8.57.0)
-      postcss:
-        specifier: ^8.4.38
-        version: 8.4.41
-      prettier:
-        specifier: ^3.2.5
-        version: 3.3.3
-      sass:
-        specifier: ^1.77.1
-        version: 1.77.8
-      typescript:
-        specifier: ^5.4.5
-        version: 5.5.4
-      typescript-plugin-css-modules:
-        specifier: ^5.1.0
-        version: 5.1.0(typescript@5.5.4)
-      vite:
-        specifier: ^5.2.11
-        version: 5.4.2(@types/node@20.16.2)(less@4.2.0)(sass-embedded@1.79.2)(sass@1.77.8)(stylus@0.62.0)(terser@5.31.6)
-      vite-plugin-node-polyfills:
-        specifier: ^0.22.0
-        version: 0.22.0(rollup@4.21.1)(vite@5.4.2(@types/node@20.16.2)(less@4.2.0)(sass-embedded@1.79.2)(sass@1.77.8)(stylus@0.62.0)(terser@5.31.6))
-      vite-plugin-svgr:
-        specifier: ^4.2.0
-        version: 4.2.0(rollup@4.21.1)(typescript@5.5.4)(vite@5.4.2(@types/node@20.16.2)(less@4.2.0)(sass-embedded@1.79.2)(sass@1.77.8)(stylus@0.62.0)(terser@5.31.6))
-
-  packages/razor-kit:
     dependencies:
       '@aptos-labs/ts-sdk':
         specifier: ^1.23.0
@@ -499,15 +402,6 @@ importers:
       typescript-plugin-css-modules:
         specifier: ^5.1.0
         version: 5.1.0(typescript@5.5.4)
-      vite:
-        specifier: ^5.2.11
-        version: 5.4.2(@types/node@20.16.2)(less@4.2.0)(sass-embedded@1.79.2)(sass@1.77.8)(stylus@0.62.0)(terser@5.31.6)
-      vite-plugin-node-polyfills:
-        specifier: ^0.22.0
-        version: 0.22.0(rollup@4.21.1)(vite@5.4.2(@types/node@20.16.2)(less@4.2.0)(sass-embedded@1.79.2)(sass@1.77.8)(stylus@0.62.0)(terser@5.31.6))
-      vite-plugin-svgr:
-        specifier: ^4.2.0
-        version: 4.2.0(rollup@4.21.1)(typescript@5.5.4)(vite@5.4.2(@types/node@20.16.2)(less@4.2.0)(sass-embedded@1.79.2)(sass@1.77.8)(stylus@0.62.0)(terser@5.31.6))
 
   packages/wallet-kit:
     dependencies:
@@ -526,6 +420,15 @@ importers:
       '@radix-ui/react-dialog':
         specifier: ^1.0.5
         version: 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@razorlabs/aptos-kit':
+        specifier: workspace:*
+        version: link:../aptos-kit
+      '@razorlabs/razorkit':
+        specifier: workspace:*
+        version: link:../mevm-kit
+      '@razorlabs/sui-kit':
+        specifier: workspace:*
+        version: link:../sui-kit
       '@tanstack/react-query':
         specifier: ^5.52.2
         version: 5.52.2(react@18.3.1)
@@ -13486,16 +13389,6 @@ snapshots:
     optionalDependencies:
       react-dom: 18.3.1(react@18.3.1)
       react-native: 0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.4)(bufferutil@4.0.8)(react@18.3.1)(typescript@5.5.4)(utf-8-validate@5.0.10)
-
-  react-query@3.39.3(react-dom@18.3.1(react@18.3.1))(react-native@0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(bufferutil@4.0.8)(react@18.3.1)(typescript@5.5.4)(utf-8-validate@5.0.10))(react@18.3.1):
-    dependencies:
-      '@babel/runtime': 7.25.4
-      broadcast-channel: 3.7.0
-      match-sorter: 6.3.4
-      react: 18.3.1
-    optionalDependencies:
-      react-dom: 18.3.1(react@18.3.1)
-      react-native: 0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(bufferutil@4.0.8)(react@18.3.1)(typescript@5.5.4)(utf-8-validate@5.0.10)
 
   react-refresh@0.14.2: {}
 

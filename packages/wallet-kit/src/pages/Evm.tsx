@@ -1,7 +1,6 @@
-import './evm.css'
-import { ConnectButton } from '../components/EthConnectButton/ConnectButton'
+import { ConnectButton } from '@razorlabs/razorkit';
+import './evm.css';
 import React from 'react';
-
 
 function Mevm() {
   return (
@@ -13,7 +12,6 @@ function Mevm() {
       }}
     >
       <ConnectButton />
-
     </div>
   );
 }

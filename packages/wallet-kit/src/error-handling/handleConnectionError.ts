@@ -1,6 +1,6 @@
-import { PresetAptosWallet } from '../wallets/aptos/wallet';
-import { PresetSuiWallet } from '../wallets/sui/wallet';
+import { PresetSuiWallet } from '@razorlabs/sui-kit';
 import { ErrorCode } from './constants';
+import { PresetAptosWallet } from '@razorlabs/aptos-kit';
 
 /**
  * Represents the response of a wallet error during the connection process.

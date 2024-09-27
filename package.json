@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "turbo run build --concurrency=1 --continue",
-    "dev": "turbo run dev --concurrency=4 --continue",
+    "dev": "turbo run dev --concurrency=8 --continue",
     "lint": "turbo lint",
     "test": "pnpm test:unit",
     "test:unit": "vitest",
