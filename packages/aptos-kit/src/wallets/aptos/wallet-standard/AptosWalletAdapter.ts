@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IAptosWalletAdapter } from './interfaces';
-import { FeatureName } from './constants';
+import { FeatureNameAptos } from './constants';
 import {
   AptosConnectMethod,
   AptosConnectOutput,
@@ -70,7 +70,7 @@ export class AptosWalletAdapter implements IAptosWalletAdapter {
 
   async connect(): Promise<UserResponse<AptosConnectOutput>> {
     const feature = this.getFeature<{ connect: AptosConnectMethod }>(
-      FeatureName.APTOS__CONNECT,
+      FeatureNameAptos.APTOS__CONNECT,
     );
     try {
       return await feature.connect();
@@ -85,7 +85,7 @@ export class AptosWalletAdapter implements IAptosWalletAdapter {
 
   async disconnect(): Promise<void> {
     const feature = this.getFeature<{ disconnect: AptosDisconnectMethod }>(
-      FeatureName.APTOS__DISCONNECT,
+      FeatureNameAptos.APTOS__DISCONNECT,
     );
     try {
       return await feature.disconnect();
@@ -99,7 +99,7 @@ export class AptosWalletAdapter implements IAptosWalletAdapter {
 
   async network(): Promise<NetworkInfo> {
     const feature = this.getFeature<{ network: AptosGetNetworkMethod }>(
-      FeatureName.APTOS__NETWORK,
+      FeatureNameAptos.APTOS__NETWORK,
     );
     try {
       return await feature.network();
@@ -113,7 +113,7 @@ export class AptosWalletAdapter implements IAptosWalletAdapter {
 
   async account(): Promise<AccountInfo> {
     const feature = this.getFeature<{ account: AptosGetAccountMethod }>(
-      FeatureName.APTOS__ACCOUNT,
+      FeatureNameAptos.APTOS__ACCOUNT,
     );
     try {
       return await feature.account();
@@ -128,7 +128,7 @@ export class AptosWalletAdapter implements IAptosWalletAdapter {
   async onAccountChange(input: AptosOnAccountChangeInput): Promise<void> {
     const feature = this.getFeature<{
       onAccountChange: AptosOnAccountChangeMethod;
-    }>(FeatureName.APTOS__ON_ACCOUNT_CHANGE);
+    }>(FeatureNameAptos.APTOS__ON_ACCOUNT_CHANGE);
     try {
       return await feature.onAccountChange(input);
     } catch (e) {
@@ -142,7 +142,7 @@ export class AptosWalletAdapter implements IAptosWalletAdapter {
   async onNetworkChange(input: AptosOnNetworkChangeInput): Promise<void> {
     const feature = this.getFeature<{
       onNetworkChange: AptosOnNetworkChangeMethod;
-    }>(FeatureName.APTOS__ON_NETWORK_CHANGE);
+    }>(FeatureNameAptos.APTOS__ON_NETWORK_CHANGE);
     try {
       return await feature.onNetworkChange(input);
     } catch (e) {
@@ -158,7 +158,7 @@ export class AptosWalletAdapter implements IAptosWalletAdapter {
   ): Promise<UserResponse<AptosSignAndSubmitTransactionOutput>> {
     const feature = this.getFeature<{
       signAndSubmitTransaction: AptosSignAndSubmitTransactionMethod;
-    }>(FeatureName.APTOS__SIGN_AND_SUBMIT_TRANSACTION);
+    }>(FeatureNameAptos.APTOS__SIGN_AND_SUBMIT_TRANSACTION);
     try {
       return await feature.signAndSubmitTransaction(input);
     } catch (e) {
@@ -175,7 +175,7 @@ export class AptosWalletAdapter implements IAptosWalletAdapter {
   ): Promise<UserResponse<AptosSignTransactionOutput>> {
     const feature = this.getFeature<{
       signTransaction: AptosSignTransactionMethod;
-    }>(FeatureName.APTOS__SIGN_TRANSACTION);
+    }>(FeatureNameAptos.APTOS__SIGN_TRANSACTION);
     try {
       return feature.signTransaction(transaction, asFeePayer);
     } catch (e) {
@@ -190,7 +190,7 @@ export class AptosWalletAdapter implements IAptosWalletAdapter {
     input: AptosSignMessageInput,
   ): Promise<UserResponse<AptosSignMessageOutput>> {
     const feature = this.getFeature<{ signMessage: AptosSignMessageMethod }>(
-      FeatureName.APTOS__SIGN_MESSAGE,
+      FeatureNameAptos.APTOS__SIGN_MESSAGE,
     );
     try {
       return await feature.signMessage(input);

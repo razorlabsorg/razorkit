@@ -25,7 +25,7 @@ import {
 import { AptosChain, DefaultAptosChains, UnknownChain } from '../chains/aptos';
 import { ConnectionStatus } from '../common';
 import {
-  FeatureName,
+  FeatureNameAptos,
   IAptosWalletAdapter,
 } from '../wallets/aptos/wallet-standard';
 import { KitError } from '../error-handling';
@@ -139,7 +139,7 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
 
     try {
       // disconnect is an optional action for wallet
-      if (adapter.hasFeature(FeatureName.APTOS__DISCONNECT)) {
+      if (adapter.hasFeature(FeatureNameAptos.APTOS__DISCONNECT)) {
         await adapter.disconnect();
       }
     } finally {

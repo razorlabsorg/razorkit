@@ -1,4 +1,4 @@
-export enum FeatureName {
+export enum FeatureNameAptos {
   APTOS__CONNECT = 'aptos:connect',
   APTOS__DISCONNECT = 'aptos:disconnect',
   APTOS__NETWORK = 'aptos:network',

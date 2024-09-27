@@ -6,7 +6,7 @@ import { IDefaultAptosWallet } from './types';
  * @param {IDefaultAptosWallet} params - The parameters to define the wallet.
  * @return {IDefaultWallet} The frozen wallet parameters.
  */
-export function defineWallet(params: IDefaultAptosWallet) {
+export function defineAptosWallet(params: IDefaultAptosWallet) {
   return Object.freeze(params);
 }
 
@@ -17,7 +17,7 @@ export enum PresetAptosWallet {
   NIGHTLY_WALLET = 'Nightly',
 }
 
-export const RazorAptosWallet = defineWallet({
+export const RazorAptosWallet = defineAptosWallet({
   name: PresetAptosWallet.RAZOR_APTOS_WALLET,
   label: 'Razor Wallet',
   iconUrl:
@@ -28,7 +28,7 @@ export const RazorAptosWallet = defineWallet({
   },
 });
 
-export const PetraWallet = defineWallet({
+export const PetraWallet = defineAptosWallet({
   name: PresetAptosWallet.PETRA_WALLET,
   label: 'Petra',
   iconUrl:
@@ -39,7 +39,7 @@ export const PetraWallet = defineWallet({
   },
 });
 
-export const NightlyWallet = defineWallet({
+export const NightlyWallet = defineAptosWallet({
   name: PresetAptosWallet.NIGHTLY_WALLET,
   label: 'Nightly',
   iconUrl:
