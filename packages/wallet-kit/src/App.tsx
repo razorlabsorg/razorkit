@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Sui from './pages/Sui';
 import Aptos from './pages/Aptos';
+import Mevm from './pages/Evm';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/sui" element={<Sui />} />
       <Route path="/aptos" element={<Aptos />} />
+      <Route path="/mevm" element={< Mevm/>} />
     </Routes>
   );
 }

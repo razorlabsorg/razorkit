@@ -1,16 +1,29 @@
 {
   "cSpell.words": [
     "Aptos",
+    "bitget",
     "camelcase",
     "classname",
+    "clsx",
+    "dataurl",
+    "DEEPLINK",
+    "deepmerge",
     "DEVNET",
     "fullnode",
+    "lucide",
     "mysten",
+    "razorkit",
     "razorlabs",
+    "Satoshi",
+    "SIWE",
     "superstruct",
     "svgr",
+    "testid",
     "treeshake",
     "tsup",
+    "typegen",
+    "viem",
+    "wagmi",
     "wkit"
   ]
 }

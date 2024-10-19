@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Transaction } from '@mysten/sui/transactions';
-import { useSuiAccountBalance } from '../hooks/useSuiAccountBalance';
-import { useSuiWallet } from '../hooks/useSuiWallet';
+import {
+  SuiConnectButton,
+  useSuiAccountBalance,
+  useSuiWallet,
+} from '@razorlabs/sui-kit';
 import React from 'react';
-import { ErrorCode, formatSUI } from '@razorlabs/m2-wallet-sdk';
-import SuiConnectButton from '../components/Button/SuiConnectButton';
+import { ErrorCode } from '../error-handling';
+import { formatSUI } from '../utils/format';
 
 const sampleNft = new Map([
   [
@@ -31,8 +34,8 @@ function Sui() {
           ),
         ],
       });
-      const resData = await wallet.signAndExecuteTransactionBlock({
-        transactionBlock: tx,
+      const resData = await wallet.signAndExecuteTransaction({
+        transaction: tx,
       });
       console.log('executeMoveCall success', resData);
       alert('executeMoveCall succeeded (see response in the console)');

@@ -6,6 +6,7 @@ const Home: React.FC = () => {
     <>
       <Link to="/aptos">Connect to M1</Link>
       <Link to="/sui">Connect to M2</Link>
+      <Link to="/mevm">Connect to MEVM</Link>
     </>
   );
 };
