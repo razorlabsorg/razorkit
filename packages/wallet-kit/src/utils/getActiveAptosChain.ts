@@ -1,18 +1,21 @@
 import { AptosGetNetworkOutput } from '@aptos-labs/wallet-standard';
-import { Network } from '@aptos-labs/ts-sdk';
 
 export default function getActiveAptosChain(connectRes: AptosGetNetworkOutput) {
-  if (connectRes.name === Network.DEVNET) {
-    return 'aptos:devnet';
+  if (connectRes.chainId === 4) {
+    return 4;
   }
 
-  if (connectRes.name === Network.TESTNET) {
-    return 'aptos:testnet';
+  if (connectRes.chainId === 27) {
+    return 27;
   }
 
-  if (connectRes.name === Network.MAINNET) {
-    return 'aptos:mainnet';
+  if (connectRes.chainId === 177) {
+    return 177;
   }
 
-  return 'unknown:unknown';
+  if (connectRes.chainId === 250) {
+    return 250;
+  }
+
+  return 0;
 }

@@ -105,7 +105,6 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
         storage.setItem(StorageKey.LAST_CONNECT_WALLET_NAME, adapter.name);
         return res;
       } catch (e) {
-        console.log('connect error', e);
         setWalletAdapter(undefined);
         setStatus(ConnectionStatus.DISCONNECTED);
         throw e;
@@ -139,7 +138,6 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
     storage.removeItem(StorageKey.LAST_CONNECT_WALLET_NAME);
 
     try {
-      // disconnect is an optional action for wallet
       if (adapter.hasFeature(FeatureName.APTOS__DISCONNECT)) {
         await adapter.disconnect();
       }

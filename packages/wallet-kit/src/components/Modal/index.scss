@@ -50,7 +50,7 @@
   &__close {
     padding: 8px;
     border: 0;
-    background-size: percentage(math.div(20, 36));
+    background-size: math.percentage(math.div(20, 36));
     width: 36px;
     height: 36px;
     border-radius: var(--wkit-border-radius);

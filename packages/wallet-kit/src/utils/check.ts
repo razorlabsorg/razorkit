@@ -9,6 +9,7 @@ export function isStandardSuiWalletAdapterCompatibleWallet(wallet: Wallet) {
   return (
     'standard:connect' in wallet.features &&
     'standard:events' in wallet.features &&
+    'sui:signAndExecuteTransaction' in wallet.features &&
     'sui:signAndExecuteTransactionBlock' in wallet.features
   );
 }
@@ -16,7 +17,8 @@ export function isStandardSuiWalletAdapterCompatibleWallet(wallet: Wallet) {
 export function isStandardAptosWalletAdapterCompatibleWallet(wallet: Wallet) {
   return (
     'aptos:connect' in wallet.features &&
-    'standard:events' in wallet.features &&
+    'aptos:disconnect' in wallet.features &&
+    'aptos:signMessage' in wallet.features &&
     'aptos:signAndSubmitTransaction' in wallet.features
   );
 }

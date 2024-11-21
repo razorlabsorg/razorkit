@@ -1,27 +1,38 @@
 import { Chain } from './types';
 
-export enum AptosChainId {
-  DEV_NET = 'aptos:devnet',
-  TEST_NET = 'aptos:testnet',
-  MAIN_NET = 'aptos:mainnet',
-}
-
-export const AptosDevnetChain: Chain = {
-  id: AptosChainId.DEV_NET,
+export const MovementDevnetChain: Chain = {
+  id: 4,
   name: 'Movement Aptos Devnet',
   rpcUrl: 'https://aptos.devnet.m1.movementlabs.xyz',
 };
 
-export const AptosTestnetChain: Chain = {
-  id: AptosChainId.TEST_NET,
-  name: 'Movement Aptos Testnet',
+export const MovementSuzukaTestnetChain: Chain = {
+  id: 27,
+  name: 'Movement Suzuka Testnet',
   rpcUrl: 'https://aptos.testnet.suzuka.movementlabs.xyz/v1',
 };
 
+export const MovementPortoTestnetChain: Chain = {
+  id: 177,
+  name: 'Movement Porto Testnet',
+  rpcUrl: 'https://aptos.testnet.porto.movementlabs.xyz/v1',
+};
+
+export const MovementBardockTestnetChain: Chain = {
+  id: 250,
+  name: 'Movement Bardock Testnet',
+  rpcUrl: 'https://aptos.testnet.bardock.movementlabs.xyz/v1',
+};
+
 export const UnknownChain: Chain = {
-  id: 'unknown:unknown',
+  id: 0,
   name: 'Unknown Network',
   rpcUrl: '',
 };
 
-export const DefaultChains = [AptosTestnetChain, AptosDevnetChain];
+export const DefaultChains = [
+  MovementDevnetChain,
+  MovementSuzukaTestnetChain,
+  MovementPortoTestnetChain,
+  MovementBardockTestnetChain,
+];

@@ -1,5 +1,5 @@
 export type Chain = {
-  id: string;
+  id: number;
   name: string;
   rpcUrl: string;
 };
