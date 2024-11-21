@@ -7,7 +7,6 @@ import { Uint8arrayTool } from './binary';
 import { has } from './check';
 import { verifyPersonalMessageSignature } from '@mysten/sui/verify';
 
-
 /**
  * Verify a signed message based on Sui standard.
  *

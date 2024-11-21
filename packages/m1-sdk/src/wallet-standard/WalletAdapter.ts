@@ -124,11 +124,9 @@ export class WalletAdapter implements IWalletAdapter {
     }
   }
 
-  async onAccountChange(
-    input: AptosOnAccountChangeInput
-  ): Promise<void> {
+  async onAccountChange(input: AptosOnAccountChangeInput): Promise<void> {
     const feature = this.getFeature<{
-      onAccountChange: AptosOnAccountChangeMethod
+      onAccountChange: AptosOnAccountChangeMethod;
     }>(FeatureName.APTOS__ON_ACCOUNT_CHANGE);
     try {
       return await feature.onAccountChange(input);
@@ -140,11 +138,9 @@ export class WalletAdapter implements IWalletAdapter {
     }
   }
 
-  async onNetworkChange(
-    input: AptosOnNetworkChangeInput
-  ): Promise<void> {
+  async onNetworkChange(input: AptosOnNetworkChangeInput): Promise<void> {
     const feature = this.getFeature<{
-      onNetworkChange: AptosOnNetworkChangeMethod
+      onNetworkChange: AptosOnNetworkChangeMethod;
     }>(FeatureName.APTOS__ON_NETWORK_CHANGE);
     try {
       return await feature.onNetworkChange(input);

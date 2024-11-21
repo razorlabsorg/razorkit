@@ -1,4 +1,4 @@
-import { MoveStructId } from "@aptos-labs/ts-sdk";
+import { MoveStructId } from '@aptos-labs/ts-sdk';
 
 export function extractAddressFromType(type: string) {
   const res = type.split('::')[0];

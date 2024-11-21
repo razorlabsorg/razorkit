@@ -1,4 +1,3 @@
-
 export type CoinStoreResult = {
   coin: {
     value: string;

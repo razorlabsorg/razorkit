@@ -17,8 +17,8 @@ export type IWalletAdapter = WalletWithAptosFeatures & {
   disconnect: AptosDisconnectMethod;
   network: AptosGetNetworkMethod;
   account: AptosGetAccountMethod;
-  onAccountChange: AptosOnAccountChangeMethod
-  onNetworkChange: AptosOnNetworkChangeMethod
+  onAccountChange: AptosOnAccountChangeMethod;
+  onNetworkChange: AptosOnNetworkChangeMethod;
   signAndSubmitTransaction: AptosSignAndSubmitTransactionMethod;
   signTransaction: AptosSignTransactionMethod;
   signMessage: AptosSignMessageMethod;

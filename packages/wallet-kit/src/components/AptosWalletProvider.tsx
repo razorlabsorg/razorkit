@@ -1,11 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, {
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { AptosWalletContext } from '../hooks';
 import {
   UserResponseStatus,
@@ -231,7 +226,6 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
   useAptosAutoConnect(select, status, allAvailableWallets, autoConnect);
 
   // sync kit's chain with wallet's active chain
-  
 
   return (
     <AptosWalletContext.Provider

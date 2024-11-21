@@ -5,9 +5,9 @@ export type AptosProvider = Aptos;
 
 export function useAptosProvider(endpoint: string): AptosProvider {
   const provider = useMemo<Aptos>(() => {
-    const config = new AptosConfig({ fullnode: endpoint })
-    return new Aptos(config)
+    const config = new AptosConfig({ fullnode: endpoint });
+    return new Aptos(config);
   }, [endpoint]);
 
-  return provider
+  return provider;
 }

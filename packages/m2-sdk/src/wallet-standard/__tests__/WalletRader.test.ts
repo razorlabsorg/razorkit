@@ -13,6 +13,7 @@ const initialWallets: Wallet[] = [
     features: {
       [FeatureName.STANDARD__CONNECT]: () => {},
       [FeatureName.STANDARD__EVENTS]: () => {},
+      [FeatureName.SUI__SIGN_AND_EXECUTE_TRANSACTION]: () => {},
       [FeatureName.SUI__SIGN_AND_EXECUTE_TRANSACTION_BLOCK]: () => {},
     },
   },
@@ -63,6 +64,7 @@ describe('test radar detection', () => {
         features: {
           [FeatureName.STANDARD__CONNECT]: () => {},
           [FeatureName.STANDARD__EVENTS]: () => {},
+          [FeatureName.SUI__SIGN_AND_EXECUTE_TRANSACTION]: () => {},
           [FeatureName.SUI__SIGN_AND_EXECUTE_TRANSACTION_BLOCK]: () => {},
         },
       },

@@ -5,10 +5,7 @@ import {
 } from './types';
 import { isStandardWalletAdapterCompatibleWallet } from './utils';
 import { WalletAdapter } from './WalletAdapter';
-import {
-  AptosWallet,
-  getAptosWallets,
-} from '@aptos-labs/wallet-standard';
+import { AptosWallet, getAptosWallets } from '@aptos-labs/wallet-standard';
 
 export class WalletRadar implements IWalletRadar {
   private walletAdapterMap: Map<string, IWalletAdapter>;
@@ -26,15 +23,12 @@ export class WalletRadar implements IWalletRadar {
     initialWalletAdapters.forEach((adapter) => {
       this.setDetectedWalletAdapters(adapter as AptosWallet);
     });
-    this.clearOnRegisterListener = on(
-      'register',
-      (...newAdapters) => {
-        newAdapters.forEach((adapter) => {
-          this.setDetectedWalletAdapters(adapter as AptosWallet);
-        });
-        this.notifySubscribers();
-      },
-    );
+    this.clearOnRegisterListener = on('register', (...newAdapters) => {
+      newAdapters.forEach((adapter) => {
+        this.setDetectedWalletAdapters(adapter as AptosWallet);
+      });
+      this.notifySubscribers();
+    });
   }
 
   deactivate(): void {

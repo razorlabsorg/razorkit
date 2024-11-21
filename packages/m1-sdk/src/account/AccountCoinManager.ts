@@ -19,7 +19,9 @@ export class AccountCoinManager
   async getOwnedCoins(address: string): Promise<AptosCoinResource[]> {
     const coins: AptosCoinResource[] = [];
 
-    const resp = await this.client.getAccountResources({ accountAddress: address });
+    const resp = await this.client.getAccountResources({
+      accountAddress: address,
+    });
 
     let i = 0;
     const length = resp.length;

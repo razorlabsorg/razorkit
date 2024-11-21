@@ -8,7 +8,9 @@ export class AccountResourceManager implements IAccountResourceManager {
   }
 
   async getOwnedResources(address: string): Promise<MoveResource[]> {
-    const response = await this.client.getAccountResources({ accountAddress: address });
+    const response = await this.client.getAccountResources({
+      accountAddress: address,
+    });
     return response;
   }
 
