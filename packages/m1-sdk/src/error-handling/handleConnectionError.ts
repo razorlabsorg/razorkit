@@ -12,9 +12,8 @@ export function handleConnectionError(
   wallet: string,
 ): WalletErrorRes {
   let code = ErrorCode.WALLET__CONNECT_ERROR; // default error
-  let message = e.message;
+  const message = e.message;
   switch (wallet) {
-    case PresetWallet.PETRA_WALLET:
     case PresetWallet.RAZOR_APTOS_WALLET:
       if (message.includes('User rejects approval')) {
         code = ErrorCode.WALLET__CONNECT_ERROR__USER_REJECTED;

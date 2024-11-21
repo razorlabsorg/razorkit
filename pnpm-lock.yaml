@@ -36,11 +36,11 @@ importers:
   packages/m1-sdk:
     dependencies:
       '@aptos-labs/ts-sdk':
-        specifier: ^1.23.0
-        version: 1.23.0
+        specifier: ^1.33.0
+        version: 1.33.0
       '@aptos-labs/wallet-standard':
-        specifier: ^0.1.0
-        version: 0.1.0(@aptos-labs/ts-sdk@1.23.0)(@wallet-standard/core@1.0.3)
+        specifier: ^0.2.0
+        version: 0.2.0(@aptos-labs/ts-sdk@1.33.0)(@wallet-standard/core@1.0.3)
       buffer:
         specifier: ^6.0.3
         version: 6.0.3
@@ -175,16 +175,34 @@ packages:
     resolution: {integrity: sha512-76uPNZ6JrpruN9H8bEU37GVhAHwdhmvp7ZXpMTFnlFOJnBYt0LHCxR3x+HCk4WZ1CRrPQ57lmO+5A58PiGuweA==}
     hasBin: true
 
+  '@aptos-labs/aptos-cli@1.0.2':
+    resolution: {integrity: sha512-PYPsd0Kk3ynkxNfe3S4fanI3DiUICCoh4ibQderbvjPFL5A0oK6F4lPEO2t0MDsQySTk2t4vh99Xjy6Bd9y+aQ==}
+    hasBin: true
+
   '@aptos-labs/aptos-client@0.1.0':
     resolution: {integrity: sha512-q3s6pPq8H2buGp+tPuIRInWsYOuhSEwuNJPwd2YnsiID3YSLihn2ug39ktDJAcSOprUcp7Nid8WK7hKqnUmSdA==}
+    engines: {node: '>=15.10.0'}
+
+  '@aptos-labs/aptos-client@0.1.1':
+    resolution: {integrity: sha512-kJsoy4fAPTOhzVr7Vwq8s/AUg6BQiJDa7WOqRzev4zsuIS3+JCuIZ6vUd7UBsjnxtmguJJulMRs9qWCzVBt2XA==}
     engines: {node: '>=15.10.0'}
 
   '@aptos-labs/ts-sdk@1.23.0':
     resolution: {integrity: sha512-X4MsRtFZQsXSB0vhYFxVtuy9WQOHYzhUA8HiMj/R03qvOk2VVGU3y23A3/fKeWWOL50IjPVxSPNeQCdnzegp3w==}
     engines: {node: '>=11.0.0'}
 
+  '@aptos-labs/ts-sdk@1.33.0':
+    resolution: {integrity: sha512-svdlPH5r2dlSue2D9WXaaTslsmX18WLytAho6IRZJxQjEssglk64I6c1G9S8BTjRQj/ug6ahTwp6lx3eWuyd8Q==}
+    engines: {node: '>=11.0.0'}
+
   '@aptos-labs/wallet-standard@0.1.0':
     resolution: {integrity: sha512-DC4cWuvgXKBVQC+seGQc/nwIZoggZmGOIoN8EtEKHBSBMijwVfgRjD6cXPx8xWaXANyr5d32BGnWvYfMyWk3Pg==}
+    peerDependencies:
+      '@aptos-labs/ts-sdk': ^1.17.0
+      '@wallet-standard/core': ^1.0.3
+
+  '@aptos-labs/wallet-standard@0.2.0':
+    resolution: {integrity: sha512-4aoO4MlqzrW+CtO83MwbHMMtu91DL5B7YKRvhJbRnVB4R+QCOwBI/aQTkNZbKBDfOplLlqWTTl6Li0l6e02YLQ==}
     peerDependencies:
       '@aptos-labs/ts-sdk': ^1.17.0
       '@wallet-standard/core': ^1.0.3
@@ -1570,6 +1588,9 @@ packages:
   axios@1.6.2:
     resolution: {integrity: sha512-7i24Ri4pmDRfJTR7LDBhsOTtcm+9kjX5WiY1X3wIisx6G9So3pfMkEiU7emUBe46oceVImccTEM3k6C5dbVW8A==}
 
+  axios@1.7.4:
+    resolution: {integrity: sha512-DukmaFRnY6AzAALSH4J2M3k6PkaC+MfaAGdEERRWcC9q3/TWQwLpHR8ZRLKTdQ3aBDL64EdluRDjJqKw+BPZEw==}
+
   axobject-query@4.0.0:
     resolution: {integrity: sha512-+60uv1hiVFhHZeO+Lz0RYzsVHy5Wr1ayX0mwda9KPDVLNJgZ1T9Ny7VmFbLDzxsH0D87I86vgj3gFrjTJUYznw==}
 
@@ -1695,6 +1716,10 @@ packages:
   combined-stream@1.0.8:
     resolution: {integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==}
     engines: {node: '>= 0.8'}
+
+  commander@12.1.0:
+    resolution: {integrity: sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==}
+    engines: {node: '>=18'}
 
   commander@4.1.1:
     resolution: {integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==}
@@ -2430,9 +2455,6 @@ packages:
   lru-cache@6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
     engines: {node: '>=10'}
-
-  magic-string@0.30.10:
-    resolution: {integrity: sha512-iIRwTIf0QKV3UAnYK4PU8uiEc4SRh5jX0mwpIwETPpHdhVM4f53RSwS/vXvN1JhGX+Cs7B8qIq3d6AH49O5fAQ==}
 
   magic-string@0.30.13:
     resolution: {integrity: sha512-8rYBO+MsWkgjDSOvLomYnzhdwEG51olQ4zL5KXnNJWV5MNmrb4rTZdrtkhxjnD/QyZUqR/Z/XDsUs/4ej2nx0g==}
@@ -3477,9 +3499,20 @@ snapshots:
 
   '@aptos-labs/aptos-cli@0.1.9': {}
 
+  '@aptos-labs/aptos-cli@1.0.2':
+    dependencies:
+      commander: 12.1.0
+
   '@aptos-labs/aptos-client@0.1.0':
     dependencies:
       axios: 1.6.2
+      got: 11.8.6
+    transitivePeerDependencies:
+      - debug
+
+  '@aptos-labs/aptos-client@0.1.1':
+    dependencies:
+      axios: 1.7.4
       got: 11.8.6
     transitivePeerDependencies:
       - debug
@@ -3500,9 +3533,30 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
+  '@aptos-labs/ts-sdk@1.33.0':
+    dependencies:
+      '@aptos-labs/aptos-cli': 1.0.2
+      '@aptos-labs/aptos-client': 0.1.1
+      '@noble/curves': 1.4.2
+      '@noble/hashes': 1.4.0
+      '@scure/bip32': 1.4.0
+      '@scure/bip39': 1.3.0
+      eventemitter3: 5.0.1
+      form-data: 4.0.0
+      js-base64: 3.7.7
+      jwt-decode: 4.0.0
+      poseidon-lite: 0.2.0
+    transitivePeerDependencies:
+      - debug
+
   '@aptos-labs/wallet-standard@0.1.0(@aptos-labs/ts-sdk@1.23.0)(@wallet-standard/core@1.0.3)':
     dependencies:
       '@aptos-labs/ts-sdk': 1.23.0
+      '@wallet-standard/core': 1.0.3
+
+  '@aptos-labs/wallet-standard@0.2.0(@aptos-labs/ts-sdk@1.33.0)(@wallet-standard/core@1.0.3)':
+    dependencies:
+      '@aptos-labs/ts-sdk': 1.33.0
       '@wallet-standard/core': 1.0.3
 
   '@babel/code-frame@7.24.7':
@@ -4858,7 +4912,7 @@ snapshots:
 
   acorn-globals@7.0.1:
     dependencies:
-      acorn: 8.12.1
+      acorn: 8.14.0
       acorn-walk: 8.3.3
     optional: true
 
@@ -4872,7 +4926,7 @@ snapshots:
 
   acorn-walk@8.3.3:
     dependencies:
-      acorn: 8.12.1
+      acorn: 8.14.0
     optional: true
 
   acorn@8.12.1: {}
@@ -4881,7 +4935,7 @@ snapshots:
 
   agent-base@6.0.2:
     dependencies:
-      debug: 4.3.5
+      debug: 4.3.7
     transitivePeerDependencies:
       - supports-color
     optional: true
@@ -4939,6 +4993,14 @@ snapshots:
   asynckit@0.4.0: {}
 
   axios@1.6.2:
+    dependencies:
+      follow-redirects: 1.15.6
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
+
+  axios@1.7.4:
     dependencies:
       follow-redirects: 1.15.6
       form-data: 4.0.0
@@ -5073,8 +5135,8 @@ snapshots:
   code-red@1.0.4:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
-      '@types/estree': 1.0.5
-      acorn: 8.12.1
+      '@types/estree': 1.0.6
+      acorn: 8.14.0
       estree-walker: 3.0.3
       periscopic: 3.1.0
 
@@ -5093,6 +5155,8 @@ snapshots:
   combined-stream@1.0.8:
     dependencies:
       delayed-stream: 1.0.0
+
+  commander@12.1.0: {}
 
   commander@4.1.1: {}
 
@@ -5665,7 +5729,7 @@ snapshots:
     dependencies:
       '@tootallnate/once': 2.0.0
       agent-base: 6.0.2
-      debug: 4.3.5
+      debug: 4.3.7
     transitivePeerDependencies:
       - supports-color
     optional: true
@@ -5678,7 +5742,7 @@ snapshots:
   https-proxy-agent@5.0.1:
     dependencies:
       agent-base: 6.0.2
-      debug: 4.3.5
+      debug: 4.3.7
     transitivePeerDependencies:
       - supports-color
     optional: true
@@ -5750,7 +5814,7 @@ snapshots:
 
   is-reference@3.0.2:
     dependencies:
-      '@types/estree': 1.0.5
+      '@types/estree': 1.0.6
 
   is-what@3.14.1: {}
 
@@ -5782,7 +5846,7 @@ snapshots:
   jsdom@20.0.3:
     dependencies:
       abab: 2.0.6
-      acorn: 8.12.1
+      acorn: 8.14.0
       acorn-globals: 7.0.1
       cssom: 0.5.0
       cssstyle: 2.3.0
@@ -5910,10 +5974,6 @@ snapshots:
     dependencies:
       yallist: 4.0.0
     optional: true
-
-  magic-string@0.30.10:
-    dependencies:
-      '@jridgewell/sourcemap-codec': 1.5.0
 
   magic-string@0.30.13:
     dependencies:
@@ -6103,7 +6163,7 @@ snapshots:
 
   periscopic@3.1.0:
     dependencies:
-      '@types/estree': 1.0.5
+      '@types/estree': 1.0.6
       estree-walker: 3.0.3
       is-reference: 3.0.2
 
@@ -6507,8 +6567,8 @@ snapshots:
       '@ampproject/remapping': 2.3.0
       '@jridgewell/sourcemap-codec': 1.5.0
       '@jridgewell/trace-mapping': 0.3.25
-      '@types/estree': 1.0.5
-      acorn: 8.12.1
+      '@types/estree': 1.0.6
+      acorn: 8.14.0
       aria-query: 5.3.0
       axobject-query: 4.0.0
       code-red: 1.0.4
@@ -6516,7 +6576,7 @@ snapshots:
       estree-walker: 3.0.3
       is-reference: 3.0.2
       locate-character: 3.0.0
-      magic-string: 0.30.10
+      magic-string: 0.30.13
       periscopic: 3.1.0
 
   svg-parser@2.0.4: {}
@@ -6592,7 +6652,7 @@ snapshots:
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
       '@types/node': 22.9.1
-      acorn: 8.12.1
+      acorn: 8.14.0
       acorn-walk: 8.3.3
       arg: 4.1.3
       create-require: 1.1.1

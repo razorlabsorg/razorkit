@@ -20,7 +20,6 @@ import {
   AptosSignMessageOutput,
   AptosSignTransactionMethod,
   AptosSignTransactionOutput,
-  NetworkInfo,
   UserResponse,
   AptosWallet,
   AptosOnAccountChangeMethod,
@@ -28,6 +27,11 @@ import {
   AptosOnNetworkChangeInput,
   AptosOnNetworkChangeMethod,
   AccountInfo,
+  AptosChangeNetworkInput,
+  AptosChangeNetworkOutput,
+  AptosChangeNetworkMethod,
+  AptosOpenInMobileAppMethod,
+  AptosGetNetworkOutput,
 } from '@aptos-labs/wallet-standard';
 import { has } from '../utils';
 import { AnyRawTransaction } from '@aptos-labs/ts-sdk';
@@ -96,7 +100,7 @@ export class WalletAdapter implements IWalletAdapter {
     }
   }
 
-  async network(): Promise<NetworkInfo> {
+  async network(): Promise<AptosGetNetworkOutput> {
     const feature = this.getFeature<{ network: AptosGetNetworkMethod }>(
       FeatureName.APTOS__NETWORK,
     );
@@ -120,6 +124,36 @@ export class WalletAdapter implements IWalletAdapter {
       throw new WalletError(
         (e as any).message,
         ErrorCode.WALLET__GET_ACCOUNT_ERROR,
+      );
+    }
+  }
+
+  async changeNetwork(
+    input: AptosChangeNetworkInput,
+  ): Promise<UserResponse<AptosChangeNetworkOutput>> {
+    const feature = this.getFeature<{
+      changeNetwork: AptosChangeNetworkMethod;
+    }>(FeatureName.APTOS__CHANGE_NETWORK);
+    try {
+      return await feature.changeNetwork(input);
+    } catch (e) {
+      throw new WalletError(
+        (e as any).message,
+        ErrorCode.WALLET__CHANGE_NETWORK_ERROR,
+      );
+    }
+  }
+
+  async openInMobileApp(): Promise<void> {
+    const feature = this.getFeature<{
+      openInMobileApp: AptosOpenInMobileAppMethod;
+    }>(FeatureName.APTOS__OPEN_IN_MOBILE_APP);
+    try {
+      return feature.openInMobileApp();
+    } catch (e) {
+      throw new WalletError(
+        (e as any).message,
+        ErrorCode.WALLET__OPEN_IN_MOBILE_APP_ERROR,
       );
     }
   }

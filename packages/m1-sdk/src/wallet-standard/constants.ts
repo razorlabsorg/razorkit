@@ -1,5 +1,7 @@
 export enum FeatureName {
   APTOS__CONNECT = 'aptos:connect',
+  APTOS__CHANGE_NETWORK = 'aptos:changeNetwork',
+  APTOS__OPEN_IN_MOBILE_APP = 'aptos:openInMobileApp',
   APTOS__DISCONNECT = 'aptos:disconnect',
   APTOS__NETWORK = 'aptos:network',
   APTOS__ACCOUNT = 'aptos:account',

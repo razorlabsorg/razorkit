@@ -1,5 +1,7 @@
 import {
   AptosConnectMethod,
+  AptosChangeNetworkMethod,
+  AptosOpenInMobileAppMethod,
   AptosDisconnectMethod,
   AptosGetAccountMethod,
   AptosGetNetworkMethod,
@@ -17,6 +19,8 @@ export type IWalletAdapter = WalletWithAptosFeatures & {
   disconnect: AptosDisconnectMethod;
   network: AptosGetNetworkMethod;
   account: AptosGetAccountMethod;
+  changeNetwork: AptosChangeNetworkMethod;
+  openInMobileApp: AptosOpenInMobileAppMethod;
   onAccountChange: AptosOnAccountChangeMethod;
   onNetworkChange: AptosOnNetworkChangeMethod;
   signAndSubmitTransaction: AptosSignAndSubmitTransactionMethod;

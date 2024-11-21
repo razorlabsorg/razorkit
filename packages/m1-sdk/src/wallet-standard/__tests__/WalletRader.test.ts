@@ -16,6 +16,7 @@ const initialWallets: Wallet[] = [
     chains: ['aptos:devnet'],
     features: {
       [FeatureName.APTOS__CONNECT]: () => {},
+      [FeatureName.APTOS__SIGN_MESSAGE]: () => {},
       [FeatureName.APTOS__SIGN_AND_SUBMIT_TRANSACTION]: () => {},
     },
   },
@@ -28,8 +29,8 @@ beforeEach(() => {
 
 vitest.mock('@aptos-labs/wallet-standard', () => {
   return {
-    getWallets: vitest.fn().mockReturnValue({
-      get: () => initialWallets,
+    getAptosWallets: vitest.fn().mockReturnValue({
+      aptosWallets: initialWallets,
       on: (event: string, callback: () => void) => {
         listeners.push(callback);
       },
@@ -65,6 +66,7 @@ describe('test radar detection', () => {
         chains: ['aptos:devnet'],
         features: {
           [FeatureName.APTOS__CONNECT]: () => {},
+          [FeatureName.APTOS__SIGN_MESSAGE]: () => {},
           [FeatureName.APTOS__SIGN_AND_SUBMIT_TRANSACTION]: () => {},
         },
       },
