@@ -10,7 +10,7 @@ import {
   UnknownChain,
   BaseError,
   formatAPT,
-} from '@razorlabs/m1-wallet-sdk';
+} from '@razorlabs/wallet-sdk';
 
 export type ConnectButtonProps = Extendable & {
   label?: string;

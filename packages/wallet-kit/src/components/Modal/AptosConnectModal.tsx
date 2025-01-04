@@ -7,7 +7,7 @@ import { useAptosWallet } from '../../hooks';
 import { isNonEmptyArray } from '../../utils/check';
 import Icon from '../Icon';
 import './index.scss';
-import { BaseError, IWallet, KitError } from '@razorlabs/m1-wallet-sdk';
+import { BaseError, IWallet, KitError } from '@razorlabs/wallet-sdk';
 
 export type ConnectModalProps = Extendable & {
   open?: boolean;

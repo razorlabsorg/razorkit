@@ -14,7 +14,7 @@ import {
   IWallet,
   KitError,
   IWalletAdapter,
-} from '@razorlabs/m1-wallet-sdk';
+} from '@razorlabs/wallet-sdk';
 import { createContext, useContext } from 'react';
 
 export interface AptosWalletContextState {

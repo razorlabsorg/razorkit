@@ -2,7 +2,7 @@
 import { useMemo } from 'react';
 import { isNonEmptyArray } from '../utils/check';
 import { useAptosWalletAdapterDetection } from './useAptosWalletAdapterDetection';
-import { IDefaultWallet, IWallet } from '@razorlabs/m1-wallet-sdk';
+import { IDefaultWallet, IWallet } from '@razorlabs/wallet-sdk';
 
 export const useAvailableAptosWallets = (defaultWallets: IDefaultWallet[]) => {
   const { data: availableWalletAdapters } = useAptosWalletAdapterDetection();

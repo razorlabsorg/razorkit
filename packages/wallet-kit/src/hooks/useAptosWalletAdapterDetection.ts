@@ -3,7 +3,7 @@ import {
   IWalletAdapter,
   IWalletRadar,
   WalletRadar,
-} from '@razorlabs/m1-wallet-sdk';
+} from '@razorlabs/wallet-sdk';
 
 /**
  * detect wallet adapters that support wallet-standard from window and register event

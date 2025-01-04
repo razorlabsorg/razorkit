@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import { QueryKey, queryKey } from '../constants';
 import { useCallback } from 'react';
 import { useAptosWallet } from './useAptosWallet';
-import { AccountAssetManager } from '@razorlabs/m1-wallet-sdk';
+import { AccountAssetManager } from '@razorlabs/wallet-sdk';
 import { useAptosChain } from './useAptosChain';
 
 export interface AptosUseCoinBalanceParams {

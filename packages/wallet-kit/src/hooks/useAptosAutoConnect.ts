@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { isNonEmptyArray } from '../utils/check';
 import { Storage } from '../utils/storage';
 import { StorageKey } from '../constants/storage';
-import { ConnectionStatus, IWallet } from '@razorlabs/m1-wallet-sdk';
+import { ConnectionStatus, IWallet } from '@razorlabs/wallet-sdk';
 
 export function useAptosAutoConnect(
   select: (name: string) => Promise<void>,

@@ -26,7 +26,7 @@ import {
   KitError,
   UnknownChain,
   // verifySignedMessage,
-} from '@razorlabs/m1-wallet-sdk';
+} from '@razorlabs/wallet-sdk';
 import { useAvailableAptosWallets } from '../hooks/useAvailableAptosWallets';
 import getActiveAptosChain from '../utils/getActiveAptosChain';
 import { AnyRawTransaction } from '@aptos-labs/ts-sdk';
