@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import { AptosWalletProvider } from './components';
+import { WalletProvider } from './components';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
-      <AptosWalletProvider>
+      <WalletProvider>
         <App />
-      </AptosWalletProvider>
+      </WalletProvider>
     </BrowserRouter>
   </React.StrictMode>,
 );
