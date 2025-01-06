@@ -1,8 +1,10 @@
-<p align="center"><a href="https://razorwallet.xyz">
-<img width="480" src="/assets/logo.png"/>
-</a></p>
+<p align="center">
+  <a href="https://razorwallet.xyz">
+    <img width="480" src="/assets/logo.png"/>
+  </a>
+</p>
 
-# Razor M1 Wallet SDK
+# Razor Wallet SDK
 
 <a href="https://github.com/aptos-labs/wallet-standard">
   <img src="https://badgen.net/badge/wallet-standard/supported/green" />
