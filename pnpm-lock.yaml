@@ -48,11 +48,11 @@ importers:
   packages/wallet-kit:
     dependencies:
       '@aptos-labs/ts-sdk':
-        specifier: ^1.33.0
-        version: 1.33.0
+        specifier: ^1.33.1
+        version: 1.33.1
       '@aptos-labs/wallet-standard':
         specifier: ^0.2.0
-        version: 0.2.0(@aptos-labs/ts-sdk@1.33.0)(@wallet-standard/core@1.0.3)
+        version: 0.2.0(@aptos-labs/ts-sdk@1.33.1)(@wallet-standard/core@1.0.3)
       '@radix-ui/react-dialog':
         specifier: ^1.1.2
         version: 1.1.2(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -143,10 +143,6 @@ packages:
   '@aptos-labs/aptos-client@0.1.1':
     resolution: {integrity: sha512-kJsoy4fAPTOhzVr7Vwq8s/AUg6BQiJDa7WOqRzev4zsuIS3+JCuIZ6vUd7UBsjnxtmguJJulMRs9qWCzVBt2XA==}
     engines: {node: '>=15.10.0'}
-
-  '@aptos-labs/ts-sdk@1.33.0':
-    resolution: {integrity: sha512-svdlPH5r2dlSue2D9WXaaTslsmX18WLytAho6IRZJxQjEssglk64I6c1G9S8BTjRQj/ug6ahTwp6lx3eWuyd8Q==}
-    engines: {node: '>=11.0.0'}
 
   '@aptos-labs/ts-sdk@1.33.1':
     resolution: {integrity: sha512-d6nWtUI//fyEN8DeLjm3+ro87Ad6+IKwR9pCqfrs/Azahso1xR1Llxd/O6fj/m1DDsuDj/HAsCsy5TC/aKD6Eg==}
@@ -3359,22 +3355,6 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@aptos-labs/ts-sdk@1.33.0':
-    dependencies:
-      '@aptos-labs/aptos-cli': 1.0.2
-      '@aptos-labs/aptos-client': 0.1.1
-      '@noble/curves': 1.4.2
-      '@noble/hashes': 1.4.0
-      '@scure/bip32': 1.4.0
-      '@scure/bip39': 1.3.0
-      eventemitter3: 5.0.1
-      form-data: 4.0.0
-      js-base64: 3.7.7
-      jwt-decode: 4.0.0
-      poseidon-lite: 0.2.0
-    transitivePeerDependencies:
-      - debug
-
   '@aptos-labs/ts-sdk@1.33.1':
     dependencies:
       '@aptos-labs/aptos-cli': 1.0.2
@@ -3390,11 +3370,6 @@ snapshots:
       poseidon-lite: 0.2.0
     transitivePeerDependencies:
       - debug
-
-  '@aptos-labs/wallet-standard@0.2.0(@aptos-labs/ts-sdk@1.33.0)(@wallet-standard/core@1.0.3)':
-    dependencies:
-      '@aptos-labs/ts-sdk': 1.33.0
-      '@wallet-standard/core': 1.0.3
 
   '@aptos-labs/wallet-standard@0.2.0(@aptos-labs/ts-sdk@1.33.1)(@wallet-standard/core@1.0.3)':
     dependencies:

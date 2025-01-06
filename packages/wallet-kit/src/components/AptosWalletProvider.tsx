@@ -147,7 +147,7 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
           )}]`,
         );
       }
-      await connect(wallet.adapter as IWalletAdapter);
+      await connect(wallet.adapter);
     },
     [walletAdapter, status, allAvailableWallets],
   );
@@ -199,29 +199,45 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
 
   // sync kit's chain with wallet's active chain
 
+  const contextValue = useMemo(() => ({
+    name: walletAdapter?.name,
+    chains,
+    chain,
+    allAvailableWallets,
+    configuredWallets,
+    detectedWallets,
+    adapter: walletAdapter,
+    status,
+    connecting: status === ConnectionStatus.CONNECTING,
+    connected: status === ConnectionStatus.CONNECTED,
+    select,
+    disconnect,
+    getAccounts,
+    account,
+    signAndSubmitTransaction,
+    signMessage,
+    signTransaction,
+    address: account?.address,
+  }), [
+    walletAdapter,
+    chains,
+    chain,
+    allAvailableWallets,
+    configuredWallets,
+    detectedWallets,
+    status,
+    select,
+    disconnect,
+    getAccounts,
+    account,
+    signAndSubmitTransaction,
+    signMessage,
+    signTransaction,
+  ]);
+
   return (
     <AptosWalletContext.Provider
-      value={{
-        name: walletAdapter?.name,
-        chains,
-        chain,
-        allAvailableWallets,
-        configuredWallets,
-        detectedWallets,
-        adapter: walletAdapter,
-        status,
-        connecting: status === ConnectionStatus.CONNECTING,
-        connected: status === ConnectionStatus.CONNECTED,
-        select,
-        disconnect,
-        getAccounts,
-        account,
-        signAndSubmitTransaction,
-        signMessage,
-        signTransaction,
-        // verifySignedMessage,
-        address: account?.address,
-      }}
+      value={contextValue}
     >
       <QueryClientProvider client={new QueryClient()}>{children}</QueryClientProvider>
     </AptosWalletContext.Provider>

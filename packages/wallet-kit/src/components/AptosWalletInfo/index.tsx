@@ -5,10 +5,9 @@ import { Extendable } from '../../types';
 import { SvgArrowDown } from '../Icon/SvgIcons';
 import type { WalletAccount } from '@aptos-labs/wallet-standard';
 import { useAptosAccountBalance, useAptosWallet } from '../../hooks';
-import { addressEllipsis, UnknownChain, BaseError, formatAPT } from '@razorlabs/wallet-sdk';
+import { addressEllipsis, UnknownChain, BaseError, formatNativeCurrency } from '@razorlabs/wallet-sdk';
 
 export type ConnectButtonProps = Extendable & {
-  label?: string;
   onDisconnectSuccess?: (walletName: string) => void;
   onDisconnectError?: (error: BaseError) => void;
 };
@@ -22,8 +21,7 @@ function AptosWalletInfo(props: ConnectButtonProps) {
     if (!chain || chain.id === UnknownChain.id) {
       return <>Unknown Chain</>;
     }
-    // TODO: formatCurrency supports bigint
-    return <>{formatAPT(balance ?? 0)} MOVE</>;
+    return <>{formatNativeCurrency(balance ?? 0)} MOVE</>;
   }, [balance, chain]);
 
   if (!connected) return null;

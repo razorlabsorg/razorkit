@@ -5,9 +5,9 @@ export type CoinResourceDto = {
 };
 
 export class CoinResource {
-  private _typeArg: string;
-  private _balance: bigint;
-  private _symbol: string;
+  private readonly _typeArg: string;
+  private readonly _balance: bigint;
+  private readonly _symbol: string;
 
   constructor(typeArg: string, balance: bigint) {
     this._balance = balance;

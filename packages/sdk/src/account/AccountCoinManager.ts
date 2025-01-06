@@ -143,8 +143,8 @@ export class AccountCoinManager extends AccountResourceManager implements IAccou
         const viewResp = await this.client.view({
           payload: {
             function: '0x1::coin::paired_metadata',
-            typeArguments: [],
-            functionArguments: [coinType],
+            typeArguments: [coinType],
+            functionArguments: [],
           },
         });
 

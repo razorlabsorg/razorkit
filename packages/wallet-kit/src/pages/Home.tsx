@@ -2,7 +2,7 @@
 import { useAptosAccountBalance } from '../hooks/useAptosAccountBalance';
 import { useAptosWallet } from '../hooks/useAptosWallet';
 import React from 'react';
-import { ErrorCode, formatAPT } from '@razorlabs/wallet-sdk';
+import { ErrorCode, formatNativeCurrency } from '@razorlabs/wallet-sdk';
 import AptosConnectButton from '../components/Button/AptosConnectButton';
 
 const Home: React.FC = () => {
@@ -14,6 +14,11 @@ const Home: React.FC = () => {
     // @ts-ignore
     return wallet.account?.publicKey.toString();
   }
+
+  const getWalletStatus = () => {
+    if (wallet.connecting) return 'connecting';
+    return wallet.connected ? 'connected' : 'disconnected';
+  };
 
   return (
     <div
@@ -64,14 +69,14 @@ const Home: React.FC = () => {
         >
           <div style={{ textAlign: 'center' }}>
             <p>current wallet: {wallet.adapter?.name}</p>
-            <p>wallet status: {wallet.connecting ? 'connecting' : wallet.connected ? 'connected' : 'disconnected'}</p>
+            <p>wallet status: {getWalletStatus()}</p>
             <p>account address: {wallet.account?.address}</p>
-            <p>account publicKey: {getPublicKey() || 'not supported'}</p>
+            <p>account publicKey: {getPublicKey() ?? 'not supported'}</p>
             <p>
               current chain: {wallet.chain?.name} (id: {wallet.chain?.id})
             </p>
             <p>
-              MOVE Balance: {formatAPT(balance ?? 0)} (id: {wallet.chain?.id})
+              MOVE Balance: {formatNativeCurrency(balance ?? 0)} (id: {wallet.chain?.id})
             </p>
           </div>
         </div>

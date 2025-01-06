@@ -3,7 +3,7 @@ import { AccountCoinManager } from './AccountCoinManager';
 import { Aptos, AptosConfig } from '@aptos-labs/ts-sdk';
 
 export class AccountAssetManager implements IAccountAssetManager {
-  private address: string;
+  readonly address: string;
   private chainRpcUrl: string;
   private indexerUrl?: string;
   private aptosClient: Aptos;

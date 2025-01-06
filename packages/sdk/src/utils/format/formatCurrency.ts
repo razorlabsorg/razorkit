@@ -10,12 +10,10 @@ export function formatNativeCurrency(
 ) {
   return formatCurrency(
     amount,
-    Object.assign(
-      {
-        decimals: 8,
-      },
-      options,
-    ),
+    {
+      decimals: 8,
+      ...options,
+    },
   );
 }
 
@@ -72,14 +70,14 @@ function formatWithAbbr(amount: number | bigint, measureUnit: number, abbrSymbol
   return result.replace(',', '.') + abbrSymbol;
 }
 
-// when currency is lower than 1SUI
+// when currency is lower than 1 
 function formatSmallCurrency(amount: number) {
   if (amount <= 0) return '0';
 
   const fixNum = Math.ceil(-Math.log10(amount));
 
   let minimalDigits = 0;
-  for (; Number(amount) % Math.pow(10, minimalDigits) === 0; ) {
+  while (Number(amount) % Math.pow(10, minimalDigits) === 0) {
     minimalDigits = minimalDigits + 1;
   }
 

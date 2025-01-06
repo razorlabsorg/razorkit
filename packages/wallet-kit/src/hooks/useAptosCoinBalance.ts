@@ -20,7 +20,7 @@ export function useAptosCoinBalance(params?: AptosUseCoinBalanceParams) {
   const { address = wallet.address, typeArg = '0x1::aptos_coin::AptosCoin', chainId = wallet.chain?.id } = params || {};
   const chain = useAptosChain(chainId);
 
-  const key = queryKey(QueryKey.APTOS_COIN_BALANCE, {
+  const key = queryKey(QueryKey.MOVE_COIN_BALANCE, {
     address,
     typeArg,
     chainId,

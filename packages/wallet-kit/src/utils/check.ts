@@ -5,15 +5,6 @@ export function isNonEmptyArray(value: any): boolean {
   return Array.isArray(value) && value.length > 0;
 }
 
-export function isStandardSuiWalletAdapterCompatibleWallet(wallet: Wallet) {
-  return (
-    'standard:connect' in wallet.features &&
-    'standard:events' in wallet.features &&
-    'sui:signAndExecuteTransaction' in wallet.features &&
-    'sui:signAndExecuteTransactionBlock' in wallet.features
-  );
-}
-
 export function isStandardAptosWalletAdapterCompatibleWallet(wallet: Wallet) {
   return (
     'aptos:connect' in wallet.features &&

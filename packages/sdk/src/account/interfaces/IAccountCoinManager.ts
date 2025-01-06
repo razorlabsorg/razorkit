@@ -25,5 +25,5 @@ export interface IAccountCoinManager {
     faAddress?: string;
   }): Promise<bigint>;
   getAptosClient(): Aptos;
-  setAptosClient(suiClient: Aptos): void;
+  setAptosClient(client: Aptos): void;
 }
