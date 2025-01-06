@@ -4,17 +4,17 @@ import './index.scss';
 import { Extendable } from '../../types';
 import { SvgArrowDown } from '../Icon/SvgIcons';
 import type { WalletAccount } from '@aptos-labs/wallet-standard';
-import { useAptosAccountBalance, useAptosWallet } from '../../hooks';
+import { useAccountBalance, useWallet } from '../../hooks';
 import { addressEllipsis, UnknownChain, BaseError, formatNativeCurrency } from '@razorlabs/wallet-sdk';
 
-export type ConnectButtonProps = Extendable & {
+export type WalletInfoProps = Extendable & {
   onDisconnectSuccess?: (walletName: string) => void;
   onDisconnectError?: (error: BaseError) => void;
 };
 
-function AptosWalletInfo(props: ConnectButtonProps) {
-  const { disconnect, account, chain, connected, name } = useAptosWallet();
-  const { balance } = useAptosAccountBalance();
+const WalletInfo: React.FC<WalletInfoProps> = (props) => {
+  const { disconnect, account, chain, connected, name } = useWallet();
+  const { balance } = useAccountBalance();
   const [showDisconnectButton, setShowDisconnectButton] = useState(false);
 
   const renderBalance = useCallback(() => {
@@ -65,4 +65,4 @@ function AptosWalletInfo(props: ConnectButtonProps) {
   );
 }
 
-export default AptosWalletInfo;
+export default WalletInfo;

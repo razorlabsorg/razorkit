@@ -6,7 +6,7 @@ import { IWalletAdapter, IWalletRadar, WalletRadar } from '@razorlabs/wallet-sdk
  * normalize them to WalletAdapter
  * Notice: call once only in provider, cuz there is event registration
  */
-export function useAptosWalletAdapterDetection() {
+export function useWalletAdapterDetection() {
   const walletRadar = useRef<IWalletRadar | null>(null);
   const [availableWalletAdapters, setAvailableWalletAdapters] = useState<IWalletAdapter[]>([]);
 

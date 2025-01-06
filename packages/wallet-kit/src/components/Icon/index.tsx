@@ -14,7 +14,7 @@ export type IconProps = Extendable & {
  * with the essential dom properties: onClick, className, style...
  * @constructor
  */
-const Icon = (props: IconProps) => {
+export const Icon: React.FC<IconProps> = (props) => {
   const { icon, alt = 'icon' } = props;
   return (
     <div onClick={props.onClick} className={props.className} style={props.style}>

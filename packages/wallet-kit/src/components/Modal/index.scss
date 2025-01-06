@@ -17,7 +17,6 @@
   box-sizing: border-box;
   padding: 24px 24px;
   width: 316px;
-  // max-height: 300px;
   position: relative;
   background-color: rgba(var(--wkit-bg-rgb), 1);
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -30,11 +29,9 @@
 .wkit-dialog__title {
   font-weight: 700;
   text-align: center;
-  font-weight: 700;
   font-size: var(--wkit-font-size-large);
   font-family: var(--wkit-font-family);
   line-height: var(--wkit-line-height-large);
-  text-align: center;
 
   color: rgba(var(--wkit-on-bg-rgb), 1);
   margin: 0;
@@ -59,25 +56,16 @@
     display: inline-block;
 
     background-color: rgba(var(--wkit-on-bg-rgb), 0.05);
-  }
-
-  &__close:hover {
-    background-color: rgba(var(--wkit-on-bg-rgb), 0.07);
-  }
-
-  &__close:active {
-    background-color: rgba(var(--wkit-on-bg-rgb), 0.1);
-  }
-
-  &__close {
     color: rgba(var(--wkit-on-bg-rgb), 0.5);
   }
 
   &__close:hover {
+    background-color: rgba(var(--wkit-on-bg-rgb), 0.07);
     color: rgba(var(--wkit-on-bg-rgb), 0.8);
   }
 
   &__close:active {
+    background-color: rgba(var(--wkit-on-bg-rgb), 0.1);
     color: rgba(var(--wkit-on-bg-rgb), 1);
   }
 }
@@ -120,11 +108,7 @@
   padding: 6px;
   transition: background-color 0.2s;
   border-radius: var(--wkit-border-radius);
-
-  & {
-    background-color: var(--wkit-button-bg-varient1);
-    color: rgba(var(--wkit-on-bg-rgb), 0.8);
-  }
+  background-color: var(--wkit-button-bg-varient1);
 
   &:hover {
     background-color: rgba(var(--wkit-on-bg-rgb), 0.03);
@@ -180,10 +164,7 @@
     font-size: var(--wkit-font-size-small);
     line-height: var(--wkit-line-height-small);
     text-decoration: none;
-
-    & {
-      color: hsl(var(--wkit-accent-hs), 50%);
-    }
+    color: hsl(var(--wkit-accent-hs), 50%);
 
     &:hover {
       color: hsl(var(--wkit-accent-hs), 45%);
@@ -223,11 +204,9 @@
 .wkit-install__title {
   font-weight: 700;
   text-align: center;
-  font-weight: 700;
   font-size: var(--wkit-font-size-large);
   line-height: var(--wkit-line-height-large);
   font-family: var(--wkit-font-family);
-  text-align: center;
 
   color: rgba(var(--wkit-on-bg-rgb), 1);
   margin: 0;

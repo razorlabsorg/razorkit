@@ -1,13 +1,13 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import classnames from 'classnames';
 import { Extendable } from '../../types/utils';
-import ConnectModal from '../Modal/AptosConnectModal';
-import { useAptosWallet } from '../../hooks/useAptosWallet';
+import ConnectModal from '../Modal/ConnectModal';
+import { useWallet } from '../../hooks/useWallet';
 import './index.scss';
-import AptosWalletInfo from '../AptosWalletInfo';
+import WalletInfo from '../WalletInfo';
 import { BaseError } from '@razorlabs/wallet-sdk';
 
-export type AptosConnectButtonProps = Extendable & {
+export type ConnectButtonProps = Extendable & {
   label?: string;
   children?: ReactNode;
   onConnectSuccess?: (walletName: string) => void;
@@ -16,10 +16,10 @@ export type AptosConnectButtonProps = Extendable & {
   onDisconnectError?: (error: BaseError) => void;
 };
 
-export const AptosConnectButton = (props: AptosConnectButtonProps) => {
+export const ConnectButton: React.FC<ConnectButtonProps> = (props) => {
   const { label = 'Connect Button' } = props;
   const [showModal, setShowModal] = useState(false);
-  const { connected } = useAptosWallet();
+  const { connected } = useWallet();
 
   useEffect(() => {
     if (connected) {
@@ -39,10 +39,10 @@ export const AptosConnectButton = (props: AptosConnectButtonProps) => {
     >
       <div>
         {connected ? (
-          <AptosWalletInfo
+          <WalletInfo
             className={classnames(props.className)}
             style={props.style}
-            onDisconnectSuccess={(name) => {
+            onDisconnectSuccess={(name: string) => {
               setShowModal(false);
               props?.onDisconnectSuccess?.(name);
             }}
@@ -58,4 +58,4 @@ export const AptosConnectButton = (props: AptosConnectButtonProps) => {
   );
 };
 
-export default AptosConnectButton;
+export default ConnectButton;

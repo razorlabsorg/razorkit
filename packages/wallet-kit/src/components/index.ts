@@ -1,3 +1,3 @@
-export * from './AptosWalletProvider';
-export * from './Button/AptosConnectButton';
-export * from './Modal/AptosConnectModal';
+export * from './WalletProvider';
+export * from './Button/ConnectButton';
+export * from './Modal/ConnectModal';

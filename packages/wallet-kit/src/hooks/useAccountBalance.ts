@@ -1,6 +1,6 @@
-import { useAptosCoinBalance } from './useAptosCoinBalance';
+import { useCoinBalance } from './useCoinBalance';
 
-export interface UseAptosAccountBalanceParams {
+export interface UseAccountBalanceParams {
   typeArg?: string;
   chainId?: string;
 }
@@ -15,9 +15,9 @@ export interface UseAptosAccountBalanceParams {
  * @property {BigInt} balance - The Aptos account balance.
  * @property {boolean} loading - Indicates if the Aptos account balance is currently being loaded.
  */
-export function useAptosAccountBalance(params?: UseAptosAccountBalanceParams) {
+export function useAccountBalance(params?: UseAccountBalanceParams) {
   const { typeArg, chainId } = params || {};
-  const res = useAptosCoinBalance({
+  const res = useCoinBalance({
     typeArg,
     chainId,
   });

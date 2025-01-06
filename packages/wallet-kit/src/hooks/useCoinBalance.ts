@@ -1,11 +1,11 @@
 import { useQuery } from 'react-query';
 import { QueryKey, queryKey } from '../constants';
 import { useCallback } from 'react';
-import { useAptosWallet } from './useAptosWallet';
+import { useWallet } from './useWallet';
 import { AccountAssetManager } from '@razorlabs/wallet-sdk';
-import { useAptosChain } from './useAptosChain';
+import { useChain } from './useChain';
 
-export interface AptosUseCoinBalanceParams {
+export interface UseCoinBalanceParams {
   address?: string;
   typeArg?: string;
   chainId?: string;
@@ -15,10 +15,10 @@ export interface AptosUseCoinBalanceParams {
  * use the account balance of one specific coin (APT by default)
  * @param params
  */
-export function useAptosCoinBalance(params?: AptosUseCoinBalanceParams) {
-  const wallet = useAptosWallet();
+export function useCoinBalance(params?: UseCoinBalanceParams) {
+  const wallet = useWallet();
   const { address = wallet.address, typeArg = '0x1::aptos_coin::AptosCoin', chainId = wallet.chain?.id } = params || {};
-  const chain = useAptosChain(chainId);
+  const chain = useChain(chainId);
 
   const key = queryKey(QueryKey.MOVE_COIN_BALANCE, {
     address,

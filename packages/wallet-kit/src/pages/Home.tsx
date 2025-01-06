@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useAptosAccountBalance } from '../hooks/useAptosAccountBalance';
-import { useAptosWallet } from '../hooks/useAptosWallet';
+import { useAccountBalance } from '../hooks/useAccountBalance';
+import { useWallet } from '../hooks/useWallet';
 import React from 'react';
 import { ErrorCode, formatNativeCurrency } from '@razorlabs/wallet-sdk';
-import AptosConnectButton from '../components/Button/AptosConnectButton';
+import AptosConnectButton from '../components/Button/ConnectButton';
 
 const Home: React.FC = () => {
-  const wallet = useAptosWallet();
-  const { balance } = useAptosAccountBalance();
+  const wallet = useWallet();
+  const { balance } = useAccountBalance();
 
   function getPublicKey() {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

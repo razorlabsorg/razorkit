@@ -11,7 +11,7 @@ export type BaseModalProps = Extendable & {
   contentProps?: DialogContentProps;
 };
 
-export const BaseModal = (props: BaseModalProps) => {
+export const BaseModal: React.FC<BaseModalProps> = (props) => {
   return (
     <Dialog.Root open={props.open} onOpenChange={props.onOpenChange}>
       <Dialog.Trigger asChild>{props.trigger}</Dialog.Trigger>

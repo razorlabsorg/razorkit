@@ -11,7 +11,7 @@ import {
 import { Chain, ConnectionStatus, IWallet, KitError, IWalletAdapter } from '@razorlabs/wallet-sdk';
 import { createContext, useContext } from 'react';
 
-export interface AptosWalletContextState {
+export interface WalletContextState {
   configuredWallets: IWallet[];
   detectedWallets: IWallet[];
   allAvailableWallets: IWallet[];
@@ -44,7 +44,7 @@ function missProviderMessage(action: string) {
   return `Failed to call ${action}, missing context provider to run within`;
 }
 
-const DEFAULT_CONTEXT: AptosWalletContextState = {
+const DEFAULT_CONTEXT: WalletContextState = {
   configuredWallets: [],
   detectedWallets: [],
   allAvailableWallets: [],
@@ -75,13 +75,10 @@ const DEFAULT_CONTEXT: AptosWalletContextState = {
   async signMessage() {
     throw new KitError(missProviderMessage('signMessage'));
   },
-  /* verifySignedMessage() {
-    throw new KitError(missProviderMessage('verifySignedMessage'));
-  }, */
 };
 
-export const AptosWalletContext = createContext<AptosWalletContextState>(DEFAULT_CONTEXT);
+export const WalletContext = createContext<WalletContextState>(DEFAULT_CONTEXT);
 
-export function useAptosWallet(): AptosWalletContextState {
-  return useContext(AptosWalletContext);
+export function useWallet(): WalletContextState {
+  return useContext(WalletContext);
 }

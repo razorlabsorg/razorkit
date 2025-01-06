@@ -4,7 +4,7 @@ import { Storage } from '../utils/storage';
 import { StorageKey } from '../constants/storage';
 import { ConnectionStatus, IWallet } from '@razorlabs/wallet-sdk';
 
-export function useAptosAutoConnect(
+export function useAutoConnect(
   select: (name: string) => Promise<void>,
   status: ConnectionStatus,
   allAvailableWallets: IWallet[],

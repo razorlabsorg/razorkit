@@ -3,7 +3,7 @@ import { BaseModal } from './BaseModal';
 import { Extendable } from '../../types/utils';
 import * as Dialog from '@radix-ui/react-dialog';
 import { SvgArrowLeft, SvgClose } from '../Icon/SvgIcons';
-import { useAptosWallet } from '../../hooks';
+import { useWallet } from '../../hooks';
 import { isNonEmptyArray } from '../../utils/check';
 import Icon from '../Icon';
 import './index.scss';
@@ -21,7 +21,7 @@ type WalletItemProps = Extendable & {
   onSelect?: (wallet: IWallet) => void;
 };
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <div className={'wkit-dialog__header'}>
       <Dialog.Title className={'wkit-dialog__title'}>{'Connect Wallet'}</Dialog.Title>
@@ -32,7 +32,7 @@ const Header = () => {
   );
 };
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
     <div className={'wkit-new-to-movement'}>
       <span className={'wkit-new-to-movement__text'}>New to Movement? </span>
@@ -43,7 +43,7 @@ const Footer = () => {
   );
 };
 
-const WalletItem = (props: WalletItemProps) => {
+const WalletItem: React.FC<WalletItemProps> = (props) => {
   const { wallet } = props;
   const [icon, setIcon] = useState<string>('');
 
@@ -66,7 +66,7 @@ const WalletItem = (props: WalletItemProps) => {
   );
 };
 
-const WalletList = (props: { title: string; wallets: IWallet[]; onSelect?: (wallet: IWallet) => void }) => {
+const WalletList: React.FC<{ title: string; wallets: IWallet[]; onSelect?: (wallet: IWallet) => void }> = (props) => {
   if (!isNonEmptyArray(props.wallets)) return null;
   return (
     <div className={'wkit-select__container'}>
@@ -83,7 +83,8 @@ type InstallGuideProps = Extendable & {
   wallet: IWallet;
   onNavBack?: () => void;
 };
-const InstallGuide = (props: InstallGuideProps) => {
+
+const InstallGuide: React.FC<InstallGuideProps> = (props) => {
   const { wallet } = props;
   return (
     <section>
@@ -120,7 +121,8 @@ type ConnectingProps = Extendable & {
   wallet: IWallet;
   onNavBack?: () => void;
 };
-const Connecting = (props: ConnectingProps) => {
+
+const Connecting: React.FC<ConnectingProps> = (props) => {
   const { wallet } = props;
   return (
     <section>
@@ -142,8 +144,8 @@ const Connecting = (props: ConnectingProps) => {
   );
 };
 
-export const AptosConnectModal = (props: ConnectModalProps) => {
-  const { configuredWallets, detectedWallets, select, connecting } = useAptosWallet();
+export const ConnectModal: React.FC<ConnectModalProps> = (props) => {
+  const { configuredWallets, detectedWallets, select, connecting } = useWallet();
 
   const {
     onConnectSuccess = () => {},
@@ -222,4 +224,4 @@ export const AptosConnectModal = (props: ConnectModalProps) => {
   );
 };
 
-export default AptosConnectModal;
+export default ConnectModal;

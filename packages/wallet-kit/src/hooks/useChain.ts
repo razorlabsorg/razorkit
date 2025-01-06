@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
-import { useAptosWallet } from './useAptosWallet';
+import { useWallet } from './useWallet';
 
 /**
  * use chain config from context by chainId
  * @param chainId
  */
-export function useAptosChain(chainId?: string | number) {
-  const wallet = useAptosWallet();
+export function useChain(chainId?: string | number) {
+  const wallet = useWallet();
 
   const memoizedChain = useMemo(() => {
     return wallet.chains.find((w) => w.id === chainId);
