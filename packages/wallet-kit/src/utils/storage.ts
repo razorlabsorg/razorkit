@@ -2,9 +2,7 @@
 export class Storage {
   constructor() {
     if (!window) {
-      throw new Error(
-        'window not found: storage should be used in browser env',
-      );
+      throw new Error('window not found: storage should be used in browser env');
     }
   }
   get length() {
@@ -15,9 +13,7 @@ export class Storage {
       const _value = JSON.stringify(value);
       return window.localStorage.setItem(key, _value);
     } catch (e) {
-      throw new Error(
-        'stringify data failed when setItem: ' + (e as Error).message,
-      );
+      throw new Error('stringify data failed when setItem: ' + (e as Error).message);
     }
   }
   getItem(key: string) {
@@ -26,9 +22,7 @@ export class Storage {
     try {
       return JSON.parse(res);
     } catch (e) {
-      throw new Error(
-        'parse data failed when getItem: ' + (e as Error).message,
-      );
+      throw new Error('parse data failed when getItem: ' + (e as Error).message);
     }
   }
   removeItem(key: string) {

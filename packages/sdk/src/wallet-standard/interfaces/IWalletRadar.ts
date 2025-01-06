@@ -1,8 +1,5 @@
 import { IWalletAdapter } from './IWalletAdapter';
-import {
-  WalletRadarSubscriptionInput,
-  WalletRadarSubscriptionOutput,
-} from '../types';
+import { WalletRadarSubscriptionInput, WalletRadarSubscriptionOutput } from '../types';
 
 export interface IWalletRadar {
   activate: () => void;
@@ -12,7 +9,5 @@ export interface IWalletRadar {
    * Subscribe to detected wallet updates
    * @param callback
    */
-  subscribe: (
-    callback: WalletRadarSubscriptionInput,
-  ) => WalletRadarSubscriptionOutput;
+  subscribe: (callback: WalletRadarSubscriptionInput) => WalletRadarSubscriptionOutput;
 }

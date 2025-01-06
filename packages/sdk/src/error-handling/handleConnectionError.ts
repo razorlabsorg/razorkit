@@ -7,14 +7,14 @@ export interface WalletErrorRes {
   details: Record<string, any>;
 }
 
-export function handleConnectionError(
-  e: Error,
-  wallet: string,
-): WalletErrorRes {
+export function handleConnectionError(e: Error, wallet: string): WalletErrorRes {
   let code = ErrorCode.WALLET__CONNECT_ERROR; // default error
   const message = e.message;
   switch (wallet) {
-    case PresetWallet.RAZOR_APTOS_WALLET:
+    case PresetWallet.RAZOR_WALLET:
+    case PresetWallet.BITGET:
+    case PresetWallet.OKX:
+    case PresetWallet.NIGHTLY_WALLET:
       if (message.includes('User rejects approval')) {
         code = ErrorCode.WALLET__CONNECT_ERROR__USER_REJECTED;
       }

@@ -3,6 +3,7 @@ import { IAccountResourceManager } from './interfaces';
 
 export class AccountResourceManager implements IAccountResourceManager {
   protected client: Aptos;
+
   constructor(aptosClient: Aptos) {
     this.client = aptosClient;
   }

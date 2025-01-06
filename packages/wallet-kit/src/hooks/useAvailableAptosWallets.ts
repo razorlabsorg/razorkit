@@ -22,9 +22,7 @@ export const useAvailableAptosWallets = (defaultWallets: IDefaultWallet[]) => {
     }
 
     return defaultWallets.map((item) => {
-      const foundAdapter = availableWalletAdapters.find(
-        (walletAdapter) => item.name === walletAdapter.name,
-      );
+      const foundAdapter = availableWalletAdapters.find((walletAdapter) => item.name === walletAdapter.name);
       if (foundAdapter) {
         return {
           ...item,
@@ -66,9 +64,7 @@ export const useAvailableAptosWallets = (defaultWallets: IDefaultWallet[]) => {
 
   // filter installed wallets
   const allAvailableWallets: IWallet[] = useMemo(() => {
-    return [...configuredWallets, ...detectedWallets].filter(
-      (wallet) => wallet.installed,
-    );
+    return [...configuredWallets, ...detectedWallets].filter((wallet) => wallet.installed);
   }, [configuredWallets, detectedWallets]);
 
   return {

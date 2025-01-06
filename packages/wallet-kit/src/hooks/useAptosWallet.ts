@@ -8,13 +8,7 @@ import {
   UserResponse,
   WalletAccount,
 } from '@aptos-labs/wallet-standard';
-import {
-  Chain,
-  ConnectionStatus,
-  IWallet,
-  KitError,
-  IWalletAdapter,
-} from '@razorlabs/wallet-sdk';
+import { Chain, ConnectionStatus, IWallet, KitError, IWalletAdapter } from '@razorlabs/wallet-sdk';
 import { createContext, useContext } from 'react';
 
 export interface AptosWalletContextState {
@@ -43,9 +37,7 @@ export interface AptosWalletContextState {
     asFeePayer?: boolean,
   ): Promise<UserResponse<AptosSignTransactionOutput>>;
 
-  signMessage(
-    input: AptosSignMessageInput,
-  ): Promise<UserResponse<AptosSignMessageOutput>>;
+  signMessage(input: AptosSignMessageInput): Promise<UserResponse<AptosSignMessageOutput>>;
 }
 
 function missProviderMessage(action: string) {
@@ -88,8 +80,7 @@ const DEFAULT_CONTEXT: AptosWalletContextState = {
   }, */
 };
 
-export const AptosWalletContext =
-  createContext<AptosWalletContextState>(DEFAULT_CONTEXT);
+export const AptosWalletContext = createContext<AptosWalletContextState>(DEFAULT_CONTEXT);
 
 export function useAptosWallet(): AptosWalletContextState {
   return useContext(AptosWalletContext);

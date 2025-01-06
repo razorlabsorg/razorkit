@@ -33,9 +33,7 @@ const Home: React.FC = () => {
         }}
         onConnectError={(err) => {
           if (err.code === ErrorCode.WALLET__CONNECT_ERROR__USER_REJECTED) {
-            console.warn(
-              'user rejected the connection to ' + err.details?.wallet,
-            );
+            console.warn('user rejected the connection to ' + err.details?.wallet);
           } else {
             console.warn('unknown connect error: ', err);
           }
@@ -66,14 +64,7 @@ const Home: React.FC = () => {
         >
           <div style={{ textAlign: 'center' }}>
             <p>current wallet: {wallet.adapter?.name}</p>
-            <p>
-              wallet status:{' '}
-              {wallet.connecting
-                ? 'connecting'
-                : wallet.connected
-                  ? 'connected'
-                  : 'disconnected'}
-            </p>
+            <p>wallet status: {wallet.connecting ? 'connecting' : wallet.connected ? 'connected' : 'disconnected'}</p>
             <p>account address: {wallet.account?.address}</p>
             <p>account publicKey: {getPublicKey() || 'not supported'}</p>
             <p>
@@ -87,6 +78,6 @@ const Home: React.FC = () => {
       )}
     </div>
   );
-}
+};
 
 export default Home;

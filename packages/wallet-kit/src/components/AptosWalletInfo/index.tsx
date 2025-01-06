@@ -5,12 +5,7 @@ import { Extendable } from '../../types';
 import { SvgArrowDown } from '../Icon/SvgIcons';
 import type { WalletAccount } from '@aptos-labs/wallet-standard';
 import { useAptosAccountBalance, useAptosWallet } from '../../hooks';
-import {
-  addressEllipsis,
-  UnknownChain,
-  BaseError,
-  formatAPT,
-} from '@razorlabs/wallet-sdk';
+import { addressEllipsis, UnknownChain, BaseError, formatAPT } from '@razorlabs/wallet-sdk';
 
 export type ConnectButtonProps = Extendable & {
   label?: string;
@@ -33,24 +28,17 @@ function AptosWalletInfo(props: ConnectButtonProps) {
 
   if (!connected) return null;
   return (
-    <div
-      className={classnames('wkit-connected-container', props.className)}
-      style={props.style}
-    >
+    <div className={classnames('wkit-connected-container', props.className)} style={props.style}>
       <button
         className={classnames('wkit-connected-button')}
         onClick={() => {
           setShowDisconnectButton(!showDisconnectButton);
         }}
       >
-        <span className={'wkit-connected-button__balance'}>
-          {renderBalance()}
-        </span>
+        <span className={'wkit-connected-button__balance'}>{renderBalance()}</span>
         <div className={'wkit-connected-button__divider'}></div>
         <div className={'wkit-address-select'}>
-          <span className={'wkit-address-select__address'}>
-            {addressEllipsis((account as WalletAccount)?.address)}
-          </span>
+          <span className={'wkit-address-select__address'}>{addressEllipsis((account as WalletAccount)?.address)}</span>
           <span className={'wkit-address-select__right-arrow'}>
             <SvgArrowDown />
           </span>

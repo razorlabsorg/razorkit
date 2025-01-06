@@ -38,32 +38,19 @@ export type AptosWalletProviderProps = Extendable & {
 };
 
 export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
-  const {
-    defaultWallets = AllDefaultAptosWallets,
-    chains = DefaultChains,
-    autoConnect = true,
-    children,
-  } = props;
+  const { defaultWallets = AllDefaultAptosWallets, chains = DefaultChains, autoConnect = true, children } = props;
 
-  const { allAvailableWallets, configuredWallets, detectedWallets } =
-    useAvailableAptosWallets(defaultWallets);
+  const { allAvailableWallets, configuredWallets, detectedWallets } = useAvailableAptosWallets(defaultWallets);
 
-  const [walletAdapter, setWalletAdapter] = useState<
-    IWalletAdapter | undefined
-  >();
-  const [status, setStatus] = useState<ConnectionStatus>(
-    ConnectionStatus.DISCONNECTED,
-  );
+  const [walletAdapter, setWalletAdapter] = useState<IWalletAdapter | undefined>();
+  const [status, setStatus] = useState<ConnectionStatus>(ConnectionStatus.DISCONNECTED);
   const [chain, setChain] = useState(() => {
     if (isNonEmptyArray(chains)) return chains[0]; // first one as default chain
     return UnknownChain;
   });
   const walletOffListeners = useRef<(() => void)[]>([]);
 
-  const isCallable = (
-    walletAdapter: IWalletAdapter | undefined,
-    status: ConnectionStatus,
-  ) => {
+  const isCallable = (walletAdapter: IWalletAdapter | undefined, status: ConnectionStatus) => {
     return walletAdapter && status === ConnectionStatus.CONNECTED;
   };
 
@@ -72,46 +59,40 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
     return (walletAdapter as IWalletAdapter).accounts[0]; // use first account by default
   }, [walletAdapter, status]);
 
-  const ensureCallable = (
-    walletAdapter: IWalletAdapter | undefined,
-    status: ConnectionStatus,
-  ) => {
+  const ensureCallable = (walletAdapter: IWalletAdapter | undefined, status: ConnectionStatus) => {
     if (!isCallable(walletAdapter, status)) {
       throw new KitError('Failed to call function, wallet not connected');
     }
   };
 
-  const connect = useCallback(
-    async (adapter: IWalletAdapter, opts?: AptosConnectInput) => {
-      if (!adapter) throw new KitError('param adapter is missing');
+  const connect = useCallback(async (adapter: IWalletAdapter, opts?: AptosConnectInput) => {
+    if (!adapter) throw new KitError('param adapter is missing');
 
-      setStatus(ConnectionStatus.CONNECTING);
-      try {
-        const res = await adapter.connect(opts?.[0]);
+    setStatus(ConnectionStatus.CONNECTING);
+    try {
+      const res = await adapter.connect(opts?.[0]);
 
-        const network = await adapter.network();
+      const network = await adapter.network();
 
-        // try to get chain from the connected account
-        if (res.status === UserResponseStatus.APPROVED) {
-          const chainId = getActiveAptosChain(network);
-          const targetChain = chains.find((item) => item.id === chainId);
-          setChain(targetChain ?? UnknownChain);
-        }
-
-        setWalletAdapter(adapter);
-        setStatus(ConnectionStatus.CONNECTED);
-
-        const storage = new Storage();
-        storage.setItem(StorageKey.LAST_CONNECT_WALLET_NAME, adapter.name);
-        return res;
-      } catch (e) {
-        setWalletAdapter(undefined);
-        setStatus(ConnectionStatus.DISCONNECTED);
-        throw e;
+      // try to get chain from the connected account
+      if (res.status === UserResponseStatus.APPROVED) {
+        const chainId = getActiveAptosChain(network);
+        const targetChain = chains.find((item) => item.id === chainId);
+        setChain(targetChain ?? UnknownChain);
       }
-    },
-    [],
-  );
+
+      setWalletAdapter(adapter);
+      setStatus(ConnectionStatus.CONNECTED);
+
+      const storage = new Storage();
+      storage.setItem(StorageKey.LAST_CONNECT_WALLET_NAME, adapter.name);
+      return res;
+    } catch (e) {
+      setWalletAdapter(undefined);
+      setStatus(ConnectionStatus.DISCONNECTED);
+      throw e;
+    }
+  }, []);
 
   const disconnect = useCallback(async () => {
     ensureCallable(walletAdapter, status);
@@ -123,10 +104,7 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
         try {
           off();
         } catch (e) {
-          console.error(
-            'error when clearing wallet listener',
-            (e as any).message,
-          );
+          console.error('error when clearing wallet listener', (e as any).message);
         }
       });
       walletOffListeners.current = []; // empty array
@@ -160,13 +138,9 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
         await disconnect();
       }
 
-      const wallet = allAvailableWallets.find(
-        (wallet) => wallet.name === walletName,
-      );
+      const wallet = allAvailableWallets.find((wallet) => wallet.name === walletName);
       if (!wallet) {
-        const availableWalletNames = allAvailableWallets.map(
-          (wallet) => wallet.name,
-        );
+        const availableWalletNames = allAvailableWallets.map((wallet) => wallet.name);
         throw new KitError(
           `select failed: wallet ${walletName} is not available, all wallets are listed here: [${availableWalletNames.join(
             ', ',
@@ -249,9 +223,7 @@ export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
         address: account?.address,
       }}
     >
-      <QueryClientProvider client={new QueryClient()}>
-        {children}
-      </QueryClientProvider>
+      <QueryClientProvider client={new QueryClient()}>{children}</QueryClientProvider>
     </AptosWalletContext.Provider>
   );
 };

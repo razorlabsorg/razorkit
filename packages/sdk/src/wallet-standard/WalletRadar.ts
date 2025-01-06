@@ -1,8 +1,5 @@
 import { IWalletAdapter, IWalletRadar } from './interfaces';
-import {
-  WalletRadarSubscriptionInput,
-  WalletRadarSubscriptionOutput,
-} from './types';
+import { WalletRadarSubscriptionInput, WalletRadarSubscriptionOutput } from './types';
 import { isStandardWalletAdapterCompatibleWallet } from './utils';
 import { WalletAdapter } from './WalletAdapter';
 import { AptosWallet, getAptosWallets } from '@aptos-labs/wallet-standard';
@@ -42,9 +39,7 @@ export class WalletRadar implements IWalletRadar {
     return Array.from(this.walletAdapterMap.values());
   }
 
-  subscribe(
-    callback: WalletRadarSubscriptionInput,
-  ): WalletRadarSubscriptionOutput {
+  subscribe(callback: WalletRadarSubscriptionInput): WalletRadarSubscriptionOutput {
     this.subscriptions.add(callback);
     return () => {
       this.subscriptions.delete(callback);

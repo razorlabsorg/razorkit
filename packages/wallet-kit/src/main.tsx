@@ -7,9 +7,9 @@ import { AptosWalletProvider } from './components';
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
-        <AptosWalletProvider>
-          <App />
-        </AptosWalletProvider>
+      <AptosWalletProvider>
+        <App />
+      </AptosWalletProvider>
     </BrowserRouter>
   </React.StrictMode>,
 );

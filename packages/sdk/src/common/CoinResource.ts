@@ -1,10 +1,10 @@
-export type AptosCoinResourceDto = {
+export type CoinResourceDto = {
   symbol: string;
   balance: bigint;
   typeArg: string;
 };
 
-export class AptosCoinResource {
+export class CoinResource {
   private _typeArg: string;
   private _balance: bigint;
   private _symbol: string;
@@ -27,11 +27,11 @@ export class AptosCoinResource {
     return this._symbol;
   }
 
-  static fromDto(res: AptosCoinResourceDto) {
-    return new AptosCoinResource(res.typeArg, res.balance);
+  static fromDto(res: CoinResourceDto) {
+    return new CoinResource(res.typeArg, res.balance);
   }
 
-  toDto(): AptosCoinResourceDto {
+  toDto(): CoinResourceDto {
     return {
       balance: this._balance,
       typeArg: this._typeArg,

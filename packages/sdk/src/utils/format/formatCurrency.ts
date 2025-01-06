@@ -2,7 +2,7 @@ const MILLION = 1_000_000;
 const BILLION = 1_000_000_000;
 const TRILLION = 1_000_000_000_000;
 
-export function formatAPT(
+export function formatNativeCurrency(
   amount: number | string | bigint,
   options?: {
     withAbbr?: boolean;
@@ -52,21 +52,15 @@ export function formatCurrency(
 
 function format(amount: number | bigint, showAbbr: boolean): string {
   if (showAbbr) {
-    if (amount >= MILLION && amount < BILLION)
-      return formatWithAbbr(amount, MILLION, 'M');
-    if (amount >= BILLION && amount < TRILLION)
-      return formatWithAbbr(amount, BILLION, 'B');
+    if (amount >= MILLION && amount < BILLION) return formatWithAbbr(amount, MILLION, 'M');
+    if (amount >= BILLION && amount < TRILLION) return formatWithAbbr(amount, BILLION, 'B');
     if (amount >= TRILLION) return formatWithAbbr(amount, TRILLION, 'T');
   }
 
   return Intl.NumberFormat('en-US').format(amount);
 }
 
-function formatWithAbbr(
-  amount: number | bigint,
-  measureUnit: number,
-  abbrSymbol: string,
-) {
+function formatWithAbbr(amount: number | bigint, measureUnit: number, abbrSymbol: string) {
   let _amount: string;
   if (typeof amount === 'bigint') {
     _amount = String(amount / (BigInt(measureUnit) / 1000n));

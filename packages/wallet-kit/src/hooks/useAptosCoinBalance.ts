@@ -17,11 +17,7 @@ export interface AptosUseCoinBalanceParams {
  */
 export function useAptosCoinBalance(params?: AptosUseCoinBalanceParams) {
   const wallet = useAptosWallet();
-  const {
-    address = wallet.address,
-    typeArg = '0x1::aptos_coin::AptosCoin',
-    chainId = wallet.chain?.id,
-  } = params || {};
+  const { address = wallet.address, typeArg = '0x1::aptos_coin::AptosCoin', chainId = wallet.chain?.id } = params || {};
   const chain = useAptosChain(chainId);
 
   const key = queryKey(QueryKey.APTOS_COIN_BALANCE, {

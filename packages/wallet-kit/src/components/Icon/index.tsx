@@ -17,18 +17,9 @@ export type IconProps = Extendable & {
 const Icon = (props: IconProps) => {
   const { icon, alt = 'icon' } = props;
   return (
-    <div
-      onClick={props.onClick}
-      className={props.className}
-      style={props.style}
-    >
+    <div onClick={props.onClick} className={props.className} style={props.style}>
       {typeof icon === 'string' ? (
-        <img
-          src={icon}
-          alt={alt}
-          className={props.elClassName}
-          style={props.elStyle}
-        />
+        <img src={icon} alt={alt} className={props.elClassName} style={props.elStyle} />
       ) : (
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         React.cloneElement(icon as any)

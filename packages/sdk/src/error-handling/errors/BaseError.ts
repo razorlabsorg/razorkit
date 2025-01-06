@@ -4,11 +4,7 @@ export class BaseError extends Error {
   code: ErrorCode;
   details: Record<string, any> | undefined;
 
-  constructor(
-    message: string,
-    code = ErrorCode.UNKNOWN_ERROR,
-    details?: Record<string, any>,
-  ) {
+  constructor(message: string, code = ErrorCode.UNKNOWN_ERROR, details?: Record<string, any>) {
     super(message);
     this.details = details;
     this.code = code;

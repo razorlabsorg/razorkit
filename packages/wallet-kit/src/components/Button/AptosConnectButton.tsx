@@ -49,10 +49,7 @@ export const AptosConnectButton = (props: AptosConnectButtonProps) => {
             onDisconnectError={props.onDisconnectError}
           />
         ) : (
-          <button
-            className={classnames('wkit-button', props.className)}
-            style={props.style}
-          >
+          <button className={classnames('wkit-button', props.className)} style={props.style}>
             {props.children || label}
           </button>
         )}

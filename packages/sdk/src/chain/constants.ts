@@ -1,21 +1,10 @@
 import { Chain } from './types';
 
-export const MovementDevnetChain: Chain = {
-  id: 4,
-  name: 'Movement Aptos Devnet',
-  rpcUrl: 'https://aptos.devnet.m1.movementlabs.xyz',
-};
-
-export const MovementSuzukaTestnetChain: Chain = {
-  id: 27,
-  name: 'Movement Suzuka Testnet',
-  rpcUrl: 'https://aptos.testnet.suzuka.movementlabs.xyz/v1',
-};
-
 export const MovementPortoTestnetChain: Chain = {
   id: 177,
   name: 'Movement Porto Testnet',
   rpcUrl: 'https://aptos.testnet.porto.movementlabs.xyz/v1',
+  indexerUrl: 'https://indexer.testnet.porto.movementnetwork.xyz/v1/graphql',
 };
 
 export const MovementBardockTestnetChain: Chain = {
@@ -24,15 +13,17 @@ export const MovementBardockTestnetChain: Chain = {
   rpcUrl: 'https://aptos.testnet.bardock.movementlabs.xyz/v1',
 };
 
+export const MovementMainnetChain: Chain = {
+  id: 126,
+  name: 'Movement Mainnet',
+  rpcUrl: 'https://mainnet.movementnetwork.xyz/v1',
+  indexerUrl: 'https://rpc.sentio.xyz/movement-indexer/v1/graphql',
+};
+
 export const UnknownChain: Chain = {
   id: 0,
   name: 'Unknown Network',
   rpcUrl: '',
 };
 
-export const DefaultChains = [
-  MovementDevnetChain,
-  MovementSuzukaTestnetChain,
-  MovementPortoTestnetChain,
-  MovementBardockTestnetChain,
-];
+export const DefaultChains = [MovementMainnetChain, MovementPortoTestnetChain, MovementBardockTestnetChain];
