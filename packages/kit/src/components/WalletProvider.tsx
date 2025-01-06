@@ -25,19 +25,18 @@ import {
   IDefaultWallet,
   KitError,
   UnknownChain,
-  // verifySignedMessage,
 } from '@razorlabs/wallet-sdk';
 import { useAvailableWallets } from '../hooks/useAvailableWallets';
-import getActiveAptosChain from '../utils/getActiveAptosChain';
+import getActiveAptosChain from '../utils/getActiveChain';
 import { AnyRawTransaction } from '@aptos-labs/ts-sdk';
 
-export type AptosWalletProviderProps = Extendable & {
+export type WalletProviderProps = Extendable & {
   defaultWallets?: IDefaultWallet[];
   chains?: Chain[];
   autoConnect?: boolean;
 };
 
-export const AptosWalletProvider = (props: AptosWalletProviderProps) => {
+export const WalletProvider = (props: WalletProviderProps) => {
   const { defaultWallets = AllDefaultAptosWallets, chains = DefaultChains, autoConnect = true, children } = props;
 
   const { allAvailableWallets, configuredWallets, detectedWallets } = useAvailableWallets(defaultWallets);
