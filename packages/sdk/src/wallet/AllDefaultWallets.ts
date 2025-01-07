@@ -1,6 +1,6 @@
 import * as presets from './preset-wallets';
 
-export const AllDefaultAptosWallets = [
+export const AllDefaultWallets = [
   presets.RazorWallet,
   ...[
     presets.NightlyWallet,
