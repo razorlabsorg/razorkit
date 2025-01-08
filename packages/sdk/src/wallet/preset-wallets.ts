@@ -16,7 +16,6 @@ export enum PresetWallet {
   NIGHTLY_WALLET = 'Nightly',
   BITGET = 'Bitget Wallet',
   OKX = 'OKX Wallet',
-  Pontem = 'Pontem Wallet'
 }
 
 export const RazorWallet = defineWallet({
