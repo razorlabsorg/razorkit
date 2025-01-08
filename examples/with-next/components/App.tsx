@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import razorLogo from './assets/logo.png';
-import "./App.css";
 import {
   ConnectButton,
   useAccountBalance,
@@ -8,9 +7,10 @@ import {
   ErrorCode,
   formatCurrency,
 } from "@razorlabs/razorkit";
+import Image from 'next/image';
 
 
-function App() {
+const App: React.FC = () => {
   const wallet = useWallet();
   const { balance } = useAccountBalance();
 
@@ -48,11 +48,8 @@ function App() {
   return (
     <div className="App">
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
         <a href="https://github.com/razorlabsorg/razorkit" target="_blank">
-          <img src={razorLogo} className="logo" alt="Razor logo" />
+          <Image src={razorLogo} className="logo" alt="Razor logo" />
         </a>
       </div>
       <h1>Vite + Razor Kit</h1>

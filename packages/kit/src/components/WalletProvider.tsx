@@ -16,7 +16,7 @@ import { Storage } from '../utils/storage';
 import { StorageKey } from '../constants/storage';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import {
-  AllDefaultAptosWallets,
+  AllDefaultWallets,
   Chain,
   ConnectionStatus,
   DefaultChains,
@@ -37,7 +37,7 @@ export type WalletProviderProps = Extendable & {
 };
 
 export const WalletProvider = (props: WalletProviderProps) => {
-  const { defaultWallets = AllDefaultAptosWallets, chains = DefaultChains, autoConnect = true, children } = props;
+  const { defaultWallets = AllDefaultWallets, chains = DefaultChains, autoConnect = true, children } = props;
 
   const { allAvailableWallets, configuredWallets, detectedWallets } = useAvailableWallets(defaultWallets);
 
