@@ -35,6 +35,9 @@ importers:
 
   examples/with-vite:
     dependencies:
+      '@razorlabs/razorkit':
+        specifier: workspace:*
+        version: link:../../packages/kit
       react:
         specifier: ^18.3.1
         version: 18.3.1
