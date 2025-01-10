@@ -14,7 +14,7 @@ import { isNonEmptyArray } from '../utils/check';
 import { useAutoConnect } from '../hooks/useAutoConnect';
 import { Storage } from '../utils/storage';
 import { StorageKey } from '../constants/storage';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
   AllDefaultWallets,
   Chain,

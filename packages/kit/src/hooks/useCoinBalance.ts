@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { QueryKey, queryKey } from '../constants';
 import { useCallback } from 'react';
 import { useWallet } from './useWallet';
@@ -34,7 +34,9 @@ export function useCoinBalance(params?: UseCoinBalanceParams) {
     return accountAssetManager.getCoinBalance(typeArg);
   }, [address, chain, typeArg]);
 
-  return useQuery(key, getCoinBalance, {
+  return useQuery({
+    queryKey: [key],
+    queryFn: getCoinBalance,
     initialData: BigInt(0),
   });
 }
