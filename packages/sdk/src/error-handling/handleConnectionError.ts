@@ -15,6 +15,7 @@ export function handleConnectionError(e: Error, wallet: string): WalletErrorRes 
     case PresetWallet.BITGET:
     case PresetWallet.OKX:
     case PresetWallet.NIGHTLY_WALLET:
+    case PresetWallet.LEAP_WALLET:
       if (message.includes('User rejects approval')) {
         code = ErrorCode.WALLET__CONNECT_ERROR__USER_REJECTED;
       }
