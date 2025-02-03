@@ -8,13 +8,10 @@ export function formatNativeCurrency(
     withAbbr?: boolean;
   },
 ) {
-  return formatCurrency(
-    amount,
-    {
-      decimals: 8,
-      ...options,
-    },
-  );
+  return formatCurrency(amount, {
+    decimals: 8,
+    ...options,
+  });
 }
 
 // formatWithAbbr currency
@@ -50,15 +47,21 @@ export function formatCurrency(
 
 function format(amount: number | bigint, showAbbr: boolean): string {
   if (showAbbr) {
-    if (amount >= MILLION && amount < BILLION) return formatWithAbbr(amount, MILLION, 'M');
-    if (amount >= BILLION && amount < TRILLION) return formatWithAbbr(amount, BILLION, 'B');
+    if (amount >= MILLION && amount < BILLION)
+      return formatWithAbbr(amount, MILLION, 'M');
+    if (amount >= BILLION && amount < TRILLION)
+      return formatWithAbbr(amount, BILLION, 'B');
     if (amount >= TRILLION) return formatWithAbbr(amount, TRILLION, 'T');
   }
 
   return Intl.NumberFormat('en-US').format(amount);
 }
 
-function formatWithAbbr(amount: number | bigint, measureUnit: number, abbrSymbol: string) {
+function formatWithAbbr(
+  amount: number | bigint,
+  measureUnit: number,
+  abbrSymbol: string,
+) {
   let _amount: string;
   if (typeof amount === 'bigint') {
     _amount = String(amount / (BigInt(measureUnit) / 1000n));
@@ -70,7 +73,7 @@ function formatWithAbbr(amount: number | bigint, measureUnit: number, abbrSymbol
   return result.replace(',', '.') + abbrSymbol;
 }
 
-// when currency is lower than 1 
+// when currency is lower than 1
 function formatSmallCurrency(amount: number) {
   if (amount <= 0) return '0';
 

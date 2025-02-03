@@ -5,7 +5,8 @@ import { expect } from 'vitest';
 
 describe('addressEllipsis', function () {
   test('correct scenario', function () {
-    const aptosAddress = '0x0000000000000000000000000000000000000000000000000000000000000000';
+    const aptosAddress =
+      '0x0000000000000000000000000000000000000000000000000000000000000000';
     expect(addressEllipsis(aptosAddress)).toEqual('0x00000....0000');
   });
 });

@@ -17,11 +17,7 @@ export default defineConfig(({ mode }) => ({
     sourcemap: false,
     minify: true,
     rollupOptions: {
-      external: [
-        'react',
-        'react-dom',
-        'react/jsx-runtime',
-      ],
+      external: ['react', 'react-dom', 'react/jsx-runtime'],
       output: {
         // Provide global variables to use in the UMD build
         // for externalized deps.

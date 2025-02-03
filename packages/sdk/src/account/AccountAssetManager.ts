@@ -1,6 +1,6 @@
 import { IAccountAssetManager } from './interfaces/IAccountAssetManager';
 import { AccountCoinManager } from './AccountCoinManager';
-import { Aptos, AptosConfig } from '@aptos-labs/ts-sdk';
+import { AccountAddress, Aptos, AptosConfig } from '@aptos-labs/ts-sdk';
 
 export class AccountAssetManager implements IAccountAssetManager {
   readonly address: string;
@@ -45,8 +45,12 @@ export class AccountAssetManager implements IAccountAssetManager {
     });
   }
 
-  getAptosBalance(): Promise<bigint> {
-    return this.getCoinBalance('0x1::aptos_coin::AptosCoin');
+  async getAptosBalance(): Promise<bigint> {
+    const aptosCoinType = '0x1::aptos_coin::AptosCoin';
+    const aptosFaAddress = AccountAddress.A.toStringLong();
+    const aptosCoinBalance = await this.getCoinBalance(aptosCoinType);
+    const aptosFaBalance = await this.getFaBalance(aptosFaAddress);
+    return aptosCoinBalance + aptosFaBalance;
   }
 
   getChainRpcUrl(): string {
@@ -60,7 +64,10 @@ export class AccountAssetManager implements IAccountAssetManager {
   setChainUrls(chainRpcUrl: string, indexerUrl: string): void {
     this.chainRpcUrl = chainRpcUrl;
     this.indexerUrl = indexerUrl;
-    const config = new AptosConfig({ fullnode: chainRpcUrl, indexer: indexerUrl });
+    const config = new AptosConfig({
+      fullnode: chainRpcUrl,
+      indexer: indexerUrl,
+    });
     this.aptosClient = new Aptos(config);
   }
 }

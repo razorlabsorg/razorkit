@@ -1,7 +1,7 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import { WalletProvider } from "@razorlabs/razorkit";
-import App from "../components/App";
+import Head from 'next/head';
+import styles from '../styles/Home.module.css';
+import { WalletProvider } from '@razorlabs/razorkit';
+import App from '../components/App';
 
 export default function Home() {
   return (
