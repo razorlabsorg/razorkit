@@ -49,7 +49,10 @@ export const ConnectButton: React.FC<ConnectButtonProps> = (props) => {
             onDisconnectError={props.onDisconnectError}
           />
         ) : (
-          <button className={classnames('wkit-button', props.className)} style={props.style}>
+          <button
+            className={classnames('wkit-button', props.className)}
+            style={props.style}
+          >
             {props.children || label}
           </button>
         )}

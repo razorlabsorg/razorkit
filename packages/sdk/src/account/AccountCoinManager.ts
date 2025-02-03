@@ -1,7 +1,15 @@
 import { AccountResourceManager } from './AccountResourceManager';
-import { FaBalance, IAccountCoinManager } from './interfaces/IAccountCoinManager';
+import {
+  FaBalance,
+  IAccountCoinManager,
+} from './interfaces/IAccountCoinManager';
 import { CoinResource } from '../common/CoinResource';
-import { composeType, extractCoinType, isAptosCoin, standardizeAddress } from '../utils';
+import {
+  composeType,
+  extractCoinType,
+  isAptosCoin,
+  standardizeAddress,
+} from '../utils';
 import { CoinStoreResource } from '../types/coins';
 import { Aptos, MoveStructId } from '@aptos-labs/ts-sdk';
 
@@ -37,12 +45,18 @@ const COIN_COUNT_QUERY = `
     }
 `;
 
-export class AccountCoinManager extends AccountResourceManager implements IAccountCoinManager {
+export class AccountCoinManager
+  extends AccountResourceManager
+  implements IAccountCoinManager
+{
   constructor(aptosClient: Aptos) {
     super(aptosClient);
   }
 
-  async getOwnedCoins(address: string, coinTypeAddress: string): Promise<CoinResource[]> {
+  async getOwnedCoins(
+    address: string,
+    coinTypeAddress: string,
+  ): Promise<CoinResource[]> {
     const coins: CoinResource[] = [];
 
     const resp = await this.client.getAccountResources({
@@ -73,7 +87,9 @@ export class AccountCoinManager extends AccountResourceManager implements IAccou
     const standardizedAddress = standardizeAddress(address);
 
     const countResp = await this.client.queryIndexer<{
-      current_fungible_asset_balances_aggregate: { aggregate: { count: number } };
+      current_fungible_asset_balances_aggregate: {
+        aggregate: { count: number };
+      };
     }>({
       query: {
         query: COIN_COUNT_QUERY,
@@ -83,7 +99,8 @@ export class AccountCoinManager extends AccountResourceManager implements IAccou
       },
     });
 
-    const faCount = countResp.current_fungible_asset_balances_aggregate.aggregate.count;
+    const faCount =
+      countResp.current_fungible_asset_balances_aggregate.aggregate.count;
 
     const fetchFungibleAssets = async (): Promise<FaBalance[]> => {
       if (!faCount) {
@@ -115,7 +132,11 @@ export class AccountCoinManager extends AccountResourceManager implements IAccou
     return fetchFungibleAssets();
   }
 
-  async fetchAccountResource(accountAddress: string, resourceType: MoveStructId, ledgerVersion?: bigint | number) {
+  async fetchAccountResource(
+    accountAddress: string,
+    resourceType: MoveStructId,
+    ledgerVersion?: bigint | number,
+  ) {
     try {
       const response = await this.client.getAccountResource({
         accountAddress,
@@ -164,12 +185,18 @@ export class AccountCoinManager extends AccountResourceManager implements IAccou
       const pairedCoinType = await getPairedCoinType();
 
       if (!pairedCoinType) {
-        const coinStore = await this.fetchAccountResource(address, composeType('0x1::coin::CoinStore', [coinType]));
+        const coinStore = await this.fetchAccountResource(
+          address,
+          composeType('0x1::coin::CoinStore', [coinType]),
+        );
         const data = coinStore;
         const balance = BigInt(data.coin.value);
         return balance;
       } else {
-        const coinStore = await this.fetchAccountResource(address, composeType('0x1::coin::CoinStore', [coinType]));
+        const coinStore = await this.fetchAccountResource(
+          address,
+          composeType('0x1::coin::CoinStore', [coinType]),
+        );
         const coinData = coinStore;
         const coinBalance = BigInt(coinData.coin.value);
 

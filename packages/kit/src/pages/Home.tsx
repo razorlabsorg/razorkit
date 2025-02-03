@@ -38,7 +38,9 @@ const Home: React.FC = () => {
         }}
         onConnectError={(err) => {
           if (err.code === ErrorCode.WALLET__CONNECT_ERROR__USER_REJECTED) {
-            console.warn('user rejected the connection to ' + err.details?.wallet);
+            console.warn(
+              'user rejected the connection to ' + err.details?.wallet,
+            );
           } else {
             console.warn('unknown connect error: ', err);
           }
@@ -76,7 +78,8 @@ const Home: React.FC = () => {
               current chain: {wallet.chain?.name} (id: {wallet.chain?.id})
             </p>
             <p>
-              MOVE Balance: {formatNativeCurrency(balance ?? 0)} (id: {wallet.chain?.id})
+              MOVE Balance: {formatNativeCurrency(balance ?? 0)} (id:{' '}
+              {wallet.chain?.id})
             </p>
           </div>
         </div>

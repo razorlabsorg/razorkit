@@ -116,9 +116,7 @@ async function run() {
           chalk.red(
             '👀 The project name you provided is a reserved package name.',
           ),
-          `🙏 Please use a project name other than "${reservedPackageNames.find(
-            (x) => x === projectPath,
-          )}".`,
+          `🙏 Please use a project name other than "${reservedPackageNames.find((x) => x === projectPath)}".`,
         ].join('\n'),
       );
     }
@@ -140,9 +138,7 @@ async function run() {
     const selectedTemplatePath = path.join(templatesPath, templateName);
 
     log(
-      chalk.cyan(
-        `🚀 Creating a new RazorKit app in ${chalk.bold(targetPath)}`,
-      ),
+      chalk.cyan(`🚀 Creating a new RazorKit app in ${chalk.bold(targetPath)}`),
     );
 
     const ignoreList: string[] = ['node_modules', '.next', 'CHANGELOG.md'];
@@ -182,9 +178,7 @@ async function run() {
 
     log(
       chalk.cyan(
-        `📦 Installing dependencies with ${chalk.bold(
-          packageManager,
-        )}. This could take a while.`,
+        `📦 Installing dependencies with ${chalk.bold(packageManager)}. This could take a while.`,
       ),
     );
     await execa(packageManager, ['install'], {
@@ -195,10 +189,7 @@ async function run() {
     if (process.env.INSTALL_WORKSPACE_RAZORKIT !== 'true') {
       await execa(
         packageManager,
-        [
-          packageManager === 'yarn' ? 'add' : 'install',
-          '@razorlabs/razorkit',
-        ],
+        [packageManager === 'yarn' ? 'add' : 'install', '@razorlabs/razorkit'],
         {
           cwd: targetPath,
           stdio: 'inherit',
@@ -218,7 +209,9 @@ async function run() {
           '--message',
           'Initial commit from create-razorkit',
         ],
-        { cwd: targetPath },
+        {
+          cwd: targetPath,
+        },
       );
     }
 
@@ -226,9 +219,7 @@ async function run() {
     log();
     log(
       chalk.cyan(
-        `👉 To get started, run ${chalk.bold(
-          `cd ${projectPath}`,
-        )} and then ${chalk.bold(
+        `👉 To get started, run ${chalk.bold(`cd ${projectPath}`)} and then ${chalk.bold(
           `${packageManager}${packageManager === 'npm' ? ' run' : ''} dev`,
         )}`,
       ),
@@ -244,4 +235,3 @@ async function run() {
   }
 }
 run();
-

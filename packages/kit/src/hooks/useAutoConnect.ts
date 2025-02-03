@@ -23,10 +23,14 @@ export function useAutoConnect(
       return;
 
     const storage = new Storage();
-    const lastConnectedWalletName = storage.getItem(StorageKey.LAST_CONNECT_WALLET_NAME);
+    const lastConnectedWalletName = storage.getItem(
+      StorageKey.LAST_CONNECT_WALLET_NAME,
+    );
     if (!lastConnectedWalletName) return;
 
-    if (allAvailableWallets.find((item) => item.name == lastConnectedWalletName)) {
+    if (
+      allAvailableWallets.find((item) => item.name == lastConnectedWalletName)
+    ) {
       // console.log('auto connect to wallet:', lastConnectedWalletName)
       select(lastConnectedWalletName)
         .then(() => {

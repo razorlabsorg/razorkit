@@ -19,8 +19,7 @@ const Home: NextPage = () => {
         <ConnectButton />
 
         <h1 className={styles.title}>
-          Welcome to RazorKit +{' '}
-          <a href="https://nextjs.org">Next.js!</a>
+          Welcome to RazorKit + <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
         <p className={styles.description}>
@@ -68,7 +67,11 @@ const Home: NextPage = () => {
       </main>
 
       <footer className={styles.footer}>
-        <a href="https://kit.razorwallet.xyz" rel="noopener noreferrer" target="_blank">
+        <a
+          href="https://kit.razorwallet.xyz"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           Made with ❤️ by your frens at Razor Labs
         </a>
       </footer>
