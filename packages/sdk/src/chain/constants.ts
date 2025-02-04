@@ -20,20 +20,6 @@ export const MovementMainnetChain: Chain = {
   indexerUrl: 'https://rpc.sentio.xyz/movement-indexer/v1/graphql',
 };
 
-export const AptosTestnetChain: Chain = {
-  id: 2,
-  name: 'Aptos Testnet',
-  rpcUrl: 'https://api.testnet.aptoslabs.com/v1',
-  indexerUrl: 'https://api.testnet.aptoslabs.com/v1/graphql',
-};
-
-export const AptosMainnetChain: Chain = {
-  id: 1,
-  name: 'Aptos Mainnet',
-  rpcUrl: 'https://api.mainnet.aptoslabs.com/v1',
-  indexerUrl: 'https://api.mainnet.aptoslabs.com/v1/graphql',
-};
-
 export const UnknownChain: Chain = {
   id: 0,
   name: 'Unknown Network',
@@ -44,6 +30,4 @@ export const DefaultChains = [
   MovementMainnetChain,
   MovementPortoTestnetChain,
   MovementBardockTestnetChain,
-  AptosTestnetChain,
-  AptosMainnetChain,
 ];
