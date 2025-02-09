@@ -11,6 +11,7 @@ export const MovementBardockTestnetChain: Chain = {
   id: 250,
   name: 'Movement Bardock Testnet',
   rpcUrl: 'https://aptos.testnet.bardock.movementlabs.xyz/v1',
+  indexerUrl: 'https://rpc.sentio.xyz/movement-testnet-indexer/v1/graphql'
 };
 
 export const MovementMainnetChain: Chain = {
