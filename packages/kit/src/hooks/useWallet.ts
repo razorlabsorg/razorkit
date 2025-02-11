@@ -1,5 +1,6 @@
 import { AnyRawTransaction } from '@aptos-labs/ts-sdk';
 import {
+  AptosChangeNetworkOutput,
   AptosSignAndSubmitTransactionInput,
   AptosSignAndSubmitTransactionOutput,
   AptosSignMessageInput,
@@ -28,11 +29,13 @@ export interface WalletContextState {
   account: WalletAccount | undefined; // current account (the first account of accounts)
   address: string | undefined; // alias for account.address
   connecting: boolean;
+  reconnecting: boolean;
   connected: boolean;
-  status: 'disconnected' | 'connected' | 'connecting';
+  status: 'disconnected' | 'connected' | 'connecting' | 'reconnecting';
   select: (walletName: string) => Promise<void>;
   disconnect: () => Promise<void>;
   getAccounts: () => readonly WalletAccount[];
+  changeNetwork: (input: number) => Promise<UserResponse<AptosChangeNetworkOutput>>;
 
   signAndSubmitTransaction(
     input: AptosSignAndSubmitTransactionInput,
@@ -61,6 +64,7 @@ const DEFAULT_CONTEXT: WalletContextState = {
   name: undefined,
   adapter: undefined,
   connecting: false,
+  reconnecting: false,
   connected: false,
   account: undefined,
   status: ConnectionStatus.DISCONNECTED,
@@ -73,6 +77,9 @@ const DEFAULT_CONTEXT: WalletContextState = {
   },
   getAccounts() {
     throw new KitError(missProviderMessage('getAccounts'));
+  },
+  async changeNetwork() {
+    throw new KitError(missProviderMessage('changeNetwork'));
   },
   async signAndSubmitTransaction() {
     throw new KitError(missProviderMessage('signAndSubmitTransaction'));
