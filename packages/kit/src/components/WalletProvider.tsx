@@ -4,6 +4,7 @@ import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { WalletContext } from '../hooks';
 import {
   UserResponseStatus,
+  NetworkInfo,
   type AptosConnectInput,
   type AptosSignAndSubmitTransactionInput,
   type AptosSignMessageInput,
@@ -28,7 +29,7 @@ import {
 } from '@razorlabs/wallet-sdk';
 import { useAvailableWallets } from '../hooks/useAvailableWallets';
 import getActiveAptosChain from '../utils/getActiveChain';
-import { AnyRawTransaction } from '@aptos-labs/ts-sdk';
+import { AnyRawTransaction, Network } from '@aptos-labs/ts-sdk';
 
 export type WalletProviderProps = Extendable & {
   defaultWallets?: IDefaultWallet[];
@@ -84,7 +85,10 @@ export const WalletProvider = (props: WalletProviderProps) => {
     async (adapter: IWalletAdapter, opts?: AptosConnectInput) => {
       if (!adapter) throw new KitError('param adapter is missing');
 
-      setStatus(ConnectionStatus.CONNECTING);
+      // Set status to RECONNECTING if we're reconnecting with the same wallet
+      const isReconnecting = adapter.name === walletAdapter?.name;
+      setStatus(isReconnecting ? ConnectionStatus.RECONNECTING : ConnectionStatus.CONNECTING);
+      
       try {
         const res = await adapter.connect(opts?.[0]);
 
@@ -109,7 +113,7 @@ export const WalletProvider = (props: WalletProviderProps) => {
         throw e;
       }
     },
-    [],
+    [walletAdapter],
   );
 
   const disconnect = useCallback(async () => {
@@ -220,6 +224,17 @@ export const WalletProvider = (props: WalletProviderProps) => {
     [walletAdapter, account, status],
   );
 
+  const changeNetwork = useCallback(async (chainId: number) => {
+    ensureCallable(walletAdapter, status);
+    const adapter = walletAdapter as IWalletAdapter;
+    const network = Network.CUSTOM;
+    const info: NetworkInfo = {
+      name: network,
+      chainId: chainId,
+    }
+    return await adapter.changeNetwork(info);
+  }, [walletAdapter, status]);
+
   useAutoConnect(select, status, allAvailableWallets, autoConnect);
 
   // sync kit's chain with wallet's active chain
@@ -235,6 +250,7 @@ export const WalletProvider = (props: WalletProviderProps) => {
       adapter: walletAdapter,
       status,
       connecting: status === ConnectionStatus.CONNECTING,
+      reconnecting: status === ConnectionStatus.RECONNECTING,
       connected: status === ConnectionStatus.CONNECTED,
       select,
       disconnect,
@@ -243,6 +259,7 @@ export const WalletProvider = (props: WalletProviderProps) => {
       signAndSubmitTransaction,
       signMessage,
       signTransaction,
+      changeNetwork,
       address: account?.address,
     }),
     [
