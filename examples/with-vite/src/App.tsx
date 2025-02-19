@@ -8,6 +8,7 @@ import {
   ErrorCode,
   formatCurrency,
 } from '@razorlabs/razorkit';
+import { InputEntryFunctionData } from '@aptos-labs/ts-sdk';
 
 function App() {
   const wallet = useWallet();
@@ -36,6 +37,32 @@ function App() {
     } catch (e) {
       console.error('signMessage failed', e);
       alert('signMessage failed (see response in the console)');
+    }
+  }
+
+  async function handleSignTransaction() {
+    if (!wallet.account) return;
+
+    try {
+      const recipient = '0xfaded96b72a03b2ed9e2b2dc0bef0642d63e07fd7b1eeeac047188eb1ef34dd6'
+ 
+      const payload: InputEntryFunctionData = {
+        function: '0x1::aptos_account::transfer',
+        functionArguments: [recipient, 100000000],
+        typeArguments: [],
+      };
+
+      const result = await wallet.signAndSubmitTransaction({
+        payload: payload
+      });
+
+      if (result.status === 'Approved') {
+        alert(`signTransaction succeed, hash: ${result.args.hash}`);
+      } else {
+        alert('signTransaction failed');
+      }
+    } catch (e) {
+      console.error('signTransaction failed', e);
     }
   }
 
@@ -103,9 +130,12 @@ function App() {
                 wallet publicKey: {uint8arrayToHex(wallet.account?.publicKey)}
               </p>
             </div>
-            <div className={'btn-group'} style={{ margin: '8px 0' }}>
-              <button onClick={handleSignMsg}>signMessage</button>
-            </div>
+              <div className={'btn-group'} style={{ margin: '8px 0' }}>
+                <button onClick={handleSignMsg}>signMessage</button>
+              </div>
+              <div className={'btn-group'} style={{ margin: '8px 0' }}>
+                <button onClick={handleSignTransaction}>signTransaction</button>
+              </div>
           </div>
         )}
       </div>
