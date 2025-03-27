@@ -1,4 +1,3 @@
-export * from './account';
 export * from './chain';
 export * from './common';
 export * from './error-handling';

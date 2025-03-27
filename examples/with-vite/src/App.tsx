@@ -7,11 +7,13 @@ import {
   useWallet,
   ErrorCode,
   formatCurrency,
+  useAccount,
 } from '@razorlabs/razorkit';
 import { InputEntryFunctionData } from '@aptos-labs/ts-sdk';
 
 function App() {
   const wallet = useWallet();
+  const account = useAccount();
   const { balance } = useAccountBalance();
 
   function uint8arrayToHex(value: Uint8Array | undefined) {
@@ -23,7 +25,7 @@ function App() {
   async function handleSignMsg() {
     if (!wallet.account) return;
     try {
-      const msg = 'Hello world!';
+      const msg = 'Hello world!.';
       const result = await wallet.signMessage({
         message: msg,
         nonce: '0',
@@ -116,7 +118,7 @@ function App() {
             <div>
               <p>current wallet: {wallet.adapter?.name}</p>
               <p>wallet status: {getWalletStatus()}</p>
-              <p>wallet address: {wallet.account?.address}</p>
+              <p>wallet address: {account?.address}</p>
               <p>current network: {wallet.chain?.name}</p>
               <p>
                 wallet balance:{' '}

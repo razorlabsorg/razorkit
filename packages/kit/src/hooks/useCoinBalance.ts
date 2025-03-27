@@ -1,13 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import { QueryKey, queryKey } from '../constants';
-import { useCallback } from 'react';
 import { useWallet } from './useWallet';
-import { AccountAssetManager } from '@razorlabs/wallet-sdk';
 import { useChain } from './useChain';
+import { useProvider } from './useProvider';
+import { MovementMainnetChain } from '@razorlabs/wallet-sdk';
+import { AccountAddress } from '@aptos-labs/ts-sdk';
 
 export interface UseCoinBalanceParams {
-  address?: string;
-  typeArg?: string;
+  accountAddress?: string;
+  coinType?: string;
+  faAddress?: string;
   chainId?: string;
 }
 
@@ -18,29 +20,55 @@ export interface UseCoinBalanceParams {
 export function useCoinBalance(params?: UseCoinBalanceParams) {
   const wallet = useWallet();
   const {
-    address = wallet.address,
-    typeArg = '0x1::aptos_coin::AptosCoin',
+    accountAddress = wallet.address,
+    coinType = '0x1::aptos_coin::AptosCoin',
+    faAddress = '0xa',
     chainId = wallet.chain?.id,
   } = params || {};
   const chain = useChain(chainId);
+  const fallBackRpcUrl = MovementMainnetChain.rpcUrl;
+  const client = useProvider(chain?.rpcUrl ?? fallBackRpcUrl, chain?.indexerUrl)
 
   const key = queryKey(QueryKey.MOVE_COIN_BALANCE, {
-    address,
-    typeArg,
+    accountAddress,
+    coinType,
+    faAddress,
     chainId,
   });
-  const getCoinBalance = useCallback(() => {
-    if (!address || !chain) return BigInt(0);
 
-    const accountAssetManager = new AccountAssetManager(address, {
-      chainRpcUrl: chain.rpcUrl,
-    });
-    return accountAssetManager.getCoinBalance(typeArg);
-  }, [address, chain, typeArg]);
+  const getCoinBalance = async () => {
+    if (!accountAddress || !chain) return BigInt(0);
+    let balance = BigInt(0);
+    if (coinType) {
+      if (coinType === '0x1::aptos_coin::AptosCoin') {
+        const onChainBalance = await client.getAccountAPTAmount({ accountAddress: accountAddress })
+        balance = BigInt(onChainBalance)
+      } else {
+        const onChainBalance = await client.getAccountCoinAmount({ accountAddress: accountAddress, coinType: coinType as `${string}::${string}::${string}` })
+        balance = BigInt(onChainBalance)
+      }
+    } else {
+      if (faAddress === '0xa' || faAddress === AccountAddress.A.toStringLong()) {
+        const onChainBalance = await client.getAccountAPTAmount({ accountAddress: accountAddress })
+        balance = BigInt(onChainBalance)
+      } else {
+        const onChainBalance = await client.getAccountCoinAmount({ accountAddress: accountAddress, faMetadataAddress: faAddress })
+        balance = BigInt(onChainBalance)
+      }
+    }
+    return balance;
+  };
 
-  return useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: [key],
     queryFn: getCoinBalance,
     initialData: BigInt(0),
+    refetchInterval: 30000,
   });
+
+  return {
+    refetch,
+    data,
+    isLoading,
+  };
 }

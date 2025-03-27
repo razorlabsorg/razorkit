@@ -1,7 +1,8 @@
 import { useCoinBalance } from './useCoinBalance';
 
 export interface UseAccountBalanceParams {
-  typeArg?: string;
+  coinType?: string;
+  faAddress?: string;
   chainId?: string;
 }
 
@@ -16,14 +17,16 @@ export interface UseAccountBalanceParams {
  * @property {boolean} loading - Indicates if the Aptos account balance is currently being loaded.
  */
 export function useAccountBalance(params?: UseAccountBalanceParams) {
-  const { typeArg, chainId } = params || {};
-  const res = useCoinBalance({
-    typeArg,
+  const { coinType, faAddress, chainId } = params || {};
+  const { data, isLoading, refetch } = useCoinBalance({
+    coinType,
+    faAddress,
     chainId,
   });
-  return Object.assign(res, {
-    // legacy interfaces
-    balance: res.data,
-    loading: res.isLoading,
-  });
+  
+  return {
+    balance: data,
+    loading: isLoading,
+    refetch,
+  };
 }
