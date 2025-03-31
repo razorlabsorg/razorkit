@@ -14,6 +14,6 @@ Razor Kit is an all-in-one react toolkit for DApps to interact with wallets on M
 
 ## Documentation
 
-See [https://kit.razorwallet.xyz/docs/get-started](https://kit.razorwallet.xyz/docs/get-started)
+See [https://kit.razorwallet.xyz/docs/getting-started](https://kit.razorwallet.xyz/docs/getting-started)
 
 > 💡 Have fun with [Demo Playground](https://kit-demo.razorwallet.xyz/) + [Vite example repo](https://github.com/razorlabsorg/razorkit/examples/with-vite)
