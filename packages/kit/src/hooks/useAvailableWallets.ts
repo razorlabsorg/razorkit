@@ -6,6 +6,7 @@ import { IDefaultWallet, IWallet } from '@razorlabs/wallet-sdk';
 
 export const useAvailableWallets = (defaultWallets: IDefaultWallet[]) => {
   const { data: availableWalletAdapters } = useWalletAdapterDetection();
+  console.log('availableWalletAdapters', availableWalletAdapters);
   // configured wallets
   const configuredWallets: IWallet[] = useMemo(() => {
     if (!isNonEmptyArray(defaultWallets)) return [];

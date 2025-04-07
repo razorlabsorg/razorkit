@@ -8,6 +8,7 @@ import { isNonEmptyArray } from '../../utils/check';
 import Icon from '../Icon';
 import './index.scss';
 import { BaseError, IWallet, KitError } from '@razorlabs/wallet-sdk';
+import { MSafeWalletName, inMSafeWallet } from '@msafe/aptos-aip62-wallet';
 
 export type ConnectModalProps = Extendable & {
   open?: boolean;
@@ -204,13 +205,34 @@ export const ConnectModal: React.FC<ConnectModalProps> = (props) => {
 
   const handleSelectWallet = useCallback(
     async (wallet: IWallet) => {
+      console.log('wallet', wallet);
       setActiveWallet(wallet);
       if (wallet.installed) {
-        try {
-          await select(wallet.name);
-        } catch (err) {
-          onConnectError(err as BaseError);
-          return;
+        if (wallet.name === MSafeWalletName) {
+          if (inMSafeWallet()) {
+            try {
+              await select('MSafe');
+            } catch (err) {
+              onConnectError(err as BaseError);
+              return;
+            }
+          } else {
+            try {
+              window.open(
+                `https://movement.m-safe.io/store/0?url=${window.location.href}`,
+            );
+          } catch (err) {
+            onConnectError(err as BaseError);
+              return;
+            }
+          }
+        } else {
+          try {
+            await select(wallet.name);
+          } catch (err) {
+            onConnectError(err as BaseError);
+            return;
+          }
         }
         onConnectSuccess(wallet.name);
       }

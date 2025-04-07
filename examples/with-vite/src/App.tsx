@@ -7,14 +7,18 @@ import {
   useWallet,
   ErrorCode,
   formatCurrency,
-  useAccount,
 } from '@razorlabs/razorkit';
 import { InputEntryFunctionData } from '@aptos-labs/ts-sdk';
+import { useEffect } from 'react';
+import { inMSafeWallet } from '@msafe/aptos-aip62-wallet';
+
 
 function App() {
-  const wallet = useWallet();
-  const account = useAccount();
+  const { connected, connecting, allAvailableWallets, account, signMessage, signAndSubmitTransaction, select, adapter, chain } = useWallet();
   const { balance } = useAccountBalance();
+
+  console.log('available wallets', allAvailableWallets);
+
 
   function uint8arrayToHex(value: Uint8Array | undefined) {
     if (!value) return '';
@@ -23,10 +27,10 @@ function App() {
   }
 
   async function handleSignMsg() {
-    if (!wallet.account) return;
+    if (!account) return;
     try {
       const msg = 'Hello world!.';
-      const result = await wallet.signMessage({
+      const result = await signMessage({
         message: msg,
         nonce: '0',
       });
@@ -43,7 +47,7 @@ function App() {
   }
 
   async function handleSignTransaction() {
-    if (!wallet.account) return;
+    if (!account) return;
 
     try {
       const recipient = '0xfaded96b72a03b2ed9e2b2dc0bef0642d63e07fd7b1eeeac047188eb1ef34dd6'
@@ -54,7 +58,7 @@ function App() {
         typeArguments: [],
       };
 
-      const result = await wallet.signAndSubmitTransaction({
+      const result = await signAndSubmitTransaction({
         payload: payload
       });
 
@@ -69,9 +73,54 @@ function App() {
   }
 
   const getWalletStatus = () => {
-    if (wallet.connecting) return 'connecting';
-    return wallet.connected ? 'connected' : 'disconnected';
+    if (connecting) return 'connecting';
+    return connected ? 'connected' : 'disconnected';
   };
+
+  // write a function that waits until allAvailableWallets is populated before
+  
+
+  useEffect(() => {
+    let pollInterval: NodeJS.Timeout | undefined;
+    
+    function waitForAllAvailableWallets() {
+      // Clear any existing interval
+      if (pollInterval) {
+        clearInterval(pollInterval);
+      }
+      
+      // Set up polling that repeatedly checks if MSafe is available
+      pollInterval = setInterval(() => {
+        console.log("Polling for MSafe wallet, available wallets:", allAvailableWallets.length);
+        if (allAvailableWallets.length > 0) {
+          // Found wallets, try to select MSafe
+          clearInterval(pollInterval);
+          const msafeWallet = allAvailableWallets.find(wallet => wallet.name === 'MSafe');
+          if (msafeWallet) {
+            console.log("MSafe wallet found, selecting...");
+            select('MSafe');
+          } else {
+            console.log("Wallets available but MSafe not found");
+          }
+        }
+      }, 1000); // Check every second
+    }
+
+    if (!connected && inMSafeWallet()) {
+      // Start polling for wallet availability
+      waitForAllAvailableWallets();
+    }
+
+    // Clean up the interval when component unmounts or dependencies change
+    return () => {
+      if (pollInterval) {
+        clearInterval(pollInterval);
+      }
+    };
+  }, [connected, select, allAvailableWallets]);
+
+  const isMsafeInjected = inMSafeWallet();
+  console.log('isMsafeInjected', isMsafeInjected);
 
   return (
     <div className="App">
@@ -111,15 +160,15 @@ function App() {
           }}
         />
 
-        {!wallet.connected ? (
+        {!connected ? (
           <p>Connect DApp with Razor wallet from now!</p>
         ) : (
           <div>
             <div>
-              <p>current wallet: {wallet.adapter?.name}</p>
+              <p>current wallet: {adapter?.name}</p>
               <p>wallet status: {getWalletStatus()}</p>
               <p>wallet address: {account?.address}</p>
-              <p>current network: {wallet.chain?.name}</p>
+              <p>current network: {chain?.name}</p>
               <p>
                 wallet balance:{' '}
                 {formatCurrency(balance ?? 0, {
@@ -129,7 +178,7 @@ function App() {
                 MOVE
               </p>
               <p>
-                wallet publicKey: {uint8arrayToHex(wallet.account?.publicKey)}
+                wallet publicKey: {uint8arrayToHex(account?.publicKey)}
               </p>
             </div>
               <div className={'btn-group'} style={{ margin: '8px 0' }}>
