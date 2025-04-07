@@ -1,6 +1,6 @@
 {
   "name": "@razorlabs/wallet-sdk",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -21,6 +21,7 @@
   "dependencies": {
     "@aptos-labs/ts-sdk": "^1.33.1",
     "@aptos-labs/wallet-standard": "^0.2.0",
+    "@msafe/aptos-aip62-wallet": "^1.0.17",
     "buffer": "^6.0.3"
   },
   "publishConfig": {
