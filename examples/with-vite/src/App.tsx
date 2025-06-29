@@ -19,7 +19,6 @@ function App() {
 
   console.log('available wallets', allAvailableWallets);
 
-
   function uint8arrayToHex(value: Uint8Array | undefined) {
     if (!value) return '';
     // @ts-ignore
@@ -178,7 +177,7 @@ function App() {
                 MOVE
               </p>
               <p>
-                wallet publicKey: {uint8arrayToHex(account?.publicKey)}
+                wallet publicKey: {uint8arrayToHex(account?.publicKey ? new Uint8Array(account.publicKey) : undefined)}
               </p>
             </div>
               <div className={'btn-group'} style={{ margin: '8px 0' }}>
