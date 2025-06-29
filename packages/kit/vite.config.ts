@@ -36,7 +36,7 @@ export default defineConfig(({ mode }) => ({
   },
   esbuild: {
     target: 'es2020',
-    pure: mode === 'production' ? ['console.log', 'debugger'] : [],
+    pure: mode === 'production' ? ['console.log'] : [],
   },
   optimizeDeps: {
     esbuildOptions: {

@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { useWallet } from "./useWallet";
 import { useChain } from "./useChain";
 

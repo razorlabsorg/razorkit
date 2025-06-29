@@ -51,7 +51,7 @@ const App: React.FC = () => {
           <Image src={razorLogo} className="logo" alt="Razor logo" />
         </a>
       </div>
-      <h1>Vite + Razor Kit</h1>
+      <h1>Next + Razor Kit</h1>
       <div className="card">
         <ConnectButton
           style={{
@@ -97,7 +97,7 @@ const App: React.FC = () => {
                 MOVE
               </p>
               <p>
-                wallet publicKey: {uint8arrayToHex(wallet.account?.publicKey)}
+                wallet publicKey: {uint8arrayToHex(wallet.account?.publicKey ? new Uint8Array(wallet.account.publicKey) : undefined)}
               </p>
             </div>
             <div className={'btn-group'} style={{ margin: '8px 0' }}>
@@ -107,7 +107,7 @@ const App: React.FC = () => {
         )}
       </div>
       <p className="read-the-docs">
-        Click on the Vite and Razor logos to learn more
+        Click on the Next and Razor logos to learn more
       </p>
     </div>
   );

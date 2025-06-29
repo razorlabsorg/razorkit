@@ -1,7 +1,21 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import { WalletProvider } from '@razorlabs/razorkit';
-import App from '../components/App';
+import dynamic from 'next/dynamic';
+
+// Loading component for dynamic imports
+const LoadingComponent = () => (
+  <div className={styles.container}>
+    <div>Loading wallet...</div>
+  </div>
+);
+
+// Dynamically import wallet components to avoid SSR issues
+const WalletProvider = dynamic(
+  () => import('@razorlabs/razorkit').then((mod) => ({ default: mod.WalletProvider })),
+  { ssr: false, loading: LoadingComponent }
+);
+
+const App = dynamic(() => import('../components/App'), { ssr: false, loading: LoadingComponent });
 
 export default function Home() {
   return (

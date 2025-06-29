@@ -1,11 +1,7 @@
 import { Wallet, getWallets } from '@aptos-labs/wallet-standard';
 import { WalletRadar } from '../WalletRadar';
 import { FeatureName } from '../constants';
-import { beforeEach } from 'vitest';
-import { vitest } from 'vitest';
-import { describe } from 'vitest';
-import { test } from 'vitest';
-import { expect } from 'vitest';
+import { beforeEach, describe, test, expect, vi } from 'vitest';
 
 const initialWallets: Wallet[] = [
   {
@@ -27,10 +23,25 @@ beforeEach(() => {
   listeners = [];
 });
 
-vitest.mock('@aptos-labs/wallet-standard', () => {
+vi.mock('@aptos-labs/wallet-standard', () => {
+  const initWallets: Wallet[] = [
+    {
+      name: 'wallet1',
+      icon: 'data:image/png;base64,',
+      version: '1.0.0',
+      accounts: [],
+      chains: ['aptos:devnet'],
+      features: {
+        [FeatureName.APTOS__CONNECT]: () => {},
+        [FeatureName.APTOS__SIGN_MESSAGE]: () => {},
+        [FeatureName.APTOS__SIGN_AND_SUBMIT_TRANSACTION]: () => {},
+      },
+    },
+  ];
+
   return {
-    getAptosWallets: vitest.fn().mockReturnValue({
-      aptosWallets: initialWallets,
+    getAptosWallets: vi.fn().mockReturnValue({
+      aptosWallets: initWallets,
       on: (event: string, callback: () => void) => {
         listeners.push(callback);
       },
