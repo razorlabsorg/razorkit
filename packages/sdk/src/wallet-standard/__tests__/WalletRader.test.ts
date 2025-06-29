@@ -32,15 +32,24 @@ vi.mock('@aptos-labs/wallet-standard', () => {
       accounts: [],
       chains: ['aptos:devnet'],
       features: {
-        [FeatureName.APTOS__CONNECT]: () => {},
-        [FeatureName.APTOS__SIGN_MESSAGE]: () => {},
-        [FeatureName.APTOS__SIGN_AND_SUBMIT_TRANSACTION]: () => {},
+        'aptos:connect': () => {},
+        'aptos:signMessage': () => {},
+        'aptos:signAndSubmitTransaction': () => {},
       },
     },
   ];
 
   return {
     getAptosWallets: vi.fn().mockReturnValue({
+      aptosWallets: initWallets,
+      on: (event: string, callback: () => void) => {
+        listeners.push(callback);
+      },
+      register: (...wallets: Wallet[]) => {
+        listeners.forEach((listener) => listener(...wallets));
+      },
+    }),
+    getWallets: vi.fn().mockReturnValue({
       aptosWallets: initWallets,
       on: (event: string, callback: () => void) => {
         listeners.push(callback);
@@ -76,9 +85,9 @@ describe('test radar detection', () => {
         accounts: [],
         chains: ['aptos:devnet'],
         features: {
-          [FeatureName.APTOS__CONNECT]: () => {},
-          [FeatureName.APTOS__SIGN_MESSAGE]: () => {},
-          [FeatureName.APTOS__SIGN_AND_SUBMIT_TRANSACTION]: () => {},
+          'aptos:connect': () => {},
+          'aptos:signMessage': () => {},
+          'aptos:signAndSubmitTransaction': () => {},
         },
       },
     ];
