@@ -3,15 +3,15 @@ import { Chain } from './types';
 export const MovementBardockTestnetChain: Chain = {
   id: 250,
   name: 'Movement Bardock Testnet',
-  rpcUrl: 'https://testnet.bardock.movementnetwork.xyz/v1',
+  rpcUrl: 'https://rpc.sentio.xyz/movement-testnet/v1',
   indexerUrl: 'https://indexer.testnet.movementnetwork.xyz/v1/graphql',
 };
 
 export const MovementMainnetChain: Chain = {
   id: 126,
   name: 'Movement Mainnet',
-  rpcUrl: 'https://mainnet.movementnetwork.xyz/v1',
-  indexerUrl: 'https://indexer.mainnet.movementnetwork.xyz/v1/graphql',
+  rpcUrl: 'https://rpc.sentio.xyz/movement/v1',
+  indexerUrl: 'https://rpc.sentio.xyz/movement-indexer/v1/graphql',
 };
 
 export const UnknownChain: Chain = {
